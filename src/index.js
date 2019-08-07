@@ -9,7 +9,7 @@ function App() {
     <div className="goods">
       <h1 class="goods-title">Список товаров</h1>
       <ul class="goods-list">
-        {goods.map(item => (
+        {goods.slice(0, 3).map(item => (
           <li className="goods-item" key={item.id}>
             {item.name}
           </li>
