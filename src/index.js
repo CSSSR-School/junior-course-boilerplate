@@ -5,17 +5,16 @@ import data from './products.json';
 import "./index.css";
 
 function App() {
+
+  const ProductsList = data
+    .filter(item => item.id < 4) 
+    .map(item => <li key={item.id}>{item.name}</li>);
+
   return (
-    <div className='main'>
+    <div className='goods'>
       <h1>Список товаров</h1>
       <ul>
-        {data.map((product, i) => {
-          if (i < 3) {
-            return <li key={product.id}>{`${product.name} ${product.id}`}</li>;
-          }
-          return null;
-        })
-      }
+        {ProductsList}
       </ul>
     </div>
   );
