@@ -1,0 +1,19 @@
+.title {
+    font-weight: normal;
+}
+  
+.goods li {
+    margin: 15px 0;
+}
+  
+.goods {
+    display: inline-block;
+    padding: 25px;
+}
+  
+#root {
+    display: inline-block;
+    text-align: left;
+}
+  
+    
