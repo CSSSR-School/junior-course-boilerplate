@@ -6,11 +6,11 @@ import data from "./products.json";
 import "./styles.css";
 
 const ProductsList = ({ products }) => {
-    const listItems = products.filter(item => item.id <= 3).map(item => {
-        const { id } = item;
-
-        return <li key={id}>Имя товара {id}</li>;
-    });
+    const listItems = products
+        .filter(item => item.id <= 3)
+        .map(item => {
+            return <li key={item.id}>{item.name}</li>;
+        });
 
     return <ul>{listItems}</ul>;
 };
