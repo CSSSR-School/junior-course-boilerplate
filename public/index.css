@@ -13,3 +13,16 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
   
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+h1 {
+	margin-bottom: 50px;
+}
+
+li {
+	margin-bottom: 20px;
+}
