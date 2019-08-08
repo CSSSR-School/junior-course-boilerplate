@@ -8,9 +8,7 @@ const App = () => {
         <div className="goods">
             <h1>Список товаров</h1>
             <ul>
-                {data.map((item) => 
-                    <li>{item.name}</li>).slice(0,3)
-                }
+                { data.slice(0,3).map( (item) => <li> {item.name} </li>) }
             </ul>
         </div>
     );
