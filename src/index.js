@@ -7,9 +7,9 @@ import "./styles.css";
 
 const ProductsList = ({ products }) => {
     const listItems = products
-        .filter(item => item.id <= 3)
-        .map(item => {
-            return <li key={item.id}>{item.name}</li>;
+        .slice(0,3)
+        .map((item, index) => {
+            return <li key={index}>{item.name}</li>;
         });
 
     return <ul>{listItems}</ul>;
