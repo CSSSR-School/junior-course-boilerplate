@@ -2,22 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import data from './products.json'
 import './index.css'
+
 const App = () => {
     return (
         <div className="goods">
             <h1>Список товаров</h1>
             <ul>
-                <li>{data[0].name}</li>
-                <li>{data[1].name}</li>
-                <li>{data[2].name}</li>
+                {data.map((item) => 
+                    <li>{item.name}</li>).slice(0,3)
+                }
             </ul>
         </div>
     );
-
 }
-
-
-
 ReactDOM.render(<App />, document.getElementById('root'));
 
 
