@@ -1,20 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import data from './products.json';
+import productsList from './products.json';
 
 import "./index.css";
 
 function App() {
 
-  const ProductsList = data
-    .filter(item => item.id < 4) 
-    .map(item => <li key={item.id}>{item.name}</li>);
+  const productsItems = productsList.slice(0, 3)
+    .map(({ id, name }) => <li key={id}>{name}</li>);
 
   return (
     <div className='goods'>
       <h1>Список товаров</h1>
       <ul>
-        {ProductsList}
+        {productsItems}
       </ul>
     </div>
   );
