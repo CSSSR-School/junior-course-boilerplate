@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "title": "Имя товара",
+        "isInStock": true,
+        "imgProduct": "./data/img/1_Rectangle.png",
+        "price": 4000,
+        "subPriceContent": 5000,
+        "maxRating": 5,
+        "rating": 3
+    },
+    {
+        "id": 2,
+        "title": "Имя товара",
+        "isInStock": true,
+        "imgProduct": "./data/img/2_Rectangle.png",
+        "price": 4000,
+        "subPriceContent": 5000,
+        "maxRating": 5,
+        "rating": 3    },
+    {
+        "id": 3,
+        "title": "Имя товара",
+        "isInStock": true,
+        "imgProduct": "./data/img/3_Rectangle.png",
+        "price": 4000,
+        "subPriceContent": 5000,
+        "maxRating": 5,
+        "rating": 3    },
+    {
+        "id": 4,
+        "title": "Имя товара",
+        "isInStock": true,
+        "imgProduct": "./data/img/4_Rectangle.png",
+        "price": 4000,
+        "subPriceContent": 5000,
+        "maxRating": 5,
+        "rating": 3    },
+    {
+        "id": 5,
+        "title": "Имя товара",
+        "isInStock": true,
+        "imgProduct": "./data/img/5_Rectangle.png",
+        "price": 4000,
+        "subPriceContent": 5000,
+        "maxRating": 5,
+        "rating": 3    },
+    {
+        "id": 6,
+        "title": "Имя товара",
+        "isInStock": true,
+        "imgProduct": "./data/img/6_Rectangle.png",
+        "price": 4000,
+        "subPriceContent": 5000,
+        "maxRating": 5,
+        "rating": 3    }
+]

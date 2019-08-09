@@ -1,22 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import productsList from './products.json';
+import productsList from './data/products.json';
+import ProductsH from './Components/ProductsH/ProductsH';
+import ProductsItems from './Components/ProductsItems/ProductsItems';
 
-import "./index.css";
+class App extends React.Component {
 
-function App() {
+  render() {
+    return (
+      <div className='goods'>
+        <ProductsH title={'Список товаров'}/>
+        <ProductsItems data={productsList}/>
+      </div>
+    );
+  }
 
-  const productsItems = productsList.slice(0, 3)
-    .map(({ id, name }) => <li key={id}>{name}</li>);
-
-  return (
-    <div className='goods'>
-      <h1>Список товаров</h1>
-      <ul>
-        {productsItems}
-      </ul>
-    </div>
-  );
 }
 
 const rootElement = document.getElementById("root");
