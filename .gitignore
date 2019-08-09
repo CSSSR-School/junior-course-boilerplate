@@ -6,6 +6,7 @@
 .pnp.js
 .idea
 .idea/encodings.xml
+.idea/workspace.xml
 
 # testing
 /coverage
