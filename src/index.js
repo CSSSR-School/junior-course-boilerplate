@@ -11,7 +11,7 @@ function App() {
     <React.Fragment>
       <h1>Список товаров</h1>
       <ul>
-      {products.map((item, index) => index < productsLimit ? <li key={item.id}>{item.name}</li> : '')}
+      {products.slice(0, productsLimit).map((item, index) => <li key={item.id}>{item.name}</li>)}
       </ul>
     </React.Fragment>
   );
