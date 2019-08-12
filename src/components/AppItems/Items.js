@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductItem from 'csssr-school-product-card'
-import styled from './Items.css'
+import './Items.css'
 
 const ratingComponent = ({ isFilled }) => {
     return <div className={isFilled && "starFill"} />;
@@ -19,7 +19,9 @@ const Items = ({data}) => {
             rating={Number(item.rating)}
             ratingComponent={ratingComponent} />      
         );
-    return <div className='item-list'>{list}</div>
+    return <div className='goods-card'>
+                {list}
+            </div>
 }
 
 
