@@ -8,7 +8,9 @@ import './index.css'
 const App = () => {
     return (
         <div className="goods">
-            <Header headerName="Список товаров"/>
+            <Header>
+                Список товаров
+            </Header> 
             <Items data={data}/>
         </div>
     );

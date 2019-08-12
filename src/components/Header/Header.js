@@ -1,9 +1,11 @@
 import React from 'react'
 import './Header.css'
 
-const Header = ({headerName}) => {
+const Header = (props) => {
     return (
-        <h1 className="goodsList">{headerName}</h1>
+        <h1 className="goodsList">
+            {props.children}
+        </h1>
     );
 }
 export default Header
