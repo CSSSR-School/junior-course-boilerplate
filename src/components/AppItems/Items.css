@@ -1,0 +1,6 @@
+.item-list {
+    display: flex;
+    max-width: 736px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

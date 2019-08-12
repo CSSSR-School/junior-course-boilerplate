@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Header from './components/Header/Header'
+import Items from './components/AppItems/Items'
 import data from './products.json'
 import './index.css'
+
 
 const App = () => {
     return (
         <div className="goods">
-            <h1>Список товаров</h1>
-            <ul>
-                { data.slice(0,3).map( (item) => <li> {item.name} </li>) }
-            </ul>
+            <Header />
+            <Items data={data}/>
         </div>
     );
 }
