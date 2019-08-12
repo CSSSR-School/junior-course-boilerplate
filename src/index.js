@@ -5,7 +5,6 @@ import Items from './components/AppItems/Items'
 import data from './products.json'
 import './index.css'
 
-
 const App = () => {
     return (
         <div className="goods">

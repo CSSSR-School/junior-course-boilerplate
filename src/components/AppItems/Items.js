@@ -19,11 +19,6 @@ const Items = ({data}) => {
             rating={Number(item.rating)}
             ratingComponent={ratingComponent} />      
         );
-    return <div className='goods-card'>
-                {list}
-            </div>
+    return <div className='goods-card'> {list} </div>
 }
-
-
-
 export default  Items
