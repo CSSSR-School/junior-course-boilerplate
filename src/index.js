@@ -20,6 +20,6 @@ function NumberList(props) {
 ReactDOM.render(
   <div className = 'productsList'>
     <h1>Список товаров</h1>
-    <NumberList itemsNumber={ITEMS_NUMBER} />,
+    <NumberList itemsNumber={ITEMS_NUMBER} />
   </div>,
   rootElement);
