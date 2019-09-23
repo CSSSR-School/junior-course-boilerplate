@@ -7,7 +7,7 @@ import "./index.css"
 const ITEMS_NUMBER = 3;
 const rootElement = document.getElementById('root');
 
-function NumberList(props) {
+function ProductsList(props) {
   const itemsNumber = props.itemsNumber;
   const listItems = products.slice(0, itemsNumber).map((item, number) =>
     <li key={number}>{item.name}</li>
@@ -20,6 +20,6 @@ function NumberList(props) {
 ReactDOM.render(
   <div className = 'productsList'>
     <h1>Список товаров</h1>
-    <NumberList itemsNumber={ITEMS_NUMBER} />
+    <ProductsList itemsNumber={ITEMS_NUMBER} />
   </div>,
   rootElement);
