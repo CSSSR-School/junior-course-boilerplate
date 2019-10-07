@@ -1,0 +1,11 @@
+h1 {
+  width: 270px;
+  margin: 0 auto;
+  margin-top: calc(50% - 48px/2 - 284px);
+
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 48px;
+
+  color: #323C48;
+}

@@ -13,8 +13,7 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-#root {
-  width: 300px;
+.appWrapper {
+  width: 736px;
   margin: 0 auto;
-  margin-top: 5%;
 }
