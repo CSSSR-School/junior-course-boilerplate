@@ -3,7 +3,7 @@ import React from "react";
 import ProductItem from 'csssr-school-product-card';
 import PropTypes from 'prop-types';
 
-import "./ProductsList.css";
+import styles from "./ProductsList.module.css";
 
 const PRODUCTS_NUMBER = 3;
 
@@ -20,7 +20,7 @@ const ProductsList = ({products}) => {
     </li>
   );
   return (
-    <ul>{list}</ul>
+    <ul className={styles.productsList}>{list}</ul>
   );
 }
 

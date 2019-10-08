@@ -9,8 +9,8 @@ import "./index.css"
 
 const App = () => {
   return (
-    <div className = 'appWrapper'>
-      <Title text = 'Список товаров'/>
+    <div className='appWrapper'>
+      <Title text='Список товаров'/>
       <ProductList products={products}/>
     </div>
   );

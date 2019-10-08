@@ -16,4 +16,9 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 .appWrapper {
   width: 736px;
   margin: 0 auto;
+  margin-top: 142px;
+}
+
+.firstTitle {
+  color: red;
 }
