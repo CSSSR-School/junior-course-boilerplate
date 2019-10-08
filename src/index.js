@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import ProductList from "./components/ProductsList/ProductsList.js"
-import Title from "./components/Title/Title.js"
+import ProductList from "./components/ProductsList/ProductsList"
+import Title from "./components/Title/Title"
 import products from "./products.json";
 
 import "./index.css"

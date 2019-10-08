@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 
 import "./ProductsList.css";
 
+const PRODUCTS_NUMBER = 3;
+
 const ratingComponent = ({ isFilled }) => {
   return <div className={isFilled && "starFill"} />;
 };
-const PRODUCTS_NUMBER = 3;
 
 const ProductsList = ({products}) => {
   const list = products.slice(0, PRODUCTS_NUMBER).map((item, number) =>
