@@ -1,21 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import ProductList from "./components/ProductsList/ProductsList"
+import Title from "./components/Title/Title"
 import products from "./products.json";
 
 import "./index.css"
 
-const ITEMS_NUMBER = 3;
-const listItems = products.slice(0, ITEMS_NUMBER).map((item, number) =>
-  <li key={number}>{item.name}</li>);
-const rootElement = document.getElementById('root');
-
-function App() {
+const App = () => {
   return (
-    <div className = 'productsList'>
-      <h1>Список товаров</h1>
-      <ul>{listItems}</ul>
+    <div className='appWrapper'>
+      <Title text='Список товаров'/>
+      <ProductList products={products}/>
     </div>
   );
 }
 
+const rootElement = document.getElementById('root');
 ReactDOM.render (<App />, rootElement);
