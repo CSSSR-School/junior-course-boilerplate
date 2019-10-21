@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import data from './products.json';
 import './styles.css';
 
-function Header() {
+const Header = () => {
   return (
     <header className="header">
       <h1 className="caption">Список товаров</h1>
     </header>
   );
-}
+};
 
-function ProductsList() {
+const ProductsList = () => {
   return (
     <ul className="products">
       {data.splice(0, 3).map(item => {
@@ -23,18 +23,16 @@ function ProductsList() {
       })}
     </ul>
   );
-}
+};
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <Header></Header>
-        <ProductsList></ProductsList>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Header></Header>
+      <ProductsList></ProductsList>
+    </div>
+  );
+};
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
