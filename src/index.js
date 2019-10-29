@@ -1,19 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './global-styles.css';
+import { render } from 'react-dom';
+import { App } from './App';
 
-// Импорт глупых компонентов
-import { Header } from './components/Header/Header';
-import { ProductsList } from './components/ProductsList/ProductsList';
-
-const App = () => {
-  return (
-    <div className="App">
-      <Header></Header>
-      <ProductsList></ProductsList>
-    </div>
-  );
-};
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
+render(<App />, document.getElementById('root'));

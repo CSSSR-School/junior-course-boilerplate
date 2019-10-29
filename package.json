@@ -19,5 +19,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "classnames": "^2.2.6",
+    "csssr-school-product-card": "git+ssh://git@github.com/CSSSR-School/junior-course-product-card.git"
+  }
 }

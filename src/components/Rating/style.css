@@ -1,0 +1,16 @@
+.star {
+  display: inline-block;
+  margin-right: 5px;
+  width: 14px;
+  height: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.star-fill {
+  background-image: url('./star-fill.svg');
+}
+
+.star-clean {
+  background-image: url('./star-clean.svg');
+}
