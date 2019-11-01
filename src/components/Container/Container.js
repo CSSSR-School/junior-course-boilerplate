@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css';
 
-export const Container = props => {
-  const { children } = props;
+export default function Container({ children }) {
   return <div className="container">{children}</div>;
-};
+}

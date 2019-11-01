@@ -3,16 +3,10 @@ import propTypes from 'prop-types';
 
 import './style.css';
 
-export const ProductItem = props => {
-  const { children } = props;
-
+export default function ProductItem({ children }) {
   return <li className="product-card">{children}</li>;
-};
+}
 
 ProductItem.propTypes = {
   children: propTypes.node.isRequired,
-};
-
-ProductItem.defaultProps = {
-  children: <div>Что-то пошло не так</div>,
 };
