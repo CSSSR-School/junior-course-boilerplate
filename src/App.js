@@ -14,7 +14,7 @@ const HEADER_TITLE = <span>Список товаров</span>;
 export const App = () => {
   return (
     <Container>
-      <Header children={HEADER_TITLE} />
+      <Header>{HEADER_TITLE}</Header>
       <ProductPage products={data} />
     </Container>
   );
