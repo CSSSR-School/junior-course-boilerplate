@@ -9,12 +9,12 @@ import Header from './components/Header/Header';
 // Импорт умных компонентов
 import ProductPage from './containers/ProductPage';
 
-const HEADER_TITLE = <span>Список товаров</span>;
-
 export const App = () => {
   return (
     <Container>
-      <Header>{HEADER_TITLE}</Header>
+      <Header>
+        <span>Список товаров</span>
+      </Header>
       <ProductPage products={data} />
     </Container>
   );
