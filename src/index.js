@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 import data from './products.json';
 import "./index.css";
 
+const filteredData = data.slice(0, 3);
+
 function App() {
     return (
         <div className="App">
             <h1>Список товаров</h1>
-            <List data={data.slice(0, 3)}/>
+            <List data={filteredData}/>
         </div>
     );
 }
