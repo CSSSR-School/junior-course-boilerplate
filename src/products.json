@@ -1,26 +1,56 @@
 [
-    {
-        "id": 1,
-        "name": "Имя товара1"
-    },
-    {
-        "id": 2,
-        "name": "Имя товара2"
-    },
-    {
-        "id": 3,
-        "name": "Имя товара3"
-    },
-    {
-        "id": 4,
-        "name": "Имя товара4"
-    },
-    {
-        "id": 5,
-        "name": "Имя товара5"
-    },
-    {
-        "id": 6,
-        "name": "Имя товара6"
-    }
+  {
+    "id": 1,
+    "name": "Имя товара 1",
+    "isInStock": true,
+    "imgUrl": "https://main-cdn.goods.ru//hlr-system/1635415/1t.jpg",
+    "price": "2 000",
+    "subPriceContent": "",
+    "rating": 3
+  },
+  {
+    "id": 2,
+    "name": "Имя товара 2",
+    "isInStock": false,
+    "imgUrl": "https://main-cdn.goods.ru//hlr-system/1666415/2t.jpg",
+    "price": "3 990",
+    "subPriceContent": "",
+    "rating": 2
+  },
+  {
+    "id": 3,
+    "name": "Имя товара 3",
+    "isInStock": true,
+    "imgUrl": "https://main-cdn.goods.ru//hlr-system/1697415/3t.jpg",
+    "price": "990",
+    "subPriceContent": "",
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "name": "Имя товара 4",
+    "isInStock": true,
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1512817531/100024748914b0.JPG",
+    "price": "10 990",
+    "subPriceContent": "",
+    "rating": 3
+  },
+  {
+    "id": 5,
+    "name": "Имя товара 5",
+    "isInStock": true,
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/163390381/600000159956b0.jpg",
+    "price": "1 290",
+    "subPriceContent": "",
+    "rating": 4
+  },
+  {
+    "id": 6,
+    "name": "Имя товара 6",
+    "isInStock": true,
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1545491/100000011827b0.jpg",
+    "price": "2 990",
+    "subPriceContent": "",
+    "rating": 1
+  }
 ]

@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 body {
     display: flex;
     justify-content: center;
+    font-family: 'Open Sans', sans-serif;
 }
 
-li:nth-child(odd) {
-    background: pink;
+h1 {
+    font-weight: 300;
+    text-align: center;
 }
