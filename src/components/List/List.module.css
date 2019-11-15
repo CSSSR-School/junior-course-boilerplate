@@ -4,7 +4,7 @@
     width: 760px;
 }
 
-.list__item {
+.listItem {
     width: 33%;
     display: flex;
     justify-content: center;

@@ -15,21 +15,5 @@ class App extends Component {
     }
 }
 
-// class List1 extends React.Component {
-//     render() {
-//         return <ul>
-//             {this.props.data.map((item) => {
-//                 return <ListItem key={item.id} data={item}/>
-//             })}
-//         </ul>
-//     }
-// }
-//
-// class ListItem extends React.Component {
-//     render() {
-//         return <li>{this.props.data.name}</li>
-//     }
-// }
-
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App/>, rootElement);
