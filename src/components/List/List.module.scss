@@ -1,12 +1,12 @@
 .list {
-    display: flex;
-    flex-wrap: wrap;
-    width: 760px;
-}
+  display: flex;
+  flex-wrap: wrap;
+  width: 760px;
 
-.listItem {
+  &Item {
     width: 33%;
     display: flex;
     justify-content: center;
     margin: 20px 0;
+  }
 }

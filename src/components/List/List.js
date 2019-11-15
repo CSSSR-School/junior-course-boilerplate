@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductItem from 'csssr-school-product-card';
 import RatingComponent from '../RatingComponent/RatingComponent';
-import styles from './List.module.css';
+import s from './List.module.scss';
  
-console.info(styles);
 const List = ({data}) => {
     return (
-        <div className={styles.list}>
+        <ul className={s.list}>
             {data.map((item) => {
                 return (
-                    <div className={styles.listItem} key={item.id}>
+                    <li className={s.listItem} key={item.id}>
                         <ProductItem
                             isInStock={item.isInStock}
                             img={item.imgUrl}
@@ -21,13 +20,12 @@ const List = ({data}) => {
                             rating={item.rating}
                             ratingComponent={RatingComponent}
                         />
-                    </div>
+                    </li>
                 )
             })}
-        </div>
+        </ul>
     )
 };
-
 
 List.propTypes = {
     data: PropTypes.array

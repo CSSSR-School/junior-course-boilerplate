@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import data from './products.json';
-import "./index.css";
-import Header from "./components/Header/Header"
+import "./index.scss";
+import MainTitle from "./components/MainTitle/MainTitle"
 import List from "./components/List/List"
 
 
 class App extends Component {
     render() {
         return <div className="App">
-            <Header/>
+            <MainTitle/>
             <List data={data}/>
         </div>
     }
