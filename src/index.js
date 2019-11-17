@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 import data from './products.json';
-import "./index.scss";
-import MainTitle from "./components/MainTitle/MainTitle"
-import List from "./components/List/List"
+import './index.scss';
+import MainTitle from './components/MainTitle/MainTitle';
+import List from './components/List/List'
 
 
 class App extends Component {
