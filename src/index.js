@@ -9,11 +9,9 @@ function App() {
     <div className="App">
       <h1>Список товаров</h1>
       <ul>
-          {data.map((prod, index)=> {
-              while (index < 3){
-              return <li>{prod.name}</li>
-              }
-          })}
+          {data.slice(0, 3).map((prod) => 
+          <li>{prod.name}</li> 
+          )}
       </ul>
     </div>
   );
