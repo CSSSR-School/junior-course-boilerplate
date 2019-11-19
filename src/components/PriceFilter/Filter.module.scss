@@ -1,0 +1,37 @@
+.filter {
+
+  &Title {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  &Row {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+
+  &Item {
+    input{
+      border: 1px solid #7E8FA4;
+      font-size: 14px;
+      padding: 0 15px;
+      height: 30px;
+      width: 90px;
+      outline: none !important;
+    }
+  }
+
+  &Submit {
+    border: none;
+    background: #323C48;
+    color: #fff;
+    text-align: center;
+    font-weight: 300;
+    line-height: 32px;
+    width: 100%;
+    display: block;
+    font-size: 14px;
+  }
+}

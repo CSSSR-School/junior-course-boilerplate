@@ -1,8 +1,9 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-  width: 760px;
-
+  padding: 0;
+  margin: -20px 0;
+  width: 100%;
   &Item {
     width: 33%;
     display: flex;
