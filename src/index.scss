@@ -9,7 +9,12 @@ body {
   margin: 0 auto;
   padding: 50px 0;
 
+  &Header {
+    text-align: center;
+  }
+
   &Body {
+    padding-top: 50px;
     display: flex;
   }
 

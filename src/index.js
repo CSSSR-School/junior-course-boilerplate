@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {maxBy, minBy} from 'csssr-school-utils'
 import data from './products.json';
-import MainTitle from './components/MainTitle/MainTitle';
+import Title from './components/Title/Title';
 import List from './components/List/List'
 import PriceFilter from './components/PriceFilter/PriceFilter'
 import './index.scss';
@@ -21,25 +21,31 @@ class App extends Component {
     }
 
     priceFilterData = (min, max) => {
-        min = min >= 0 ? min : this.state.minPrice;
-        max = max >= 0 ? max : this.state.maxPrice;
+        const minValue = min >= 0 ? min : this.state.minPrice;
+        const maxValue = max >= 0 ? max : this.state.maxPrice;
 
         this.setState({
             filteredData: data.filter((item) => {
-                return item.price >= min && item.price <= max
+                return item.price >= minValue && item.price <= maxValue
             })
         });
     };
 
     render() {
+        const {minPrice, maxPrice, filteredData} = this.state;
+
         return <div className="App">
-            <MainTitle/>
+            <div className="AppHeader">
+                <Title text="Список товаров"/>
+            </div>
             <div className="AppBody">
                 <aside className="AppSidebar">
-                    <PriceFilter minPrice={this.state.minPrice} maxPrice={this.state.maxPrice} priceFilterData={this.priceFilterData}/>
+                    <PriceFilter minPrice={minPrice}
+                                 maxPrice={maxPrice}
+                                 priceFilterData={this.priceFilterData}/>
                 </aside>
                 <main className="AppMain">
-                    <List data={this.state.filteredData}/>
+                    <List data={filteredData}/>
                 </main>
             </div>
         </div>

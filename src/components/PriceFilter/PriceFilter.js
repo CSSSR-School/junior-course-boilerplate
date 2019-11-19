@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import reactMixin from 'react-mixin';
 
-import logRender from '../../mixins/logRender'
-
-import s from './Filter.module.scss'
+import s from './PriceFilter.module.scss'
+import Title from "../Title/Title";
 
 class PriceFilter extends Component {
-    constructor(props) {
+    constructor({props}) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.filterMinPrice = React.createRef();
         this.filterMaxPrice = React.createRef();
     }
@@ -20,15 +17,17 @@ class PriceFilter extends Component {
     };
 
     render() {
+        const {maxPrice, minPrice} = this.props;
+
         return (
             <form className={s.filter} onSubmit={this.handleSubmit}>
-                <h4 className={s.filterTitle}>Цена</h4>
+                <Title text="Цена"/>
                 <div className={s.filterRow}>
                     <div className={s.filterItem}>
-                        от <input type="text" defaultValue={this.props.minPrice} ref={this.filterMinPrice}/>
+                        от <input type="text" defaultValue={minPrice} ref={this.filterMinPrice}/>
                     </div>
                     <div className={s.filterItem}>
-                        до <input type="text" defaultValue={this.props.maxPrice} ref={this.filterMaxPrice}/>
+                        до <input type="text" defaultValue={maxPrice} ref={this.filterMaxPrice}/>
                     </div>
                 </div>
                 <button type="submit" className={s.filterSubmit}><span>Применить</span></button>
@@ -38,7 +37,6 @@ class PriceFilter extends Component {
     }
 };
 
-reactMixin(PriceFilter.prototype, logRender);
 
 PriceFilter.propTypes = {
     minPrice: PropTypes.number,

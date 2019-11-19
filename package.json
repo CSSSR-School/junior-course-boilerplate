@@ -7,7 +7,6 @@
     "csssr-school-utils": "git+https://github.com/CSSSR-School/junior-course-utils.git",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-mixin": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
