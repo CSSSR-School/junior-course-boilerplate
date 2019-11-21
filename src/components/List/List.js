@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductItem from 'csssr-school-product-card';
 import {formatMoney} from 'csssr-school-utils'
-
 import RatingComponent from '../RatingComponent/RatingComponent';
 
 import s from './List.module.scss';
@@ -18,7 +17,7 @@ const List = ({data}) => {
                                 isInStock={item.isInStock}
                                 img={item.imgUrl}
                                 title={item.name}
-                                price={formatMoney(item.price, 0 , '.', ' ')}
+                                price={formatMoney(item.price, 0, '.', ' ')}
                                 subPriceContent={item.subPriceContent}
                                 maxRating={5}
                                 rating={item.rating}

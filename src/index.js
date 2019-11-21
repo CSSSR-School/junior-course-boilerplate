@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import {maxBy, minBy} from 'csssr-school-utils'
 import data from './products.json';
@@ -8,7 +8,7 @@ import PriceFilter from './components/PriceFilter/PriceFilter'
 import './index.scss';
 
 
-class App extends Component {
+class App extends React.Component {
 
     constructor(props) {
         super(props);

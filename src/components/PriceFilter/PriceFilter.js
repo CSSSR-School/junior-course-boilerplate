@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import s from './PriceFilter.module.scss'
 import Title from "../Title/Title";
 
-class PriceFilter extends Component {
+class PriceFilter extends React.Component {
     constructor({props}) {
         super(props);
         this.filterMinPrice = React.createRef();
@@ -43,4 +42,4 @@ PriceFilter.propTypes = {
     maxPrice: PropTypes.number,
 };
 
-export default PriceFilter;
+export default PriceFilter
