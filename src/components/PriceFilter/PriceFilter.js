@@ -20,7 +20,7 @@ class PriceFilter extends React.Component {
 
         return (
             <form className={s.filter} onSubmit={this.handleSubmit}>
-                <Title text="Цена"/>
+                <Title>Цена</Title>
                 <div className={s.filterRow}>
                     <div className={s.filterItem}>
                         от <input type="text" defaultValue={minPrice} ref={this.filterMinPrice}/>
@@ -35,7 +35,6 @@ class PriceFilter extends React.Component {
         )
     }
 };
-
 
 PriceFilter.propTypes = {
     minPrice: PropTypes.number,

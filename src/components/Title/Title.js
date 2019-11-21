@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from 'prop-types';
 import s from './Title.module.scss'
 
-const Title = ({text}) => {
+const Title = ({children}) => {
     return (
-        <h1 className={s.title}>{text}</h1>
+        <h1 className={s.title}>{children}</h1>
     )
 };
 
 Title.propTypes = {
-    text: PropTypes.string
+    text: PropTypes.node
 };
 
 export default Title;

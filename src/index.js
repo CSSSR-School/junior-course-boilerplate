@@ -36,7 +36,7 @@ class App extends React.Component {
 
         return <div className="App">
             <div className="AppHeader">
-                <Title text="Список товаров"/>
+                <Title>Список товаров</Title>
             </div>
             <div className="AppBody">
                 <aside className="AppSidebar">
