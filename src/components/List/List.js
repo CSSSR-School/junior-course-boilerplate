@@ -18,7 +18,7 @@ const List = ({data}) => {
                                 img={item.imgUrl}
                                 title={item.name}
                                 price={formatMoney(item.price, 0, '.', ' ')}
-                                subPriceContent={item.subPriceContent}
+                                subPriceContent={formatMoney(item.subPriceContent, 0, '.', ' ')}
                                 maxRating={5}
                                 rating={item.rating}
                                 ratingComponent={RatingComponent}

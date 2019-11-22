@@ -2,33 +2,56 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import s from './PriceFilter.module.scss'
 import Title from "../Title/Title";
+import InputNumber from '../InputNumber/InputNumber'
 
 class PriceFilter extends React.Component {
-    constructor({props}) {
+    constructor(props) {
         super(props);
-        this.filterMinPrice = React.createRef();
-        this.filterMaxPrice = React.createRef();
+        this.state = {
+            minPrice: this.props.minPrice,
+            maxPrice: this.props.maxPrice
+        };
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.priceFilterData(this.filterMinPrice.current.value, this.filterMaxPrice.current.value);
+        this.props.priceFilterData(this.state.minPrice, this.state.maxPrice);
     };
 
+    changeMinPrice = (value) => {
+        this.setState({
+            minPrice: value
+        });
+    };
+
+    changeMaxPrice = (value) => {
+        this.setState({
+            maxPrice: value
+        });
+    };
+
+
     render() {
-        const {maxPrice, minPrice} = this.props;
+        const {maxPrice, minPrice} = this.state;
 
         return (
             <form className={s.filter} onSubmit={this.handleSubmit}>
                 <Title>Цена</Title>
                 <div className={s.filterRow}>
                     <div className={s.filterItem}>
-                        от <input type="text" defaultValue={minPrice} ref={this.filterMinPrice}/>
+                        от
+                        <InputNumber
+                                     value={minPrice}
+                                     onChange={this.changeMinPrice}/>
                     </div>
                     <div className={s.filterItem}>
-                        до <input type="text" defaultValue={maxPrice} ref={this.filterMaxPrice}/>
+                        до
+                        <InputNumber
+                                     value={maxPrice}
+                                     onChange={this.changeMaxPrice}/>
                     </div>
                 </div>
+
                 <button type="submit" className={s.filterSubmit}><span>Применить</span></button>
             </form>
 
