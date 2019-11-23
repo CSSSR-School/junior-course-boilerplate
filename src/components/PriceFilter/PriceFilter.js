@@ -41,14 +41,14 @@ class PriceFilter extends React.Component {
                     <div className={s.filterItem}>
                         от
                         <InputNumber
-                                     value={minPrice}
-                                     onChange={this.changeMinPrice}/>
+                            value={minPrice}
+                        />
                     </div>
                     <div className={s.filterItem}>
                         до
                         <InputNumber
-                                     value={maxPrice}
-                                     onChange={this.changeMaxPrice}/>
+                            value={maxPrice}
+                        />
                     </div>
                 </div>
 

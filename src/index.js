@@ -6,7 +6,7 @@ import Title from './components/Title/Title';
 import List from './components/List/List'
 import PriceFilter from './components/PriceFilter/PriceFilter'
 import './index.scss';
-
+import InputNumber from "./components/InputNumber/InputNumber";
 
 class App extends React.Component {
 
@@ -35,6 +35,7 @@ class App extends React.Component {
         const {minPrice, maxPrice, filteredData} = this.state;
 
         return <div className="App">
+            <InputNumber/>
             <div className="AppHeader">
                 <Title>Список товаров</Title>
             </div>
