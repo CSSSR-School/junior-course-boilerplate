@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import {maxBy, minBy} from 'csssr-school-utils'
 import data from './products.json';
 import Title from './components/Title/Title';
-import List from './components/List/List'
-import PriceFilter from './components/PriceFilter/PriceFilter'
+import List from './components/List/List';
+import PriceFilter from './components/PriceFilter/PriceFilter';
 import './index.scss';
-import InputNumber from "./components/InputNumber/InputNumber";
 
 class App extends React.Component {
 
@@ -15,35 +14,51 @@ class App extends React.Component {
         this.state = {
             filteredData: data,
             minPrice: minBy(obj => obj.price, data).price,
-            maxPrice: maxBy(obj => obj.price, data).price
+            maxPrice: maxBy(obj => obj.price, data).price,
+            discount: 0
         }
 
     }
 
-    priceFilterData = (min, max) => {
-        const minValue = min >= 0 ? min : this.state.minPrice;
-        const maxValue = max >= 0 ? max : this.state.maxPrice;
+    priceFilterData = (min, max, discount) => {
+        return data.filter((item) => {
+            return item.price >= min && item.price <= max
+        })
+    };
 
+    handleChangeMinPrice = (value) => {
         this.setState({
-            filteredData: data.filter((item) => {
-                return item.price >= minValue && item.price <= maxValue
-            })
-        });
+            minPrice: value,
+            filteredData: this.priceFilterData(value, this.state.maxPrice, this.state.discount)
+        })
+    };
+    handleChangeMaxPrice = (value) => {
+        this.setState({
+            maxPrice: value,
+            filteredData: this.priceFilterData(this.state.minPrice, value, this.state.discount)
+        })
+    };
+    handleChangeDiscount = (value) => {
+        this.setState({
+            discount: value,
+            filteredData: this.priceFilterData(this.state.minPrice, this.state.maxPrice, value)
+        })
     };
 
     render() {
-        const {minPrice, maxPrice, filteredData} = this.state;
+        const {minPrice, maxPrice, discount, filteredData} = this.state;
 
         return <div className="App">
-            <InputNumber/>
             <div className="AppHeader">
                 <Title>Список товаров</Title>
             </div>
             <div className="AppBody">
                 <aside className="AppSidebar">
-                    <PriceFilter minPrice={minPrice}
-                                 maxPrice={maxPrice}
-                                 priceFilterData={this.priceFilterData}/>
+                    <PriceFilter {...this.state}
+                                 handleChangeMinPrice={this.handleChangeMinPrice}
+                                 handleChangeMaxPrice={this.handleChangeMaxPrice}
+                                 handleChangeDiscount={this.handleChangeDiscount}
+                    />
                 </aside>
                 <main className="AppMain">
                     <List data={filteredData}/>

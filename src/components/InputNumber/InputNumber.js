@@ -1,14 +1,14 @@
 import React from 'react';
-import HOC from "../../containers/HOC";
+import inputHOC from "../../containers/inputHOC";
 import s from './InputNumber.module.scss'
 
 const InputNumber = props => {
-  const { value, onChange } = props;
-
-  return <input type="text"
-                value={value}
-                className={s.InputNumber}
-                onChange={event=>onChange(event)} />;
+    const {value, onChange} = props;
+    return <input type="text"
+                  className={s.InputNumber}
+                  value={value}
+                  onChange={onChange}
+            />;
 };
 
-export default HOC(InputNumber);
+export default inputHOC(InputNumber);
