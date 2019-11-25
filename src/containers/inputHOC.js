@@ -15,7 +15,7 @@ export default function inputHOC(HoccedComponent) {
         };
 
         render() {
-            const { value, ...rest } = this.props;
+            const { value, onChange, ...rest } = this.props;
             console.info(this.props.value, this.state.value); // state не меняется
             return (
                 <HoccedComponent
