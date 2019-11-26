@@ -9,19 +9,25 @@ export default function inputHOC(HoccedComponent) {
             };
         }
 
+        static getDerivedStateFromProps(props, state) {
+            return {
+                value: props.value || 0
+            }
+        }
+
         handleChange = event => {
             const value = parseInt(event.target.value.replace(/\D/, ''));
             this.props.onChange(value);
         };
 
         render() {
-            const { value, onChange, ...rest } = this.props;
+            const {value, onChange, ...rest} = this.props;
             console.info(this.props.value, this.state.value); // state не меняется
             return (
                 <HoccedComponent
-                     {...rest}
+                    {...rest}
                     onChange={this.handleChange}
-                    value={value}
+                    value={this.state.value}
                 />
             );
         }
