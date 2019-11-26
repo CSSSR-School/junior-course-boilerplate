@@ -40,7 +40,7 @@ class App extends React.Component {
     };
 
 
-    getFilterData = memoize((data, minPrice, maxPrice, discount) => {
+    getFilteredData = memoize((data, minPrice, maxPrice, discount) => {
         return data.filter((item) => {
             return item.price >= minPrice && item.price <= maxPrice && item.discount >= discount
         })
@@ -48,7 +48,7 @@ class App extends React.Component {
 
 
     render() {
-        const {minPrice, maxPrice, discount} = this.state;
+        const {data, minPrice, maxPrice, discount} = this.state;
         return <div className="App">
             <div className="AppHeader">
                 <Title>Список товаров</Title>
@@ -64,7 +64,7 @@ class App extends React.Component {
                     />
                 </aside>
                 <main className="AppMain">
-                    <List data={this.getFilterData(data, minPrice, maxPrice, discount)}/>
+                    <List data={this.getFilteredData(data, minPrice, maxPrice, discount)}/>
                 </main>
             </div>
         </div>
