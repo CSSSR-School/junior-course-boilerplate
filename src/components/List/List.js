@@ -4,10 +4,10 @@ import ProductItem from 'csssr-school-product-card';
 import {formatMoney} from 'csssr-school-utils'
 import logRenderComponent from "../../containers/logRenderComponent";
 import RatingComponent from '../RatingComponent/RatingComponent';
-
 import s from './List.module.scss';
 
 class List extends React.Component {
+
     render() {
         const {data} = this.props;
         if (data.length > 0) {

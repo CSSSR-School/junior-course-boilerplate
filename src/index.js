@@ -6,47 +6,49 @@ import Title from './components/Title/Title';
 import List from './components/List/List';
 import PriceFilter from './components/PriceFilter/PriceFilter';
 import './index.scss';
+import memoize from "./containers/memoize";
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            filteredData: data,
+            data: data,
             minPrice: minBy(obj => obj.price, data).price,
             maxPrice: maxBy(obj => obj.price, data).price,
-            discount: 0
+            discount: minBy(obj => obj.discount, data).discount,
         }
     }
 
-    priceFilterData = (min, max, discount) => {
-        return data.filter((item) => {
-            return item.price >= min && item.price <= max && item.discount >= discount
-        })
-    };
 
     handleChangeMinPrice = (value) => {
         this.setState({
             minPrice: value,
-            filteredData: this.priceFilterData(value, this.state.maxPrice, this.state.discount)
         })
     };
+
     handleChangeMaxPrice = (value) => {
         this.setState({
             maxPrice: value,
-            filteredData: this.priceFilterData(this.state.minPrice, value, this.state.discount)
         })
     };
+
     handleChangeDiscount = (value) => {
         this.setState({
             discount: value,
-            filteredData: this.priceFilterData(this.state.minPrice, this.state.maxPrice, value)
         })
     };
 
-    render() {
-        const {minPrice, maxPrice, discount, filteredData} = this.state;
 
+    getFilterData = memoize((data, minPrice, maxPrice, discount) => {
+        return data.filter((item) => {
+            return item.price >= minPrice && item.price <= maxPrice && item.discount >= discount
+        })
+    });
+
+
+    render() {
+        const {minPrice, maxPrice, discount} = this.state;
         return <div className="App">
             <div className="AppHeader">
                 <Title>Список товаров</Title>
@@ -62,7 +64,7 @@ class App extends React.Component {
                     />
                 </aside>
                 <main className="AppMain">
-                    <List data={filteredData}/>
+                    <List data={this.getFilterData(data, minPrice, maxPrice, discount)}/>
                 </main>
             </div>
         </div>

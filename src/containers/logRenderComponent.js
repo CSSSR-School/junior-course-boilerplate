@@ -4,7 +4,7 @@ import {logger} from 'csssr-school-utils'
 export default function logRenderComponent(WrappedComponent) {
     return class extends WrappedComponent {
         shouldComponentUpdate(nextProps, nextState) {
-            if (shallowCompare(this, nextProps, nextState)){
+            if (shallowCompare(this, nextProps, nextState)) {
                 logger.call(this, super.constructor.name, nextProps, nextState);
                 return true
             } else {
