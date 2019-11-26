@@ -1,28 +1,27 @@
 import React from 'react';
 
 export default function inputHOC(HoccedComponent) {
-    return class extends React.PureComponent {
+    return class extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
-                value: props.value || 0
+                value: ''
             };
         }
 
-        static getDerivedStateFromProps(props, state) {
+        static getDerivedStateFromProps(nextProps, prevState) {
             return {
-                value: props.value || 0
+                value: nextProps.value
             }
         }
 
         handleChange = event => {
-            const value = parseInt(event.target.value.replace(/\D/, ''));
+            const value = parseInt(event.target.value.replace(/\D/, '')) || 0;
             this.props.onChange(value);
         };
 
         render() {
             const {value, onChange, ...rest} = this.props;
-            console.info(this.props.value, this.state.value); // state не меняется
             return (
                 <HoccedComponent
                     {...rest}

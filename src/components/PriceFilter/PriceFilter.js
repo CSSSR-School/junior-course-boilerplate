@@ -6,13 +6,17 @@ import InputNumber from '../InputNumber/InputNumber'
 import inputHOC from '../../containers/inputHOC'
 
 import s from './PriceFilter.module.scss'
+import logRenderComponent from "../../containers/logRenderComponent";
+
+const HoccedDiscount = inputHOC(Discount);
 
 class PriceFilter extends React.Component {
 
     render() {
-        const {maxPrice, minPrice, discount, handleChangeMinPrice,
-                handleChangeMaxPrice, handleChangeDiscount} = this.props;
-        const HoccedDiscount = inputHOC(Discount);
+        const {
+            maxPrice, minPrice, discount, handleChangeMinPrice,
+            handleChangeMaxPrice, handleChangeDiscount
+        } = this.props;
         return (
             <form className={s.filter}>
                 <Title>Цена</Title>
@@ -33,10 +37,10 @@ class PriceFilter extends React.Component {
                     </div>
                 </div>
                 <HoccedDiscount
-                          title="Скидка"
-                          name="sale"
-                          value={discount}
-                          onChange={handleChangeDiscount}
+                    title="Скидка"
+                    name="sale"
+                    value={discount}
+                    onChange={handleChangeDiscount}
                 />
             </form>
 
@@ -50,4 +54,4 @@ PriceFilter.propTypes = {
     discount: PropTypes.number,
 };
 
-export default PriceFilter
+export default logRenderComponent(PriceFilter);

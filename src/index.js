@@ -17,12 +17,11 @@ class App extends React.Component {
             maxPrice: maxBy(obj => obj.price, data).price,
             discount: 0
         }
-
     }
 
     priceFilterData = (min, max, discount) => {
         return data.filter((item) => {
-            return item.price >= min && item.price <= max
+            return item.price >= min && item.price <= max && item.discount >= discount
         })
     };
 
@@ -54,7 +53,9 @@ class App extends React.Component {
             </div>
             <div className="AppBody">
                 <aside className="AppSidebar">
-                    <PriceFilter {...this.state}
+                    <PriceFilter minPrice={minPrice}
+                                 maxPrice={maxPrice}
+                                 discount={discount}
                                  handleChangeMinPrice={this.handleChangeMinPrice}
                                  handleChangeMaxPrice={this.handleChangeMaxPrice}
                                  handleChangeDiscount={this.handleChangeDiscount}
