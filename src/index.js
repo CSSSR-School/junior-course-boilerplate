@@ -6,7 +6,7 @@ import Title from './components/Title/Title';
 import List from './components/List/List';
 import PriceFilter from './components/PriceFilter/PriceFilter';
 import './index.scss';
-import memoize from "./containers/memoize";
+import memoize from './containers/memoize';
 
 class App extends React.Component {
 
