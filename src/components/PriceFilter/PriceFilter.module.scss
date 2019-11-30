@@ -6,12 +6,10 @@
     padding: 20px 0;
   }
 
-  &Submit {
-    border: none;
-    background: #323C48;
-    color: #fff;
+  &Button {
+    border: 2px solid #323C48;
+    color: #323C48;
     text-align: center;
-    font-weight: 300;
     line-height: 32px;
     width: 100%;
     display: block;

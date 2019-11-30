@@ -1,62 +1,68 @@
 [
   {
     "id": 1,
-    "name": "Имя товара 1",
+    "name": "Смартфон Samsung Galaxy A50",
     "isInStock": true,
-    "imgUrl": "https://main-cdn.goods.ru//hlr-system/1635415/1t.jpg",
-    "price": 2000,
+    "imgUrl": "https://main-cdn.goods.ru//hlr-system/1507522415/10101t.jpg",
+    "price": 15990,
     "subPriceContent": 2500,
     "rating": 3,
-    "discount": 10
+    "discount": 10,
+    "category": "Смартфон"
   },
   {
     "id": 2,
-    "name": "Имя товара 2",
+    "name": "Гуашь Луч Гуашь Престиж 12 цветов",
     "isInStock": false,
-    "imgUrl": "https://main-cdn.goods.ru//hlr-system/1666415/2t.jpg",
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1603151/100002137745b0.jpg",
     "price": 3990,
     "subPriceContent": "",
     "rating": 2,
-    "discount": 30
+    "discount": 30,
+    "category": "Хобби"
   },
   {
     "id": 3,
-    "name": "Имя товара 3",
+    "name": "Смартфон Apple iPhone XR 64GB RED",
     "isInStock": true,
-    "imgUrl": "https://main-cdn.goods.ru//hlr-system/1697415/3t.jpg",
-    "price": 990,
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1515700414/100023876017b0.jpg",
+    "price": 48888,
     "subPriceContent": "",
     "rating": 5,
-    "discount": 15
+    "discount": 15,
+    "category": "Смартфон"
   },
   {
     "id": 4,
-    "name": "Имя товара 4",
+    "name": "Художественные краски Jovi 24 цвета с кисточкой",
     "isInStock": true,
-    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1512817531/100024748914b0.JPG",
-    "price": 10990,
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1571438/100022999333b0.jpg",
+    "price": 4990,
     "subPriceContent": "",
     "rating": 3,
-    "discount": 25
+    "discount": 25,
+    "category": "Хобби"
   },
   {
     "id": 5,
-    "name": "Имя товара 5",
+    "name": "Сетевая циркулярная пила Makita 5477NB",
     "isInStock": true,
-    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/163390381/600000159956b0.jpg",
-    "price": 1290,
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1693485/100000379576b0.jpg",
+    "price": 10550,
     "subPriceContent": "",
     "rating": 4,
-    "discount": 80
+    "discount": 80,
+    "category": "Инструмент"
   },
   {
     "id": 6,
-    "name": "Имя товара 6",
+    "name": "Смартфон Apple iPhone 11 128GB Black",
     "isInStock": true,
-    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1545491/100000011827b0.jpg",
-    "price": 2990,
+    "imgUrl": "https://main-cdn.goods.ru/mid9/hlr-system/1720393911/100025399383b0.jpg",
+    "price": 64890,
     "subPriceContent": "",
     "rating": 1,
-    "discount": 30
+    "discount": 30,
+    "category": "Смартфон"
   }
 ]
