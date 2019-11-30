@@ -60,7 +60,6 @@ class PriceFilter extends React.Component {
                     </form>
                 )}
             </FilterContext.Consumer>
-
         )
     }
 }

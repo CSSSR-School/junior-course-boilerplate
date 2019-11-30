@@ -13,14 +13,24 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+
+        let url = decodeURIComponent(window.location.pathname.substr(1))
         this.state = {
             minPrice: minBy(obj => obj.price, data).price,
             maxPrice: maxBy(obj => obj.price, data).price,
             discount: minBy(obj => obj.discount, data).discount,
-            selectedCategories: this.getCategoryList(data)
-        }
+            url: url,
+            selectedCategories: this.getSelectedCategoryFromUrl(url)
+        };
+        window.history.replaceState(this.state.url, "category", window.location.pathname);
+        window.addEventListener("popstate", this.setFromHistory);
     }
 
+    setFromHistory = (event) => {
+        this.setState({
+            url: event.state["url"]
+        });
+    };
 
     handleChangeMinPrice = (value) => {
         this.setState({
@@ -50,10 +60,16 @@ class App extends React.Component {
         } else {
             arr = selectedCategories.filter(i => i !== item)
         }
+        window.history.pushState(this.state.url, "category", arr.length > 0 ? arr : '/');
 
         this.setState({
             selectedCategories: arr
         })
+    };
+
+    getSelectedCategoryFromUrl = (url) => {
+        const arr = url.split(',');
+        return arr.length > 1 ? arr : this.getCategoryList(data);
     };
 
     handleClearFilter = (event) => {
