@@ -23,7 +23,14 @@ class App extends React.Component {
             urlFilterParams: urlFilterParams,
             selectedCategories: this.getSelectedCategoryFromUrl(urlFilterParams)
         };
+    }
+
+    componentDidMount() {
         window.addEventListener('popstate', this.setFromHistory);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('popstate', this.setFromHistory);
     }
 
     setFromHistory = (event) => {
