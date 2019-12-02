@@ -64,7 +64,7 @@ class App extends React.Component {
         const {selectedCategories} = this.state;
         let categoriesList = [];
 
-        if (selectedCategories.indexOf(selectedItem) === -1) {
+        if (selectedCategories.includes(selectedItem)) {
             categoriesList = [...selectedCategories, selectedItem]
         } else {
             categoriesList = selectedCategories.filter(item => item !== selectedItem)
