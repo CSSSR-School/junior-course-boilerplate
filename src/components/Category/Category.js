@@ -1,11 +1,11 @@
 import React from 'react';
-import FilterContext from "../../filter-context";
+import filterContext from '../../filter-context';
 
 import s from './Category.module.scss'
 
 const Category = props => {
     return (
-        <FilterContext.Consumer>
+        <filterContext.Consumer>
             {({categoryList: list, selectedCategories, handleSelectCategory}) => (
                 <div className={s.Category}>
                     {list.map((item, key) => {
@@ -13,7 +13,7 @@ const Category = props => {
                             <label className={s.CategoryButton} key={key}>
                                 <input
                                     type="checkbox"
-                                    checked={selectedCategories.indexOf(item) !== -1}
+                                    checked={selectedCategories.includes(item)}
                                     onChange={handleSelectCategory}
                                     name={item}
                                 />
@@ -22,7 +22,7 @@ const Category = props => {
                         )
                     })}
                 </div>)}
-        </FilterContext.Consumer>
+        </filterContext.Consumer>
     );
 };
 

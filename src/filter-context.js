@@ -1,7 +1,7 @@
 import React from 'react';
 
-const FilterContext = React.createContext({
+const filterContext = React.createContext({
     data: []
 });
 
-export default FilterContext;
+export default filterContext;

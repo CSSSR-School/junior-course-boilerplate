@@ -7,28 +7,30 @@ import List from './components/List/List';
 import PriceFilter from './components/PriceFilter/PriceFilter';
 import './index.scss';
 import memoize from './containers/memoize';
-import FilterContext from './filter-context';
+import filterContext from './filter-context';
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
 
-        let url = decodeURIComponent(window.location.pathname.substr(1))
+        const urlFilterParams = decodeURIComponent(window.location.pathname.substr(1));
+
         this.state = {
             minPrice: minBy(obj => obj.price, data).price,
             maxPrice: maxBy(obj => obj.price, data).price,
             discount: minBy(obj => obj.discount, data).discount,
-            url: url,
-            selectedCategories: this.getSelectedCategoryFromUrl(url)
+            urlFilterParams: urlFilterParams,
+            selectedCategories: this.getSelectedCategoryFromUrl(urlFilterParams)
         };
-        window.history.replaceState(this.state.url, "category", window.location.pathname);
-        window.addEventListener("popstate", this.setFromHistory);
+        window.addEventListener('popstate', this.setFromHistory);
     }
 
     setFromHistory = (event) => {
+        const urlFilterParams = event.state ? event.state['filter'] : '';
         this.setState({
-            url: event.state["url"]
+            urlFilterParams: urlFilterParams,
+            selectedCategories: this.getSelectedCategoryFromUrl(urlFilterParams)
         });
     };
 
@@ -51,35 +53,36 @@ class App extends React.Component {
     };
 
     handleSelectCategory = (event) => {
-        const item = event.target.name;
+        const selectedItem = event.target.name;
         const {selectedCategories} = this.state;
-        let arr = [];
+        let categoriesList = [];
 
-        if (selectedCategories.indexOf(item) === -1) {
-            arr = [...selectedCategories, item]
+        if (selectedCategories.indexOf(selectedItem) === -1) {
+            categoriesList = [...selectedCategories, selectedItem]
         } else {
-            arr = selectedCategories.filter(i => i !== item)
+            categoriesList = selectedCategories.filter(item => item !== selectedItem)
         }
-        window.history.pushState(this.state.url, "category", arr.length > 0 ? arr : '/');
+        window.history.pushState({filter: categoriesList.toString()}, 'category', categoriesList.length > 0 ? categoriesList : '/');
 
         this.setState({
-            selectedCategories: arr
+            selectedCategories: categoriesList
         })
-    };
-
-    getSelectedCategoryFromUrl = (url) => {
-        const arr = url.split(',');
-        return arr.length > 1 ? arr : this.getCategoryList(data);
     };
 
     handleClearFilter = (event) => {
         event.preventDefault();
+        window.history.pushState({}, 'category', '/');
         this.setState({
             minPrice: minBy(obj => obj.price, data).price,
             maxPrice: maxBy(obj => obj.price, data).price,
             discount: minBy(obj => obj.discount, data).discount,
-            selectedCategories: this.getCategoryList(data)
+            urlFilterParams: '',
+            selectedCategories: []
         })
+    };
+
+    getSelectedCategoryFromUrl = (url) => {
+        return url ? url.split(',') : []
     };
 
 
@@ -94,7 +97,7 @@ class App extends React.Component {
             return item.price >= minPrice
                 && item.price <= maxPrice
                 && item.discount >= discount
-                && selectedCategories.indexOf(item.category) !== -1
+                && (selectedCategories.length > 0 ? selectedCategories.includes(item.category) : true)
         })
     });
 
@@ -103,7 +106,7 @@ class App extends React.Component {
         const {minPrice, maxPrice, discount, selectedCategories} = this.state;
 
         return (
-            <FilterContext.Provider value={{
+            <filterContext.Provider value={{
                 ...this.state,
                 categoryList: this.getCategoryList(data),
                 handleChangeMinPrice: this.handleChangeMinPrice,
@@ -125,10 +128,10 @@ class App extends React.Component {
                         </main>
                     </div>
                 </div>
-            </FilterContext.Provider>
+            </filterContext.Provider>
         )
     }
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App/>, rootElement);
