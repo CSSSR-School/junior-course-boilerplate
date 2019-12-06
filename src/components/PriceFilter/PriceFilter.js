@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Discount from 'csssr-school-input-discount';
-import inputHOC from '../../containers/inputHOC'
-import logRenderComponent from '../../containers/logRenderComponent';
+import inputHOC from '../../HOC/inputHOC'
+import logRenderComponent from '../../HOC/logRenderComponent';
 import filterContext from '../../filter-context';
 import s from './PriceFilter.module.scss';
 import Title from '../Title/Title';
 import InputNumber from '../InputNumber/InputNumber';
 import Category from '../Category/Category';
+
+// импортируем import {resetFilter} from '../../actions'
 
 const HoccedDiscount = inputHOC(Discount);
 
@@ -17,6 +19,7 @@ class PriceFilter extends React.Component {
 
         return (
             <filterContext.Consumer>
+                {/*{({state, dispatch})}*/}
                 {({
                       maxPrice,
                       minPrice,
@@ -56,6 +59,9 @@ class PriceFilter extends React.Component {
                         </div>
                         <div className={s.filterRow}>
                             <button type="button" className={s.filterButton} onClick={handleClearFilter}>Сбросить фильтры</button>
+                            {/*<button type="button" className={s.filterButton} onClick={() => {*/}
+                            {/*   dispatch(action())*/}
+                            {/*}}>Сбросить фильтры</button>*/}
                         </div>
                     </form>
                 )}

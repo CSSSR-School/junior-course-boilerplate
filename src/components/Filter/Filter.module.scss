@@ -1,0 +1,18 @@
+.filter {
+
+  &Row {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+
+  &Button {
+    border: 2px solid #323C48;
+    color: #323C48;
+    text-align: center;
+    line-height: 32px;
+    width: 100%;
+    display: block;
+    font-size: 14px;
+  }
+}

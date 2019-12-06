@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductItem from 'csssr-school-product-card';
 import {formatMoney} from 'csssr-school-utils'
-import logRenderComponent from '../../containers/logRenderComponent';
+import logRenderComponent from '../../HOC/logRenderComponent';
 import RatingComponent from '../RatingComponent/RatingComponent';
 import s from './List.module.scss';
 

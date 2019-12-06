@@ -1,5 +1,5 @@
 import React from 'react';
-import inputHOC from '../../containers/inputHOC';
+import inputHOC from '../../HOC/inputHOC';
 import s from './InputNumber.module.scss'
 
 const InputNumber = props => {
