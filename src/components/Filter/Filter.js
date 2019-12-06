@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Discount from 'csssr-school-input-discount';
 import inputHOC from '../../HOC/inputHOC'
 import logRenderComponent from '../../HOC/logRenderComponent';
-import s from './Filter.module.scss';
 import Title from '../Title/Title';
 import InputNumber from '../InputNumber/InputNumber';
 import Category from '../Category/Category';
+import s from './Filter.module.scss';
 
 const HoccedDiscount = inputHOC(Discount);
 
