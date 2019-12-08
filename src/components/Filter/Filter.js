@@ -56,7 +56,6 @@ class PriceFilter extends React.Component {
                     </button>
                 </div>
             </form>
-
         )
     }
 }
@@ -65,6 +64,10 @@ PriceFilter.propTypes = {
     minPrice: PropTypes.number,
     maxPrice: PropTypes.number,
     discount: PropTypes.number,
+    handleChangeMinPrice: PropTypes.func,
+    handleChangeMaxPrice: PropTypes.func,
+    handleChangeDiscount: PropTypes.func,
+    handleResetFilter: PropTypes.func
 };
 
 export default logRenderComponent(PriceFilter);

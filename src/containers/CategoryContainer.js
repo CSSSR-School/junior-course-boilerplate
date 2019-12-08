@@ -4,13 +4,12 @@ import Category from '../components/Category/Category';
 
 const mapStateToProps = (state) => {
     return {
-        list: state.categoryList,
+        categoryList: state.categoryList,
         selectedCategories: state.selectedCategories
     }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    console.info(ownProps);
+const mapDispatchToProps = (dispatch) => {
     return {
 
         handleSelectCategory: (event, selectedCategories) => {
@@ -26,7 +25,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
             dispatch(selectCategory(categoriesList))
         },
-
     }
 };
 
