@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { HEADINGS_MAP } from "utils/constants";
 import styled from "./index.module.scss";
 
@@ -14,6 +15,10 @@ const Heading = ({ level = 1, className = "", children, ...attrs }) => {
       {children}
     </Tag>
   );
+};
+
+Heading.propTypes = {
+  level: PropTypes.oneOf([1, 2, 3, 4, 5, 6])
 };
 
 export { Heading };
