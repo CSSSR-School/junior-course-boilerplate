@@ -1,8 +1,9 @@
 import React from 'react';
+import {Provider} from 'react-redux';
+
 import ReactDOM from 'react-dom';
 import './index.scss';
 import Title from './components/Title/Title';
-import appContext from './app-context';
 import {store} from './store';
 import {selectCategory} from './store/actions'
 import ListContainer from './containers/ListContainer';
@@ -37,27 +38,28 @@ class App extends React.Component {
 
     render() {
         return (
-            <appContext.Provider value={{
-                state: this.state,
-                dispatch: store.dispatch
-            }}>
-                <div className="App">
-                    <div className="AppHeader">
-                        <Title>Список товаров</Title>
-                    </div>
-                    <div className="AppBody">
-                        <aside className="AppSidebar">
-                            <FilterContainer/>
-                        </aside>
-                        <main className="AppMain">
-                            <ListContainer/>
-                        </main>
-                    </div>
+
+            <div className="App">
+                <div className="AppHeader">
+                    <Title>Список товаров</Title>
                 </div>
-            </appContext.Provider>
+                <div className="AppBody">
+                    <aside className="AppSidebar">
+                        <FilterContainer/>
+                    </aside>
+                    <main className="AppMain">
+                        <ListContainer/>
+                    </main>
+                </div>
+            </div>
         )
     }
 }
 
 const rootElement = document.getElementById('root');
-ReactDOM.render(<App/>, rootElement);
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>
+    , rootElement
+);

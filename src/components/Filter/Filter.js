@@ -5,8 +5,8 @@ import inputHOC from '../../HOC/inputHOC'
 import logRenderComponent from '../../HOC/logRenderComponent';
 import Title from '../Title/Title';
 import InputNumber from '../InputNumber/InputNumber';
-import Category from '../Category/Category';
 import s from './Filter.module.scss';
+import CategoryContainer from '../../containers/CategoryContainer';
 
 const HoccedDiscount = inputHOC(Discount);
 
@@ -20,7 +20,7 @@ class PriceFilter extends React.Component {
             handleChangeMinPrice,
             handleChangeMaxPrice,
             handleChangeDiscount,
-            handleClearFilter
+            handleResetFilter
         } = this.props;
         return (
             <form className={s.filter}>
@@ -49,10 +49,10 @@ class PriceFilter extends React.Component {
                 />
                 <Title>Категории</Title>
                 <div className={s.filterRow}>
-                    <Category/>
+                    <CategoryContainer/>
                 </div>
                 <div className={s.filterRow}>
-                    <button type="button" className={s.filterButton} onClick={handleClearFilter}>Сбросить фильтры
+                    <button type="button" className={s.filterButton} onClick={handleResetFilter}>Сбросить фильтры
                     </button>
                 </div>
             </form>
