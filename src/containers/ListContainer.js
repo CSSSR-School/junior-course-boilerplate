@@ -12,15 +12,13 @@ const getFilteredData = memoize((data, minPrice, maxPrice, discount, selectedCat
     })
 });
 
-const mapStateToProps = (state) => {
-    return {
-        minPrice: state.minPrice,
-        maxPrice: state.maxPrice,
-        discount: state.discount,
-        selectedCategories: state.selectedCategories,
-        data: getFilteredData(data, state.minPrice, state.maxPrice, state.discount, state.selectedCategories)
-    }
-};
+const mapStateToProps = (state) => ({
+    minPrice: state.minPrice,
+    maxPrice: state.maxPrice,
+    discount: state.discount,
+    selectedCategories: state.selectedCategories,
+    data: getFilteredData(data, state.minPrice, state.maxPrice, state.discount, state.selectedCategories)
+});
 
 const ListContainer = connect(mapStateToProps)(List);
 

@@ -7,10 +7,29 @@ import Title from '../Title/Title';
 import InputNumber from '../InputNumber/InputNumber';
 import s from './Filter.module.scss';
 import CategoryContainer from '../../containers/CategoryContainer';
+import {store} from '../../store';
+import {selectCategory} from '../../store/actions';
 
 const HoccedDiscount = inputHOC(Discount);
 
 class PriceFilter extends React.Component {
+    componentDidMount() {
+        window.addEventListener('popstate', this.setFromHistory);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('popstate', this.setFromHistory);
+    }
+
+    setFromHistory = (event) => {
+        const urlFilterParams = event.state ? event.state['filter'] : '';
+        store.dispatch(selectCategory(urlFilterParams ? urlFilterParams.split(',') : []))
+    };
+
+    handleResetFilters = () => {
+        window.history.pushState({}, 'category', '/');
+        this.props.handleResetFilters()
+    };
 
     render() {
         const {
@@ -19,9 +38,10 @@ class PriceFilter extends React.Component {
             discount,
             handleChangeMinPrice,
             handleChangeMaxPrice,
-            handleChangeDiscount,
-            handleResetFilter
+            handleChangeDiscount
         } = this.props;
+
+
         return (
             <form className={s.filter}>
                 <Title>Цена</Title>
@@ -52,7 +72,7 @@ class PriceFilter extends React.Component {
                     <CategoryContainer/>
                 </div>
                 <div className={s.filterRow}>
-                    <button type="button" className={s.filterButton} onClick={handleResetFilter}>Сбросить фильтры
+                    <button type="button" className={s.filterButton} onClick={this.handleResetFilters}>Сбросить фильтры
                     </button>
                 </div>
             </form>
@@ -67,7 +87,7 @@ PriceFilter.propTypes = {
     handleChangeMinPrice: PropTypes.func,
     handleChangeMaxPrice: PropTypes.func,
     handleChangeDiscount: PropTypes.func,
-    handleResetFilter: PropTypes.func
+    handleResetFilters: PropTypes.func
 };
 
 export default logRenderComponent(PriceFilter);

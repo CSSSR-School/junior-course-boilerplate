@@ -1,7 +1,7 @@
 import {createStore} from 'redux'
 import {maxBy, minBy} from 'csssr-school-utils'
 import data from '../products.json';
-import {CHANGE_DISCOUNT, CHANGE_MAX_PRICE, CHANGE_MIN_PRICE, RESET_FILTER, SELECT_CATEGORY} from './actions';
+import {CHANGE_DISCOUNT, CHANGE_MAX_PRICE, CHANGE_MIN_PRICE, RESET_FILTERS, SELECT_CATEGORY} from './actions';
 
 const urlFilterParams = decodeURIComponent(window.location.pathname.substr(1));
 const getSelectedCategoryFromUrl = (url) => {
@@ -32,12 +32,9 @@ const reducer = (state, action) => {
         case SELECT_CATEGORY :
             return {...state, selectedCategories: action.payload};
 
-        case RESET_FILTER :
+        case RESET_FILTERS :
             return {
-                ...state,
-                minPrice: minBy(obj => obj.price, data).price,
-                maxPrice: maxBy(obj => obj.price, data).price,
-                discount: minBy(obj => obj.discount, data).discount,
+                ...initialState,
                 selectedCategories: []
             };
 
