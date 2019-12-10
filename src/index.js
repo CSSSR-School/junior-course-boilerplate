@@ -10,8 +10,8 @@ function App(props) {
   const products = props.products;
   return (
     <React.Fragment>
-      <Title>Hello</Title>
-      <List props={products} />
+      <Title>Список товаров</Title>
+      <ul><List props={products} /></ul>
     </React.Fragment>
 
   );

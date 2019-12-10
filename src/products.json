@@ -2,7 +2,7 @@
     {
         "id": 1,
         "isInStock": true,
-        "img": "",
+        "img": "https://img.freepik.com/free-vector/_1034-737.jpg?size=338&ext=jpg",
         "title": "Название первого товара",
         "price": "23 000",
         "subPriceContent": "",
@@ -12,7 +12,7 @@
     {
         "id": 2,
         "isInStock": false,
-        "img": "",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2VoDBHrSA3jLwdaQMduEQWJ_z5fyncKpLH3cmZ33BHVsIJusF&s",
         "title": "Название первого товара",
         "price": "23 000",
         "subPriceContent": "",
@@ -22,7 +22,7 @@
     {
         "id": 3,
         "isInStock": true,
-        "img": "",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlMP6QJgW692VUJ3dG3WbVSng5OcFEgRtn6_hq69jkIiDVeLUH&s",
         "title": "Название первого товара",
         "price": "23 000",
         "subPriceContent": "",
@@ -32,7 +32,7 @@
     {
         "id": 4,
         "isInStock": true,
-        "img": "",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlMP6QJgW692VUJ3dG3WbVSng5OcFEgRtn6_hq69jkIiDVeLUH&s",
         "title": "Название первого товара",
         "price": "23 000",
         "subPriceContent": "",
@@ -42,7 +42,7 @@
     {
         "id": 5,
         "isInStock": true,
-        "img": "",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2VoDBHrSA3jLwdaQMduEQWJ_z5fyncKpLH3cmZ33BHVsIJusF&s",
         "title": "Название первого товара",
         "price": "23 000",
         "subPriceContent": "",
@@ -52,7 +52,7 @@
     {
         "id": 6,
         "isInStock": false,
-        "img": "",
+        "img": "https://img.freepik.com/free-vector/_1034-737.jpg?size=338&ext=jpg",
         "title": "Название первого товара",
         "price": "23 000",
         "subPriceContent": "",
