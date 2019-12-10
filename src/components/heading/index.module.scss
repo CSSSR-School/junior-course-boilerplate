@@ -1,6 +1,5 @@
 .title {
-  --heading-size: 1;
-  font-size: calc(39px - var(--heading-size) * 3px);
+  font-size: calc(39px - var(--heading-size, 1) * 3px);
   line-height: (48/36);
   font-weight: 300;
   margin-top: 0;
