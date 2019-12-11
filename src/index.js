@@ -11,7 +11,7 @@ function App(props) {
   return (
     <React.Fragment>
       <Title>Список товаров</Title>
-      <ul><List props={products} /></ul>
+      <List props={products} />
     </React.Fragment>
 
   );

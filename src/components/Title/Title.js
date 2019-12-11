@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './Title.module.css';
+import styles from './Title.module.css';
 
 const Title = (props) => {
-	return (<h1>{props.children}</h1>);
+	return (<h1 className={styles.title}>{props.children}</h1>);
 };
 
 

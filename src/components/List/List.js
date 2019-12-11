@@ -5,18 +5,19 @@ import ProductItem from 'csssr-school-product-card';
 import starFill from './img/starFill.png';
 import starEmpty from './img/starEmpty.png';
 
-import './List.module.css';
+import styles from './List.module.css';
 
 const ratingComponent = ({ isFilled }) => {
-  return <img src={(isFilled) ? starFill : starEmpty} className='star'/>;
+  return <img src={(isFilled) ? starFill : starEmpty} />;
 };
 
-
 const List = ({props}) => {
+  console.log(styles);
   return (
+    <ul className={styles.goodsList} > {
     props.map((item) => 
      ( 
-      <li key={item.id}>
+      <li className={styles.goodsList__item} key={item.id}>
         <ProductItem 
           key={item.id}
           isInStock={item.isInStock}
@@ -29,7 +30,7 @@ const List = ({props}) => {
           ratingComponent={ratingComponent}
         />
       </li>
-    ))
+    ))} </ul>
   );
 };
 
