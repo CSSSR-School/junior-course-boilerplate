@@ -3,6 +3,7 @@ export const CHANGE_MIN_PRICE = 'CHANGE_MIN_PRICE';
 export const CHANGE_MAX_PRICE = 'CHANGE_MAX_PRICE';
 export const CHANGE_DISCOUNT = 'CHANGE_DISCOUNT';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
+export const CHANGE_PAGINATION_PAGE = 'CHANGE_PAGINATION_PAGE';
 
 export const resetFilter = () => {
     return {
@@ -35,6 +36,13 @@ export const changeDiscount = (value) => {
 export const selectCategory = (value) => {
     return {
         type: SELECT_CATEGORY,
+        payload: value
+    }
+};
+
+export const changePaginationPage = (value) => {
+    return {
+        type: CHANGE_PAGINATION_PAGE,
         payload: value
     }
 };

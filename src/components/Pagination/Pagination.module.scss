@@ -1,0 +1,47 @@
+.Pagination {
+  margin: -5px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 40px 0 0;
+
+  &Item {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    margin: 0 2px;
+    color: #7E8FA4;
+    font-size: 14px;
+
+    &Prev,
+    &Next {
+      width: 88px;
+      margin-right: 10px;
+    }
+
+    &Next {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+
+    &Active {
+      border-color: #5695ED;
+      background: #5695ED;
+      color: #fff;
+    }
+  }
+
+  &Button {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 1px solid #C5CFDE;
+    outline: none !important;
+    cursor: pointer;
+    color: inherit;
+    font-size: inherit;
+  }
+}

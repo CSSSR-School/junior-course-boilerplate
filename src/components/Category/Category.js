@@ -8,6 +8,7 @@ const Category = props => {
 
     const handleSelectCategory = (event) => {
         const selectedItem = event.target.name;
+        const searchParams = new URLSearchParams(window.location.search);
         let categoriesList = [];
 
         if (selectedCategories.includes(selectedItem)) {
@@ -15,8 +16,17 @@ const Category = props => {
         } else {
             categoriesList = [...selectedCategories, selectedItem]
         }
-        window.history.pushState({filter: categoriesList.toString()}, 'category', categoriesList.length > 0 ? categoriesList : '/');
 
+        if (categoriesList.length > 0) {
+            searchParams.set('category', categoriesList.toString());
+        } else {
+            searchParams.delete('category');
+        }
+
+        window.history.pushState(
+            {...window.history.state, category: categoriesList.toString()},
+            'category',
+            '?' + searchParams.toString());
         props.handleSelectCategory(categoriesList);
     };
 

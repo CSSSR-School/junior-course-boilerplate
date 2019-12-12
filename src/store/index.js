@@ -1,12 +1,27 @@
 import {createStore} from 'redux'
 import {maxBy, minBy} from 'csssr-school-utils'
 import data from '../products.json';
-import {CHANGE_DISCOUNT, CHANGE_MAX_PRICE, CHANGE_MIN_PRICE, RESET_FILTERS, SELECT_CATEGORY} from './actions';
+import {
+    CHANGE_DISCOUNT,
+    CHANGE_MAX_PRICE,
+    CHANGE_MIN_PRICE,
+    CHANGE_PAGINATION_PAGE,
+    RESET_FILTERS,
+    SELECT_CATEGORY
+} from './actions';
 
-const urlFilterParams = decodeURIComponent(window.location.pathname.substr(1));
-const getSelectedCategoryFromUrl = (url) => {
-    return url ? url.split(',') : []
+
+const searchParams = new URLSearchParams(window.location.search);
+
+
+const getSelectedCategoryFromString = (string) => {
+    return string ? string.split(',') : []
 };
+
+const getPaginationActiveFromString = (string) => {
+    return string ? string.split(',') : []
+};
+
 const getCategoryList = (data) => {
     const set = data.reduce((arr, item) => arr.add(item.category), new Set());
     return Array.from(set)
@@ -17,9 +32,10 @@ const initialState = {
     maxPrice: maxBy(obj => obj.price, data).price,
     discount: minBy(obj => obj.discount, data).discount,
     categoryList: getCategoryList(data),
-    selectedCategories: getSelectedCategoryFromUrl(urlFilterParams)
+    selectedCategories: searchParams.get('category') || [],
+    paginationActivePage: searchParams.get('page') || 1,
+    itemPerPage: 8
 };
-
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -31,6 +47,11 @@ const reducer = (state, action) => {
             return {...state, discount: action.payload};
         case SELECT_CATEGORY :
             return {...state, selectedCategories: action.payload};
+        case CHANGE_PAGINATION_PAGE :
+            return {
+                ...state,
+                paginationActivePage: action.payload
+            };
 
         case RESET_FILTERS :
             return {

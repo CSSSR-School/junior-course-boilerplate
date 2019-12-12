@@ -7,8 +7,25 @@ import Title from './components/Title/Title';
 import {store} from './store';
 import ListContainer from './containers/ListContainer';
 import FilterContainer from './containers/FilterContainer';
+import PaginationContainer from './containers/PaginationContainer';
+import {selectCategory, changePaginationPage} from './store/actions';
 
 class App extends React.Component {
+    componentDidMount() {
+        window.addEventListener('popstate', this.handleChangeUrl);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('popstate', this.handleChangeUrl);
+    }
+
+    handleChangeUrl = (event) => {
+        const searchParams = new URLSearchParams(window.location.search);
+
+        store.dispatch(selectCategory(searchParams.get('category') || []));
+        store.dispatch(changePaginationPage(searchParams.get('page') || 1));
+    };
+
 
     render() {
         return (
@@ -22,6 +39,7 @@ class App extends React.Component {
                     </aside>
                     <main className="AppMain">
                         <ListContainer/>
+                        <PaginationContainer/>
                     </main>
                 </div>
             </div>

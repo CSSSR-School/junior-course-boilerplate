@@ -7,27 +7,18 @@ import Title from '../Title/Title';
 import InputNumber from '../InputNumber/InputNumber';
 import s from './Filter.module.scss';
 import CategoryContainer from '../../containers/CategoryContainer';
-import {store} from '../../store';
-import {selectCategory} from '../../store/actions';
 
 const HoccedDiscount = inputHOC(Discount);
 
 class PriceFilter extends React.Component {
-    componentDidMount() {
-        window.addEventListener('popstate', this.setFromHistory);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('popstate', this.setFromHistory);
-    }
-
-    setFromHistory = (event) => {
-        const urlFilterParams = event.state ? event.state['filter'] : '';
-        store.dispatch(selectCategory(urlFilterParams ? urlFilterParams.split(',') : []))
-    };
 
     handleResetFilters = () => {
-        window.history.pushState({}, 'category', '/');
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.delete('category');
+        window.history.pushState(
+            {},
+            'category',
+            '?' + searchParams.toString());
         this.props.handleResetFilters()
     };
 
