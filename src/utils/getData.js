@@ -1,13 +1,14 @@
 import memoize from './memoize';
 import {splitEvery} from 'csssr-school-utils'
 
-export const getFilteredData = memoize((
-    data,
-    minPrice,
-    maxPrice,
-    discount,
-    selectedCategories
-) => {
+export const getFilteredData = memoize((obj) => {
+    const {
+        data,
+        minPrice,
+        maxPrice,
+        discount,
+        selectedCategories
+    } = obj;
     return data.filter((item) => {
         return item.price >= minPrice
             && item.price <= maxPrice
@@ -16,21 +17,23 @@ export const getFilteredData = memoize((
     });
 });
 
-export const getPaginationData = memoize((
-    data,
-    minPrice,
-    maxPrice,
-    discount,
-    selectedCategories,
-    itemsPerPage,
-    paginationActivePage
-) => {
-    const filteredData = getFilteredData(data,
+export const getPaginationData = memoize((obj) => {
+    const {
+        data,
         minPrice,
         maxPrice,
         discount,
-        selectedCategories);
-
+        selectedCategories,
+        itemsPerPage,
+        paginationActivePage
+    } = obj;
+    const filteredData = getFilteredData({
+        data,
+        minPrice,
+        maxPrice,
+        discount,
+        selectedCategories
+    });
     return splitEvery(itemsPerPage, filteredData)[paginationActivePage - 1];
 });
 

@@ -8,13 +8,13 @@ const mapStateToProps = (state) => ({
     paginationActivePage: state.paginationActivePage,
     itemsPerPage: state.itemsPerPage,
 
-    data: getFilteredData(
-        data,
-        state.minPrice,
-        state.maxPrice,
-        state.discount,
-        state.selectedCategories
-    )
+    data: getFilteredData({
+        data: data,
+        minPrice: state.minPrice,
+        maxPrice: state.maxPrice,
+        discount: state.discount,
+        selectedCategories: state.selectedCategories
+    })
 });
 
 const mapDispatchToProps = (dispatch) => ({

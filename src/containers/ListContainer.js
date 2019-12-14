@@ -5,15 +5,15 @@ import {getPaginationData} from '../utils/getData';
 
 const mapStateToProps = (state) => ({
 
-    data: getPaginationData(
-        data,
-        state.minPrice,
-        state.maxPrice,
-        state.discount,
-        state.selectedCategories,
-        state.itemsPerPage,
-        state.paginationActivePage
-    )
+    data: getPaginationData({
+        data: data,
+        minPrice: state.minPrice,
+        maxPrice: state.maxPrice,
+        discount: state.discount,
+        selectedCategories: state.selectedCategories,
+        itemsPerPage: state.itemsPerPage,
+        paginationActivePage: state.paginationActivePage
+    })
 });
 
 
