@@ -8,7 +8,8 @@ import {store} from './store';
 import ListContainer from './containers/ListContainer';
 import FilterContainer from './containers/FilterContainer';
 import PaginationContainer from './containers/PaginationContainer';
-import {selectCategory, changePaginationPage} from './store/actions';
+import {changePaginationPage, selectCategory} from './store/actions';
+import getArrayFromString from './utils/getArrayFromString';
 
 class App extends React.Component {
     componentDidMount() {
@@ -22,7 +23,7 @@ class App extends React.Component {
     handleChangeUrl = (event) => {
         const searchParams = new URLSearchParams(window.location.search);
 
-        store.dispatch(selectCategory(searchParams.get('category') || []));
+        store.dispatch(selectCategory(getArrayFromString(searchParams.get('category'))));
         store.dispatch(changePaginationPage(searchParams.get('page') || 1));
     };
 

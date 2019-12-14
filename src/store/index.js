@@ -1,6 +1,8 @@
 import {createStore} from 'redux'
 import {maxBy, minBy} from 'csssr-school-utils'
 import data from '../products.json';
+import getArrayFromString from '../utils/getArrayFromString';
+
 import {
     CHANGE_DISCOUNT,
     CHANGE_MAX_PRICE,
@@ -10,13 +12,9 @@ import {
     SELECT_CATEGORY
 } from './actions';
 
+const ITEMS_PER_PAGE = 2;
 
 const searchParams = new URLSearchParams(window.location.search);
-
-
-const getSelectedCategoryFromString = (string) => {
-    return string ? string.split(',') : []
-};
 
 const getPaginationActiveFromString = (string) => {
     return string ? string.split(',') : []
@@ -32,9 +30,9 @@ const initialState = {
     maxPrice: maxBy(obj => obj.price, data).price,
     discount: minBy(obj => obj.discount, data).discount,
     categoryList: getCategoryList(data),
-    selectedCategories: searchParams.get('category') || [],
+    selectedCategories: getArrayFromString(searchParams.get('category')),
     paginationActivePage: searchParams.get('page') || 1,
-    itemPerPage: 8
+    itemsPerPage: ITEMS_PER_PAGE
 };
 
 const reducer = (state, action) => {

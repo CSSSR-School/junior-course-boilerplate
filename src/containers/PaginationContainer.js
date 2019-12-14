@@ -1,10 +1,20 @@
 import {connect} from 'react-redux';
 import {changePaginationPage} from '../store/actions';
 import Pagination from '../components/Pagination/Pagination';
+import {getFilteredData} from '../utils/getData';
+import data from '../products';
 
 const mapStateToProps = (state) => ({
     paginationActivePage: state.paginationActivePage,
-    items: [1, 2, 3, 4, 5]
+    itemsPerPage: state.itemsPerPage,
+
+    data: getFilteredData(
+        data,
+        state.minPrice,
+        state.maxPrice,
+        state.discount,
+        state.selectedCategories
+    )
 });
 
 const mapDispatchToProps = (dispatch) => ({

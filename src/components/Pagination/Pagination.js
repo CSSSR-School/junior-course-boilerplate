@@ -5,12 +5,9 @@ import s from './Pagination.module.scss'
 
 const Pagination = props => {
 
-    const {items, paginationActivePage, changePaginationActive} = props;
+    const {data, itemsPerPage, paginationActivePage, changePaginationActive} = props;
 
     const handleClick = (value) => {
-        if (value < 1 || value > items.length) {
-            return false
-        }
 
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set('page', value);
@@ -22,25 +19,41 @@ const Pagination = props => {
         changePaginationActive(value)
     };
 
-    return (
-        <ul className={s.Pagination}>
-            <li className={cx(s.PaginationItem, s.PaginationItemPrev)}>
-                <button type="button" className={s.PaginationButton} onClick={() => handleClick(+paginationActivePage - 1)}>Назад</button>
-            </li>
+    const paginationLength = Math.ceil(data.length / itemsPerPage);
 
-            {items.map((item, key) => (
-                <li className={cx(s.PaginationItem, {[s.PaginationItemActive]: item == paginationActivePage})} key={item}>
-                    <button type="button" className={s.PaginationButton} onClick={() => handleClick(item)}>{item}</button>
+    if (data.length > 0) {
+        return (
+            <ul className={s.Pagination}>
+                <li className={cx(s.PaginationItem, s.PaginationItemPrev)}>
+                    <button type="button"
+                            disabled={+paginationActivePage === 1}
+                            className={s.PaginationButton}
+                            onClick={() => handleClick(+paginationActivePage - 1)}>
+                        Назад
+                    </button>
                 </li>
-            ))}
+
+                {[...Array(paginationLength)].map((item, key) => (
+                    <li className={cx(s.PaginationItem, {[s.PaginationItemActive]: key + 1 === +paginationActivePage})} key={key}>
+                        <button type="button" className={s.PaginationButton} onClick={() => handleClick(key + 1)}>{key + 1}</button>
+                    </li>
+                ))}
 
 
-            <li className={cx(s.PaginationItem, s.PaginationItemNext)}>
-                <button type="button" className={s.PaginationButton} onClick={() => handleClick(+paginationActivePage + 1)}>Вперед</button>
-            </li>
-        </ul>
-    )
-};
+                <li className={cx(s.PaginationItem, s.PaginationItemNext)}>
+                    <button type="button"
+                            disabled={+paginationActivePage === paginationLength}
+                            className={s.PaginationButton}
+                            onClick={() => handleClick(+paginationActivePage + 1)}>
+                        Вперед
+                    </button>
+                </li>
+            </ul>
+        )
+    } else {
+        return false
+    }
+}
 
 
 export default Pagination;

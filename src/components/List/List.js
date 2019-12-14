@@ -12,6 +12,7 @@ class List extends React.Component {
         const {data} = this.props;
         if (data.length > 0) {
             return (
+                <>
                 <ul className={s.list}>
                     {data.map((item) => {
                         return (
@@ -30,6 +31,7 @@ class List extends React.Component {
                         )
                     })}
                 </ul>
+                </>
             )
         } else {
             return (
