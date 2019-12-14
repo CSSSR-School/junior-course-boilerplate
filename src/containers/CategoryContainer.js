@@ -1,10 +1,10 @@
 import {connect} from 'react-redux';
-import {selectCategory} from '../store/actions';
+import {selectCategory} from '../redux/modules/filter';
 import Category from '../components/Category/Category';
 
-const mapStateToProps = (state) => ({
-    categoryList: state.categoryList,
-    selectedCategories: state.selectedCategories
+const mapStateToProps = ({filter}) => ({
+    categoryList: filter.categoryList,
+    selectedCategories: filter.selectedCategories
 });
 
 const mapDispatchToProps = (dispatch) => ({

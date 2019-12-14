@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
-import {changeDiscount, changeMaxPrice, changeMinPrice, resetFilter} from '../store/actions';
+import {changeDiscount, changeMaxPrice, changeMinPrice, resetFilter} from '../redux/modules/filter';
 import Filter from '../components/Filter/Filter';
 
-const mapStateToProps = (state) => (
+const mapStateToProps = ({filter}) => (
     {
-        maxPrice: state.maxPrice,
-        minPrice: state.minPrice,
-        discount: state.discount
+        maxPrice: filter.maxPrice,
+        minPrice: filter.minPrice,
+        discount: filter.discount
     });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,11 +4,12 @@ import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import Title from './components/Title/Title';
-import {store} from './store';
+import {store} from './redux';
 import ListContainer from './containers/ListContainer';
 import FilterContainer from './containers/FilterContainer';
 import PaginationContainer from './containers/PaginationContainer';
-import {changePaginationPage, selectCategory} from './store/actions';
+import {changePaginationPage} from './redux/modules/pagination';
+import {selectCategory} from './redux/modules/filter';
 import getArrayFromStringWithCommas from './utils/getArrayFromStringWithCommas';
 
 class App extends React.Component {
@@ -27,8 +28,8 @@ class App extends React.Component {
         store.dispatch(changePaginationPage(searchParams.get('page') || 1));
     };
 
-
     render() {
+
         return (
             <div className="App">
                 <div className="AppHeader">

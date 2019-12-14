@@ -5,7 +5,6 @@ import s from './Category.module.scss'
 
 const Category = props => {
     const {categoryList, selectedCategories} = props;
-
     const handleSelectCategory = (event) => {
         const selectedItem = event.target.name;
         const searchParams = new URLSearchParams(window.location.search);

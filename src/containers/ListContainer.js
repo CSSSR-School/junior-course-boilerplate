@@ -3,16 +3,16 @@ import data from '../products.json';
 import List from '../components/List/List';
 import {getPaginationData} from '../utils/getData';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = ({filter, pagination}) => ({
 
     data: getPaginationData({
         data: data,
-        minPrice: state.minPrice,
-        maxPrice: state.maxPrice,
-        discount: state.discount,
-        selectedCategories: state.selectedCategories,
-        itemsPerPage: state.itemsPerPage,
-        paginationActivePage: state.paginationActivePage
+        minPrice: filter.minPrice,
+        maxPrice: filter.maxPrice,
+        discount: filter.discount,
+        selectedCategories: filter.selectedCategories,
+        itemsPerPage: pagination.itemsPerPage,
+        paginationActivePage: pagination.paginationActivePage
     })
 });
 

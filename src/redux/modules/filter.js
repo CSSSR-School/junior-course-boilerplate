@@ -1,21 +1,14 @@
-import {createStore} from 'redux'
-import {maxBy, minBy} from 'csssr-school-utils'
-import data from '../products.json';
-import getArrayFromStringWithCommas from '../utils/getArrayFromStringWithCommas';
+import {maxBy, minBy} from 'csssr-school-utils';
+import data from '../../products';
+import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
 
-import {
-    CHANGE_DISCOUNT,
-    CHANGE_MAX_PRICE,
-    CHANGE_MIN_PRICE,
-    CHANGE_PAGINATION_PAGE,
-    RESET_FILTERS,
-    SELECT_CATEGORY
-} from './actions';
-
-const ITEMS_PER_PAGE = 2;
+export const RESET_FILTERS = 'filter/RESET_FILTERS';
+export const CHANGE_MIN_PRICE = 'filter/CHANGE_MIN_PRICE';
+export const CHANGE_MAX_PRICE = 'filter/CHANGE_MAX_PRICE';
+export const CHANGE_DISCOUNT = 'filter/CHANGE_DISCOUNT';
+export const SELECT_CATEGORY = 'filter/SELECT_CATEGORY';
 
 const searchParams = new URLSearchParams(window.location.search);
-
 
 const getCategoryList = (data) => {
     const set = data.reduce((arr, item) => arr.add(item.category), new Set());
@@ -28,11 +21,43 @@ const initialState = {
     discount: minBy(obj => obj.discount, data).discount,
     categoryList: getCategoryList(data),
     selectedCategories: getArrayFromStringWithCommas(searchParams.get('category')),
-    paginationActivePage: searchParams.get('page') || 1,
-    itemsPerPage: ITEMS_PER_PAGE
 };
 
-const reducer = (state, action) => {
+export const resetFilter = () => {
+    return {
+        type: RESET_FILTERS
+    }
+};
+
+export const changeMinPrice = (value) => {
+    return {
+        type: CHANGE_MIN_PRICE,
+        payload: value
+    }
+};
+
+export const changeMaxPrice = (value) => {
+    return {
+        type: CHANGE_MAX_PRICE,
+        payload: value
+    }
+};
+
+export const changeDiscount = (value) => {
+    return {
+        type: CHANGE_DISCOUNT,
+        payload: value
+    }
+};
+
+export const selectCategory = (value) => {
+    return {
+        type: SELECT_CATEGORY,
+        payload: value
+    }
+};
+
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case CHANGE_MIN_PRICE :
             return {...state, minPrice: action.payload};
@@ -42,21 +67,12 @@ const reducer = (state, action) => {
             return {...state, discount: action.payload};
         case SELECT_CATEGORY :
             return {...state, selectedCategories: action.payload};
-        case CHANGE_PAGINATION_PAGE :
-            return {
-                ...state,
-                paginationActivePage: action.payload
-            };
-
         case RESET_FILTERS :
             return {
                 ...initialState,
                 selectedCategories: []
             };
-
         default:
             return state
     }
-};
-
-export const store = createStore(reducer, initialState);
+}
