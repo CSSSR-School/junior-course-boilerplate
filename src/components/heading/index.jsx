@@ -4,7 +4,7 @@ import { HEADINGS_MAP } from "utils/constants";
 import styled from "./index.module.scss";
 
 const Heading = ({ level = 1, className = "", children, ...attrs }) => {
-  const Tag = HEADINGS_MAP[`h${level}`] || HEADINGS_MAP.default;
+  const Tag = HEADINGS_MAP.get(`h${level}`) || HEADINGS_MAP.get("default");
 
   const styles = {
     "--heading-size": level
