@@ -19,9 +19,7 @@ function App() {
         <Grid
           columnsCount={3}
           items={data}
-          render={props => (
-            <ProductCard key={props.id} ratingComponent={Rating} {...props} />
-          )}
+          render={props => <ProductCard ratingComponent={Rating} {...props} />}
         />
       </div>
     </div>

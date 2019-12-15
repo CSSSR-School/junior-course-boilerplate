@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const Grid = ({
   children,
   className = "",
+  keyValue = "id",
   items,
   render,
   columnsCount = 1,
@@ -14,16 +15,19 @@ const Grid = ({
     "--grid-columns-count": columnsCount
   };
 
-  const columns = items.map(item => render(item));
+  const columns = items.map(item => (
+    <li key={item[keyValue]}>{render(item)}</li>
+  ));
 
   return (
-    <div className={`${styled.grid} ${className}`} style={style} {...attrs}>
+    <ul className={`${styled.grid} ${className}`} style={style} {...attrs}>
       {columns}
-    </div>
+    </ul>
   );
 };
 
 Grid.propTypes = {
+  keyValue: PropTypes.string,
   className: PropTypes.string,
   items: PropTypes.array.isRequired,
   render: PropTypes.func.isRequired,
