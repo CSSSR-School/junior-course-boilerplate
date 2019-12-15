@@ -302,7 +302,9 @@ module.exports = function(webpackEnv) {
         "@": path.resolve(__dirname, "../src"),
         components: path.resolve(__dirname, "../src/components"),
         utils: path.resolve(__dirname, "../src/utils"),
-        assets: path.resolve(__dirname, "../src/assets")
+        assets: path.resolve(__dirname, "../src/assets"),
+        helpers: path.resolve(__dirname, "../src/utils/helpers"),
+        constants: path.resolve(__dirname, "../src/utils/constants")
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
