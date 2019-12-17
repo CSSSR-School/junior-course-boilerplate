@@ -4,12 +4,12 @@ import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import Title from './components/Title/Title';
-import {store} from './redux';
+import {store} from './store';
 import ListContainer from './containers/ListContainer';
 import FilterContainer from './containers/FilterContainer';
 import PaginationContainer from './containers/PaginationContainer';
-import {changePaginationPage} from './redux/modules/pagination';
-import {selectCategory} from './redux/modules/filter';
+import {paginationActions} from './store/pagination';
+import {filterActions} from './store/filter/';
 import getArrayFromStringWithCommas from './utils/getArrayFromStringWithCommas';
 
 class App extends React.Component {
@@ -24,8 +24,8 @@ class App extends React.Component {
     handleChangeUrl = (event) => {
         const searchParams = new URLSearchParams(window.location.search);
 
-        store.dispatch(selectCategory(getArrayFromStringWithCommas(searchParams.get('category'))));
-        store.dispatch(changePaginationPage(searchParams.get('page') || 1));
+        store.dispatch(filterActions.selectCategory(getArrayFromStringWithCommas(searchParams.get('category'))));
+        store.dispatch(paginationActions.changePaginationPage(searchParams.get('page') || 1));
     };
 
     render() {

@@ -21,7 +21,9 @@ const Pagination = props => {
 
     const paginationLength = Math.ceil(data.length / itemsPerPage);
 
-    if (paginationActivePage > paginationLength) handleChange(1);
+    if (paginationActivePage > paginationLength) {
+        handleChange(1);
+    }
 
     if (data.length > 0) {
         return (

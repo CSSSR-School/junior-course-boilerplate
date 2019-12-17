@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {selectCategory} from '../redux/modules/filter';
+import {filterActions} from '../store/filter';
 import Category from '../components/Category/Category';
 
 const mapStateToProps = ({filter}) => ({
@@ -8,7 +8,7 @@ const mapStateToProps = ({filter}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    handleSelectCategory: (value) => dispatch(selectCategory(value))
+    handleSelectCategory: (value) => dispatch(filterActions.selectCategory(value))
 });
 
 const CategoryContainer = connect(mapStateToProps, mapDispatchToProps)(Category);

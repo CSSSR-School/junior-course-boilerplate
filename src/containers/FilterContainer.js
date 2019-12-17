@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {changeDiscount, changeMaxPrice, changeMinPrice, resetFilter} from '../redux/modules/filter';
+import {filterActions} from '../store/filter';
 import Filter from '../components/Filter/Filter';
 
 const mapStateToProps = ({filter}) => (
@@ -11,13 +11,13 @@ const mapStateToProps = ({filter}) => (
 
 const mapDispatchToProps = (dispatch) => ({
 
-    handleChangeMinPrice: (value) => dispatch(changeMinPrice(value)),
+    handleChangeMinPrice: (value) => dispatch(filterActions.changeMinPrice(value)),
 
-    handleChangeMaxPrice: (value) => dispatch(changeMaxPrice(value)),
+    handleChangeMaxPrice: (value) => dispatch(filterActions.changeMaxPrice(value)),
 
-    handleChangeDiscount: (value) => dispatch(changeDiscount(value)),
+    handleChangeDiscount: (value) => dispatch(filterActions.changeDiscount(value)),
 
-    handleResetFilters: () => dispatch(resetFilter())
+    handleResetFilters: () => dispatch(filterActions.resetFilter())
 
 });
 

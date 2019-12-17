@@ -1,6 +1,5 @@
-export const CHANGE_PAGINATION_PAGE = 'pagination/CHANGE_PAGINATION_PAGE';
+import * as types from './types'
 const ITEMS_PER_PAGE = 2;
-
 const searchParams = new URLSearchParams(window.location.search);
 
 const initialState = {
@@ -8,16 +7,9 @@ const initialState = {
     itemsPerPage: ITEMS_PER_PAGE
 };
 
-export const changePaginationPage = (value) => {
-    return {
-        type: CHANGE_PAGINATION_PAGE,
-        payload: value
-    }
-};
-
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case CHANGE_PAGINATION_PAGE :
+        case types.CHANGE_PAGINATION_PAGE :
             return {
                 ...state,
                 paginationActivePage: action.payload

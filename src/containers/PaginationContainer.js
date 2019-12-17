@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {changePaginationPage} from '../redux/modules/pagination';
+import {paginationActions} from '../store/pagination';
 import Pagination from '../components/Pagination/Pagination';
 import {getFilteredData} from '../utils/getData';
 import data from '../products';
@@ -16,7 +16,7 @@ const mapStateToProps = ({pagination, filter}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-    changePaginationActive: (value) => dispatch(changePaginationPage(value)),
+    changePaginationActive: (value) => dispatch(paginationActions.changePaginationPage(value)),
 
 });
 
