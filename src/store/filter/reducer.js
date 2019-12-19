@@ -1,7 +1,9 @@
 import * as types from './types';
 import {maxBy, minBy} from 'csssr-school-utils';
 import data from '../../products';
-import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
+
+const ITEMS_PER_PAGE = 2;
+
 export const searchParams = new URLSearchParams(window.location.search);
 
 export const getCategoryList = (data) => {
@@ -14,7 +16,7 @@ const initialState = {
     maxPrice: maxBy(obj => obj.price, data).price,
     discount: minBy(obj => obj.discount, data).discount,
     categoryList: getCategoryList(data),
-    selectedCategories: getArrayFromStringWithCommas(searchParams.get('category')),
+    itemsPerPage: ITEMS_PER_PAGE
 };
 
 

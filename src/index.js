@@ -8,27 +8,10 @@ import {store} from './store';
 import ListContainer from './containers/ListContainer';
 import FilterContainer from './containers/FilterContainer';
 import PaginationContainer from './containers/PaginationContainer';
-import {paginationActions} from './store/pagination';
-import {filterActions} from './store/filter/';
-import getArrayFromStringWithCommas from './utils/getArrayFromStringWithCommas';
 import Detail from './components/Detail/Detail';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 class App extends React.Component {
-    componentDidMount() {
-        window.addEventListener('popstate', this.handleChangeUrl);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('popstate', this.handleChangeUrl);
-    }
-
-    handleChangeUrl = (event) => {
-        const searchParams = new URLSearchParams(window.location.search);
-
-        store.dispatch(filterActions.selectCategory(getArrayFromStringWithCommas(searchParams.get('category'))));
-        store.dispatch(paginationActions.changePaginationPage(searchParams.get('page') || 1));
-    };
 
     render() {
 

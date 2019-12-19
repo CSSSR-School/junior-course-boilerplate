@@ -7,20 +7,10 @@ import Title from '../Title/Title';
 import InputNumber from '../InputNumber/InputNumber';
 import s from './Filter.module.scss';
 import CategoryContainer from '../../containers/CategoryContainer';
-
+import {Link} from 'react-router-dom';
 const HoccedDiscount = inputHOC(Discount);
 
 class PriceFilter extends React.Component {
-
-    handleResetFilters = () => {
-        const searchParams = new URLSearchParams(window.location.search);
-        searchParams.delete('category');
-        window.history.pushState(
-            {},
-            'category',
-            '?' + searchParams.toString());
-        this.props.handleResetFilters()
-    };
 
     render() {
         const {
@@ -63,8 +53,7 @@ class PriceFilter extends React.Component {
                     <CategoryContainer/>
                 </div>
                 <div className={s.filterRow}>
-                    <button type="button" className={s.filterButton} onClick={this.handleResetFilters}>Сбросить фильтры
-                    </button>
+                    <Link className={s.filterButton} to="/">Сбросить фильтры</Link>
                 </div>
             </form>
         )
@@ -77,8 +66,7 @@ PriceFilter.propTypes = {
     discount: PropTypes.number,
     handleChangeMinPrice: PropTypes.func,
     handleChangeMaxPrice: PropTypes.func,
-    handleChangeDiscount: PropTypes.func,
-    handleResetFilters: PropTypes.func
+    handleChangeDiscount: PropTypes.func
 };
 
 export default logRenderComponent(PriceFilter);

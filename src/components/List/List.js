@@ -1,20 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProductItem from 'csssr-school-product-card';
-import {formatMoney} from 'csssr-school-utils'
+import {formatMoney, splitEvery} from 'csssr-school-utils'
 import logRenderComponent from '../../HOC/logRenderComponent';
 import RatingComponent from '../RatingComponent/RatingComponent';
 import s from './List.module.scss';
 import {Link} from 'react-router-dom';
+import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
 
 class List extends React.Component {
 
     render() {
-        const {data} = this.props;
-        if (data.length > 0) {
+        const {data, location, itemsPerPage} = this.props;
+
+
+        const searchParams = new URLSearchParams(location.search);
+        const selectedCategories = getArrayFromStringWithCommas(searchParams.get('category'));
+        const paginationActivePage = searchParams.get('page') || 1;
+
+        const getDataFilteredBySearchParams = (data) => {
+            const filteredData = data.filter(item => {
+                return (selectedCategories.length > 0 ? selectedCategories.includes(item.category) : true)
+            });
+            return splitEvery(itemsPerPage, filteredData)[paginationActivePage - 1] || []
+        };
+
+        if (getDataFilteredBySearchParams(data).length > 0) {
             return (
                 <ul className={s.list}>
-                    {data.map((item) => {
+                    {getDataFilteredBySearchParams(data).map((item) => {
                         return (
                             <li className={s.listItem} key={item.id}>
                                 <Link to={`products/${item.id}`}>

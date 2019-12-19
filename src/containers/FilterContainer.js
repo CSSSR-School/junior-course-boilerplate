@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 import {filterActions} from '../store/filter';
 import Filter from '../components/Filter/Filter';
-import {withRouter} from 'react-router';
 
 const mapStateToProps = ({filter}) => (
     {
@@ -22,6 +21,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-const FilterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Filter))
+const FilterContainer = connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 export default FilterContainer

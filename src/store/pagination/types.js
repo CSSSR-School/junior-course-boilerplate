@@ -1,1 +1,0 @@
-export const CHANGE_PAGINATION_PAGE = 'pagination/CHANGE_PAGINATION_PAGE';

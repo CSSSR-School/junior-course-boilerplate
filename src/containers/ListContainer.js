@@ -1,18 +1,18 @@
 import {connect} from 'react-redux';
 import data from '../products.json';
 import List from '../components/List/List';
-import {getPaginationData} from '../utils/getData';
+import {getFilteredData} from '../utils/getData';
+import {withRouter} from 'react-router';
 
-const mapStateToProps = ({filter, pagination}) => ({
-
-    data: getPaginationData({
+const mapStateToProps = ({filter}) => ({
+    ...filter,
+    data: getFilteredData({
         data,
-        ...filter,
-        ...pagination
-    })
+        ...filter
+    }),
+
 });
 
-
-const ListContainer = connect(mapStateToProps)(List);
+const ListContainer = withRouter(connect(mapStateToProps)(List));
 
 export default ListContainer;

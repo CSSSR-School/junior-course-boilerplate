@@ -43,5 +43,14 @@
     cursor: pointer;
     color: inherit;
     font-size: inherit;
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+
+    &Disabled {
+      pointer-events: none;
+      opacity: .5;
+    }
   }
 }

@@ -1,25 +1,17 @@
 import {connect} from 'react-redux';
-import {paginationActions} from '../store/pagination';
 import Pagination from '../components/Pagination/Pagination';
 import {getFilteredData} from '../utils/getData';
 import data from '../products';
+import {withRouter} from 'react-router';
 
-const mapStateToProps = ({pagination, filter}) => ({
+const mapStateToProps = ({filter}) => ({
     ...filter,
-    ...pagination,
     data: getFilteredData({
         data: data,
-        ...filter,
-        ...pagination
+        ...filter
     })
 });
 
-const mapDispatchToProps = (dispatch) => ({
-
-    changePaginationActive: (value) => dispatch(paginationActions.changePaginationPage(value)),
-
-});
-
-const PaginationContainer = connect(mapStateToProps, mapDispatchToProps)(Pagination);
+const PaginationContainer = withRouter(connect(mapStateToProps)(Pagination));
 
 export default PaginationContainer;

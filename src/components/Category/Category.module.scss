@@ -4,26 +4,22 @@
   flex-wrap: wrap;
 
   &Button {
-    input {
-      display: none;
-      &:checked ~ span {
-        color: #fff;
-        background: #323C48;
-      }
-    }
 
-    span {
+    border: 2px solid #323C48;
+    color: #323C48;
+    text-align: center;
+    line-height: 32px;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 50px;
+    margin: 5px;
+    cursor: pointer;
+    padding: 0 20px;
+    text-decoration: none;
 
-      border: 2px solid #323C48;
-      color: #323C48;
-      text-align: center;
-      line-height: 32px;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 50px;
-      margin: 5px;
-      cursor: pointer;
-      padding: 0 20px;
+    &Checked {
+      color: #fff;
+      background: #323C48;
     }
   }
 }

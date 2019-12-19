@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import s from './Category.module.scss'
+import {Link} from 'react-router-dom';
+import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
+import cx from 'classnames';
 
 const Category = props => {
-    const {categoryList, selectedCategories} = props;
-    const handleSelectCategory = (event) => {
-        const selectedItem = event.target.name;
-        const searchParams = new URLSearchParams(window.location.search);
+    const {categoryList, location} = props;
+
+    const searchParams = new URLSearchParams(location.search);
+    const selectedCategories = getArrayFromStringWithCommas(searchParams.get('category'));
+
+    const getCategorySearchString = (selectedItem) => {
         let categoriesList = [];
 
         if (selectedCategories.includes(selectedItem)) {
@@ -17,31 +21,26 @@ const Category = props => {
         }
 
         if (categoriesList.length > 0) {
-            searchParams.set('category', categoriesList.toString());
+            searchParams.set('category', categoriesList);
         } else {
             searchParams.delete('category');
         }
 
-        window.history.pushState(
-            {...window.history.state, category: categoriesList.toString()},
-            'category',
-            '?' + searchParams.toString());
-        props.handleSelectCategory(categoriesList);
+        return {
+            search: searchParams.toString()
+        }
     };
 
     return (
         <div className={s.Category}>
             {categoryList.map((item, key) => {
                 return (
-                    <label className={s.CategoryButton} key={key}>
-                        <input
-                            type="checkbox"
-                            checked={selectedCategories.includes(item)}
-                            onChange={handleSelectCategory}
-                            name={item}
-                        />
-                        <span>{item}</span>
-                    </label>
+                    <Link key={key}
+                          to={location => (getCategorySearchString(item))}
+                          className={cx(s.CategoryButton, {[s.CategoryButtonChecked]: selectedCategories.includes(item)})}
+                    >
+                        {item}
+                    </Link>
                 )
             })}
         </div>
@@ -50,8 +49,6 @@ const Category = props => {
 
 Category.propTypes = {
     categoryList: PropTypes.array,
-    selectedCategories: PropTypes.array,
-    handleSelectCategory: PropTypes.func,
 };
 
 export default Category;

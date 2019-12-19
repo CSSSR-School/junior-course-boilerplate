@@ -2,62 +2,76 @@ import React from 'react';
 
 import cx from 'classnames';
 import s from './Pagination.module.scss'
+import {Link} from 'react-router-dom';
+import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
+import {splitEvery} from 'csssr-school-utils';
 
 const Pagination = props => {
 
-    const {data, itemsPerPage, paginationActivePage, changePaginationActive} = props;
+    const {data, itemsPerPage, location, history} = props;
 
-    const handleChange = (value) => {
+    const searchParams = new URLSearchParams(location.search);
+    const selectedCategories = getArrayFromStringWithCommas(searchParams.get('category'));
+    let paginationActivePage = searchParams.get('page') || 1;
 
-        const searchParams = new URLSearchParams(window.location.search);
-        searchParams.set('page', value);
-
-        window.history.pushState(
-            {...window.history.state, paginationActive: value},
-            'pagination',
-            '?' + searchParams.toString());
-        changePaginationActive(value)
+    const getDataFilteredBySearchParams = (data) => {
+        const filteredData = data.filter(item => {
+            return (selectedCategories.length > 0 ? selectedCategories.includes(item.category) : true)
+        });
+        return splitEvery(itemsPerPage, filteredData) || []
     };
 
-    const paginationLength = Math.ceil(data.length / itemsPerPage);
+    const getPaginationSearchString = (page) => {
+        searchParams.set('page', page);
+        return {
+            search: searchParams.toString()
+        }
+    };
+
+    const paginationLength = getDataFilteredBySearchParams(data).length;
 
     if (paginationActivePage > paginationLength) {
-        handleChange(1);
+        searchParams.delete('page');
+        history.push('?' + searchParams.toString());
+        return false;
     }
 
-    if (data.length > 0) {
+    if (getDataFilteredBySearchParams(data).length > 0 || paginationActivePage <= paginationLength) {
         return (
             <ul className={s.Pagination}>
                 <li className={cx(s.PaginationItem, s.PaginationItemPrev)}>
-                    <button type="button"
-                            disabled={+paginationActivePage === 1}
-                            className={s.PaginationButton}
-                            onClick={() => handleChange(+paginationActivePage - 1)}>
+                    <Link disabled={+paginationActivePage === 1}
+                          className={cx(s.PaginationButton, {[s.PaginationButtonDisabled]: paginationActivePage === 1})}
+                          to={getPaginationSearchString(paginationActivePage - 1)}
+                    >
                         Назад
-                    </button>
+                    </Link>
                 </li>
 
                 {[...Array(paginationLength)].map((item, key) => (
                     <li className={cx(s.PaginationItem, {[s.PaginationItemActive]: key + 1 === +paginationActivePage})} key={key}>
-                        <button type="button" className={s.PaginationButton} onClick={() => handleChange(key + 1)}>{key + 1}</button>
+                        <Link className={s.PaginationButton}
+                              to={getPaginationSearchString(+key + 1)}>
+                            {key + 1}
+                        </Link>
                     </li>
                 ))}
 
 
                 <li className={cx(s.PaginationItem, s.PaginationItemNext)}>
-                    <button type="button"
-                            disabled={+paginationActivePage === paginationLength}
-                            className={s.PaginationButton}
-                            onClick={() => handleChange(+paginationActivePage + 1)}>
+                    <Link disabled={+paginationActivePage === paginationLength}
+                          className={cx(s.PaginationButton, {[s.PaginationButtonDisabled]: paginationActivePage === paginationLength})}
+                          to={getPaginationSearchString(paginationActivePage + 1)}
+                    >
                         Вперед
-                    </button>
+                    </Link>
                 </li>
             </ul>
         )
     } else {
         return false
     }
-}
+};
 
 
 export default Pagination;
