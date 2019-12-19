@@ -5,33 +5,35 @@ import {formatMoney} from 'csssr-school-utils'
 import logRenderComponent from '../../HOC/logRenderComponent';
 import RatingComponent from '../RatingComponent/RatingComponent';
 import s from './List.module.scss';
+import {Link} from 'react-router-dom';
 
 class List extends React.Component {
-    
+
     render() {
         const {data} = this.props;
         if (data.length > 0) {
             return (
-                <>
                 <ul className={s.list}>
                     {data.map((item) => {
                         return (
                             <li className={s.listItem} key={item.id}>
-                                <ProductItem
-                                    isInStock={item.isInStock}
-                                    img={item.imgUrl}
-                                    title={item.name}
-                                    price={formatMoney(item.price, 0, '.', ' ')}
-                                    subPriceContent=""
-                                    maxRating={5}
-                                    rating={item.rating}
-                                    ratingComponent={RatingComponent}
-                                />
+                                <Link to={`products/${item.id}`}>
+
+                                    <ProductItem
+                                        isInStock={item.isInStock}
+                                        img={item.imgUrl}
+                                        title={item.name}
+                                        price={formatMoney(item.price, 0, '.', ' ')}
+                                        subPriceContent=""
+                                        maxRating={5}
+                                        rating={item.rating}
+                                        ratingComponent={RatingComponent}
+                                    />
+                                </Link>
                             </li>
                         )
                     })}
                 </ul>
-                </>
             )
         } else {
             return (

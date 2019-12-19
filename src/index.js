@@ -11,6 +11,8 @@ import PaginationContainer from './containers/PaginationContainer';
 import {paginationActions} from './store/pagination';
 import {filterActions} from './store/filter/';
 import getArrayFromStringWithCommas from './utils/getArrayFromStringWithCommas';
+import Detail from './components/Detail/Detail';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 class App extends React.Component {
     componentDidMount() {
@@ -31,20 +33,30 @@ class App extends React.Component {
     render() {
 
         return (
-            <div className="App">
-                <div className="AppHeader">
-                    <Title>Список товаров</Title>
+            <BrowserRouter>
+                <div className="App">
+                    <Route path="/products/:id">
+                        <Detail/>
+                    </Route>
+                    <Route exact path="/">
+                        <div>
+                            <div className="AppHeader">
+                                <Title>Список товаров</Title>
+                            </div>
+                            <div className="AppBody">
+                                <aside className="AppSidebar">
+                                    <FilterContainer/>
+                                </aside>
+                                <main className="AppMain">
+                                    <ListContainer/>
+                                    <PaginationContainer/>
+                                </main>
+                            </div>
+                        </div>
+                    </Route>
+
                 </div>
-                <div className="AppBody">
-                    <aside className="AppSidebar">
-                        <FilterContainer/>
-                    </aside>
-                    <main className="AppMain">
-                        <ListContainer/>
-                        <PaginationContainer/>
-                    </main>
-                </div>
-            </div>
+            </BrowserRouter>
         )
     }
 }
