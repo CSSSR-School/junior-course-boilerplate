@@ -1,0 +1,28 @@
+.formField {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 4px 16px;
+  border: 1px solid #7e8fa4;
+  transition: border-color 0.2s;
+  background: none;
+
+  &.hasError {
+    border-color: #b80000;
+    background-color: #ffdddd;
+  }
+
+  &:focus {
+    border-color: #6882a3;
+  }
+
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.8;
+    background-color: #dfdfdf;
+  }
+}
+
+textarea.formField {
+  resize: vertical;
+}
