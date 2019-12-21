@@ -13,14 +13,14 @@ const FormControl = ({
   children,
   ...attrs
 }) => {
-  const labelClassNames = stylesCx({
-    formControl__label: true,
+  const classNames = stylesCx({
+    formControl: true,
     isHorizontal
   });
 
   return (
-    <div className={`${styled.formControl} ${className}`} {...attrs}>
-      <label className={labelClassNames}>
+    <div className={`${classNames} ${className}`} {...attrs}>
+      <label className={styled.formControl__label}>
         {label && (
           <span className={styled.formControl__labelText}>{label}</span>
         )}

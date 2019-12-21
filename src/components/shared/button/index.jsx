@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "./index.module.scss";
 import cn from "classnames/bind";
-import { Spinner } from "components/spinner";
+import { Spinner } from "components/shared/spinner";
 
 const BUTTON_SIZES = {
   lg: "lg"
