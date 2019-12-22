@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "./index.module.scss";
 import cn from "classnames/bind";
+import { logRender } from "hoc";
 
 const stylesCx = cn.bind(styled);
 
-const FormControl = ({
+const BaseFormControl = ({
   className = "",
   label,
   hint,
@@ -31,11 +32,13 @@ const FormControl = ({
   );
 };
 
-FormControl.propTypes = {
+BaseFormControl.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
   hint: PropTypes.string,
   isHorizontal: PropTypes.bool
 };
+
+const FormControl = logRender(BaseFormControl, "FormControl");
 
 export { FormControl };

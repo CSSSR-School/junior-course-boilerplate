@@ -301,6 +301,7 @@ module.exports = function(webpackEnv) {
         ...(modules.webpackAliases || {}),
         "@": path.resolve(__dirname, "../src"),
         components: path.resolve(__dirname, "../src/components"),
+        hoc: path.resolve(__dirname, "../src/components/hoc"),
         utils: path.resolve(__dirname, "../src/utils"),
         assets: path.resolve(__dirname, "../src/assets"),
         helpers: path.resolve(__dirname, "../src/utils/helpers"),

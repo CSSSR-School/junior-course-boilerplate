@@ -2,23 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "./index.module.scss";
 import cn from "classnames/bind";
-
-const FIELD_TYPES = {
-  input: "input",
-  textarea: "textarea"
-};
-
-const INPUT_TYPES = {
-  text: "text",
-  number: "number",
-  tel: "tel",
-  email: "email",
-  search: "search"
-};
+import { logRender } from "hoc";
+import { FIELD_TYPES, INPUT_TYPES } from "constants";
 
 const stylesCx = cn.bind(styled);
 
-const FormField = ({
+const BaseFormField = ({
   onChange,
   type = INPUT_TYPES.text,
   fieldType = FIELD_TYPES.input,
@@ -44,12 +33,14 @@ const FormField = ({
   );
 };
 
-FormField.propTypes = {
+BaseFormField.propTypes = {
   onChange: PropTypes.func,
   type: PropTypes.oneOf(Object.values(INPUT_TYPES)),
   fieldType: PropTypes.oneOf(Object.values(FIELD_TYPES)),
   disabled: PropTypes.bool,
   hasError: PropTypes.bool
 };
+
+const FormField = logRender(BaseFormField, "FormField");
 
 export { FormField };

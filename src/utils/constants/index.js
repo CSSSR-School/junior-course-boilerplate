@@ -9,3 +9,26 @@ export const HEADINGS_MAP = objToMap({
   h6: "h6",
   default: "h1"
 });
+
+export const FIELD_TYPES = {
+  input: "input",
+  textarea: "textarea"
+};
+
+export const INPUT_TYPES = {
+  text: "text",
+  number: "number",
+  tel: "tel",
+  email: "email",
+  search: "search"
+};
+
+export const BUTTON_SIZES = {
+  lg: "lg"
+};
+
+export const BUTTON_TYPES = {
+  button: "button",
+  reset: "reset",
+  submit: "submit"
+};

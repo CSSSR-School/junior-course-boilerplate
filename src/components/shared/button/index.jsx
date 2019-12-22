@@ -3,20 +3,12 @@ import PropTypes from "prop-types";
 import styled from "./index.module.scss";
 import cn from "classnames/bind";
 import { Spinner } from "components/shared/spinner";
-
-const BUTTON_SIZES = {
-  lg: "lg"
-};
-
-const BUTTON_TYPES = {
-  button: "button",
-  reset: "reset",
-  submit: "submit"
-};
+import { logRender } from "hoc";
+import { BUTTON_SIZES, BUTTON_TYPES } from "constants";
 
 const stylesCx = cn.bind(styled);
 
-const Button = ({
+const BaseButton = ({
   onClick,
   type = BUTTON_TYPES.button,
   size,
@@ -47,11 +39,13 @@ const Button = ({
   );
 };
 
-Button.propTypes = {
+BaseButton.propTypes = {
   type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   size: PropTypes.oneOf(Object.values(BUTTON_SIZES))
 };
+
+const Button = logRender(BaseButton, "Button");
 
 export { Button };

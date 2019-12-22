@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./styles.module.scss";
+import { logRender } from "hoc";
 
-const Spinner = ({ size = "1em", className = "", ...attrs }) => {
+const BaseSpinner = ({ size = "1em", className = "", ...attrs }) => {
   return (
     <svg
       width={size}
@@ -35,5 +36,7 @@ const Spinner = ({ size = "1em", className = "", ...attrs }) => {
     </svg>
   );
 };
+
+const Spinner = logRender(BaseSpinner, "Spinner");
 
 export { Spinner };
