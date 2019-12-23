@@ -12,6 +12,7 @@ export const getCategoryList = (data) => {
 };
 
 const initialState = {
+    data: data,
     minPrice: minBy(obj => obj.price, data).price,
     maxPrice: maxBy(obj => obj.price, data).price,
     discount: minBy(obj => obj.discount, data).discount,

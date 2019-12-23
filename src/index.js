@@ -4,19 +4,22 @@ import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import Title from './components/Title/Title';
-import {store} from './store';
 import ListContainer from './containers/ListContainer';
 import FilterContainer from './containers/FilterContainer';
 import PaginationContainer from './containers/PaginationContainer';
 import Detail from './components/Detail/Detail';
 import {BrowserRouter, Route} from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router'
+import configureStore , { history } from './store'
+
+const store = configureStore();
 
 class App extends React.Component {
 
     render() {
 
         return (
-            <BrowserRouter>
+            <ConnectedRouter history={history}>
                 <div className="App">
                     <Route path="/products/:id">
                         <Detail/>
@@ -39,7 +42,7 @@ class App extends React.Component {
                     </Route>
 
                 </div>
-            </BrowserRouter>
+            </ConnectedRouter>
         )
     }
 }

@@ -3,23 +3,13 @@ import React from 'react';
 import cx from 'classnames';
 import s from './Pagination.module.scss'
 import {Link} from 'react-router-dom';
-import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
-import {splitEvery} from 'csssr-school-utils';
+
 
 const Pagination = props => {
-
     const {data, itemsPerPage, location, history} = props;
-
     const searchParams = new URLSearchParams(location.search);
-    const selectedCategories = getArrayFromStringWithCommas(searchParams.get('category'));
     let paginationActivePage = searchParams.get('page') || 1;
 
-    const getDataFilteredBySearchParams = (data) => {
-        const filteredData = data.filter(item => {
-            return (selectedCategories.length > 0 ? selectedCategories.includes(item.category) : true)
-        });
-        return splitEvery(itemsPerPage, filteredData) || []
-    };
 
     const getPaginationSearchString = (page) => {
         searchParams.set('page', page);
@@ -28,7 +18,7 @@ const Pagination = props => {
         }
     };
 
-    const paginationLength = getDataFilteredBySearchParams(data).length;
+    const paginationLength = data.length;
 
     if (paginationActivePage > paginationLength) {
         searchParams.delete('page');
@@ -36,7 +26,7 @@ const Pagination = props => {
         return false;
     }
 
-    if (getDataFilteredBySearchParams(data).length > 0 || paginationActivePage <= paginationLength) {
+    if (data.length > 0 || paginationActivePage <= paginationLength) {
         return (
             <ul className={s.Pagination}>
                 <li className={cx(s.PaginationItem, s.PaginationItemPrev)}>

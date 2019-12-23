@@ -7,6 +7,7 @@ import RatingComponent from '../RatingComponent/RatingComponent';
 import s from './List.module.scss';
 import {Link} from 'react-router-dom';
 import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
+import PaginationContainer from '../Pagination/Pagination';
 
 class List extends React.Component {
 
@@ -25,29 +26,34 @@ class List extends React.Component {
             return splitEvery(itemsPerPage, filteredData)[paginationActivePage - 1] || []
         };
 
-        if (getDataFilteredBySearchParams(data).length > 0) {
-            return (
-                <ul className={s.list}>
-                    {getDataFilteredBySearchParams(data).map((item) => {
-                        return (
-                            <li className={s.listItem} key={item.id}>
-                                <Link to={`products/${item.id}`}>
+        const dataFilteredBySearchParams = getDataFilteredBySearchParams(data);
 
-                                    <ProductItem
-                                        isInStock={item.isInStock}
-                                        img={item.imgUrl}
-                                        title={item.name}
-                                        price={formatMoney(item.price, 0, '.', ' ')}
-                                        subPriceContent=""
-                                        maxRating={5}
-                                        rating={item.rating}
-                                        ratingComponent={RatingComponent}
-                                    />
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
+        if (dataFilteredBySearchParams.length > 0) {
+            return (
+                <div>
+                    <ul className={s.list}>
+                        {dataFilteredBySearchParams.map((item) => {
+                            return (
+                                <li className={s.listItem} key={item.id}>
+                                    <Link to={`products/${item.id}`}>
+
+                                        <ProductItem
+                                            isInStock={item.isInStock}
+                                            img={item.imgUrl}
+                                            title={item.name}
+                                            price={formatMoney(item.price, 0, '.', ' ')}
+                                            subPriceContent=""
+                                            maxRating={5}
+                                            rating={item.rating}
+                                            ratingComponent={RatingComponent}
+                                        />
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+
             )
         } else {
             return (

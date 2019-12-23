@@ -1,8 +1,28 @@
-import {combineReducers, createStore} from 'redux'
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import filterReducer from './filter'
+import {connectRouter, routerMiddleware} from 'connected-react-router'
+import {createBrowserHistory} from 'history'
 
-const reducer = combineReducers({
+export const history = createBrowserHistory();
+
+const createRootReducer = (history) => combineReducers({
+    router: connectRouter(history),
     filter: filterReducer,
 });
 
-export const store = createStore(reducer);
+const devtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export default function configureStore(preloadedState) {
+    const store = createStore(
+        createRootReducer(history),
+        preloadedState,
+        composeEnhancers(
+            applyMiddleware(
+                routerMiddleware(history),
+            ),
+        ),
+    );
+
+    return store
+}
