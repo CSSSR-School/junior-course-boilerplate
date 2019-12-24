@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "./index.module.scss";
 import PropTypes from "prop-types";
+import { logRender } from "hoc";
 
-const Grid = ({
+const BaseGrid = ({
   children,
   className = "",
   keyValue = "id",
@@ -26,12 +27,12 @@ const Grid = ({
   );
 };
 
-Grid.propTypes = {
+BaseGrid.propTypes = {
   keyValue: PropTypes.string,
   className: PropTypes.string,
   items: PropTypes.array.isRequired,
   render: PropTypes.func.isRequired,
   columnsCount: PropTypes.number
 };
-
+const Grid = logRender(BaseGrid, "Grid");
 export { Grid };

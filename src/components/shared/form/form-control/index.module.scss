@@ -1,0 +1,28 @@
+.formControl {
+  $this: &;
+
+  &__label {
+    display: block;
+
+    #{$this}.isHorizontal & {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__labelText {
+    display: block;
+    font-size: 14px;
+    padding: 5px 10px;
+
+    #{$this}.isHorizontal & {
+      padding-left: 0;
+    }
+  }
+
+  &__hint {
+    font-size: 12px;
+    display: block;
+    padding: 3px;
+  }
+}
