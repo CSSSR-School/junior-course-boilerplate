@@ -13,7 +13,7 @@ const mapStateToProps = ({filter, router}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changePaginationActive: (value) => dispatch(push(value))
+    resetPagination: (value) => dispatch(push(value))
 });
 
 

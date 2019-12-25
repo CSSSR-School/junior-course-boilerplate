@@ -7,7 +7,7 @@ import {splitEvery} from 'csssr-school-utils';
 
 
 const Pagination = props => {
-    const {data, location, itemsPerPage, changePaginationActive} = props;
+    const {data, location, itemsPerPage, resetPagination} = props;
 
     const paginationActivePage = +location.query.page || 1;
     const searchParams = new URLSearchParams(location.search);
@@ -57,7 +57,7 @@ const Pagination = props => {
         return false
     } else {
         searchParams.delete('page');
-        changePaginationActive('?' + searchParams.toString());
+        resetPagination('?' + searchParams.toString());
         return false;
     }
 };
