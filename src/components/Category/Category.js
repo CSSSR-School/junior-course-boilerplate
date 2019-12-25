@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import s from './Category.module.scss'
 import {Link} from 'react-router-dom';
-import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
+import getArrayFromQueryString from '../../utils/getArrayFromQueryString';
 import cx from 'classnames';
 
 const Category = props => {
     const {categoryList, location} = props;
 
+    const selectedCategories = getArrayFromQueryString(location.query.category);
     const searchParams = new URLSearchParams(location.search);
-    const selectedCategories = getArrayFromStringWithCommas(searchParams.get('category'));
 
     const getCategorySearchString = (selectedItem) => {
         let categoriesList = [];

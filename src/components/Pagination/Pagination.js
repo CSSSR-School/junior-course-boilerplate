@@ -3,13 +3,15 @@ import React from 'react';
 import cx from 'classnames';
 import s from './Pagination.module.scss'
 import {Link} from 'react-router-dom';
+import {splitEvery} from 'csssr-school-utils';
 
 
 const Pagination = props => {
-    const {data, itemsPerPage, location, history} = props;
-    const searchParams = new URLSearchParams(location.search);
-    let paginationActivePage = searchParams.get('page') || 1;
+    const {data, location, itemsPerPage, changePaginationActive} = props;
 
+    const paginationActivePage = +location.query.page || 1;
+    const searchParams = new URLSearchParams(location.search);
+    const paginationLength = splitEvery(itemsPerPage, data).length;
 
     const getPaginationSearchString = (page) => {
         searchParams.set('page', page);
@@ -18,15 +20,8 @@ const Pagination = props => {
         }
     };
 
-    const paginationLength = data.length;
 
-    if (paginationActivePage > paginationLength) {
-        searchParams.delete('page');
-        history.push('?' + searchParams.toString());
-        return false;
-    }
-
-    if (data.length > 0 || paginationActivePage <= paginationLength) {
+    if (data.length > 0 && paginationActivePage <= paginationLength) {
         return (
             <ul className={s.Pagination}>
                 <li className={cx(s.PaginationItem, s.PaginationItemPrev)}>
@@ -58,8 +53,12 @@ const Pagination = props => {
                 </li>
             </ul>
         )
-    } else {
+    } else if (data.length === 0) {
         return false
+    } else {
+        searchParams.delete('page');
+        changePaginationActive('?' + searchParams.toString());
+        return false;
     }
 };
 

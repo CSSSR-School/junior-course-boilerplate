@@ -1,15 +1,22 @@
 import {connect} from 'react-redux';
 import Pagination from '../components/Pagination/Pagination';
 import {getFilteredData} from '../utils/getData';
-import {withRouter} from 'react-router';
+import {push} from 'connected-react-router';
 
-const mapStateToProps = ({filter}) => ({
+const mapStateToProps = ({filter, router}) => ({
     ...filter,
+    ...router,
     data: getFilteredData({
-        ...filter
-    })
+        selectedCategories: router.location.query.category,
+        ...filter,
+    }),
 });
 
-const PaginationContainer = withRouter(connect(mapStateToProps)(Pagination));
+const mapDispatchToProps = (dispatch) => ({
+    changePaginationActive: (value) => dispatch(push(value))
+});
+
+
+const PaginationContainer = connect(mapStateToProps, mapDispatchToProps)(Pagination);
 
 export default PaginationContainer;

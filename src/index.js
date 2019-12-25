@@ -8,7 +8,7 @@ import ListContainer from './containers/ListContainer';
 import FilterContainer from './containers/FilterContainer';
 import PaginationContainer from './containers/PaginationContainer';
 import Detail from './components/Detail/Detail';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router'
 import configureStore , { history } from './store'
 

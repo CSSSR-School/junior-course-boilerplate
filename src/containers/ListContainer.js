@@ -3,11 +3,13 @@ import List from '../components/List/List';
 import {getFilteredData} from '../utils/getData';
 import {withRouter} from 'react-router';
 
-const mapStateToProps = ({filter}) => ({
+const mapStateToProps = ({filter, router}) => ({
     ...filter,
+    ...router,
     data: getFilteredData({
-        ...filter
-    }),
+        selectedCategories: router.location.query.category,
+        ...filter,
+    })
 });
 
 

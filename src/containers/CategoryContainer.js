@@ -1,17 +1,15 @@
 import {connect} from 'react-redux';
-import {filterActions} from '../store/filter';
 import Category from '../components/Category/Category';
-import {withRouter} from 'react-router';
 
-const mapStateToProps = ({filter}) => ({
-    categoryList: filter.categoryList,
-    selectedCategories: filter.selectedCategories
+const mapStateToProps = ({filter, router}) => ({
+    ...filter,
+    ...router
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    handleSelectCategory: (value) => dispatch(filterActions.selectCategory(value))
+    // handleSelectCategory: (value) => dispatch(filterActions.selectCategory(value))
 });
 
-const CategoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Category))
+const CategoryContainer = connect(mapStateToProps, mapDispatchToProps)(Category)
 
 export default CategoryContainer

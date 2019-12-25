@@ -6,33 +6,23 @@ import logRenderComponent from '../../HOC/logRenderComponent';
 import RatingComponent from '../RatingComponent/RatingComponent';
 import s from './List.module.scss';
 import {Link} from 'react-router-dom';
-import getArrayFromStringWithCommas from '../../utils/getArrayFromStringWithCommas';
-import PaginationContainer from '../Pagination/Pagination';
 
 class List extends React.Component {
 
     render() {
         const {data, location, itemsPerPage} = this.props;
 
+        const paginationActivePage = location.query.page || 1;
 
-        const searchParams = new URLSearchParams(location.search);
-        const selectedCategories = getArrayFromStringWithCommas(searchParams.get('category'));
-        const paginationActivePage = searchParams.get('page') || 1;
-
-        const getDataFilteredBySearchParams = (data) => {
-            const filteredData = data.filter(item => {
-                return (selectedCategories.length > 0 ? selectedCategories.includes(item.category) : true)
-            });
-            return splitEvery(itemsPerPage, filteredData)[paginationActivePage - 1] || []
+        const getActivePageData = (data) => {
+            return splitEvery(itemsPerPage, data)[paginationActivePage - 1] || []
         };
 
-        const dataFilteredBySearchParams = getDataFilteredBySearchParams(data);
-
-        if (dataFilteredBySearchParams.length > 0) {
+        if (getActivePageData(data).length > 0) {
             return (
                 <div>
                     <ul className={s.list}>
-                        {dataFilteredBySearchParams.map((item) => {
+                        {getActivePageData(data).map((item) => {
                             return (
                                 <li className={s.listItem} key={item.id}>
                                     <Link to={`products/${item.id}`}>

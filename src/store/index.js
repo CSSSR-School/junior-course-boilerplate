@@ -10,7 +10,6 @@ const createRootReducer = (history) => combineReducers({
     filter: filterReducer,
 });
 
-const devtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default function configureStore(preloadedState) {
