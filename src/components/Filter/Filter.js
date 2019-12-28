@@ -19,7 +19,8 @@ class PriceFilter extends React.Component {
             discount,
             handleChangeMinPrice,
             handleChangeMaxPrice,
-            handleChangeDiscount
+            handleChangeDiscount,
+            handleResetFilters
         } = this.props;
 
 
@@ -53,7 +54,7 @@ class PriceFilter extends React.Component {
                     <CategoryContainer/>
                 </div>
                 <div className={s.filterRow}>
-                    <Link className={s.filterButton} to="/">Сбросить фильтры</Link>
+                    <Link onClick={handleResetFilters} className={s.filterButton} to="/">Сбросить фильтры</Link>
                 </div>
             </form>
         )

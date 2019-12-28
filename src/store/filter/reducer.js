@@ -2,9 +2,7 @@ import * as types from './types';
 import {maxBy, minBy} from 'csssr-school-utils';
 import data from '../../products';
 
-const ITEMS_PER_PAGE = 2;
-
-export const searchParams = new URLSearchParams(window.location.search);
+const ITEMS_PER_PAGE = 200 //для работы моих доработок;
 
 export const getCategoryList = (data) => {
     const set = data.reduce((arr, item) => arr.add(item.category), new Set());
@@ -12,7 +10,6 @@ export const getCategoryList = (data) => {
 };
 
 const initialState = {
-    data: data,
     minPrice: minBy(obj => obj.price, data).price,
     maxPrice: maxBy(obj => obj.price, data).price,
     discount: minBy(obj => obj.discount, data).discount,
@@ -29,12 +26,9 @@ const reducer = (state = initialState, action) => {
             return {...state, maxPrice: action.payload};
         case types.CHANGE_DISCOUNT :
             return {...state, discount: action.payload};
-        case types.SELECT_CATEGORY :
-            return {...state, selectedCategories: action.payload};
         case types.RESET_FILTERS :
             return {
                 ...initialState,
-                selectedCategories: []
             };
         default:
             return state

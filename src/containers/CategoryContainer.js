@@ -2,14 +2,10 @@ import {connect} from 'react-redux';
 import Category from '../components/Category/Category';
 
 const mapStateToProps = ({filter, router}) => ({
-    ...filter,
-    ...router
+    filter,
+    router
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    // handleSelectCategory: (value) => dispatch(filterActions.selectCategory(value))
-});
-
-const CategoryContainer = connect(mapStateToProps, mapDispatchToProps)(Category)
+const CategoryContainer = connect(mapStateToProps)(Category)
 
 export default CategoryContainer

@@ -12,7 +12,8 @@ class List extends React.Component {
     render() {
         const {data, location, itemsPerPage} = this.props;
 
-        const paginationActivePage = location.query.page || 1;
+        // const paginationActivePage = location.query.page || 1;
+        const paginationActivePage = 1; //что бы работали мои изменения 
 
         const getActivePageData = (data) => {
             return splitEvery(itemsPerPage, data)[paginationActivePage - 1] || []

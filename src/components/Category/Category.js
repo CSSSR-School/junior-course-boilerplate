@@ -6,10 +6,10 @@ import getArrayFromQueryString from '../../utils/getArrayFromQueryString';
 import cx from 'classnames';
 
 const Category = props => {
-    const {categoryList, location} = props;
+    const {filter, router} = props;
 
-    const selectedCategories = getArrayFromQueryString(location.query.category);
-    const searchParams = new URLSearchParams(location.search);
+    const selectedCategories = getArrayFromQueryString(router.location.query.category);
+    const searchParams = new URLSearchParams(router.location.search);
 
     const getCategorySearchString = (selectedItem) => {
         let categoriesList = [];
@@ -33,11 +33,14 @@ const Category = props => {
 
     return (
         <div className={s.Category}>
-            {categoryList.map((item, key) => {
+            {filter.categoryList.map((item, key) => {
                 return (
-                    <Link key={key}
-                          to={location => (getCategorySearchString(item))}
-                          className={cx(s.CategoryButton, {[s.CategoryButtonChecked]: selectedCategories.includes(item)})}
+                    <Link 
+                        key={key}
+                        to={() => (getCategorySearchString(item))}
+                        className={cx(s.CategoryButton, {
+                            [s.CategoryButtonChecked]: selectedCategories.includes(item)
+                        })}
                     >
                         {item}
                     </Link>

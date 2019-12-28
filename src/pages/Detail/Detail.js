@@ -2,9 +2,9 @@ import React from 'react';
 import {withRouter} from 'react-router';
 import ProductItem from 'csssr-school-product-card';
 import {formatMoney} from 'csssr-school-utils';
-import RatingComponent from '../RatingComponent/RatingComponent';
+import RatingComponent from '../../components/RatingComponent/RatingComponent';
 import data from '../../products.json';
-import Title from '../Title/Title';
+import Title from '../../components/Title/Title';
 import {Link} from 'react-router-dom';
 
 import iconBack from '../../assets/images/icon-back.svg'

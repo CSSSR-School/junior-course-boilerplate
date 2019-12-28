@@ -27,9 +27,3 @@ export const changeDiscount = (value) => {
     }
 };
 
-export const selectCategory = (value) => {
-    return {
-        type: types.SELECT_CATEGORY,
-        payload: value
-    }
-};

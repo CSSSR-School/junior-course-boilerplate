@@ -8,10 +8,10 @@ export const getFilteredData = createSelector(
     ({discount}) => discount,
     ({selectedCategories}) => selectedCategories,
     (data, minPrice, maxPrice, discount, selectedCategories) => data.filter((item) => {
-            return item.price >= minPrice
-                && item.price <= maxPrice
-                && item.discount >= discount
-                && (getArrayFromQueryString(selectedCategories).length > 0 ? getArrayFromQueryString(selectedCategories).includes(item.category) : true)
+        return item.price >= minPrice
+            && item.price <= maxPrice
+            && item.discount >= discount
+            && (getArrayFromQueryString(selectedCategories).length > 0 ? getArrayFromQueryString(selectedCategories).includes(item.category) : true)
         }
     )
 );
