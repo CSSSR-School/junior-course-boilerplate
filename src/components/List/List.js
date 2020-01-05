@@ -15,15 +15,13 @@ class List extends React.Component {
         // const paginationActivePage = location.query.page || 1;
         const paginationActivePage = 1; //что бы работали мои изменения 
 
-        const getActivePageData = (data) => {
-            return splitEvery(itemsPerPage, data)[paginationActivePage - 1] || []
-        };
+        const activePageData =  splitEvery(itemsPerPage, data)[paginationActivePage - 1] || []
 
-        if (getActivePageData(data).length > 0) {
+        if (activePageData.length > 0) {
             return (
                 <div>
                     <ul className={s.list}>
-                        {getActivePageData(data).map((item) => {
+                        {activePageData.map((item) => {
                             return (
                                 <li className={s.listItem} key={item.id}>
                                     <Link to={`products/${item.id}`}>

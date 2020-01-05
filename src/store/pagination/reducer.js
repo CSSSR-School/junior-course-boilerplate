@@ -1,7 +1,7 @@
-import data from '../../products.json';
+const ITEMS_PER_PAGE = 2 //для работы моих доработок;
 
 const initialState = {
-    products: [...data]
+    itemsPerPage: ITEMS_PER_PAGE
 };
 
 const reducer = (state = initialState, action) => {

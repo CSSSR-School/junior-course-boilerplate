@@ -13,7 +13,6 @@ const mapDispatchToProps = (dispatch) => ({
     handleChangeMaxPrice: (value) => dispatch(filterActions.changeMaxPrice(value)),
     handleChangeDiscount: (value) => dispatch(filterActions.changeDiscount(value)),
     handleResetFilters: () => dispatch(filterActions.resetFilter())
-
 });
 
 const FilterContainer = connect(mapStateToProps, mapDispatchToProps)(Filter);

@@ -3,9 +3,10 @@ import List from '../components/List/List';
 import {getFilteredData} from '../utils/getData';
 import {withRouter} from 'react-router';
 
-const mapStateToProps = ({filter, router, data}) => ({
+const mapStateToProps = ({filter, pagination, router, data}) => ({
     ...filter,
     ...router,
+    ...pagination,
     data: getFilteredData({
         ...filter,
         selectedCategories: router.location.query.category,

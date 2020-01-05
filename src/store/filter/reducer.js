@@ -2,8 +2,6 @@ import * as types from './types';
 import {maxBy, minBy} from 'csssr-school-utils';
 import data from '../../products';
 
-const ITEMS_PER_PAGE = 200 //для работы моих доработок;
-
 export const getCategoryList = (data) => {
     const set = data.reduce((arr, item) => arr.add(item.category), new Set());
     return Array.from(set)
@@ -14,7 +12,6 @@ const initialState = {
     maxPrice: maxBy(obj => obj.price, data).price,
     discount: minBy(obj => obj.discount, data).discount,
     categoryList: getCategoryList(data),
-    itemsPerPage: ITEMS_PER_PAGE
 };
 
 

@@ -13,7 +13,6 @@ import s from './Detail.module.scss'
 
 class Detail extends React.Component {
     render() {
-        console.info(this.props);
         const item = data[+this.props.match.params.id - 1];
         if (item) {
             return (
