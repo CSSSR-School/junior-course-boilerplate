@@ -2,15 +2,15 @@ import {connect} from 'react-redux';
 import Pagination from '../components/Pagination/Pagination';
 import {getFilteredData} from '../utils/getData';
 import {push} from 'connected-react-router';
+import {splitEvery} from 'csssr-school-utils';
 
-const mapStateToProps = ({filter, pagination, router}) => ({
-    ...filter,
-    ...router,
-    ...pagination,
-    data: getFilteredData({
-        selectedCategories: router.location.query.category,
+const mapStateToProps = ({filter, pagination, router, data}) => ({
+    router,
+    paginationLength: splitEvery(pagination.itemsPerPage, getFilteredData({
         ...filter,
-    }),
+        selectedCategories: router.location.query.category,
+        data: data.products,
+    })).length
 });
 
 const mapDispatchToProps = (dispatch) => ({

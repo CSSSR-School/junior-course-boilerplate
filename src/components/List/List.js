@@ -10,12 +10,11 @@ import {Link} from 'react-router-dom';
 class List extends React.Component {
 
     render() {
-        const {data, location, itemsPerPage} = this.props;
+        const {data, router, itemsPerPage} = this.props;
 
-        // const paginationActivePage = location.query.page || 1;
-        const paginationActivePage = 1; //что бы работали мои изменения 
+        const paginationActivePage = router.location.query.page || 1;
 
-        const activePageData =  splitEvery(itemsPerPage, data)[paginationActivePage - 1] || []
+        const activePageData =  splitEvery(itemsPerPage, data)[paginationActivePage - 1] || [];
 
         if (activePageData.length > 0) {
             return (

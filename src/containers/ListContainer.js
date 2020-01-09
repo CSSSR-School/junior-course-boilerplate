@@ -5,8 +5,8 @@ import {withRouter} from 'react-router';
 
 const mapStateToProps = ({filter, pagination, router, data}) => ({
     ...filter,
-    ...router,
-    ...pagination,
+    router,
+    itemsPerPage: pagination.itemsPerPage,
     data: getFilteredData({
         ...filter,
         selectedCategories: router.location.query.category,

@@ -6,6 +6,6 @@ const mapStateToProps = ({filter, router}) => ({
     router
 });
 
-const CategoryContainer = connect(mapStateToProps)(Category)
+const CategoryContainer = connect(mapStateToProps)(Category);
 
 export default CategoryContainer

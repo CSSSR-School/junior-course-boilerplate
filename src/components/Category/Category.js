@@ -7,7 +7,6 @@ import cx from 'classnames';
 
 const Category = props => {
     const {filter, router} = props;
-
     const selectedCategories = getArrayFromQueryString(router.location.query.category);
     const searchParams = new URLSearchParams(router.location.search);
 
