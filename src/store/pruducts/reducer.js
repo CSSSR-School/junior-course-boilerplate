@@ -1,7 +1,7 @@
-import data from '../../products.json';
+import products from '../../products.json';
 
 const initialState = {
-    products: [...data]
+    products: [...products]
 };
 
 const reducer = (state = initialState, action) => {

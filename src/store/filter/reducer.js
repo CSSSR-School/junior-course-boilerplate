@@ -1,17 +1,17 @@
 import * as types from './types';
 import {maxBy, minBy} from 'csssr-school-utils';
-import data from '../../products';
+import products from '../../products';
 
-export const getCategoryList = (data) => {
-    const set = data.reduce((arr, item) => arr.add(item.category), new Set());
+export const getCategoryList = (products) => {
+    const set = products.reduce((arr, item) => arr.add(item.category), new Set());
     return Array.from(set)
 };
 
 const initialState = {
-    minPrice: minBy(obj => obj.price, data).price,
-    maxPrice: maxBy(obj => obj.price, data).price,
-    discount: minBy(obj => obj.discount, data).discount,
-    categoryList: getCategoryList(data),
+    minPrice: minBy(obj => obj.price, products).price,
+    maxPrice: maxBy(obj => obj.price, products).price,
+    discount: minBy(obj => obj.discount, products).discount,
+    categoryList: getCategoryList(products),
 };
 
 

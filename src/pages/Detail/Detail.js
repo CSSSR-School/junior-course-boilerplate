@@ -3,7 +3,7 @@ import {withRouter} from 'react-router';
 import ProductItem from 'csssr-school-product-card';
 import {formatMoney} from 'csssr-school-utils';
 import RatingComponent from '../../components/RatingComponent/RatingComponent';
-import data from '../../products.json';
+import products from '../../products.json';
 import Title from '../../components/Title/Title';
 import {Link} from 'react-router-dom';
 
@@ -13,7 +13,7 @@ import s from './Detail.module.scss'
 
 class Detail extends React.Component {
     render() {
-        const item = data[+this.props.match.params.id - 1];
+        const item = products[+this.props.match.params.id - 1];
         if (item) {
             return (
                 <div>

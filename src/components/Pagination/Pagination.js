@@ -57,15 +57,6 @@ const Pagination = props => {
         return false;
     }
 
-    // if (data.length > 0 && paginationActivePage <= paginationLength) {
-    //
-    // } else if (data.length === 0) {
-    //     return false
-    // } else {
-    //     searchParams.delete('page');
-    //     resetPagination('?' + searchParams.toString());
-    //     return false;
-    // }
 };
 
 

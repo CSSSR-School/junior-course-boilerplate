@@ -10,17 +10,17 @@ import {Link} from 'react-router-dom';
 class List extends React.Component {
 
     render() {
-        const {data, router, itemsPerPage} = this.props;
+        const {products, router, itemsPerPage} = this.props;
 
         const paginationActivePage = router.location.query.page || 1;
 
-        const activePageData =  splitEvery(itemsPerPage, data)[paginationActivePage - 1] || [];
+        const activePageProducts =  splitEvery(itemsPerPage, products)[paginationActivePage - 1] || [];
 
-        if (activePageData.length > 0) {
+        if (activePageProducts.length > 0) {
             return (
                 <div>
                     <ul className={s.list}>
-                        {activePageData.map((item) => {
+                        {activePageProducts.map((item) => {
                             return (
                                 <li className={s.listItem} key={item.id}>
                                     <Link to={`products/${item.id}`}>
@@ -52,11 +52,11 @@ class List extends React.Component {
 }
 
 List.propTypes = {
-    data: PropTypes.array
+    products: PropTypes.array
 };
 
 List.defaultProps = {
-    data: []
+    products: []
 };
 
 export default logRenderComponent(List);

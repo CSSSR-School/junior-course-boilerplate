@@ -1,15 +1,15 @@
 import {connect} from 'react-redux';
 import List from '../components/List/List';
-import {getFilteredData} from '../utils/getData';
+import {getFilteredProducts} from '../utils/getFilteredProducts';
 import {withRouter} from 'react-router';
 
 const mapStateToProps = ({filter, pagination, router, data}) => ({
     router,
     itemsPerPage: pagination.itemsPerPage,
-    data: getFilteredData({
+    products: getFilteredProducts({
         ...filter,
         selectedCategories: router.location.query.category,
-        data: data.products,
+        products: data.products,
     })
 });
 

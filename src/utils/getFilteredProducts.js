@@ -1,13 +1,13 @@
 import {createSelector} from 'reselect';
 import getArrayFromQueryString from './getArrayFromQueryString';
 
-export const getFilteredData = createSelector(
-    ({data}) => data,
+export const getFilteredProducts = createSelector(
+    ({products}) => products,
     ({minPrice}) => minPrice,
     ({maxPrice}) => maxPrice,
     ({discount}) => discount,
     ({selectedCategories}) => selectedCategories,
-    (data, minPrice, maxPrice, discount, selectedCategories) => data.filter((item) => {
+    (products, minPrice, maxPrice, discount, selectedCategories) => products.filter((item) => {
         return item.price >= minPrice
             && item.price <= maxPrice
             && item.discount >= discount
