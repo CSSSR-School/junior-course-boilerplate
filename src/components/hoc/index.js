@@ -1,1 +1,2 @@
-export * from "./logRender";
+export * from "./withLogger";
+export * from "./withNumber";

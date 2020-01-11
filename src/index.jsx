@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 
 import "./assets/styles/index.scss";
@@ -8,19 +8,20 @@ import { Grid } from "components/shared/grid";
 import { PriceFilter } from "components/price-filter";
 import ProductCard from "csssr-school-product-card";
 import styled from "./index.module.scss";
-import { formatPrice, getMaxMinPrice } from "helpers";
-import { logRender } from "hoc";
+import { formatPrice, getMaxMinPrice, memoizeByProps } from "helpers";
+import { withLogger } from "hoc";
 
 const Rating = ({ isFilled }) => (isFilled ? "★" : "☆");
 
-const ProductCardWithLogger = logRender(ProductCard, "ProductCard");
+const ProductCardWithLogger = withLogger(ProductCard, "ProductCard");
 
-class App extends Component {
+class App extends PureComponent {
   state = {
     from: 0,
     to: 0,
     min: 0,
     max: 0,
+    sale: 0,
     products: []
   };
 
@@ -42,15 +43,16 @@ class App extends Component {
     }
   }
 
-  onSubmit = ({ from, to }) => {
-    if (from === this.state.from && to === this.state.to) return;
-    this.setState({ from, to });
+  onFilterChange = ({ name, value }) => {
+    this.setState({
+      [name]: Number(value)
+    });
   };
 
-  render() {
-    const { products, from, to, min, max } = this.state;
+  getProducts = memoizeByProps((products, from, to, sale) => {
     const filteredProducts = products.filter(
-      ({ price }) => price >= from && price <= to
+      ({ price, discount }) =>
+        price >= from && price <= to && discount >= sale / 100
     );
 
     const formattedProducts = filteredProducts.map(({ price, ...rest }) => ({
@@ -58,18 +60,30 @@ class App extends Component {
       ...rest
     }));
 
+    return formattedProducts;
+  });
+
+  render() {
+    const { products, from, to, min, max, sale } = this.state;
+
+    const items = this.getProducts(products, from, to, sale);
+
     return (
       <div className="app">
         <div className={styled.products}>
           <Heading className={styled.products__title}>Список товаров</Heading>
           <PriceFilter
-            onSubmit={this.onSubmit}
-            defaultFrom={min}
-            defaultTo={max}
+            onChange={this.onFilterChange}
+            min={min}
+            max={max}
+            from={from}
+            to={to}
+            sale={sale}
           />
           <Grid
             columnsCount={3}
-            items={formattedProducts}
+            items={items}
+            emptyListPlaceholder="По заданным параметрам ничего не найдено."
             render={props => (
               <ProductCardWithLogger ratingComponent={Rating} {...props} />
             )}

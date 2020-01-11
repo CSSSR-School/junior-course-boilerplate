@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "./index.module.scss";
 import PropTypes from "prop-types";
-import { logRender } from "hoc";
+import { withLogger } from "hoc";
 
 const BaseGrid = ({
   children,
@@ -10,6 +10,7 @@ const BaseGrid = ({
   items,
   render,
   columnsCount = 1,
+  emptyListPlaceholder = "",
   ...attrs
 }) => {
   const style = {
@@ -22,7 +23,11 @@ const BaseGrid = ({
 
   return (
     <ul className={`${styled.grid} ${className}`} style={style} {...attrs}>
-      {columns}
+      {Array.isArray(columns) && columns.length ? (
+        columns
+      ) : (
+        <li className={styled.grid__placeholder}>{emptyListPlaceholder}</li>
+      )}
     </ul>
   );
 };
@@ -34,5 +39,5 @@ BaseGrid.propTypes = {
   render: PropTypes.func.isRequired,
   columnsCount: PropTypes.number
 };
-const Grid = logRender(BaseGrid, "Grid");
+const Grid = withLogger(BaseGrid, "Grid");
 export { Grid };
