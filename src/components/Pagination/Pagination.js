@@ -17,6 +17,11 @@ const Pagination = props => {
         }
     };
 
+    if (paginationActivePage > paginationLength) {
+        searchParams.delete('page');
+        resetPagination('?' + searchParams.toString());
+        return false;
+    }
 
     if (paginationLength > 0) {
         return (
