@@ -17,7 +17,7 @@ const Pagination = props => {
         }
     };
 
-    if (paginationActivePage > paginationLength) {
+    if (paginationActivePage > paginationLength && paginationLength > 0) {
         searchParams.delete('page');
         resetPagination('?' + searchParams.toString());
         return false;

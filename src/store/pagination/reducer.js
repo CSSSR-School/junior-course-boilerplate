@@ -1,4 +1,4 @@
-const ITEMS_PER_PAGE = 2 //для работы моих доработок;
+const ITEMS_PER_PAGE = 3
 
 const initialState = {
     itemsPerPage: ITEMS_PER_PAGE

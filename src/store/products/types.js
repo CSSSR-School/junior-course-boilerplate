@@ -1,0 +1,3 @@
+export const LOAD_PRODUCTS_START = 'products/LOAD_PRODUCTS_START';
+export const LOAD_PRODUCTS_SUCCESS = 'products/LOAD_PRODUCTS_SUCCESS';
+export const LOAD_PRODUCTS_FAIL = 'products/LOAD_PRODUCTS_FAIL';

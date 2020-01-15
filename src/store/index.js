@@ -1,9 +1,10 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import filterReducer from './filter'
-import productsReducer from './pruducts/reducer'
+import productsReducer from './products/reducer'
 import paginationReducer from './pagination/reducer'
 import {connectRouter, routerMiddleware} from 'connected-react-router'
 import {createBrowserHistory} from 'history'
+import thunk from 'redux-thunk';
 
 export const history = createBrowserHistory();
 
@@ -22,6 +23,7 @@ export default function configureStore() {
         composeEnhancers(
             applyMiddleware(
                 routerMiddleware(history),
+                thunk
             ),
         ),
     );
