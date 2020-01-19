@@ -10,10 +10,21 @@ import ProductCard from "csssr-school-product-card";
 import styled from "./index.module.scss";
 import { formatPrice, getMaxMinPrice, memoizeByProps } from "helpers";
 import { withLogger } from "hoc";
+import { clone } from "ramda";
+import { FilterContext } from "context";
+import queryString from "query-string";
 
 const Rating = ({ isFilled }) => (isFilled ? "★" : "☆");
 
 const ProductCardWithLogger = withLogger(ProductCard, "ProductCard");
+
+const BASE_STATE = {
+  sale: 0,
+  categories: [
+    { value: false, name: "clothes", label: "Clothes" },
+    { value: false, name: "books", label: "Books" }
+  ]
+};
 
 class App extends PureComponent {
   state = {
@@ -21,12 +32,13 @@ class App extends PureComponent {
     to: 0,
     min: 0,
     max: 0,
-    sale: 0,
-    products: []
+    products: [],
+    ...clone(BASE_STATE)
   };
 
   async componentDidMount() {
     try {
+      this.getFromHistory();
       const data = await import("./products.json");
       const products = data.default;
       const { min, max } = getMaxMinPrice(products);
@@ -43,16 +55,72 @@ class App extends PureComponent {
     }
   }
 
-  onFilterChange = ({ name, value }) => {
+  _handleCategory({ name, value }) {
+    const categories = this.state.categories.map(cat => {
+      if (name === cat.name) {
+        return {
+          ...cat,
+          value
+        };
+      }
+
+      return cat;
+    });
+
+    this.setState({
+      categories
+    });
+  }
+
+  getFromHistory = () => {
+    const { search } = window.location;
+
+    console.log(queryString.parse(search));
+    return {
+      ...queryString.parse(search)
+    };
+  };
+
+  handleHistoryChange = () => {
+    window.history.pushState({ data: "asdsd" }, "title", window.location.href);
+  };
+
+  onFilterChange = ({ name, value, type }) => {
+    if (type === "checkbox") {
+      this._handleCategory({ name, value });
+      return;
+    }
+
+    this.handleHistoryChange();
+
     this.setState({
       [name]: Number(value)
     });
   };
 
-  getProducts = memoizeByProps((products, from, to, sale) => {
+  onFilterReset = () => {
+    const { min, max } = this.state;
+    this.setState({
+      from: min,
+      to: max,
+      ...BASE_STATE
+    });
+  };
+
+  getProducts = memoizeByProps((products, from, to, sale, categoriesNames) => {
     const filteredProducts = products.filter(
-      ({ price, discount }) =>
-        price >= from && price <= to && discount >= sale / 100
+      ({ price, discount, categories }) => {
+        const satisfyCategory = categoriesNames.length
+          ? categoriesNames.every(cat => categories.includes(cat))
+          : true;
+
+        return (
+          price >= from &&
+          price <= to &&
+          discount >= sale / 100 &&
+          satisfyCategory
+        );
+      }
     );
 
     const formattedProducts = filteredProducts.map(({ price, ...rest }) => ({
@@ -64,22 +132,35 @@ class App extends PureComponent {
   });
 
   render() {
-    const { products, from, to, min, max, sale } = this.state;
+    const { products, ...filterProps } = this.state;
 
-    const items = this.getProducts(products, from, to, sale);
+    const { from, to, sale, categories } = filterProps;
+
+    const selectedCategories = categories
+      .filter(({ value }) => value)
+      .map(({ name }) => name);
+
+    const items = this.getProducts(
+      products,
+      from,
+      to,
+      sale,
+      selectedCategories
+    );
+
+    const contextValue = {
+      onChange: this.onFilterChange,
+      onReset: this.onFilterReset,
+      ...filterProps
+    };
 
     return (
       <div className="app">
         <div className={styled.products}>
           <Heading className={styled.products__title}>Список товаров</Heading>
-          <PriceFilter
-            onChange={this.onFilterChange}
-            min={min}
-            max={max}
-            from={from}
-            to={to}
-            sale={sale}
-          />
+          <FilterContext.Provider value={contextValue}>
+            <PriceFilter />
+          </FilterContext.Provider>
           <Grid
             columnsCount={3}
             items={items}
