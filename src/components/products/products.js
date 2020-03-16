@@ -7,7 +7,7 @@ import './products.css';
 
 const Products = ({data}) => {
   return (
-    <section classList="products">
+    <section className="products">
       <ProductsHeader />
       <ProductsList products={data}/>
     </section>

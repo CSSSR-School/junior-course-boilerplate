@@ -7,9 +7,9 @@ import data from './assets/products.json';
 
 const App = () => {
   return (
-    <div className="app">
+    <main className="app">
       <Products data={data} />
-    </div>
+    </main>
   );
 };
 
