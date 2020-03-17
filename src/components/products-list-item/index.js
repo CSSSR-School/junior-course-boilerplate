@@ -1,3 +1,3 @@
-import ProductsListItem from './products-list-item';
+import ProductsListItem from 'csssr-school-product-card';
 
 export default ProductsListItem;
