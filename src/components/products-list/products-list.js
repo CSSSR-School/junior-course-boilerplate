@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductsListItem from '../products-list-item';
+import ProductsListItem from 'csssr-school-product-card';
 import './products-list.scss';
 import '../products-list-item/products-list-item.scss';
 
@@ -8,18 +8,30 @@ import Price from '../price';
 
 const ProductsList = ({ products }) => {
   const elements = products.map(product => {
-    const { id, price, subPriceContent, ...productProps } = product;
+    const {
+      id,
+      isInStock,
+      img,
+      title,
+      price,
+      subPriceContent,
+      maxRating,
+      rating
+    } = product;
     return (
-      <li key={id} className="products__list-item list-item-products">
+      <li key={id} className="products__list-item" style={{ marginBottom: 50 }}>
         <ProductsListItem
-          {...productProps}
-          price={((item, cls) => (
-            <Price price={item} clsName={cls} />
-          ))(price, 'list-item-products__price')}
-          subPriceContent={((item, cls) => (item ? <Price price={item} clsName={cls} /> : ''))(
-            subPriceContent,
-            'list-item-products__sub-price-content'
-          )}
+          isInStock={isInStock}
+          img={img}
+          title={title}
+          maxRating={maxRating}
+          rating={rating}
+          price={<Price value={price} isPrimary={true} />}
+          subPriceContent={
+            subPriceContent ? (
+              <Price value={subPriceContent} isPrimary={false} />
+            ) : ''
+          }
           ratingComponent={Rating}
         />
       </li>

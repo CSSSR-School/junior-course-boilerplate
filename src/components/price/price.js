@@ -3,13 +3,28 @@ import propTypes from 'prop-types';
 
 import './price.scss';
 
-const Price = ({price, clsName}) => {
-return <span className={clsName}>{price.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8399;</span>;
+const primaryStyles = {
+  marginRight: 10,
+  fontSize: 20
+};
+const secondaryStyles = {
+  fontSize: 12
+};
+
+const Price = ({ value, isPrimary }) => {
+  return (
+    <span
+      className={'price'}
+      style={isPrimary ? primaryStyles : secondaryStyles}
+    >
+      {value.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8399;
+    </span>
+  );
 };
 
 Price.propTypes = {
-  price: propTypes.number,
-  clsName: propTypes.string,
+  value: propTypes.number,
+  clsName: propTypes.string
 };
 
 export default Price;
