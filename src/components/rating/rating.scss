@@ -1,0 +1,12 @@
+.rating {
+  --border: #323c48;
+  display: inline-flex;
+  margin-right: 10px;
+  svg {
+    width: 13px;
+    height: 13px;
+  }
+  &--is-filled {
+    --fill: #323c48;
+  }
+}

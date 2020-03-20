@@ -2,7 +2,8 @@ import React from 'react';
 
 import Products from '../products';
 
-import './app.css';
+
+import './app.scss';
 import data from './assets/products.json';
 
 const App = () => {
