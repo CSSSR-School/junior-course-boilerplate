@@ -3,4 +3,13 @@
   line-height: 1;
   font-weight: 600;
   color: #7e8fa4;
+
+  &--primary {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  &--secondary {
+    font-size: 12px;
+  }
 }

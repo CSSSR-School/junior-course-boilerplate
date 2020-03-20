@@ -3,19 +3,11 @@ import propTypes from 'prop-types';
 
 import './price.scss';
 
-const primaryStyles = {
-  marginRight: 10,
-  fontSize: 20
-};
-const secondaryStyles = {
-  fontSize: 12
-};
 
-const Price = ({ value, isPrimary }) => {
+const Price = ({ value, isPrimary = true }) => {
   return (
     <span
-      className={'price'}
-      style={isPrimary ? primaryStyles : secondaryStyles}
+      className={isPrimary ? 'price price--primary' : 'price price--secondary'}
     >
       {value.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8399;
     </span>
