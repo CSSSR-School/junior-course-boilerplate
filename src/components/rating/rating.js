@@ -2,12 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import './rating.scss';
-import SvgIcon from '../svg-icon';
+import SvgIconStar from '../svg-icon-star';
 
 const Rating = ({isFilled}) => {
   return (
     <div className={isFilled ? 'rating rating--is-filled' : 'rating'}>
-      <SvgIcon isFilled={isFilled}/>
+      <SvgIconStar isFilled={isFilled}/>
     </div>
   )
 };

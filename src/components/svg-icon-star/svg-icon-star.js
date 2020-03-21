@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import './svg-icon.scss';
+import './svg-icon-star.scss';
 
-const SvgIcon = ({ isFilled }) => {
+const SvgIconStar = ({ isFilled }) => {
   return (
     <svg viewBox="0 0 13.33329 12.66665">
       <title>star</title>
@@ -33,8 +33,8 @@ const SvgIcon = ({ isFilled }) => {
   );
 };
 
-SvgIcon.propTypes = {
+SvgIconStar.propTypes = {
   isInteger: propTypes.bool
 };
 
-export default SvgIcon;
+export default SvgIconStar;
