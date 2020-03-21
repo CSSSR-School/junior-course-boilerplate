@@ -9,14 +9,14 @@ const Price = ({ value, isPrimary = true }) => {
     <span
       className={isPrimary ? 'price price--primary' : 'price price--secondary'}
     >
-      {value.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8399;
+      {value.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8381;
     </span>
   );
 };
 
 Price.propTypes = {
   value: propTypes.number,
-  clsName: propTypes.string
+  isPrimary: propTypes.bool
 };
 
 export default Price;
