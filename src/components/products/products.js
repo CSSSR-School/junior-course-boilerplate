@@ -1,22 +1,40 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import './products.scss';
+
+import FilterProducts from '../filter-products';
 import ProductsHeader from '../products-header';
 import ProductsList from '../products-list';
 
-import './products.scss';
+import {logRender} from '../../utils/log-render';
 
-const Products = ({ data }) => {
+const Products = ({ priceRange, productsList, updatePriceRange }) => {
   return (
     <section className="products">
-      <ProductsHeader header={'Список товаров'} />
-      <ProductsList products={data} />
+      <div className="products__row">
+        <div className="products__col--left">
+          <FilterProducts
+            classModifier="products"
+            priceRange={priceRange}
+            updatePriceRange={updatePriceRange}
+          />
+        </div>
+        <div className="products__col--right">
+          <ProductsHeader classModifier="products" header={'Список товаров'} />
+          <ProductsList classModifier="products" productsList={productsList} />
+        </div>
+      </div>
     </section>
   );
 };
 
 Products.propTypes = {
-  data: propTypes.arrayOf(
+  priceRange: propTypes.shape({
+    min: propTypes.number,
+    max: propTypes.number
+  }),
+  productsList: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number,
       isInStock: propTypes.bool,
@@ -25,9 +43,11 @@ Products.propTypes = {
       price: propTypes.node,
       subPriceContent: propTypes.node,
       maxRating: propTypes.number,
-      rating: propTypes.number,
+      rating: propTypes.number
     })
-  )
+  ),
+  updatePriceRange: propTypes.func
 };
 
+logRender(Products);
 export default Products;

@@ -1,7 +1,7 @@
 .products__list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0;
   padding: 0;
 
@@ -9,5 +9,9 @@
 
   &-item {
     margin-bottom: 50px;
+
+    &:not(:nth-child(3n)) {
+      margin-right: 30px;
+    }
   }
 }
