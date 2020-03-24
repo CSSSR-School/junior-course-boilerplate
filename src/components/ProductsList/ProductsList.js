@@ -22,7 +22,7 @@ const ProductsList = ({products}) => {
   return (
     <ul className={styles.productsList}>{list}</ul>
   );
-}
+};
 
 ProductItem.propTypes = {
   isInStock: PropTypes.bool.isRequired,
