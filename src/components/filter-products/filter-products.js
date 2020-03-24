@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import classnames from 'classnames';
 
 import './filter-products.scss';
 import InputFilterProducts from '../input-filter-products';
-import {logRender} from '../../utils/log-render';
+import { logRender } from '../../utils/log-render';
 
 class FilterProducts extends Component {
   handleSubmit = event => {
@@ -15,30 +16,21 @@ class FilterProducts extends Component {
   };
 
   render() {
-    const { classModifier, priceRange } = this.props;
-    const baseClassName = `filter-${classModifier}`;
+    const { priceRange } = this.props;
     const { min, max } = priceRange;
     return (
       <form
-        className={`${classModifier}__filter ${baseClassName}`}
+        className={classnames('products__filter', 'filter-products__header')}
         onSubmit={this.handleSubmit}
       >
-        <h3 className={`${baseClassName}__header`}>Цена</h3>
-        <div className={`${baseClassName}__inner`}>
+        <h3 className={'filter-products__header'}>Цена</h3>
+        <div className={'filter-products__inner'}>
           <span>от</span>
-          <InputFilterProducts
-            classModifier={baseClassName}
-            name="min"
-            defaultValue={min}
-          />
+          <InputFilterProducts name="min" defaultValue={min} />
           <span>до</span>
-          <InputFilterProducts
-            classModifier={baseClassName}
-            name="max"
-            defaultValue={max}
-          />
+          <InputFilterProducts name="max" defaultValue={max} />
         </div>
-        <button className={`${baseClassName}__button`} type="submit">
+        <button className={'filter-products__button'} type="submit">
           Применить
         </button>
       </form>
@@ -47,7 +39,6 @@ class FilterProducts extends Component {
 }
 
 FilterProducts.propTypes = {
-  classModifier: propTypes.string,
   priceRange: propTypes.shape({
     min: propTypes.number,
     max: propTypes.number

@@ -6,13 +6,12 @@ import {logRender} from '../../utils/log-render';
 
 class ProductsHeader extends Component {
   render() {
-    const { classModifier, header } = this.props;
-    return <h2 className={`${classModifier}__header`}>{header}</h2>;
+    const { header } = this.props;
+    return <h2 className="products__header">{header}</h2>;
   }
 }
 
 ProductsHeader.propTypes = {
-  classModifier: propTypes.string,
   header: propTypes.string
 };
 

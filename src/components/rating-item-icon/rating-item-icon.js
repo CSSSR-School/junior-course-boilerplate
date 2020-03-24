@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import classnames from 'classnames';
 
 import './rating-item-icon.scss';
-import {logRender} from '../../utils/log-render';
+import { logRender } from '../../utils/log-render';
 
 class RatingItemIcon extends Component {
   render() {
-    const { classModifier, isFilled } = this.props;
+    const { isFilled } = this.props;
     return (
       <svg
-        className={`${classModifier}__icon ${classModifier}-icon`}
+        className={classnames('rating-item__icon', 'rating-item-icon')}
         viewBox="0 0 13.33329 12.66665"
       >
         <title>star</title>
@@ -41,7 +42,6 @@ class RatingItemIcon extends Component {
 }
 
 RatingItemIcon.propTypes = {
-  classModifier: propTypes.string,
   isInteger: propTypes.bool
 };
 

@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import classnames from 'classnames';
 
 import './input-filter-products.scss';
-import {logRender} from '../../utils/log-render';
+import { logRender } from '../../utils/log-render';
 
 class InputFilterProducts extends Component {
   render() {
-    const { classModifier, name, defaultValue } = this.props;
-    const baseClassName = `input-${classModifier}`;
+    const { name, defaultValue } = this.props;
     return (
       <input
-        className={`${classModifier}__input ${baseClassName}`}
+        className={classnames(
+          'filter-products__input',
+          'input-filter-products'
+        )}
         type="number"
         name={name}
         defaultValue={defaultValue}
@@ -20,7 +23,8 @@ class InputFilterProducts extends Component {
 }
 
 InputFilterProducts.propTypes = {
-  classModifier: propTypes.string
+  name: propTypes.string,
+  defaultValue: propTypes.number
 };
 
 logRender(InputFilterProducts);

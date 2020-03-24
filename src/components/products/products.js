@@ -15,14 +15,13 @@ const Products = ({ priceRange, productsList, updatePriceRange }) => {
       <div className="products__row">
         <div className="products__col--left">
           <FilterProducts
-            classModifier="products"
             priceRange={priceRange}
             updatePriceRange={updatePriceRange}
           />
         </div>
         <div className="products__col--right">
-          <ProductsHeader classModifier="products" header={'Список товаров'} />
-          <ProductsList classModifier="products" productsList={productsList} />
+          <ProductsHeader header={'Список товаров'} />
+          <ProductsList productsList={productsList} />
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import classnames from 'classnames';
 
 import './rating-item.scss';
 import RatingItemIcon from '../rating-item-icon';
@@ -11,10 +12,13 @@ class RatingItem extends Component {
     return (
       <div
         className={
-          isFilled ? 'rating-item rating-item--is-filled' : 'rating-item'
+          classnames(
+            'rating-item',
+            {'rating-item--is-filled': isFilled},
+          )
         }
       >
-        <RatingItemIcon classModifier="rating-item" isFilled={isFilled} />
+        <RatingItemIcon isFilled={isFilled} />
       </div>
     );
   }

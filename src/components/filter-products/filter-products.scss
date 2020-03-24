@@ -1,9 +1,12 @@
 .filter-products {
+  display: flex;
+  flex-flow: row wrap;
+
   &__header {
+    flex-basis: 100%;
     margin: 0;
     padding: 0;
     margin-bottom: 20px;
-    flex-basis: 100%;
 
     font-size: 20px;
     line-height: 1;
@@ -38,6 +41,6 @@
     color: white;
 
     border: none;
-    background-color: #323C48;
+    background-color: #323c48;
   }
 }
