@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './rating-item-icon.scss';
-import { logRender } from '../../utils/log-render';
+import LogRender from '../log-render';
 
-class RatingItemIcon extends Component {
+class RatingItemIcon extends LogRender {
   render() {
     const { isFilled } = this.props;
     return (
@@ -44,7 +44,5 @@ class RatingItemIcon extends Component {
 RatingItemIcon.propTypes = {
   isInteger: propTypes.bool
 };
-
-logRender(RatingItemIcon);
 
 export default RatingItemIcon;

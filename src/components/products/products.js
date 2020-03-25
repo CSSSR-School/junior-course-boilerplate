@@ -6,27 +6,29 @@ import './products.scss';
 import FilterProducts from '../filter-products';
 import ProductsHeader from '../products-header';
 import ProductsList from '../products-list';
+import LogRender from '../log-render';
 
-import {logRender} from '../../utils/log-render';
-
-const Products = ({ priceRange, productsList, updatePriceRange }) => {
-  return (
-    <section className="products">
-      <div className="products__row">
-        <div className="products__col--left">
-          <FilterProducts
-            priceRange={priceRange}
-            updatePriceRange={updatePriceRange}
-          />
+class Products extends LogRender {
+  render() {
+    const { priceRange, productsList, updatePriceRange } = this.props;
+    return (
+      <section className="products">
+        <div className="products__row">
+          <aside className="products__col--left">
+            <FilterProducts
+              priceRange={priceRange}
+              updatePriceRange={updatePriceRange}
+            />
+          </aside>
+          <div className="products__col--right">
+            <ProductsHeader header={'Список товаров'} />
+            <ProductsList productsList={productsList} />
+          </div>
         </div>
-        <div className="products__col--right">
-          <ProductsHeader header={'Список товаров'} />
-          <ProductsList productsList={productsList} />
-        </div>
-      </div>
-    </section>
-  );
-};
+      </section>
+    );
+  }
+}
 
 Products.propTypes = {
   priceRange: propTypes.shape({
@@ -48,5 +50,4 @@ Products.propTypes = {
   updatePriceRange: propTypes.func
 };
 
-logRender(Products);
 export default Products;

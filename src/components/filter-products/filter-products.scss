@@ -42,5 +42,10 @@
 
     border: none;
     background-color: #323c48;
+
+    &:disabled {
+      background-color: #7e8fa4;
+      cursor: not-allowed;
+    }
   }
 }

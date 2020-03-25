@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { forwardRef } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './input-filter-products.scss';
-import { logRender } from '../../utils/log-render';
+import LogRender from '../log-render';
 
-class InputFilterProducts extends Component {
+class InputFilterProducts extends LogRender {
   render() {
-    const { name, defaultValue } = this.props;
+    const { initialValue, innerRef } = this.props;
     return (
       <input
         className={classnames(
@@ -15,17 +15,18 @@ class InputFilterProducts extends Component {
           'input-filter-products'
         )}
         type="number"
-        name={name}
-        defaultValue={defaultValue}
+        defaultValue={initialValue}
+        ref={innerRef}
       />
     );
   }
 }
 
 InputFilterProducts.propTypes = {
-  name: propTypes.string,
-  defaultValue: propTypes.number
+  initialValue: propTypes.number,
+  innerRef: propTypes.instanceOf(Object),
 };
 
-logRender(InputFilterProducts);
-export default InputFilterProducts;
+export default forwardRef((props, ref) => (
+  <InputFilterProducts innerRef={ref} {...props} />
+));

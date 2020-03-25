@@ -1,47 +1,61 @@
 import React, { Component } from 'react';
+import { minBy, maxBy } from 'csssr-school-utils';
 
 import './app.scss';
 import Products from '../products';
-import { priceRange, productsList } from './assets/products.json';
-
-const { min: MIN_PRICE, max: MAX_PRICE } = priceRange;
+import products from './assets/products.json';
 
 class App extends Component {
-  state = {
-    priceRange,
-    productsList
+  constructor(props) {
+    super(props);
+    this.state = {
+      priceRange: {
+        min: this.findPriceValue(minBy),
+        max: this.findPriceValue(maxBy)
+      },
+      products
+    };
+  }
+
+  findPriceValue = func => func(product => product.price, products).price;
+
+  updatePriceRange = range => {
+    const normalizedPriceRange = this.normalizePriceRange(range);
+    this.setState({
+      ...this.state.priceRange,
+      ...{ priceRange: normalizedPriceRange }
+    });
   };
 
-  updatePriceRange = data => {
-    const priceRange = Object.keys(data).reduce((acc, key) => {
-      let number = Number(data[key]);
-      if (number <= 0) {
+  normalizePriceRange = range => {
+    Object.keys(range).forEach(key => {
+      const value = range[key];
+      if (value <= 0) {
         switch (key) {
           case 'min':
-            number = MIN_PRICE;
+            range[key] = this.findPriceValue(minBy);
             break;
           case 'max':
-            number = MAX_PRICE;
+            range[key] = this.findPriceValue(maxBy);
             break;
           default:
             throw new Error(`Unknown key: ${key}`);
         }
       }
-      return { ...acc, [key]: number };
-    }, {});
-    this.setState(state => ({ ...priceRange, priceRange }));
+    });
+    return range;
   };
 
   filterProductsBasedOnPriceRange = (range, list) => {
-    let { min, max } = range;
+    const { min, max } = range;
     return list.filter(({ price }) => price >= min && price <= max);
   };
 
   render() {
-    const { priceRange, productsList } = this.state;
+    const { priceRange, products } = this.state;
     const filteredProducts = this.filterProductsBasedOnPriceRange(
-      priceRange,
-      productsList
+      this.normalizePriceRange(priceRange),
+      products
     );
     return (
       <main className="app">

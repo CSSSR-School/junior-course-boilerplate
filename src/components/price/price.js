@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './price.scss';
-import { logRender } from '../../utils/log-render';
+import LogRender from '../log-render';
 
-class Price extends Component {
+class Price extends LogRender {
   render() {
     const { value, isPrimary = true } = this.props;
     return (
@@ -27,7 +27,5 @@ Price.propTypes = {
   value: propTypes.number,
   isPrimary: propTypes.bool
 };
-
-logRender(Price);
 
 export default Price;

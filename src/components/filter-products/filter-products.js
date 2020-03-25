@@ -1,36 +1,62 @@
-import React, { Component } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './filter-products.scss';
 import InputFilterProducts from '../input-filter-products';
-import { logRender } from '../../utils/log-render';
+import LogRender from '../log-render';
 
-class FilterProducts extends Component {
+class FilterProducts extends LogRender {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDisabled: true
+    };
+    this.inputMinRef = React.createRef();
+    this.inputMaxRef = React.createRef();
+  }
+
+  handleInput = () => {
+    this.setState({ isDisabled: false });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    const { target } = event;
-    const formData = new FormData(target);
-    const cb = this.props.updatePriceRange || (() => {});
-    cb(Object.fromEntries(formData));
+    const { updatePriceRange } = this.props;
+    updatePriceRange({
+      min: Number(this.inputMinRef.current.value),
+      max: Number(this.inputMaxRef.current.value)
+    });
   };
 
   render() {
     const { priceRange } = this.props;
+    const { isDisabled } = this.state;
     const { min, max } = priceRange;
     return (
       <form
         className={classnames('products__filter', 'filter-products__header')}
         onSubmit={this.handleSubmit}
+        onInput={this.handleInput}
       >
         <h3 className={'filter-products__header'}>Цена</h3>
         <div className={'filter-products__inner'}>
           <span>от</span>
-          <InputFilterProducts name="min" defaultValue={min} />
+          <InputFilterProducts
+            initialValue={min}
+            ref={this.inputMinRef}
+          />
           <span>до</span>
-          <InputFilterProducts name="max" defaultValue={max} />
+          <InputFilterProducts
+            initialValue={max}
+            ref={this.inputMaxRef}
+          />
         </div>
-        <button className={'filter-products__button'} type="submit">
+        <button
+          className={'filter-products__button'}
+          type="submit"
+          disabled={isDisabled}
+        >
           Применить
         </button>
       </form>
@@ -45,7 +71,5 @@ FilterProducts.propTypes = {
   }),
   updatePriceRange: propTypes.func
 };
-
-logRender(FilterProducts);
 
 export default FilterProducts;

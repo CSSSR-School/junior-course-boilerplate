@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './rating-item.scss';
 import RatingItemIcon from '../rating-item-icon';
-import {logRender} from '../../utils/log-render';
+import LogRender from '../log-render';
 
-class RatingItem extends Component {
+class RatingItem extends LogRender {
   render() {
     const {isFilled} = this.props;
     return (
@@ -28,6 +28,4 @@ RatingItem.propTypes = {
   isFilled: propTypes.bool
 };
 
-
-logRender(RatingItem);
 export default RatingItem;

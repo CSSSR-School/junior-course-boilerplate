@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -7,10 +7,9 @@ import './products-list.scss';
 import ProductsListItem from 'csssr-school-product-card';
 import RatingItem from '../rating-item';
 import Price from '../price';
+import LogRender from '../log-render';
 
-import { logRender } from '../../utils/log-render';
-
-class ProductsList extends Component {
+class ProductsList extends LogRender {
   render() {
     const { productsList } = this.props;
     const elements = productsList.map(product => {
@@ -68,5 +67,4 @@ ProductsList.propTypes = {
   )
 };
 
-logRender(ProductsList);
 export default ProductsList;

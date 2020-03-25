@@ -1,68 +1,62 @@
-{
-  "priceRange": {
-    "min": 0,
-    "max": 666000
+[
+  {
+    "id": 1,
+    "isInStock": true,
+    "img": "https://picsum.photos/240/200?random=1",
+    "title": "Имя товара 1",
+    "price": 666,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 5
   },
-  "productsList": [
-    {
-      "id": 1,
-      "isInStock": true,
-      "img": "https://picsum.photos/240/200?random=1",
-      "title": "Имя товара 1",
-      "price": 500,
-      "subPriceContent": null,
-      "maxRating": 5,
-      "rating": 5
-    },
-    {
-      "id": 2,
-      "isInStock": false,
-      "img": "https://picsum.photos/240/200?random=2",
-      "title": "Имя товара 2",
-      "price": 5000,
-      "subPriceContent": null,
-      "maxRating": 5,
-      "rating": 1
-    },
-    {
-      "id": 3,
-      "isInStock": true,
-      "img": "https://picsum.photos/240/200?random=3",
-      "title": "Имя товара 3",
-      "price": 10000,
-      "subPriceContent": 10000,
-      "maxRating": 5,
-      "rating": 4
-    },
-    {
-      "id": 4,
-      "isInStock": true,
-      "img": "https://picsum.photos/240/200?random=1",
-      "title": "Имя товара 4",
-      "price": 15000,
-      "subPriceContent": null,
-      "maxRating": 5,
-      "rating": 3
-    },
-    {
-      "id": 5,
-      "isInStock": true,
-      "img": "https://picsum.photos/240/200?random=4",
-      "title": "Имя товара 5",
-      "price": 23000,
-      "subPriceContent": null,
-      "maxRating": 5,
-      "rating": 2
-    },
-    {
-      "id": 6,
-      "isInStock": false,
-      "img": "https://picsum.photos/240/200?random=5",
-      "title": "Имя товара 6",
-      "price": 30000,
-      "subPriceContent": null,
-      "maxRating": 5,
-      "rating": 0
-    }
-  ]
-}
+  {
+    "id": 2,
+    "isInStock": false,
+    "img": "https://picsum.photos/240/200?random=2",
+    "title": "Имя товара 2",
+    "price": 1000,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 1
+  },
+  {
+    "id": 3,
+    "isInStock": true,
+    "img": "https://picsum.photos/240/200?random=3",
+    "title": "Имя товара 3",
+    "price": 5000,
+    "subPriceContent": 10000,
+    "maxRating": 5,
+    "rating": 4
+  },
+  {
+    "id": 4,
+    "isInStock": true,
+    "img": "https://picsum.photos/240/200?random=1",
+    "title": "Имя товара 4",
+    "price": 10000,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 3
+  },
+  {
+    "id": 5,
+    "isInStock": true,
+    "img": "https://picsum.photos/240/200?random=4",
+    "title": "Имя товара 5",
+    "price": 15000,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 2
+  },
+  {
+    "id": 6,
+    "isInStock": false,
+    "img": "https://picsum.photos/240/200?random=5",
+    "title": "Имя товара 6",
+    "price": 30000,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 0
+  }
+]
