@@ -2,60 +2,82 @@ import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './filter-products.scss';
+import styles from './filter-products.module.scss';
 import InputFilterProducts from '../input-filter-products';
 import LogRender from '../log-render';
 
 class FilterProducts extends LogRender {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDisabled: true
-    };
-    this.inputMinRef = React.createRef();
-    this.inputMaxRef = React.createRef();
-  }
+  handleFilterChange = event => {
+    const {
+      target: { value, name },
+      currentTarget
+    } = event;
+    const {
+      updateProductsFilterFieldValidty,
+      updateProductsFilterValidity
+    } = this.props;
 
-  handleInput = () => {
-    this.setState({ isDisabled: false });
+    // current field
+    if (Number(value) <= 0) {
+      updateProductsFilterFieldValidty(name, { isValid: false });
+    } else {
+      updateProductsFilterFieldValidty(name, { isValid: true });
+    }
+
+    // form
+    const formData = new FormData(currentTarget);
+    const formDataObject = Object.fromEntries(formData);
+    const { min, max } = formDataObject;
+
+    if (Number(min) >= Number(max) || Number(min) <= 0 || Number(max) <= 0) {
+      updateProductsFilterValidity({ isValid: false });
+    } else {
+      updateProductsFilterValidity({ isValid: true });
+    }
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    const { updatePriceRange } = this.props;
-    updatePriceRange({
-      min: Number(this.inputMinRef.current.value),
-      max: Number(this.inputMaxRef.current.value)
+    const { target } = event;
+    const { updateProductsFilterFieldPrice } = this.props;
+
+    // form
+    const formData = new FormData(target);
+    const formDataObject = Object.fromEntries(formData);
+    const mappedData = Object.keys(formDataObject).map(key => {
+      return {
+        [key]: {
+          price: Number(formDataObject[key])
+        }
+      };
     });
+    updateProductsFilterFieldPrice(mappedData);
   };
 
   render() {
-    const { priceRange } = this.props;
-    const { isDisabled } = this.state;
-    const { min, max } = priceRange;
+    const {
+      filter: {
+        fields: { min, max },
+        isValid
+      }
+    } = this.props;
     return (
       <form
-        className={classnames('products__filter', 'filter-products__header')}
+        className={classnames('products__filter', styles.filterProducts)}
         onSubmit={this.handleSubmit}
-        onInput={this.handleInput}
+        onChange={this.handleFilterChange}
       >
-        <h3 className={'filter-products__header'}>Цена</h3>
-        <div className={'filter-products__inner'}>
+        <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
+        <div className={styles.filterProductsInner}>
           <span>от</span>
-          <InputFilterProducts
-            initialValue={min}
-            ref={this.inputMinRef}
-          />
+          <InputFilterProducts data={min} name="min" />
           <span>до</span>
-          <InputFilterProducts
-            initialValue={max}
-            ref={this.inputMaxRef}
-          />
+          <InputFilterProducts data={max} name="max" />
         </div>
         <button
-          className={'filter-products__button'}
+          className={styles.filterProductsButton}
           type="submit"
-          disabled={isDisabled}
+          disabled={!isValid}
         >
           Применить
         </button>
@@ -65,11 +87,21 @@ class FilterProducts extends LogRender {
 }
 
 FilterProducts.propTypes = {
-  priceRange: propTypes.shape({
-    min: propTypes.number,
-    max: propTypes.number
+  filter: propTypes.shape({
+    fields: propTypes.shape({
+      min: propTypes.shape({
+        price: propTypes.number,
+        isValid: propTypes.bool
+      }),
+      max: propTypes.shape({
+        price: propTypes.number,
+        isValid: propTypes.bool
+      })
+    })
   }),
-  updatePriceRange: propTypes.func
+  updateProductsFilterFieldValidty: propTypes.func,
+  updateProductsFilterFieldPrice: propTypes.func,
+  updateProductsFilterValidity: propTypes.func
 };
 
 export default FilterProducts;

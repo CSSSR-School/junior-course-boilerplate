@@ -1,28 +1,39 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import classnames from 'classnames';
 
-import './products.scss';
+import styles from './products.module.scss';
 
 import FilterProducts from '../filter-products';
-import ProductsHeader from '../products-header';
-import ProductsList from '../products-list';
+import HeaderProducts from '../header-products';
+import ListProducts from '../list-products';
 import LogRender from '../log-render';
 
 class Products extends LogRender {
   render() {
-    const { priceRange, productsList, updatePriceRange } = this.props;
+    const {
+      filter,
+      list,
+      updateProductsFilterFieldValidty,
+      updateProductsFilterFieldPrice,
+      updateProductsFilterValidity
+    } = this.props;
     return (
-      <section className="products">
-        <div className="products__row">
-          <aside className="products__col--left">
+      <section className={classnames(styles.products)}>
+        <div className={classnames(styles.productsRow)}>
+        <aside className={classnames(styles.productsCol, styles.productsColLeft)}>
             <FilterProducts
-              priceRange={priceRange}
-              updatePriceRange={updatePriceRange}
+              filter={filter}
+              updateProductsFilterFieldValidty={
+                updateProductsFilterFieldValidty
+              }
+              updateProductsFilterFieldPrice={updateProductsFilterFieldPrice}
+              updateProductsFilterValidity={updateProductsFilterValidity}
             />
           </aside>
-          <div className="products__col--right">
-            <ProductsHeader header={'Список товаров'} />
-            <ProductsList productsList={productsList} />
+          <div className={classnames(styles.productsCol, styles.productsColRight)}>
+            <HeaderProducts header={'Список товаров'} />
+            <ListProducts productsList={list} />
           </div>
         </div>
       </section>
@@ -31,11 +42,19 @@ class Products extends LogRender {
 }
 
 Products.propTypes = {
-  priceRange: propTypes.shape({
-    min: propTypes.number,
-    max: propTypes.number
+  filter: propTypes.shape({
+    fields: propTypes.shape({
+      min: propTypes.shape({
+        price: propTypes.number,
+        isValid: propTypes.bool
+      }),
+      max: propTypes.shape({
+        price: propTypes.number,
+        isValid: propTypes.bool
+      })
+    })
   }),
-  productsList: propTypes.arrayOf(
+  list: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number,
       isInStock: propTypes.bool,
@@ -47,7 +66,9 @@ Products.propTypes = {
       rating: propTypes.number
     })
   ),
-  updatePriceRange: propTypes.func
+  updateProductsFilterFieldValidty: propTypes.func,
+  updateProductsFilterValidity: propTypes.func,
+  updateProductsFilterFieldPrice: propTypes.func
 };
 
 export default Products;

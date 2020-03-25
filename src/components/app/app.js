@@ -1,68 +1,96 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { minBy, maxBy } from 'csssr-school-utils';
 
-import './app.scss';
+import styles from './app.module.scss';
 import Products from '../products';
-import products from './assets/products.json';
+import productsList from './assets/products.json';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      priceRange: {
-        min: this.findPriceValue(minBy),
-        max: this.findPriceValue(maxBy)
+      productsFilter: {
+        fields: {
+          min: {
+            price: minBy(product => product.price, productsList).price,
+            isValid: true
+          },
+          max: {
+            price: maxBy(product => product.price, productsList).price,
+            isValid: true
+          }
+        },
+        isValid: true
       },
-      products
+      productsList
     };
   }
 
-  findPriceValue = func => func(product => product.price, products).price;
-
-  updatePriceRange = range => {
-    const normalizedPriceRange = this.normalizePriceRange(range);
-    this.setState({
-      ...this.state.priceRange,
-      ...{ priceRange: normalizedPriceRange }
-    });
-  };
-
-  normalizePriceRange = range => {
-    Object.keys(range).forEach(key => {
-      const value = range[key];
-      if (value <= 0) {
-        switch (key) {
-          case 'min':
-            range[key] = this.findPriceValue(minBy);
-            break;
-          case 'max':
-            range[key] = this.findPriceValue(maxBy);
-            break;
-          default:
-            throw new Error(`Unknown key: ${key}`);
-        }
+  updateProductsFilterFieldValidty = (name, data) => {
+    this.setState(prevState => ({
+      productsFilter: {
+        fields: {
+          ...prevState.productsFilter.fields,
+          [name]: { ...prevState.productsFilter.fields[name], ...data }
+        },
+        isValid: prevState.productsFilter.isValid
       }
-    });
-    return range;
+    }));
   };
 
-  filterProductsBasedOnPriceRange = (range, list) => {
+  updateProductsFilterFieldPrice = fields => {
+    fields.forEach(field => {
+      const name = Object.keys(field);
+      this.setState(prevState => ({
+        productsFilter: {
+          fields: {
+            ...prevState.productsFilter.fields,
+            [name]: {
+              ...prevState.productsFilter.fields[name],
+              ...field[name]
+            }
+          },
+          isValid: prevState.productsFilter.isValid
+        }
+      }));
+    });
+  };
+
+  updateProductsFilterValidity = data => {
+    this.setState(prevState => ({
+      productsFilter: {
+        ...prevState.productsFilter,
+        ...data
+      }
+    }));
+  };
+
+  filterProductsList = (range, products) => {
     const { min, max } = range;
-    return list.filter(({ price }) => price >= min && price <= max);
+    return products.filter(({ price }) => price >= min && price <= max);
   };
 
   render() {
-    const { priceRange, products } = this.state;
-    const filteredProducts = this.filterProductsBasedOnPriceRange(
-      this.normalizePriceRange(priceRange),
-      products
-    );
+    const { productsFilter, productsList } = this.state;
+    const {
+      fields: {
+        min: { price: min },
+        max: { price: max }
+      }
+    } = productsFilter;
+    const range = { min, max };
+    const filteredProducts = this.filterProductsList(range, productsList);
     return (
-      <main className="app">
+      <main className={classnames(styles.app)}>
         <Products
-          priceRange={priceRange}
-          productsList={filteredProducts}
-          updatePriceRange={this.updatePriceRange}
+          filter={productsFilter}
+          list={filteredProducts}
+          updateProductsFilterFieldValidty={
+            this.updateProductsFilterFieldValidty
+          }
+          updateProductsFilterValidity={this.updateProductsFilterValidity}
+          updateProductsFilterFieldPrice={this.updateProductsFilterFieldPrice}
         />
       </main>
     );

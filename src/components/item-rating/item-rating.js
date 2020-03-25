@@ -2,30 +2,30 @@ import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './rating-item.scss';
-import RatingItemIcon from '../rating-item-icon';
+import styles from './item-rating.module.scss';
+import IconItemRating from '../icon-item-rating';
 import LogRender from '../log-render';
 
-class RatingItem extends LogRender {
+class ItemRating extends LogRender {
   render() {
     const {isFilled} = this.props;
     return (
       <div
         className={
           classnames(
-            'rating-item',
-            {'rating-item--is-filled': isFilled},
+            styles.itemRating,
+            {[styles.itemRatingIsFilled]: isFilled},
           )
         }
       >
-        <RatingItemIcon isFilled={isFilled} />
+        <IconItemRating isFilled={isFilled} />
       </div>
     );
   }
 }
 
-RatingItem.propTypes = {
+ItemRating.propTypes = {
   isFilled: propTypes.bool
 };
 
-export default RatingItem;
+export default ItemRating;

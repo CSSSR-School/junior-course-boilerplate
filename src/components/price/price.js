@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './price.scss';
+import styles from './price.module.scss';
 import LogRender from '../log-render';
 
 class Price extends LogRender {
@@ -11,10 +11,10 @@ class Price extends LogRender {
     return (
       <span
         className={classnames(
-          'list-item-products__price',
-          'price',
-          { 'price--primary': isPrimary },
-          { 'price--secondary': !isPrimary }
+          'itemListProductsprice',
+          styles.price,
+          { [styles.pricePrimary]: isPrimary },
+          { [styles.priceSecondary]: !isPrimary }
         )}
       >
         {value.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8381;

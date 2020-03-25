@@ -1,32 +1,37 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './input-filter-products.scss';
+import styles from './input-filter-products.module.scss';
 import LogRender from '../log-render';
 
 class InputFilterProducts extends LogRender {
   render() {
-    const { initialValue, innerRef } = this.props;
+    const {
+      name,
+      data: { price, isValid },
+    } = this.props;
     return (
       <input
         className={classnames(
           'filter-products__input',
-          'input-filter-products'
+          styles.inputFilterProducts,
+          { [styles.inputFilterProductsInvalid]: !isValid }
         )}
         type="number"
-        defaultValue={initialValue}
-        ref={innerRef}
+        defaultValue={price}
+        name={name}
       />
     );
   }
 }
 
 InputFilterProducts.propTypes = {
-  initialValue: propTypes.number,
-  innerRef: propTypes.instanceOf(Object),
+  data: propTypes.shape({
+    price: propTypes.number,
+    isValid: propTypes.bool
+  }),
+  name: propTypes.string,
 };
 
-export default forwardRef((props, ref) => (
-  <InputFilterProducts innerRef={ref} {...props} />
-));
+export default InputFilterProducts;

@@ -2,14 +2,14 @@ import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './products-list.scss';
+import styles from './list-products.module.scss';
 
-import ProductsListItem from 'csssr-school-product-card';
-import RatingItem from '../rating-item';
+import ItemListProducts from 'csssr-school-product-card';
+import ItemRating from '../item-rating';
 import Price from '../price';
 import LogRender from '../log-render';
 
-class ProductsList extends LogRender {
+class ListProducts extends LogRender {
   render() {
     const { productsList } = this.props;
     const elements = productsList.map(product => {
@@ -26,9 +26,9 @@ class ProductsList extends LogRender {
       return (
         <li
           key={id}
-          className={classnames('products__list-item', 'list-item-products')}
+          className={classnames('itemListProducts', styles.listProductsItem)}
         >
-          <ProductsListItem
+          <ItemListProducts
             isInStock={isInStock}
             img={img}
             title={title}
@@ -42,17 +42,17 @@ class ProductsList extends LogRender {
                 ''
               )
             }
-            ratingComponent={RatingItem}
+            ratingComponent={ItemRating}
           />
         </li>
       );
     });
 
-    return <ul className="products__list">{elements}</ul>;
+    return <ul className={classnames('productsList', styles.listProducts)}>{elements}</ul>;
   }
 }
 
-ProductsList.propTypes = {
+ListProducts.propTypes = {
   productsList: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number,
@@ -67,4 +67,4 @@ ProductsList.propTypes = {
   )
 };
 
-export default ProductsList;
+export default ListProducts;

@@ -1,10 +1,10 @@
-.rating-item {
+.itemRating {
   --border: #323c48;
 
   display: inline-flex;
   margin-right: 10px;
 
-  &--is-filled {
+  &IsFilled {
     --fill: #323c48;
   }
 }

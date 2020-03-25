@@ -2,27 +2,21 @@
   display: flex;
   flex-flow: row wrap;
 
-  &__row {
+  &Row {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
   }
 
-  &__col {
-    &--left {
+  &Col {
+    &Left {
       width: 255px;
       margin-top: 100px;
       margin-right: 50px;
     }
-    &--right {
+    &Right {
       width: 740px;
       margin-left: auto;
     }
-  }
-
-  &__filter {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
   }
 }

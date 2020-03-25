@@ -1,8 +1,8 @@
-.filter-products {
+.filterProducts {
   display: flex;
   flex-flow: row wrap;
 
-  &__header {
+  &Header {
     flex-basis: 100%;
     margin: 0;
     padding: 0;
@@ -13,7 +13,7 @@
     font-weight: 600;
   }
 
-  &__inner {
+  &Inner {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -28,7 +28,7 @@
     }
   }
 
-  &__button {
+  &Button {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -40,8 +40,17 @@
     line-height: 1;
     color: white;
 
-    border: none;
+    border: 1px solid transparent;
     background-color: #323c48;
+
+    transition: all 0.5s;
+
+    &:focus {
+      color: #323c48;
+      background-color: transparent;
+      border: 1px solid #323c48;
+      outline: none;
+    }
 
     &:disabled {
       background-color: #7e8fa4;

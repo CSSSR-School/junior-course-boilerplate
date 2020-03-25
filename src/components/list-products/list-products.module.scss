@@ -1,4 +1,4 @@
-.products__list {
+.listProducts {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -7,7 +7,7 @@
 
   list-style: none;
 
-  &-item {
+  &Item {
     margin-bottom: 50px;
 
     &:not(:nth-child(3n)) {
