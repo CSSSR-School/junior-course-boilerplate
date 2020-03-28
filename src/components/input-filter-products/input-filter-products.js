@@ -6,32 +6,37 @@ import styles from './input-filter-products.module.scss';
 import LogRender from '../log-render';
 
 class InputFilterProducts extends LogRender {
+  state = {
+    isValid: true,
+  };
+  handleInputChange = ({target: {value}}) => {
+    if (Number(value) <= 0) {
+      this.setState({isValid: false});
+    } else {
+      this.setState({isValid: true});
+    }
+  };
   render() {
-    const {
-      name,
-      data: { price, isValid },
-    } = this.props;
+    const { name, initialValue } = this.props;
     return (
       <input
         className={classnames(
-          'filter-products__input',
+          'filterProductsInput',
           styles.inputFilterProducts,
-          { [styles.inputFilterProductsInvalid]: !isValid }
+          {[styles.inputFilterProductsInvalid]: !this.state.isValid},
         )}
         type="number"
-        defaultValue={price}
+        defaultValue={initialValue}
         name={name}
-      />
+        onChange={this.handleInputChange}
+    />
     );
   }
 }
 
 InputFilterProducts.propTypes = {
-  data: propTypes.shape({
-    price: propTypes.number,
-    isValid: propTypes.bool
-  }),
   name: propTypes.string,
+  initialValue: propTypes.number
 };
 
 export default InputFilterProducts;

@@ -11,59 +11,29 @@ class App extends Component {
     super(props);
     this.state = {
       productsFilter: {
-        fields: {
-          min: {
-            price: minBy(product => product.price, productsList).price,
-            isValid: true
-          },
-          max: {
-            price: maxBy(product => product.price, productsList).price,
-            isValid: true
-          }
-        },
+        min: minBy(product => product.price, productsList).price,
+        max: maxBy(product => product.price, productsList).price,
         isValid: true
       },
       productsList
     };
   }
 
-  updateProductsFilterFieldValidty = (name, data) => {
-    this.setState(prevState => ({
-      productsFilter: {
-        fields: {
-          ...prevState.productsFilter.fields,
-          [name]: { ...prevState.productsFilter.fields[name], ...data }
-        },
-        isValid: prevState.productsFilter.isValid
-      }
-    }));
-  };
+  updateProductsList = (filterData = {}) => {
+    const {
+      min = this.state.productsFilter.min,
+      max = this.state.productsFilter.max,
+      isValid = true
+    } = filterData;
 
-  updateProductsFilterFieldPrice = fields => {
-    fields.forEach(field => {
-      const name = Object.keys(field);
-      this.setState(prevState => ({
-        productsFilter: {
-          fields: {
-            ...prevState.productsFilter.fields,
-            [name]: {
-              ...prevState.productsFilter.fields[name],
-              ...field[name]
-            }
-          },
-          isValid: prevState.productsFilter.isValid
-        }
-      }));
+    this.setState({
+      productsFilter: {
+        ...this.state.productsFilter,
+        min,
+        max,
+        isValid
+      }
     });
-  };
-
-  updateProductsFilterValidity = data => {
-    this.setState(prevState => ({
-      productsFilter: {
-        ...prevState.productsFilter,
-        ...data
-      }
-    }));
   };
 
   filterProductsList = (range, products) => {
@@ -73,24 +43,17 @@ class App extends Component {
 
   render() {
     const { productsFilter, productsList } = this.state;
-    const {
-      fields: {
-        min: { price: min },
-        max: { price: max }
-      }
-    } = productsFilter;
-    const range = { min, max };
-    const filteredProducts = this.filterProductsList(range, productsList);
+    const { min, max } = productsFilter;
+    const filteredProducts = this.filterProductsList(
+      { min, max },
+      productsList
+    );
     return (
       <main className={classnames(styles.app)}>
         <Products
           filter={productsFilter}
           list={filteredProducts}
-          updateProductsFilterFieldValidty={
-            this.updateProductsFilterFieldValidty
-          }
-          updateProductsFilterValidity={this.updateProductsFilterValidity}
-          updateProductsFilterFieldPrice={this.updateProductsFilterFieldPrice}
+          updateProductsList={this.updateProductsList}
         />
       </main>
     );

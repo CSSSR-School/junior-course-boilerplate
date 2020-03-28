@@ -9,19 +9,15 @@ import LogRender from '../log-render';
 class FilterProducts extends LogRender {
   handleFilterChange = event => {
     const {
-      target: { value, name },
+      target: { value },
       currentTarget
     } = event;
-    const {
-      updateProductsFilterFieldValidty,
-      updateProductsFilterValidity
-    } = this.props;
+
+    const { updateProductsList = () => {} } = this.props;
 
     // current field
     if (Number(value) <= 0) {
-      updateProductsFilterFieldValidty(name, { isValid: false });
-    } else {
-      updateProductsFilterFieldValidty(name, { isValid: true });
+      updateProductsList({ isValid: false });
     }
 
     // form
@@ -30,49 +26,46 @@ class FilterProducts extends LogRender {
     const { min, max } = formDataObject;
 
     if (Number(min) >= Number(max) || Number(min) <= 0 || Number(max) <= 0) {
-      updateProductsFilterValidity({ isValid: false });
+      updateProductsList({ isValid: false });
     } else {
-      updateProductsFilterValidity({ isValid: true });
+      updateProductsList();
     }
   };
 
-  handleSubmit = event => {
+  handleFilterSubmit = event => {
     event.preventDefault();
     const { target } = event;
-    const { updateProductsFilterFieldPrice } = this.props;
+    const { updateProductsList } = this.props;
 
     // form
     const formData = new FormData(target);
     const formDataObject = Object.fromEntries(formData);
-    const mappedData = Object.keys(formDataObject).map(key => {
-      return {
-        [key]: {
-          price: Number(formDataObject[key])
-        }
-      };
-    });
-    updateProductsFilterFieldPrice(mappedData);
+    const mappedData = Object.keys(formDataObject).reduce(
+      (acc, key) => ({ ...acc, [key]: Number(formDataObject[key]) }),
+      {}
+    );
+    updateProductsList(mappedData);
   };
 
   render() {
     const {
-      filter: {
-        fields: { min, max },
-        isValid
-      }
+      filter: { min, max, isValid }
     } = this.props;
+
     return (
       <form
         className={classnames('products__filter', styles.filterProducts)}
-        onSubmit={this.handleSubmit}
+        onSubmit={this.handleFilterSubmit}
         onChange={this.handleFilterChange}
       >
         <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
         <div className={styles.filterProductsInner}>
           <span>от</span>
-          <InputFilterProducts data={min} name="min" />
+
+          <InputFilterProducts name="min" initialValue={min}/>
           <span>до</span>
-          <InputFilterProducts data={max} name="max" />
+
+          <InputFilterProducts name="max" initialValue={max}/>
         </div>
         <button
           className={styles.filterProductsButton}
@@ -88,20 +81,11 @@ class FilterProducts extends LogRender {
 
 FilterProducts.propTypes = {
   filter: propTypes.shape({
-    fields: propTypes.shape({
-      min: propTypes.shape({
-        price: propTypes.number,
-        isValid: propTypes.bool
-      }),
-      max: propTypes.shape({
-        price: propTypes.number,
-        isValid: propTypes.bool
-      })
-    })
+    min: propTypes.number,
+    max: propTypes.number,
+    isValid: propTypes.bool
   }),
-  updateProductsFilterFieldValidty: propTypes.func,
-  updateProductsFilterFieldPrice: propTypes.func,
-  updateProductsFilterValidity: propTypes.func
+  updateProductsList: propTypes.func,
 };
 
 export default FilterProducts;

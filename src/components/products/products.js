@@ -14,24 +14,22 @@ class Products extends LogRender {
     const {
       filter,
       list,
-      updateProductsFilterFieldValidty,
-      updateProductsFilterFieldPrice,
-      updateProductsFilterValidity
+      updateProductsList
     } = this.props;
     return (
       <section className={classnames(styles.products)}>
         <div className={classnames(styles.productsRow)}>
-        <aside className={classnames(styles.productsCol, styles.productsColLeft)}>
+          <aside
+            className={classnames(styles.productsCol, styles.productsColLeft)}
+          >
             <FilterProducts
               filter={filter}
-              updateProductsFilterFieldValidty={
-                updateProductsFilterFieldValidty
-              }
-              updateProductsFilterFieldPrice={updateProductsFilterFieldPrice}
-              updateProductsFilterValidity={updateProductsFilterValidity}
+              updateProductsList={updateProductsList}
             />
           </aside>
-          <div className={classnames(styles.productsCol, styles.productsColRight)}>
+          <div
+            className={classnames(styles.productsCol, styles.productsColRight)}
+          >
             <HeaderProducts header={'Список товаров'} />
             <ListProducts productsList={list} />
           </div>
@@ -43,16 +41,9 @@ class Products extends LogRender {
 
 Products.propTypes = {
   filter: propTypes.shape({
-    fields: propTypes.shape({
-      min: propTypes.shape({
-        price: propTypes.number,
-        isValid: propTypes.bool
-      }),
-      max: propTypes.shape({
-        price: propTypes.number,
-        isValid: propTypes.bool
-      })
-    })
+    min: propTypes.number,
+    max: propTypes.number,
+    isValid: propTypes.bool
   }),
   list: propTypes.arrayOf(
     propTypes.shape({
@@ -66,9 +57,7 @@ Products.propTypes = {
       rating: propTypes.number
     })
   ),
-  updateProductsFilterFieldValidty: propTypes.func,
-  updateProductsFilterValidity: propTypes.func,
-  updateProductsFilterFieldPrice: propTypes.func
+  updateProductsList: propTypes.func
 };
 
 export default Products;
