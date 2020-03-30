@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 import styles from './list-products.module.scss';
 
-import ItemListProducts from 'csssr-school-product-card';
+import ItemListProducts from '../item-list-products';
 import ItemRating from '../item-rating';
 import Price from '../price';
 import LogRender from '../log-render';
