@@ -54,7 +54,7 @@ class FilterProducts extends LogRender {
 
     return (
       <form
-        className={classnames('products__filter', styles.filterProducts)}
+        className={classnames('productsFilter', styles.filterProducts)}
         onSubmit={this.handleFilterSubmit}
         onChange={this.handleFilterChange}
       >
