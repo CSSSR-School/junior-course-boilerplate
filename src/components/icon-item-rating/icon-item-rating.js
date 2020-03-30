@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './icon-item-rating.module.scss';
-import LogRender from '../log-render';
 
-class IconItemRating extends LogRender {
+class IconItemRating extends Component {
   render() {
     const { isFilled } = this.props;
     return (

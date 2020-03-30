@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './input-filter-products.module.scss';
-import LogRender from '../log-render';
 
-class InputFilterProducts extends LogRender {
+class InputFilterProducts extends Component {
   state = {
     isValid: true,
   };

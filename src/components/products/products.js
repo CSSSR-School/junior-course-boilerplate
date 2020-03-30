@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -7,9 +7,8 @@ import styles from './products.module.scss';
 import FilterProducts from '../filter-products';
 import HeaderProducts from '../header-products';
 import ListProducts from '../list-products';
-import LogRender from '../log-render';
 
-class Products extends LogRender {
+class Products extends Component {
   render() {
     const {
       filter,

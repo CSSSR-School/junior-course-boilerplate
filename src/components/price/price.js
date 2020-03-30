@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './price.module.scss';
-import LogRender from '../log-render';
 
-class Price extends LogRender {
+class Price extends Component {
   render() {
     const { value, isPrimary = true } = this.props;
     return (
