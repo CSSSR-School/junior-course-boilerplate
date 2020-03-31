@@ -14,6 +14,7 @@ class App extends Component {
         min: minBy(product => product.price, productsList).price,
         max: maxBy(product => product.price, productsList).price,
         discount: maxBy(product => product.discount, productsList).discount,
+        isValid: true,
       },
       productsList
     };

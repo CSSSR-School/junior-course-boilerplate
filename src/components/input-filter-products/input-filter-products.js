@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './input-filter-products.module.scss';
+import { withInputNumberState } from '../hoc-helpers';
 
 class InputFilterProducts extends Component {
   render() {
@@ -12,12 +13,12 @@ class InputFilterProducts extends Component {
         className={classnames(
           'filterProductsInput',
           styles.inputFilterProducts,
-          {[styles.inputFilterProductsInvalid]: !isValid}
+          { [styles.inputFilterProductsInvalid]: !isValid }
         )}
         value={value}
         name={name}
         onChange={handleChange}
-    />
+      />
     );
   }
 }
@@ -29,4 +30,4 @@ InputFilterProducts.propTypes = {
   handleChange: propTypes.func
 };
 
-export default InputFilterProducts;
+export default withInputNumberState(InputFilterProducts);
