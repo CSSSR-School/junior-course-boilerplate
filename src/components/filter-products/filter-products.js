@@ -3,8 +3,8 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './filter-products.module.scss';
-import InputFilterProducts from '../input-filter-products';
-import Discount from 'csssr-school-input-discount';
+import InputFilterProductsNumber from '../input-filter-products';
+import InputFilterProductsDiscount from 'csssr-school-input-discount';
 import LogRender from '../log-render';
 
 class FilterProducts extends LogRender {
@@ -19,21 +19,35 @@ class FilterProducts extends LogRender {
         isValid: true
       }
     },
-    discount: 0,
+    discount: this.props.filter.discount,
     isDisabled: false
   };
-  handleChange = () => {};
+
   handleInputFilterProductsChange = ({ target: { value, name } }) => {
-    this.setState(prevState => ({
-      range: {
-        ...prevState.range,
-        [name]: {
-          ...prevState.range[name],
-          value: Number(value),
-          isValid: value > 0
-        }
-      }
-    }));
+    const maskedValue = Number(value.replace(/\D/g, ''));
+    switch (name) {
+      case 'min':
+      case 'max':
+        this.setState(prevState => ({
+          range: {
+            ...prevState.range,
+            [name]: {
+              ...prevState.range[name],
+              value: maskedValue,
+              isValid: value > 0
+            }
+          }
+        }));
+        break;
+      case 'sale':
+        this.setState(prevState => ({
+          ...prevState,
+          discount: maskedValue,
+        }));
+        break;
+      default:
+        throw new Error(`Unknown name: ${name}`);
+    }
   };
 
   handleFilterProductsChange = ({ currentTarget }) => {
@@ -88,14 +102,14 @@ class FilterProducts extends LogRender {
           <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
           <div className={styles.filterProductsInner}>
             от
-            <InputFilterProducts
+            <InputFilterProductsNumber
               name="min"
               value={minValue}
               isValid={isMinValid}
               handleChange={this.handleInputFilterProductsChange}
             />
             до
-            <InputFilterProducts
+            <InputFilterProductsNumber
               name="max"
               value={maxValue}
               isValid={isMaxValid}
@@ -104,11 +118,11 @@ class FilterProducts extends LogRender {
           </div>
         </section>
         <section className={classnames(styles.filterProductsSection)}>
-          <Discount
+          <InputFilterProductsDiscount
             title="Скидка"
             name="sale"
             value={discount}
-            onChange={this.handleChange}
+            onChange={this.handleInputFilterProductsChange}
           />
         </section>
         <button

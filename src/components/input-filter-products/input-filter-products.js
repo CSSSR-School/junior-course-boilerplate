@@ -14,7 +14,6 @@ class InputFilterProducts extends Component {
           styles.inputFilterProducts,
           {[styles.inputFilterProductsInvalid]: !isValid}
         )}
-        type="number"
         value={value}
         name={name}
         onChange={handleChange}

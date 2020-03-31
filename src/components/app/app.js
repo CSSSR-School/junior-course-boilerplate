@@ -13,36 +13,38 @@ class App extends Component {
       productsFilter: {
         min: minBy(product => product.price, productsList).price,
         max: maxBy(product => product.price, productsList).price,
+        discount: maxBy(product => product.discount, productsList).discount,
       },
       productsList
     };
   }
 
   updateProductsFilter = (filterData = {}) => {
-    const {
-      min = this.state.productsFilter.min,
-      max = this.state.productsFilter.max,
-    } = filterData;
+    const { min, max, sale: discount } = filterData;
 
     this.setState({
       productsFilter: {
         ...this.state.productsFilter,
         min,
         max,
+        discount
       }
     });
   };
 
-  filterProductsList = (range, products) => {
-    const { min, max } = range;
-    return products.filter(({ price }) => price >= min && price <= max);
+  filterProductsList = (params, products) => {
+    const { min, max, discount } = params;
+    return products.filter(
+      ({ price, discount: productDiscount }) =>
+        price >= min && price <= max && productDiscount <= discount
+    );
   };
 
   render() {
     const { productsFilter, productsList } = this.state;
-    const { min, max } = productsFilter;
+    const { min, max, discount } = productsFilter;
     const filteredProducts = this.filterProductsList(
-      { min, max },
+      { min, max, discount },
       productsList
     );
     return (
