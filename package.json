@@ -26,6 +26,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "csssr-school-input-discount": "git+https://github.com/CSSSR-School/junior-course-input-discount.git",
     "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git",
     "eslint-plugin-prettier": "3.1.2",
     "husky": "3.1.0",
