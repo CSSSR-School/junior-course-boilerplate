@@ -4,6 +4,7 @@ import classnames from 'classnames';
 
 import styles from './filter-products.module.scss';
 import InputFilterProducts from '../input-filter-products';
+import Discount from 'csssr-school-input-discount';
 import LogRender from '../log-render';
 
 class FilterProducts extends LogRender {
@@ -18,8 +19,10 @@ class FilterProducts extends LogRender {
         isValid: true
       }
     },
+    discount: 0,
     isDisabled: false
   };
+  handleChange = () => {};
   handleInputFilterProductsChange = ({ target: { value, name } }) => {
     this.setState(prevState => ({
       range: {
@@ -71,6 +74,7 @@ class FilterProducts extends LogRender {
         min: { value: minValue, isValid: isMinValid },
         max: { value: maxValue, isValid: isMaxValid }
       },
+      discount,
       isDisabled
     } = this.state;
 
@@ -80,25 +84,33 @@ class FilterProducts extends LogRender {
         onSubmit={this.handleFilterProductsSubmit}
         onChange={this.handleFilterProductsChange}
       >
-        <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
-        <div className={styles.filterProductsInner}>
-          <span>от</span>
-
-          <InputFilterProducts
-            name="min"
-            value={minValue}
-            isValid={isMinValid}
-            handleChange={this.handleInputFilterProductsChange}
+        <section className={classnames(styles.filterProductsSection)}>
+          <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
+          <div className={styles.filterProductsInner}>
+            от
+            <InputFilterProducts
+              name="min"
+              value={minValue}
+              isValid={isMinValid}
+              handleChange={this.handleInputFilterProductsChange}
+            />
+            до
+            <InputFilterProducts
+              name="max"
+              value={maxValue}
+              isValid={isMaxValid}
+              handleChange={this.handleInputFilterProductsChange}
+            />
+          </div>
+        </section>
+        <section className={classnames(styles.filterProductsSection)}>
+          <Discount
+            title="Скидка"
+            name="sale"
+            value={discount}
+            onChange={this.handleChange}
           />
-          <span>до</span>
-
-          <InputFilterProducts
-            name="max"
-            value={maxValue}
-            isValid={isMaxValid}
-            handleChange={this.handleInputFilterProductsChange}
-          />
-        </div>
+        </section>
         <button
           className={styles.filterProductsButton}
           type="submit"
