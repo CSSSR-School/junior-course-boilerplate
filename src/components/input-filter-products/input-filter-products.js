@@ -5,29 +5,19 @@ import classnames from 'classnames';
 import styles from './input-filter-products.module.scss';
 
 class InputFilterProducts extends Component {
-  state = {
-    isValid: true,
-  };
-  handleInputChange = ({target: {value}}) => {
-    if (Number(value) <= 0) {
-      this.setState({isValid: false});
-    } else {
-      this.setState({isValid: true});
-    }
-  };
   render() {
-    const { name, initialValue } = this.props;
+    const { name, value, isValid, handleChange } = this.props;
     return (
       <input
         className={classnames(
           'filterProductsInput',
           styles.inputFilterProducts,
-          {[styles.inputFilterProductsInvalid]: !this.state.isValid},
+          {[styles.inputFilterProductsInvalid]: !isValid}
         )}
         type="number"
-        defaultValue={initialValue}
+        value={value}
         name={name}
-        onChange={this.handleInputChange}
+        onChange={handleChange}
     />
     );
   }
@@ -35,7 +25,9 @@ class InputFilterProducts extends Component {
 
 InputFilterProducts.propTypes = {
   name: propTypes.string,
-  initialValue: propTypes.number
+  value: propTypes.number,
+  isValid: propTypes.bool,
+  handleChange: propTypes.func
 };
 
 export default InputFilterProducts;

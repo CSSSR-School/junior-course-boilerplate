@@ -7,70 +7,102 @@ import InputFilterProducts from '../input-filter-products';
 import LogRender from '../log-render';
 
 class FilterProducts extends LogRender {
-  handleFilterChange = event => {
-    const {
-      target: { value },
-      currentTarget
-    } = event;
+  state = {
+    range: {
+      min: {
+        value: this.props.filter.min,
+        isValid: true
+      },
+      max: {
+        value: this.props.filter.max,
+        isValid: true
+      }
+    },
+    isDisabled: false
+  };
+  handleInputFilterProductsChange = ({ target: { value, name } }) => {
+    this.setState(prevState => ({
+      range: {
+        ...prevState.range,
+        [name]: {
+          ...prevState.range[name],
+          value: Number(value),
+          isValid: value > 0
+        }
+      }
+    }));
+  };
 
-    const { updateProductsList = () => {} } = this.props;
-
-    // current field
-    if (Number(value) <= 0) {
-      updateProductsList({ isValid: false });
-    }
-
-    // form
+  handleFilterProductsChange = ({ currentTarget }) => {
     const formData = new FormData(currentTarget);
     const formDataObject = Object.fromEntries(formData);
     const { min, max } = formDataObject;
 
-    if (Number(min) >= Number(max) || Number(min) <= 0 || Number(max) <= 0) {
-      updateProductsList({ isValid: false });
+    if (Number(min) <= 0 || Number(max) <= 0 || Number(min) >= Number(max)) {
+      this.setState(prevState => ({
+        ...prevState,
+        isDisabled: true
+      }));
     } else {
-      updateProductsList();
+      this.setState(prevState => ({
+        ...prevState,
+        isDisabled: false
+      }));
     }
   };
 
-  handleFilterSubmit = event => {
+  handleFilterProductsSubmit = event => {
     event.preventDefault();
     const { target } = event;
-    const { updateProductsList } = this.props;
+    const { updateProductsFilter = () => {} } = this.props;
 
-    // form
     const formData = new FormData(target);
     const formDataObject = Object.fromEntries(formData);
-    const mappedData = Object.keys(formDataObject).reduce(
+    const data = Object.keys(formDataObject).reduce(
       (acc, key) => ({ ...acc, [key]: Number(formDataObject[key]) }),
       {}
     );
-    updateProductsList(mappedData);
+    updateProductsFilter(data);
   };
 
   render() {
     const {
-      filter: { min, max, isValid }
-    } = this.props;
+      range: {
+        min: { value: minValue, isValid: isMinValid },
+        max: { value: maxValue, isValid: isMaxValid }
+      },
+      isDisabled
+    } = this.state;
 
     return (
       <form
         className={classnames('productsFilter', styles.filterProducts)}
-        onSubmit={this.handleFilterSubmit}
-        onChange={this.handleFilterChange}
+        onSubmit={this.handleFilterProductsSubmit}
+        onChange={this.handleFilterProductsChange}
       >
         <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
         <div className={styles.filterProductsInner}>
           <span>от</span>
 
-          <InputFilterProducts name="min" initialValue={min}/>
+          <InputFilterProducts
+            name="min"
+            value={minValue}
+            isValid={isMinValid}
+            handleChange={this.handleInputFilterProductsChange}
+          />
           <span>до</span>
 
-          <InputFilterProducts name="max" initialValue={max}/>
+          <InputFilterProducts
+            name="max"
+            value={maxValue}
+            isValid={isMaxValid}
+            handleChange={this.handleInputFilterProductsChange}
+          />
         </div>
         <button
           className={styles.filterProductsButton}
           type="submit"
-          disabled={!isValid}
+          disabled={isDisabled}
         >
           Применить
         </button>
@@ -85,7 +117,7 @@ FilterProducts.propTypes = {
     max: propTypes.number,
     isValid: propTypes.bool
   }),
-  updateProductsList: propTypes.func,
+  updateProductsFilter: propTypes.func
 };
 
 export default FilterProducts;

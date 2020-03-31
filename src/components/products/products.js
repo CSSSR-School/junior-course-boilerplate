@@ -13,7 +13,7 @@ class Products extends Component {
     const {
       filter,
       list,
-      updateProductsList
+      updateProductsFilter
     } = this.props;
     return (
       <section className={classnames(styles.products)}>
@@ -23,7 +23,7 @@ class Products extends Component {
           >
             <FilterProducts
               filter={filter}
-              updateProductsList={updateProductsList}
+              updateProductsFilter={updateProductsFilter}
             />
           </aside>
           <div
@@ -56,7 +56,7 @@ Products.propTypes = {
       rating: propTypes.number
     })
   ),
-  updateProductsList: propTypes.func
+  updateProductsFilter: propTypes.func
 };
 
 export default Products;
