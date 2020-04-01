@@ -50,35 +50,4 @@
       }
     }
   }
-
-  &Button {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 100%;
-    padding: 10px;
-    margin-top: 30px;
-
-    font-size: 14px;
-    line-height: 1;
-    color: white;
-
-    border: 1px solid transparent;
-    background-color: #323c48;
-
-    transition: all 0.5s;
-
-    &:focus {
-      color: #323c48;
-      background-color: transparent;
-      border: 1px solid #323c48;
-      outline: none;
-    }
-
-    &:disabled {
-      background-color: #7e8fa4;
-      cursor: not-allowed;
-    }
-  }
 }

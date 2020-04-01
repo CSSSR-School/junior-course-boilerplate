@@ -8,49 +8,31 @@ import InputFilterProductsDiscount from '../input-filter-products-discount';
 import LogRender from '../log-render';
 
 class FilterProducts extends LogRender {
-  handleFilterProductsChange = ({ currentTarget }) => {
+  handleFilterProductsChange = event => {
+    const { currentTarget } = event;
     const { updateProductsFilter = () => {} } = this.props;
 
     const formData = new FormData(currentTarget);
-    const formDataObject = Object.fromEntries(formData);
-    const { min, max, sale: discount } = formDataObject;
-
-    if (
-      Number(min) <= 0 ||
-      Number(max) <= 0 ||
-      Number(min) >= Number(max) ||
-      Number(discount) <= 0 ||
-      Number(discount) > 100
-    ) {
-      updateProductsFilter({ isValid: false });
-    } else {
-      updateProductsFilter({ isValid: true });
-    }
-  };
-
-  handleFilterProductsSubmit = event => {
-    event.preventDefault();
-    const { target } = event;
-    const { updateProductsFilter = () => {} } = this.props;
-
-    const formData = new FormData(target);
     const formDataObject = Object.fromEntries(formData);
     const data = Object.keys(formDataObject).reduce(
       (acc, key) => ({ ...acc, [key]: Number(formDataObject[key]) }),
       {}
     );
-    updateProductsFilter(data);
+    const { min, max, sale: discount } = data;
+
+    if ((min > 0 && max > 0 && min < max) && (discount > 0 && discount < 100)) {
+      updateProductsFilter({ min, max, discount });
+    }
   };
 
   render() {
     const {
-      filter: { min, max, discount, isValid }
+      filter: { min, max, discount }
     } = this.props;
 
     return (
       <form
         className={classnames('productsFilter', styles.filterProducts)}
-        onSubmit={this.handleFilterProductsSubmit}
         onChange={this.handleFilterProductsChange}
       >
         <section className={classnames(styles.filterProductsSection)}>
@@ -68,13 +50,6 @@ class FilterProducts extends LogRender {
           value={discount}
           parentClassName={classnames(styles.filterProductsSection)}
         />
-        <button
-          className={styles.filterProductsButton}
-          type="submit"
-          disabled={!isValid}
-        >
-          Применить
-        </button>
       </form>
     );
   }

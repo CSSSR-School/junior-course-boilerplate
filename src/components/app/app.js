@@ -15,7 +15,6 @@ class App extends Component {
         min: minBy(product => product.price, productsList).price,
         max: maxBy(product => product.price, productsList).price,
         discount: minBy(product => product.discount, productsList).discount,
-        isValid: true
       },
       productsList
     };
@@ -27,8 +26,7 @@ class App extends Component {
     const {
       min = productsFilter.min,
       max = productsFilter.max,
-      sale: discount = productsFilter.discount,
-      isValid = productsFilter.isValid
+      discount = productsFilter.discount,
     } = filterData;
 
     this.setState({
@@ -37,7 +35,6 @@ class App extends Component {
         min,
         max,
         discount,
-        isValid
       }
     });
   };
