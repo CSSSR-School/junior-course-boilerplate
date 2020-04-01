@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './icon-item-rating.module.scss';
 
-class IconItemRating extends Component {
+class IconItemRating extends PureComponent {
   render() {
     const { isFilled } = this.props;
     return (

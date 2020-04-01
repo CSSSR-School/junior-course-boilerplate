@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './filter-products.module.scss';
 import InputFilterProductsNumber from '../input-filter-products-number';
 import InputFilterProductsDiscount from '../input-filter-products-discount';
-import LogRender from '../log-render';
 
-class FilterProducts extends LogRender {
+class FilterProducts extends PureComponent {
   handleFilterProductsChange = event => {
     const { currentTarget } = event;
     const { updateProductsFilter = () => {} } = this.props;

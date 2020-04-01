@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './price.module.scss';
 
-class Price extends Component {
+class Price extends PureComponent {
   render() {
     const { value, isPrimary = true } = this.props;
     return (

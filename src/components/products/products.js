@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -8,7 +8,7 @@ import FilterProducts from '../filter-products';
 import HeaderProducts from '../header-products';
 import ListProducts from '../list-products';
 
-class Products extends Component {
+class Products extends PureComponent {
   render() {
     const {
       filter,

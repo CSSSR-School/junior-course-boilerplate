@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -7,9 +7,8 @@ import styles from './list-products.module.scss';
 import ItemListProducts from 'csssr-school-product-card';
 import ItemRating from '../item-rating';
 import Price from '../price';
-import LogRender from '../log-render';
 
-class ListProducts extends LogRender {
+class ListProducts extends PureComponent {
   render() {
     const { productsList } = this.props;
     const elements = productsList.map(product => {
@@ -48,7 +47,11 @@ class ListProducts extends LogRender {
       );
     });
 
-    return <ul className={classnames('productsList', styles.listProducts)}>{elements}</ul>;
+    return (
+      <ul className={classnames('productsList', styles.listProducts)}>
+        {elements}
+      </ul>
+    );
   }
 }
 
