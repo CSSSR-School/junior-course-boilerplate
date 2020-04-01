@@ -12,7 +12,6 @@ const withInputNumberState = WrappedComponent => {
     };
 
     handleChange = ({ target: { value } }) => {
-      console.log('.');
       const maskedValue = this.addNumberMask(value);
       this.setState({ ...this.state, value: maskedValue, isValid: value > 0 });
     };

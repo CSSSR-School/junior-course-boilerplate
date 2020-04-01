@@ -14,21 +14,28 @@ class App extends Component {
         min: minBy(product => product.price, productsList).price,
         max: maxBy(product => product.price, productsList).price,
         discount: maxBy(product => product.discount, productsList).discount,
-        isValid: true,
+        isValid: true
       },
       productsList
     };
   }
 
   updateProductsFilter = (filterData = {}) => {
-    const { min, max, sale: discount } = filterData;
+    const { productsFilter } = this.state;
+    const {
+      min = productsFilter.min,
+      max = productsFilter.max,
+      sale: discount = productsFilter.discount,
+      isValid = productsFilter.isValid
+    } = filterData;
 
     this.setState({
       productsFilter: {
         ...this.state.productsFilter,
         min,
         max,
-        discount
+        discount,
+        isValid
       }
     });
   };

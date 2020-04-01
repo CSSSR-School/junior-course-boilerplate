@@ -3,95 +3,42 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './filter-products.module.scss';
-import InputFilterProductsNumber from '../input-filter-products';
-import InputFilterProductsDiscount from 'csssr-school-input-discount';
+import InputFilterProductsNumber from '../input-filter-products-number';
+import InputFilterProductsDiscount from '../input-filter-products-discount';
 import LogRender from '../log-render';
 
 class FilterProducts extends LogRender {
-  // state = {
-  //   range: {
-  //     min: {
-  //       value: this.props.filter.min,
-  //       isValid: true
-  //     },
-  //     max: {
-  //       value: this.props.filter.max,
-  //       isValid: true
-  //     }
-  //   },
-  //   discount: this.props.filter.discount,
-  //   isDisabled: false
-  // };
+  handleFilterProductsChange = ({currentTarget}) => {
+    const { updateProductsFilter = () => {} } = this.props;
 
-  // handleInputFilterProductsChange = ({ target: { value, name } }) => {
-  //   // const maskedValue = Number(value.replace(/\D/g, ''));
-  //   switch (name) {
-  //     case 'min':
-  //     case 'max':
-  //       this.setState(prevState => ({
-  //         range: {
-  //           ...prevState.range,
-  //           [name]: {
-  //             ...prevState.range[name],
-  //             // value: maskedValue,
-  //             value,
-  //             isValid: value > 0
-  //           }
-  //         }
-  //       }));
-  //       break;
-  //     case 'sale':
-  //       this.setState(prevState => ({
-  //         ...prevState,
-  //         discount: value,
-  //       }));
-  //       break;
-  //     default:
-  //       throw new Error(`Unknown name: ${name}`);
-  //   }
-  // };
+    const formData = new FormData(currentTarget);
+    const formDataObject = Object.fromEntries(formData);
+    Object.keys(formDataObject).forEach(key => Number(formDataObject[key]));
+    const {min, max, sale: discount} = formDataObject;
 
-  // handleFilterProductsChange = ({ currentTarget }) => {
-  //   const formData = new FormData(currentTarget);
-  //   const formDataObject = Object.fromEntries(formData);
-  //   const { min, max } = formDataObject;
+    if (min <= 0 || max <= 0 || discount <= 0 || min >= max) {
+      updateProductsFilter({isValid: false});
+    } else {
+      updateProductsFilter({isValid: true});
+    }
 
-  //   if (Number(min) <= 0 || Number(max) <= 0 || Number(min) >= Number(max)) {
-  //     this.setState(prevState => ({
-  //       ...prevState,
-  //       isDisabled: true
-  //     }));
-  //   } else {
-  //     this.setState(prevState => ({
-  //       ...prevState,
-  //       isDisabled: false
-  //     }));
-  //   }
-  // };
+  };
 
-  // handleFilterProductsSubmit = event => {
-  //   event.preventDefault();
-  //   const { target } = event;
-  //   const { updateProductsFilter = () => {} } = this.props;
+  handleFilterProductsSubmit = event => {
+    event.preventDefault();
+    const { target } = event;
+    const { updateProductsFilter = () => {} } = this.props;
 
-  //   const formData = new FormData(target);
-  //   const formDataObject = Object.fromEntries(formData);
-  //   const data = Object.keys(formDataObject).reduce(
-  //     (acc, key) => ({ ...acc, [key]: Number(formDataObject[key]) }),
-  //     {}
-  //   );
-  //   updateProductsFilter(data);
-  // };
+    const formData = new FormData(target);
+    const formDataObject = Object.fromEntries(formData);
+    const data = Object.keys(formDataObject).reduce(
+      (acc, key) => ({ ...acc, [key]: Number(formDataObject[key]) }),
+      {}
+    );
+    updateProductsFilter(data);
+  };
 
   render() {
-    // const {
-    //   range: {
-    //     min: { value: minValue, isValid: isMinValid },
-    //     max: { value: maxValue, isValid: isMaxValid }
-    //   },
-    //   discount,
-    //   isDisabled
-    // } = this.state;
     const {
       filter: { min, max, discount, isValid }
     } = this.props;
@@ -106,24 +53,17 @@ class FilterProducts extends LogRender {
           <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
           <div className={styles.filterProductsInner}>
             от
-            <InputFilterProductsNumber
-              name="min"
-              value={min}
-            />
+            <InputFilterProductsNumber name="min" value={min} />
             до
-            <InputFilterProductsNumber
-              name="max"
-              value={max}
-            />
+            <InputFilterProductsNumber name="max" value={max} />
           </div>
         </section>
-        <section className={classnames(styles.filterProductsSection)}>
-          <InputFilterProductsDiscount
-            title="Скидка"
-            name="sale"
-            value={discount}
-          />
-        </section>
+        <InputFilterProductsDiscount
+          title="Скидка"
+          name="sale"
+          value={discount}
+          parentClassName={classnames(styles.filterProductsSection)}
+        />
         <button
           className={styles.filterProductsButton}
           type="submit"
