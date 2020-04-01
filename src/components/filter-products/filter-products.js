@@ -19,10 +19,7 @@ class FilterProducts extends LogRender {
       {}
     );
     const { min, max, discount } = data;
-
-    if ((min > 0 && max > 0 && min < max) && (discount > 0 && discount < 100)) {
-      updateProductsFilter({ min, max, discount });
-    }
+    updateProductsFilter({ min, max, discount });
   };
 
   render() {

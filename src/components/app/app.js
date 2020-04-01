@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import _ from 'lodash';
+import { memoize } from 'lodash';
 import { minBy, maxBy } from 'csssr-school-utils';
 
 import styles from './app.module.scss';
@@ -14,11 +14,14 @@ class App extends Component {
       productsFilter: {
         min: minBy(product => product.price, productsList).price,
         max: maxBy(product => product.price, productsList).price,
-        discount: minBy(product => product.discount, productsList).discount,
+        discount: minBy(product => product.discount, productsList).discount
       },
       productsList
     };
-    this.filterProductsList = _.memoize(this.filterProductsList, params => params);
+    this.filterProductsList = memoize(
+      this.filterProductsList,
+      params => params
+    );
   }
 
   updateProductsFilter = (filterData = {}) => {
@@ -26,17 +29,19 @@ class App extends Component {
     const {
       min = productsFilter.min,
       max = productsFilter.max,
-      discount = productsFilter.discount,
+      discount = productsFilter.discount
     } = filterData;
 
-    this.setState({
-      productsFilter: {
-        ...this.state.productsFilter,
-        min,
-        max,
-        discount,
-      }
-    });
+    if (min > 0 && max > 0 && min < max && discount > 0 && discount < 100) {
+      this.setState({
+        productsFilter: {
+          ...this.state.productsFilter,
+          min,
+          max,
+          discount
+        }
+      });
+    }
   };
 
   filterProductsList = (params, products) => {
