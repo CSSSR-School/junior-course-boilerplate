@@ -8,20 +8,24 @@ import InputFilterProductsDiscount from '../input-filter-products-discount';
 import LogRender from '../log-render';
 
 class FilterProducts extends LogRender {
-  handleFilterProductsChange = ({currentTarget}) => {
+  handleFilterProductsChange = ({ currentTarget }) => {
     const { updateProductsFilter = () => {} } = this.props;
 
     const formData = new FormData(currentTarget);
     const formDataObject = Object.fromEntries(formData);
-    Object.keys(formDataObject).forEach(key => Number(formDataObject[key]));
-    const {min, max, sale: discount} = formDataObject;
+    const { min, max, sale: discount } = formDataObject;
 
-    if (min <= 0 || max <= 0 || discount <= 0 || min >= max) {
-      updateProductsFilter({isValid: false});
+    if (
+      Number(min) <= 0 ||
+      Number(max) <= 0 ||
+      Number(min) >= Number(max) ||
+      Number(discount) <= 0 ||
+      Number(discount) > 100
+    ) {
+      updateProductsFilter({ isValid: false });
     } else {
-      updateProductsFilter({isValid: true});
+      updateProductsFilter({ isValid: true });
     }
-
   };
 
   handleFilterProductsSubmit = event => {
