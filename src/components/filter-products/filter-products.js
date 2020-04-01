@@ -18,7 +18,7 @@ class FilterProducts extends LogRender {
       (acc, key) => ({ ...acc, [key]: Number(formDataObject[key]) }),
       {}
     );
-    const { min, max, sale: discount } = data;
+    const { min, max, discount } = data;
 
     if ((min > 0 && max > 0 && min < max) && (discount > 0 && discount < 100)) {
       updateProductsFilter({ min, max, discount });
@@ -46,7 +46,7 @@ class FilterProducts extends LogRender {
         </section>
         <InputFilterProductsDiscount
           title="Скидка"
-          name="sale"
+          name="discount"
           value={discount}
           parentClassName={classnames(styles.filterProductsSection)}
         />
