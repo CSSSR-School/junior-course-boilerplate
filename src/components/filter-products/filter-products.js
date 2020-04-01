@@ -55,7 +55,7 @@ FilterProducts.propTypes = {
   filter: propTypes.shape({
     min: propTypes.number,
     max: propTypes.number,
-    isValid: propTypes.bool
+    discount: propTypes.number,
   }),
   updateProductsFilter: propTypes.func
 };

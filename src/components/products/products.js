@@ -42,7 +42,7 @@ Products.propTypes = {
   filter: propTypes.shape({
     min: propTypes.number,
     max: propTypes.number,
-    isValid: propTypes.bool
+    discount: propTypes.number
   }),
   list: propTypes.arrayOf(
     propTypes.shape({
@@ -53,7 +53,8 @@ Products.propTypes = {
       price: propTypes.node,
       subPriceContent: propTypes.node,
       maxRating: propTypes.number,
-      rating: propTypes.number
+      rating: propTypes.number,
+      discount: propTypes.number,
     })
   ),
   updateProductsFilter: propTypes.func

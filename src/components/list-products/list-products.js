@@ -65,7 +65,8 @@ ListProducts.propTypes = {
       price: propTypes.node,
       subPriceContent: propTypes.node,
       maxRating: propTypes.number,
-      rating: propTypes.number
+      rating: propTypes.number,
+      discount: propTypes.number,
     })
   )
 };
