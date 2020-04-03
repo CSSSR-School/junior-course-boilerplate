@@ -8,7 +8,8 @@
     "subPriceContent": null,
     "maxRating": 5,
     "rating": 5,
-    "discount": 5
+    "discount": 5,
+    "category": "clothes"
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "subPriceContent": null,
     "maxRating": 5,
     "rating": 1,
-    "discount": 10
+    "discount": 10,
+    "category": "clothes"
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "subPriceContent": 10000,
     "maxRating": 5,
     "rating": 4,
-    "discount": 15
+    "discount": 15,
+    "category": "clothes"
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "subPriceContent": null,
     "maxRating": 5,
     "rating": 3,
-    "discount": 20
+    "discount": 20,
+    "category": "books"
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "subPriceContent": null,
     "maxRating": 5,
     "rating": 2,
-    "discount": 25
+    "discount": 25,
+    "category": "books"
   },
   {
     "id": 6,
@@ -63,6 +68,7 @@
     "subPriceContent": null,
     "maxRating": 5,
     "rating": 0,
-    "discount": 30
+    "discount": 30,
+    "category": "books"
   }
 ]

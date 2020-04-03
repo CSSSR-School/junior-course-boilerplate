@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './input-filter-products-number.module.scss';
-import { withInputNumberState } from '../hoc-helpers';
+import { withInputProductsNumberState } from '../hoc-helpers';
 
 class InputFilterProductsNumber extends PureComponent {
   render() {
@@ -30,4 +30,4 @@ InputFilterProductsNumber.propTypes = {
   handleChange: propTypes.func
 };
 
-export default withInputNumberState(InputFilterProductsNumber);
+export default withInputProductsNumberState(InputFilterProductsNumber);

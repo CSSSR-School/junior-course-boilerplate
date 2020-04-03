@@ -1,0 +1,51 @@
+.inputFilterProductsCategory {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+  color: #323c48;
+
+  background-color: transparent;
+  border: 1px solid #323c48;
+  border-radius: 15px;
+
+  transition: all 0.5s;
+
+  &:not(:last-of-type) {
+    margin-right: 16px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover,
+  &:focus {
+    color: #ffffff;
+    background-color: #437bbf;
+    border: 1px solid #437bbf;
+  }
+
+  &:active {
+    color: #ffffff;
+    background-color: darken(#437bbf, 10%);
+    border: 1px solid darken(#437bbf, 10%);
+  }
+
+  &Active {
+    color: #ffffff;
+
+    background-color: #323c48;
+    border: 1px solid #323c48;
+  }
+}

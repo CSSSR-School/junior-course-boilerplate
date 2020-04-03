@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import CSSSRSchoolInputDiscount from 'csssr-school-input-discount';
 
 import styles from './input-filter-products-discount.module.scss';
-import { withInputNumberState } from '../hoc-helpers';
+import { withInputProductsNumberState } from '../hoc-helpers';
 
 class InputFilterProductsDiscount extends PureComponent {
   render() {
@@ -45,4 +45,4 @@ InputFilterProductsDiscount.propTypes = {
   parentClassName: propTypes.string
 };
 
-export default withInputNumberState(InputFilterProductsDiscount);
+export default withInputProductsNumberState(InputFilterProductsDiscount);

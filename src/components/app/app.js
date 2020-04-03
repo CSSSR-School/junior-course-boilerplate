@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { memoize } from 'lodash';
+import { memoize, uniq } from 'lodash';
 import { minBy, maxBy } from 'csssr-school-utils';
 
 import styles from './app.module.scss';
@@ -14,7 +14,11 @@ class App extends Component {
       productsFilter: {
         min: minBy(product => product.price, productsList).price,
         max: maxBy(product => product.price, productsList).price,
-        discount: minBy(product => product.discount, productsList).discount
+        discount: minBy(product => product.discount, productsList).discount,
+        categories: uniq(productsList.map(product => product.category)).reduce(
+          (acc, category) => ({ ...acc, [category]: true }),
+          {}
+        )
       },
       productsList
     };
@@ -24,7 +28,7 @@ class App extends Component {
     );
   }
 
-  updateProductsFilter = (filterData = {}) => {
+  updateProductsFilterByValue = (filterData = {}) => {
     const { productsFilter } = this.state;
     const {
       min = productsFilter.min,
@@ -33,30 +37,48 @@ class App extends Component {
     } = filterData;
 
     if (min > 0 && max > 0 && min < max && discount > 0 && discount < 100) {
-      this.setState({
+      this.setState(prevState => ({
         productsFilter: {
-          ...this.state.productsFilter,
+          ...prevState.productsFilter,
           min,
           max,
           discount
         }
-      });
+      }));
     }
   };
 
+  updateProductsFilterByCategory = (name, isActive) => {
+    this.setState(prevState => ({
+      productsFilter: {
+        ...prevState.productsFilter,
+        categories: {
+          ...prevState.productsFilter.categories,
+          [name]: isActive
+        }
+      }
+    }));
+  };
+
   filterProductsList = (params, products) => {
-    const { min, max, discount } = params;
-    return products.filter(
+    const { min, max, discount, categories } = params;
+    const filteredProducts = products.filter(
       ({ price, discount: productDiscount }) =>
         price >= min && price <= max && productDiscount >= discount
+    );
+    const categoriesList = Object.keys(categories).filter(
+      category => categories[category]
+    );
+    return filteredProducts.filter(({ category }) =>
+      categoriesList.includes(category)
     );
   };
 
   render() {
     const { productsFilter, productsList } = this.state;
-    const { min, max, discount } = productsFilter;
+    const { min, max, discount, categories } = productsFilter;
     const filteredProducts = this.filterProductsList(
-      { min, max, discount },
+      { min, max, discount, categories },
       productsList
     );
     return (
@@ -64,7 +86,8 @@ class App extends Component {
         <Products
           filter={productsFilter}
           list={filteredProducts}
-          updateProductsFilter={this.updateProductsFilter}
+          updateProductsFilterByValue={this.updateProductsFilterByValue}
+          updateProductsFilterByCategory={this.updateProductsFilterByCategory}
         />
       </main>
     );

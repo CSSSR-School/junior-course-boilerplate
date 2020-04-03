@@ -1,14 +1,18 @@
 .filterProducts {
+  $filterProducts: &;
+
   display: flex;
   flex-flow: row wrap;
 
-  &Section {
+  &Wrapper,
+  section {
     flex-basis: 100%;
 
     &:not(:last-of-type) {
       margin-bottom: 30px;
     }
 
+    #{$filterProducts}Header,
     > h3 {
       display: flex;
       flex-flow: row nowrap;
@@ -23,6 +27,7 @@
       color: #323c48;
     }
 
+    #{$filterProducts}Inner,
     > div {
       display: flex;
       flex-flow: row nowrap;
@@ -34,7 +39,7 @@
       font-weight: 600;
       color: #323c48;
 
-      input {
+      input:not([type="button"]) {
         display: flex;
         flex-flow: row nowrap;
         flex-grow: 1;

@@ -13,7 +13,8 @@ class Products extends PureComponent {
     const {
       filter,
       list,
-      updateProductsFilter
+      updateProductsFilterByValue,
+      updateProductsFilterByCategory,
     } = this.props;
     return (
       <section className={classnames(styles.products)}>
@@ -23,7 +24,8 @@ class Products extends PureComponent {
           >
             <FilterProducts
               filter={filter}
-              updateProductsFilter={updateProductsFilter}
+              updateProductsFilterByValue={updateProductsFilterByValue}
+              updateProductsFilterByCategory={updateProductsFilterByCategory}
             />
           </aside>
           <div
@@ -57,7 +59,8 @@ Products.propTypes = {
       discount: propTypes.number,
     })
   ),
-  updateProductsFilter: propTypes.func
+  updateProductsFilterByValue: propTypes.func,
+  updateProductsFilterByCategory: propTypes.func,
 };
 
 export default Products;

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-const withInputNumberState = WrappedComponent => {
-  return class extends Component {
+const withInputProductsNumberState = WrappedComponent => {
+  return class extends PureComponent {
     state = {
       value: this.props.value,
       isValid: true
@@ -28,4 +28,4 @@ const withInputNumberState = WrappedComponent => {
     }
   };
 };
-export default withInputNumberState;
+export default withInputProductsNumberState;
