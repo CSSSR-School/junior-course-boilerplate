@@ -10,8 +10,8 @@ import Price from '../price';
 
 class ListProducts extends PureComponent {
   render() {
-    const { productsList } = this.props;
-    const elements = productsList.map(product => {
+    const { list } = this.props;
+    const elements = list.map(product => {
       const {
         id,
         isInStock,
@@ -67,6 +67,7 @@ ListProducts.propTypes = {
       maxRating: propTypes.number,
       rating: propTypes.number,
       discount: propTypes.number,
+      category: propTypes.string,
     })
   )
 };

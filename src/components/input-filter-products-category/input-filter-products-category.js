@@ -1,27 +1,30 @@
 import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
-import { startCase } from 'lodash';
-
-import { withInputProductsCategoryState } from '../hoc-helpers';
 
 import styles from './input-filter-products-category.module.scss';
+import { withInputProductsCategoryHandler } from '../hoc-helpers';
+import { Context } from '../context';
 
 class InputFilterProductsCategory extends PureComponent {
   render() {
-    const { name, isActive, onClick: handleClick } = this.props;
+    const { isActive, onClick: handleClick, ...rest } = this.props;
     return (
-      <input
-        className={classnames(
-          'filterProductsInput',
-          styles.inputFilterProductsCategory,
-          { [styles.inputFilterProductsCategoryActive]: isActive }
+      <Context.Consumer>
+        {({updateProductsFilterField}) => (
+          <input
+            className={classnames(
+              'filterProductsInput',
+              styles.inputFilterProductsCategory,
+              { [styles.inputFilterProductsCategoryActive]: isActive }
+            )}
+            type="button"
+            onClick={event =>
+              handleClick(event, 'categories', updateProductsFilterField)}
+            {...rest}
+          />
         )}
-        type="button"
-        name={name}
-        value={startCase(name)}
-        onClick={handleClick}
-      />
+      </Context.Consumer>
     );
   }
 }
@@ -32,4 +35,4 @@ InputFilterProductsCategory.propTypes = {
   onClick: propTypes.func
 };
 
-export default withInputProductsCategoryState(InputFilterProductsCategory);
+export default withInputProductsCategoryHandler(InputFilterProductsCategory);

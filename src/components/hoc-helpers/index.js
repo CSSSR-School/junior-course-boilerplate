@@ -1,7 +1,7 @@
-import withInputProductsNumberState from './with-input-products-number-state';
-import withInputProductsCategoryState from './with-input-products-category-state';
+import withInputProductsNumberHandler from './with-input-products-number-handler';
+import withInputProductsCategoryHandler from './with-input-products-category-handler';
 
 export {
-  withInputProductsNumberState,
-  withInputProductsCategoryState,
+  withInputProductsNumberHandler,
+  withInputProductsCategoryHandler,
 };

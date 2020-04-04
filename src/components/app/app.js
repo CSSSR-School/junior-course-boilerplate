@@ -1,73 +1,89 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { memoize, uniq } from 'lodash';
+import { memoize, uniqBy } from 'lodash';
 import { minBy, maxBy } from 'csssr-school-utils';
 
 import styles from './app.module.scss';
 import Products from '../products';
 import productsList from './assets/products.json';
+import { Context } from '../context';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       productsFilter: {
-        min: minBy(product => product.price, productsList).price,
-        max: maxBy(product => product.price, productsList).price,
-        discount: minBy(product => product.discount, productsList).discount,
-        categories: uniq(productsList.map(product => product.category)).reduce(
-          (acc, category) => ({ ...acc, [category]: true }),
-          {}
-        )
+        ...this.productsFilterInitialParams
       },
       productsList
     };
+
     this.filterProductsList = memoize(
       this.filterProductsList,
       params => params
     );
   }
 
-  updateProductsFilterByValue = (filterData = {}) => {
-    const { productsFilter } = this.state;
-    const {
-      min = productsFilter.min,
-      max = productsFilter.max,
-      discount = productsFilter.discount
-    } = filterData;
-
-    if (min > 0 && max > 0 && min < max && discount > 0 && discount < 100) {
-      this.setState(prevState => ({
-        productsFilter: {
-          ...prevState.productsFilter,
-          min,
-          max,
-          discount
-        }
-      }));
-    }
+  productsFilterInitialParams = {
+    price: {
+      min: {
+        value: minBy(product => product.price, productsList).price,
+        isValid: true
+      },
+      max: {
+        value: maxBy(product => product.price, productsList).price,
+        isValid: true
+      }
+    },
+    discount: {
+      total: {
+        value: minBy(product => product.discount, productsList).discount,
+        isValid: true
+      }
+    },
+    categories: uniqBy(productsList, value => value.category).reduce(
+      (acc, value) => ({ ...acc, [value.category]: { isActive: true } }),
+      {}
+    )
   };
 
-  updateProductsFilterByCategory = (name, isActive) => {
+  updateProductsFilterField = (groupName, fieldName, fieldData) => {
     this.setState(prevState => ({
       productsFilter: {
         ...prevState.productsFilter,
-        categories: {
-          ...prevState.productsFilter.categories,
-          [name]: isActive
+        [groupName]: {
+          ...prevState.productsFilter[groupName],
+          [fieldName]: fieldData
         }
       }
     }));
   };
 
+  resetProductsFilter = () => {
+    this.setState({
+      productsFilter: this.productsFilterInitialParams
+    });
+  };
+
   filterProductsList = (params, products) => {
-    const { min, max, discount, categories } = params;
+    const {
+      price: {
+        min: { value: minValue },
+        max: { value: maxValue }
+      },
+      discount: {
+        total: { value: discountValue }
+      },
+      categories
+    } = params;
     const filteredProducts = products.filter(
       ({ price, discount: productDiscount }) =>
-        price >= min && price <= max && productDiscount >= discount
+        price >= minValue &&
+        price <= maxValue &&
+        productDiscount >= discountValue
     );
     const categoriesList = Object.keys(categories).filter(
-      category => categories[category]
+      category => categories[category].isActive
     );
     return filteredProducts.filter(({ category }) =>
       categoriesList.includes(category)
@@ -76,19 +92,22 @@ class App extends Component {
 
   render() {
     const { productsFilter, productsList } = this.state;
-    const { min, max, discount, categories } = productsFilter;
     const filteredProducts = this.filterProductsList(
-      { min, max, discount, categories },
+      productsFilter,
       productsList
     );
     return (
       <main className={classnames(styles.app)}>
-        <Products
-          filter={productsFilter}
-          list={filteredProducts}
-          updateProductsFilterByValue={this.updateProductsFilterByValue}
-          updateProductsFilterByCategory={this.updateProductsFilterByCategory}
-        />
+        <Context.Provider
+          value={{
+            filter: productsFilter,
+            updateProductsFilterField: this.updateProductsFilterField,
+            resetProductsFilter: this.resetProductsFilter,
+            list: filteredProducts
+          }}
+        >
+          <Products />
+        </Context.Provider>
       </main>
     );
   }

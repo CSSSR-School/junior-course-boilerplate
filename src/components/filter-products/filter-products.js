@@ -3,67 +3,72 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './filter-products.module.scss';
-import InputFilterProductsNumber from '../input-filter-products-number';
-import InputFilterProductsDiscount from '../input-filter-products-discount';
+import InputFilterProductsNumberPrice from '../input-filter-products-number-price';
+import InputFilterProductsNumberDiscount from '../input-filter-products-number-discount';
 import InputFilterProductsCategory from '../input-filter-products-category';
 
+import { Context } from '../context';
+
 class FilterProducts extends PureComponent {
-  handleProductsFilterChange = event => {
-    const { currentTarget } = event;
-    const { updateProductsFilterByValue = () => {} } = this.props;
-
-    const formData = new FormData(currentTarget);
-    const formDataObject = Object.fromEntries(formData);
-    const data = Object.keys(formDataObject).reduce(
-      (acc, key) => ({
-        ...acc,
-        [key]: Number(formDataObject[key])
-      }),
-      {}
-    );
-    const { min, max, discount } = data;
-    updateProductsFilterByValue({ min, max, discount });
-  };
-
   render() {
     const {
-      filter: { min, max, discount },
-      updateProductsFilterByCategory,
+      filter: {
+        price: { min, max },
+        discount: { total: totalDiscount },
+        categories
+      }
     } = this.props;
 
+    const mappedCategories = Object.keys(categories).map((category, index) => (
+      <InputFilterProductsCategory
+        key={index}
+        name={category}
+        value={`${category[0].toUpperCase()}${category.slice(1)}`}
+        isActive={categories[category].isActive}
+      />
+    ));
+
     return (
-      <form
-        className={classnames('productsFilter', styles.filterProducts)}
-        onChange={this.handleProductsFilterChange}
-      >
+      <form className={classnames('productsFilter', styles.filterProducts)}>
         <section className={classnames(styles.filterProductsWrapper)}>
           <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
           <div className={classnames(styles.filterProductsInner)}>
             от
-            <InputFilterProductsNumber name="min" value={min} />
+            <InputFilterProductsNumberPrice
+              name="min"
+              value={min.value}
+              isValid={min.isValid}
+            />
             до
-            <InputFilterProductsNumber name="max" value={max} />
+            <InputFilterProductsNumberPrice
+              name="max"
+              value={max.value}
+              isValid={max.isValid}
+            />
           </div>
         </section>
-        <InputFilterProductsDiscount
+        <InputFilterProductsNumberDiscount
           title="Скидка"
-          name="discount"
-          value={discount}
+          name="total"
+          value={totalDiscount.value}
+          isValid={totalDiscount.isValid}
           parentClassName={classnames(styles.filterProductsWrapper)}
         />
         <section className={classnames(styles.filterProductsWrapper)}>
           <h3 className={classnames(styles.filterProductsHeader)}>Категории</h3>
-          <div className={styles.filterProductsInner}>
-            <InputFilterProductsCategory
-              name="clothes"
-              updateProductsFilterByCategory={updateProductsFilterByCategory}
-            />
-            <InputFilterProductsCategory
-              name="books"
-              updateProductsFilterByCategory={updateProductsFilterByCategory}
-            />
-          </div>
+          <div className={styles.filterProductsInner}>{mappedCategories}</div>
         </section>
+        <Context.Consumer>
+          {({ resetProductsFilter }) => (
+            <input
+              type="button"
+              value="Сбросить фильтры"
+              readOnly={true}
+              className={classnames(styles.filterProductsReset)}
+              onClick={resetProductsFilter}
+            />
+          )}
+        </Context.Consumer>
       </form>
     );
   }
@@ -71,11 +76,26 @@ class FilterProducts extends PureComponent {
 
 FilterProducts.propTypes = {
   filter: propTypes.shape({
-    min: propTypes.number,
-    max: propTypes.number,
-    discount: propTypes.number
+    price: propTypes.shape({
+      min: propTypes.shape({
+        value: propTypes.number,
+        isValid: propTypes.bool
+      }),
+      max: propTypes.shape({
+        value: propTypes.number,
+        isValid: propTypes.bool
+      })
+    }),
+    discount: propTypes.shape({
+      total: propTypes.shape({
+        value: propTypes.number,
+        isValid: propTypes.bool
+      })
+    }),
+    categories: propTypes.shape({
+      isActive: propTypes.bool
+    })
   }),
-  updateProductsFilterByValue: propTypes.func
 };
 
 export default FilterProducts;
