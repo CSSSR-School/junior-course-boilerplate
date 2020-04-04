@@ -8,6 +8,11 @@ import Products from '../products';
 import productsList from './assets/products.json';
 import { Context } from '../context';
 
+const productsListCategories = uniqBy(
+  productsList,
+  value => value.category
+).map(value => value.category);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,12 +22,38 @@ class App extends Component {
       },
       productsList
     };
+    window.history.replaceState(
+      this.state.productsFilter.categories,
+      'categories',
+      `?${productsListCategories.reduce(
+        (acc, key, index) => `${acc}${index === 0 ? '' : '&'}category=${key}`,
+        ''
+      )}`
+    );
 
     this.filterProductsList = memoize(
       this.filterProductsList,
       params => params
     );
   }
+
+  componentDidMount() {
+    window.addEventListener('popstate', this.setFromHistory);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.setFromHistory);
+  }
+
+  setFromHistory = ({ state }) => {
+    this.setState(prevState => ({
+      productsFilter: {
+        categories: {
+          ...prevState.categories,
+          ...state
+        }
+      }
+    }));
+  };
 
   productsFilterInitialParams = {
     price: {
@@ -41,8 +72,8 @@ class App extends Component {
         isValid: true
       }
     },
-    categories: uniqBy(productsList, value => value.category).reduce(
-      (acc, value) => ({ ...acc, [value.category]: { isActive: true } }),
+    categories: productsListCategories.reduce(
+      (acc, category) => ({ ...acc, [category]: { isActive: true } }),
       {}
     )
   };
@@ -63,6 +94,15 @@ class App extends Component {
     this.setState({
       productsFilter: this.productsFilterInitialParams
     });
+
+    window.history.replaceState(
+      this.state.productsFilter.categories,
+      'categories',
+      `?${productsListCategories.reduce(
+        (acc, key, index) => `${acc}${index === 0 ? '' : '&'}category=${key}`,
+        ''
+      )}`
+    );
   };
 
   filterProductsList = (params, products) => {
