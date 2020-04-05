@@ -22,14 +22,7 @@ class App extends Component {
       },
       productsList
     };
-    window.history.replaceState(
-      this.state.productsFilter.categories,
-      'categories',
-      `?${productsListCategories.reduce(
-        (acc, key, index) => `${acc}${index === 0 ? '' : '&'}category=${key}`,
-        ''
-      )}`
-    );
+    this.setHistoryInitialURL();
 
     this.filterProductsList = memoize(
       this.filterProductsList,
@@ -43,6 +36,8 @@ class App extends Component {
   componentWillUnmount() {
     window.removeEventListener('popstate', this.setFromHistory);
   }
+
+  setHistoryInitialURL = () => window.history.replaceState({}, 'categories', window.location.pathname);
 
   setFromHistory = ({ state }) => {
     this.setState(prevState => ({
@@ -73,7 +68,7 @@ class App extends Component {
       }
     },
     categories: productsListCategories.reduce(
-      (acc, category) => ({ ...acc, [category]: { isActive: true } }),
+      (acc, category) => ({ ...acc, [category]: { isActive: false } }),
       {}
     )
   };
@@ -95,14 +90,7 @@ class App extends Component {
       productsFilter: this.productsFilterInitialParams
     });
 
-    window.history.replaceState(
-      this.state.productsFilter.categories,
-      'categories',
-      `?${productsListCategories.reduce(
-        (acc, key, index) => `${acc}${index === 0 ? '' : '&'}category=${key}`,
-        ''
-      )}`
-    );
+    this.setHistoryInitialURL();
   };
 
   filterProductsList = (params, products) => {
@@ -125,9 +113,12 @@ class App extends Component {
     const categoriesList = Object.keys(categories).filter(
       category => categories[category].isActive
     );
-    return filteredProducts.filter(({ category }) =>
-      categoriesList.includes(category)
-    );
+    if (categoriesList.length !== 0) {
+      return filteredProducts.filter(({ category }) =>
+        categoriesList.includes(category)
+      );
+    }
+    return filteredProducts;
   };
 
   render() {
