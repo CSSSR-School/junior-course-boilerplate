@@ -35,10 +35,10 @@ class App extends Component {
     this.setState(prevState => ({
       productsFilter: {
         price: {
-          ...prevState.productsFilter.price,
+          ...prevState.productsFilter.price
         },
         discount: {
-          ...prevState.productsFilter.discount,
+          ...prevState.productsFilter.discount
         },
         categories: {
           ...prevState.productsFilter.categories,
@@ -46,6 +46,14 @@ class App extends Component {
         }
       }
     }));
+  };
+
+  updateHistory = (data, filteredData, title) => {
+    const reducedData = filteredData.reduce(
+      (acc, key, index) => `${acc}${index === 0 ? '' : '&'}category=${key}`,
+      ''
+    );
+    window.history.pushState(data, title, `?${reducedData}`);
   };
 
   initializeState = list => {
@@ -89,6 +97,13 @@ class App extends Component {
     }));
   };
 
+  filterProductsFilterField = (groupName, fieldName) => {
+    const productsFilterField = this.state.productsFilter[groupName];
+    return Object.keys(productsFilterField).filter(
+      value => productsFilterField[value][fieldName]
+    );
+  };
+
   resetProductsFilter = () => {
     this.setState(this.initializeState(productsList));
 
@@ -104,7 +119,6 @@ class App extends Component {
       discount: {
         total: { value: discountValue }
       },
-      categories
     } = params;
     const filteredProducts = products.filter(
       ({ price, discount: productDiscount }) =>
@@ -112,9 +126,11 @@ class App extends Component {
         price <= maxValue &&
         productDiscount >= discountValue
     );
-    const categoriesList = Object.keys(categories).filter(
-      category => categories[category].isActive
+    const categoriesList = this.filterProductsFilterField(
+      'categories',
+      'isActive'
     );
+
     if (categoriesList.length !== 0) {
       return filteredProducts.filter(({ category }) =>
         categoriesList.includes(category)
@@ -125,9 +141,15 @@ class App extends Component {
 
   render() {
     const { productsFilter, productsList } = this.state;
+    const {categories} = productsFilter;
     const filteredProducts = this.filterProductsList(
       productsFilter,
       productsList
+    );
+    this.updateHistory(
+      categories,
+      this.filterProductsFilterField('categories', 'isActive'),
+      'categories'
     );
     return (
       <main className={classnames(styles.app)}>

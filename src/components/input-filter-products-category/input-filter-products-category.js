@@ -11,7 +11,7 @@ class InputFilterProductsCategory extends PureComponent {
     const { isActive, onClick: handleClick, ...rest } = this.props;
     return (
       <Context.Consumer>
-        {({ updateProductsFilterField, filter: {categories} }) => (
+        {({ updateProductsFilterField }) => (
           <input
             className={classnames(
               'filterProductsInput',
@@ -22,7 +22,6 @@ class InputFilterProductsCategory extends PureComponent {
             onClick={event =>
               handleClick(event, 'categories', updateProductsFilterField)
             }
-            data-categories={JSON.stringify(categories)}
             {...rest}
           />
         )}
