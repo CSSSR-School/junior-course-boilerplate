@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { memoize, uniqBy } from 'lodash';
+import { memoize } from 'lodash';
 import { minBy, maxBy } from 'csssr-school-utils';
 
 import styles from './app.module.scss';
@@ -8,20 +8,11 @@ import Products from '../products';
 import productsList from './assets/products.json';
 import { Context } from '../context';
 
-const productsListCategories = uniqBy(
-  productsList,
-  value => value.category
-).map(value => value.category);
-
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      productsFilter: {
-        ...this.productsFilterInitialParams
-      },
-      productsList
-    };
+
+    this.state = this.initializeState(productsList);
     this.setHistoryInitialURL();
 
     this.filterProductsList = memoize(
@@ -37,7 +28,8 @@ class App extends Component {
     window.removeEventListener('popstate', this.setFromHistory);
   }
 
-  setHistoryInitialURL = () => window.history.replaceState({}, 'categories', window.location.pathname);
+  setHistoryInitialURL = () =>
+    window.history.replaceState({}, 'categories', window.location.pathname);
 
   setFromHistory = ({ state }) => {
     this.setState(prevState => ({
@@ -50,27 +42,33 @@ class App extends Component {
     }));
   };
 
-  productsFilterInitialParams = {
-    price: {
-      min: {
-        value: minBy(product => product.price, productsList).price,
-        isValid: true
+  initializeState = list => {
+    const listCategories = Array.from(new Set(list.map(item => item.category)));
+    return {
+      productsFilter: {
+        price: {
+          min: {
+            value: minBy(item => item.price, list).price,
+            isValid: true
+          },
+          max: {
+            value: maxBy(item => item.price, list).price,
+            isValid: true
+          }
+        },
+        discount: {
+          total: {
+            value: minBy(item => item.discount, list).discount,
+            isValid: true
+          }
+        },
+        categories: listCategories.reduce(
+          (acc, category) => ({ ...acc, [category]: { isActive: false } }),
+          {}
+        )
       },
-      max: {
-        value: maxBy(product => product.price, productsList).price,
-        isValid: true
-      }
-    },
-    discount: {
-      total: {
-        value: minBy(product => product.discount, productsList).discount,
-        isValid: true
-      }
-    },
-    categories: productsListCategories.reduce(
-      (acc, category) => ({ ...acc, [category]: { isActive: false } }),
-      {}
-    )
+      productsList: list
+    };
   };
 
   updateProductsFilterField = (groupName, fieldName, fieldData) => {
@@ -86,9 +84,7 @@ class App extends Component {
   };
 
   resetProductsFilter = () => {
-    this.setState({
-      productsFilter: this.productsFilterInitialParams
-    });
+    this.setState(this.initializeState(productsList));
 
     this.setHistoryInitialURL();
   };
