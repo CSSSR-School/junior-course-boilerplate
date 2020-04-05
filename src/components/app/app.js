@@ -34,8 +34,14 @@ class App extends Component {
   setFromHistory = ({ state }) => {
     this.setState(prevState => ({
       productsFilter: {
+        price: {
+          ...prevState.productsFilter.price,
+        },
+        discount: {
+          ...prevState.productsFilter.discount,
+        },
         categories: {
-          ...prevState.categories,
+          ...prevState.productsFilter.categories,
           ...state
         }
       }
@@ -89,7 +95,7 @@ class App extends Component {
     this.setHistoryInitialURL();
   };
 
-  filterProductsList = (params, products) => {
+  filterProductsList = (params = {}, products = []) => {
     const {
       price: {
         min: { value: minValue },
