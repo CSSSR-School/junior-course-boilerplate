@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { memoize } from 'lodash';
-import { minBy, maxBy } from 'csssr-school-utils';
 
 import styles from './app.module.scss';
 import Products from '../products';
 import productsList from './assets/products.json';
-import { Context } from '../context';
+import { Context, getInitialState } from '../context';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = this.initializeState(productsList);
+    this.state = getInitialState(productsList);
     this.setHistoryInitialURL();
 
     this.filterProductsList = memoize(
@@ -56,35 +55,6 @@ class App extends Component {
     window.history.pushState(data, title, `?${reducedData}`);
   };
 
-  initializeState = list => {
-    const listCategories = Array.from(new Set(list.map(item => item.category)));
-    return {
-      productsFilter: {
-        price: {
-          min: {
-            value: minBy(item => item.price, list).price,
-            isValid: true
-          },
-          max: {
-            value: maxBy(item => item.price, list).price,
-            isValid: true
-          }
-        },
-        discount: {
-          total: {
-            value: minBy(item => item.discount, list).discount,
-            isValid: true
-          }
-        },
-        categories: listCategories.reduce(
-          (acc, category) => ({ ...acc, [category]: { isActive: false } }),
-          {}
-        )
-      },
-      productsList: list
-    };
-  };
-
   updateProductsFilterField = (groupName, fieldName, fieldData) => {
     this.setState(prevState => ({
       productsFilter: {
@@ -105,7 +75,7 @@ class App extends Component {
   };
 
   resetProductsFilter = () => {
-    this.setState(this.initializeState(productsList));
+    this.setState(getInitialState(productsList));
 
     this.setHistoryInitialURL();
   };
