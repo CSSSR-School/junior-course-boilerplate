@@ -13,7 +13,7 @@ class Products extends PureComponent {
   render() {
     return (
       <Context.Consumer>
-        {({ filter, list }) => (
+        {({ filter, list, updateProductsFilterField, resetProductsFilter }) => (
           <section className={classnames(styles.products)}>
             <div className={classnames(styles.productsRow)}>
               <aside
@@ -22,7 +22,11 @@ class Products extends PureComponent {
                   styles.productsColLeft
                 )}
               >
-                <FilterProducts filter={filter} />
+                <FilterProducts
+                  filter={filter}
+                  updateProductsFilterField={updateProductsFilterField}
+                  resetProductsFilter={resetProductsFilter}
+                />
               </aside>
               <div
                 className={classnames(

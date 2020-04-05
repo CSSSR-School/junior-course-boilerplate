@@ -4,27 +4,25 @@ import classnames from 'classnames';
 
 import styles from './input-filter-products-number-price.module.scss';
 import { withInputProductsNumberHandler } from '../hoc-helpers';
-import { Context } from '../context';
 
 class InputFilterProductsNumberPrice extends PureComponent {
   render() {
-    const { isValid, onChange: handleChange, ...rest } = this.props;
+    const {
+      isValid,
+      updateProductsFilterField,
+      onChange: handleChange,
+      ...rest
+    } = this.props;
     return (
-      <Context.Consumer>
-        {({ updateProductsFilterField }) => (
-          <input
-            className={classnames(
-              'filterProductsInput',
-              styles.inputFilterProductsNumberPrice,
-              { [styles.inputFilterProductsNumberPriceInvalid]: !isValid }
-            )}
-            onChange={event =>
-              handleChange(event, 'price', updateProductsFilterField)
-            }
-            {...rest}
-          />
+      <input
+        className={classnames(
+          'filterProductsInput',
+          styles.inputFilterProductsNumberPrice,
+          { [styles.inputFilterProductsNumberPriceInvalid]: !isValid }
         )}
-      </Context.Consumer>
+        onChange={event => handleChange(event, 'price')}
+        {...rest}
+      />
     );
   }
 }
@@ -33,7 +31,8 @@ InputFilterProductsNumberPrice.propTypes = {
   name: propTypes.string,
   value: propTypes.number,
   isValid: propTypes.bool,
-  onChange: propTypes.func
+  onChange: propTypes.func,
+  updateProductsFilterField: propTypes.func
 };
 
 export default withInputProductsNumberHandler(InputFilterProductsNumberPrice);

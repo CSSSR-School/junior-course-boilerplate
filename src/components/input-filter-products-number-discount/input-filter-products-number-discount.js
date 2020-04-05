@@ -5,37 +5,33 @@ import CSSSRSchoolInputDiscount from 'csssr-school-input-discount';
 
 import styles from './input-filter-products-number-discount.module.scss';
 import { withInputProductsNumberHandler } from '../hoc-helpers';
-import { Context } from '../context';
 
 class InputFilterProductsNumberDiscount extends PureComponent {
   render() {
     const {
       isValid,
       parentClassName,
+      updateProductsFilterField,
       onChange: handleChange,
       ...rest
     } = this.props;
     return (
-      <Context.Consumer>
-        {({ updateProductsFilterField }) => (
-          <section
-            className={classnames(
-              parentClassName,
-              styles.inputFilterProductsNumberDiscount,
-              {
-                [styles.inputFilterProductsNumberDiscountInvalid]: !isValid
-              }
-            )}
-          >
-            <CSSSRSchoolInputDiscount
-              onChange={event =>
-                handleChange(event, 'discount', updateProductsFilterField)
-              }
-              {...rest}
-            />
-          </section>
+      <section
+        className={classnames(
+          parentClassName,
+          styles.inputFilterProductsNumberDiscount,
+          {
+            [styles.inputFilterProductsNumberDiscountInvalid]: !isValid
+          }
         )}
-      </Context.Consumer>
+      >
+        <CSSSRSchoolInputDiscount
+          onChange={event =>
+            handleChange(event, 'discount')
+          }
+          {...rest}
+        />
+      </section>
     );
   }
 }
@@ -45,7 +41,10 @@ InputFilterProductsNumberDiscount.propTypes = {
   value: propTypes.number,
   isValid: propTypes.bool,
   onChange: propTypes.func,
+  updateProductsFilterField: propTypes.func,
   parentClassName: propTypes.string
 };
 
-export default withInputProductsNumberHandler(InputFilterProductsNumberDiscount);
+export default withInputProductsNumberHandler(
+  InputFilterProductsNumberDiscount
+);

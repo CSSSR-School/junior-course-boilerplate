@@ -2,12 +2,10 @@ import React, { PureComponent } from 'react';
 
 const withInputProductsCategoryHandler = WrappedComponent => {
   return class extends PureComponent {
-    handleClick = (event, groupName, cb) => {
-      const { target } = event;
-      const { name: key } = target;
-      const { isActive } = this.props;
+    handleClick = ({ target: { name: fieldName } }, groupName) => {
+      const { isActive, updateProductsFilterField } = this.props;
 
-      cb(groupName, key, { isActive: !isActive });
+      updateProductsFilterField(groupName, fieldName, { isActive: !isActive });
     };
     render() {
       return <WrappedComponent onClick={this.handleClick} {...this.props} />;

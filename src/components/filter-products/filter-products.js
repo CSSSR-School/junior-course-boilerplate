@@ -7,8 +7,6 @@ import InputFilterProductsNumberPrice from '../input-filter-products-number-pric
 import InputFilterProductsNumberDiscount from '../input-filter-products-number-discount';
 import InputFilterProductsCategory from '../input-filter-products-category';
 
-import { Context } from '../context';
-
 class FilterProducts extends PureComponent {
   render() {
     const {
@@ -16,7 +14,9 @@ class FilterProducts extends PureComponent {
         price: { min, max },
         discount: { total: totalDiscount },
         categories
-      }
+      },
+      updateProductsFilterField,
+      resetProductsFilter
     } = this.props;
 
     const mappedCategories = Object.keys(categories).map((category, index) => (
@@ -25,6 +25,7 @@ class FilterProducts extends PureComponent {
         name={category}
         value={`${category[0].toUpperCase()}${category.slice(1)}`}
         isActive={categories[category].isActive}
+        updateProductsFilterField={updateProductsFilterField}
       />
     ));
 
@@ -38,12 +39,14 @@ class FilterProducts extends PureComponent {
               name="min"
               value={min.value}
               isValid={min.isValid}
+              updateProductsFilterField={updateProductsFilterField}
             />
             до
             <InputFilterProductsNumberPrice
               name="max"
               value={max.value}
               isValid={max.isValid}
+              updateProductsFilterField={updateProductsFilterField}
             />
           </div>
         </section>
@@ -52,23 +55,20 @@ class FilterProducts extends PureComponent {
           name="total"
           value={totalDiscount.value}
           isValid={totalDiscount.isValid}
+          updateProductsFilterField={updateProductsFilterField}
           parentClassName={classnames(styles.filterProductsWrapper)}
         />
         <section className={classnames(styles.filterProductsWrapper)}>
           <h3 className={classnames(styles.filterProductsHeader)}>Категории</h3>
           <div className={styles.filterProductsInner}>{mappedCategories}</div>
         </section>
-        <Context.Consumer>
-          {({ resetProductsFilter }) => (
-            <input
-              type="button"
-              value="Сбросить фильтры"
-              readOnly={true}
-              className={classnames(styles.filterProductsReset)}
-              onClick={resetProductsFilter}
-            />
-          )}
-        </Context.Consumer>
+        <input
+          type="button"
+          value="Сбросить фильтры"
+          readOnly={true}
+          className={classnames(styles.filterProductsReset)}
+          onClick={resetProductsFilter}
+        />
       </form>
     );
   }
@@ -96,6 +96,8 @@ FilterProducts.propTypes = {
       isActive: propTypes.bool
     })
   }),
+  updateProductsFilterField: propTypes.func,
+  resetProductsFilter: propTypes.func
 };
 
 export default FilterProducts;

@@ -6,23 +6,16 @@ const withInputProductsNumberHandler = WrappedComponent => {
       return Number(value.replace(/\D/g, ''));
     };
 
-    handleChange = (event, groupName, cb) => {
-      const {
-        target: { value, name: fieldName }
-      } = event;
+    handleChange = ({ target: { value, name: fieldName } }, groupName) => {
+      const { updateProductsFilterField } = this.props;
       const maskedValue = this.addNumberMask(value);
-      cb(groupName, fieldName, {
+      updateProductsFilterField(groupName, fieldName, {
         value: maskedValue,
         isValid: value > 0
       });
     };
     render() {
-      return (
-        <WrappedComponent
-          onChange={this.handleChange}
-          {...this.props}
-        />
-      );
+      return <WrappedComponent onChange={this.handleChange} {...this.props} />;
     }
   };
 };

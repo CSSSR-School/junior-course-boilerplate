@@ -4,28 +4,26 @@ import classnames from 'classnames';
 
 import styles from './input-filter-products-category.module.scss';
 import { withInputProductsCategoryHandler } from '../hoc-helpers';
-import { Context } from '../context';
 
 class InputFilterProductsCategory extends PureComponent {
   render() {
-    const { isActive, onClick: handleClick, ...rest } = this.props;
+    const {
+      isActive,
+      updateProductsFilterField,
+      onClick: handleClick,
+      ...rest
+    } = this.props;
     return (
-      <Context.Consumer>
-        {({ updateProductsFilterField }) => (
-          <input
-            className={classnames(
-              'filterProductsInput',
-              styles.inputFilterProductsCategory,
-              { [styles.inputFilterProductsCategoryActive]: isActive }
-            )}
-            type="button"
-            onClick={event =>
-              handleClick(event, 'categories', updateProductsFilterField)
-            }
-            {...rest}
-          />
+      <input
+        className={classnames(
+          'filterProductsInput',
+          styles.inputFilterProductsCategory,
+          { [styles.inputFilterProductsCategoryActive]: isActive }
         )}
-      </Context.Consumer>
+        type="button"
+        onClick={event => handleClick(event, 'categories')}
+        {...rest}
+      />
     );
   }
 }
@@ -33,7 +31,8 @@ class InputFilterProductsCategory extends PureComponent {
 InputFilterProductsCategory.propTypes = {
   name: propTypes.string,
   isActive: propTypes.bool,
-  onClick: propTypes.func
+  onClick: propTypes.func,
+  updateProductsFilterField: propTypes.func,
 };
 
 export default withInputProductsCategoryHandler(InputFilterProductsCategory);
