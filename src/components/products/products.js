@@ -12,29 +12,31 @@ import { Context } from '../context';
 class Products extends PureComponent {
   render() {
     return (
-      <section className={classnames(styles.products)}>
-        <div className={classnames(styles.productsRow)}>
-          <aside
-            className={classnames(styles.productsCol, styles.productsColLeft)}
-          >
-            <Context.Consumer>
-              {({ filter, updateProductsFilterField }) => (
-                <FilterProducts
-                  filter={filter}
-                />
-              )}
-            </Context.Consumer>
-          </aside>
-          <div
-            className={classnames(styles.productsCol, styles.productsColRight)}
-          >
-            <HeaderProducts header={'Список товаров'} />
-            <Context.Consumer>
-              {({ list }) => <ListProducts list={list} />}
-            </Context.Consumer>
-          </div>
-        </div>
-      </section>
+      <Context.Consumer>
+        {({ filter, list }) => (
+          <section className={classnames(styles.products)}>
+            <div className={classnames(styles.productsRow)}>
+              <aside
+                className={classnames(
+                  styles.productsCol,
+                  styles.productsColLeft
+                )}
+              >
+                <FilterProducts filter={filter} />
+              </aside>
+              <div
+                className={classnames(
+                  styles.productsCol,
+                  styles.productsColRight
+                )}
+              >
+                <HeaderProducts header={'Список товаров'} />
+                <ListProducts list={list} />
+              </div>
+            </div>
+          </section>
+        )}
+      </Context.Consumer>
     );
   }
 }
