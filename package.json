@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "csssr-school-utils": "https://github.com/CSSSR-School/junior-course-utils.git",
     "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

@@ -1,7 +1,8 @@
 import React from "react";
 
-import ProductItem from 'csssr-school-product-card';
-import PropTypes from 'prop-types';
+import LogRender from "../LogRender/LogRender";
+import ProductItem from "csssr-school-product-card";
+import PropTypes from "prop-types";
 
 import styles from "./ProductsList.module.css";
 
@@ -11,18 +12,9 @@ const ratingComponent = ({ isFilled }) => {
   return <div className={isFilled && "starFill"} />;
 };
 
-class ProductsList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      price: props.price,
-      products: props.products
-    }
-  }
-
+export default class ProductsList extends LogRender {
   generateList() {
-    return this.state.products.slice(0, PRODUCTS_NUMBER)
+    return this.props.products.slice(0, PRODUCTS_NUMBER)
       .filter((product) => (product.price >= this.props.price.min) && (product.price <= this.props.price.max))
       .map((item, number) =>
         <li key={number}>
@@ -65,5 +57,3 @@ ProductItem.defaultProps = {
   rating: 4,
   ratingComponent: ratingComponent
 };
-
-export default ProductsList;

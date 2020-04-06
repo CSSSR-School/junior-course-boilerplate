@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./Form.module.css";
+import LogRender from "../LogRender/LogRender";
 
-export default class Form extends React.Component {
+export default class Form extends LogRender {
   constructor(props) {
     super(props);
 
