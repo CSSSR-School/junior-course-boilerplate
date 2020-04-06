@@ -5,31 +5,51 @@ import PropTypes from 'prop-types';
 
 import styles from "./ProductsList.module.css";
 
-const PRODUCTS_NUMBER = 3;
+const PRODUCTS_NUMBER = 6;
 
 const ratingComponent = ({ isFilled }) => {
   return <div className={isFilled && "starFill"} />;
 };
 
-const ProductsList = ({products}) => {
-  const list = products.slice(0, PRODUCTS_NUMBER).map((item, number) =>
-    <li key={number}>
-      <ProductItem
-        title = {item.name}
-      />
-    </li>
-  );
-  return (
-    <ul className={styles.productsList}>{list}</ul>
-  );
-};
+class ProductsList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      price: props.price,
+      products: props.products
+    }
+  }
+
+  generateList() {
+    return this.state.products.slice(0, PRODUCTS_NUMBER)
+      .filter((product) => (product.price >= this.props.price.min) && (product.price <= this.props.price.max))
+      .map((item, number) =>
+        <li key={number}>
+          <ProductItem
+            title = {item.name}
+            price = {item.price}
+            subPriceContent = {item.subPriceContent}
+          />
+        </li>
+      )
+  }
+
+  render() {
+    return (
+      <ul className={styles.productsList}>
+        {this.generateList()}
+      </ul>
+    )
+  }
+}
 
 ProductItem.propTypes = {
   isInStock: PropTypes.bool.isRequired,
   img: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  subPriceContent: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  subPriceContent: PropTypes.number.isRequired,
   maxRating: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
   ratingComponent: PropTypes.func.isRequired

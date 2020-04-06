@@ -8,17 +8,53 @@ import products from "./products.json";
 
 import "./index.css"
 
-const App = () => {
-  return (
-    <div className='appWrapper'>
-      <Title text='Список товаров'/>
-      <div className='wrapper'>
-        <Form />
-        <ProductList products={products}/>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      products: this.props.products,
+      price: this.getMinAndMaxPrice()
+    };
+
+    this.updateData = this.updateData.bind(this);
+  }
+
+  getMinPrice() {
+    return this.props.products.reduce((a,b) => a.price < b.price ? a : b).price;
+  }
+
+  getMaxPrice() {
+    return this.props.products.reduce((a,b) => a.price > b.price ? a : b).price;
+  }
+
+  getMinAndMaxPrice() {
+    return {
+      min: this.getMinPrice(),
+      max: this.getMaxPrice()
+    }
+  }
+
+  updateData(value) {
+    this.setState({price: value})
+  }
+
+  render() {
+    return (
+      <div className='appWrapper'>
+        <Title text='Список товаров'/>
+        <div className='wrapper'>
+          <Form
+            price={this.state.price}
+            updateData={this.updateData}/>
+          <ProductList
+            products={this.state.products}
+            price={this.state.price}/>
+        </div>
       </div>
-    </div>
-  );
-};
+    )
+  }
+}
 
 const rootElement = document.getElementById('root');
-ReactDOM.render (<App />, rootElement);
+ReactDOM.render (<App products = {products} />, rootElement);
