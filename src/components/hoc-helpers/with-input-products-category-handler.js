@@ -5,7 +5,11 @@ const withInputProductsCategoryHandler = WrappedComponent => {
     handleClick = ({ target: { name: fieldName } }, groupName) => {
       const { isActive, updateProductsFilterField } = this.props;
 
-      updateProductsFilterField(groupName, fieldName, { isActive: !isActive });
+      updateProductsFilterField({
+        groupName,
+        fieldName,
+        fieldData: { isActive: !isActive }
+      });
     };
     render() {
       return <WrappedComponent onClick={this.handleClick} {...this.props} />;

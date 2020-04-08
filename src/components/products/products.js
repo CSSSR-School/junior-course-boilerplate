@@ -3,44 +3,38 @@ import classnames from 'classnames';
 
 import styles from './products.module.scss';
 
-import FilterProducts from '../filter-products';
+import FilterProductsContainer from '../../containers/filter-products-container';
+import ListProductsContainer from '../../containers/list-products-container';
 import HeaderProducts from '../header-products';
-import ListProducts from '../list-products';
-
-import { Context } from '../context';
 
 class Products extends PureComponent {
+  filterProductsFilterField = (filterParams, groupName, fieldName) => {
+    const filterField = filterParams[groupName];
+    return Object.keys(filterField).filter(
+      value => filterField[value][fieldName]
+    );
+  };
   render() {
     return (
-      <Context.Consumer>
-        {({ filter, list, updateProductsFilterField, resetProductsFilter }) => (
-          <section className={classnames(styles.products)}>
-            <div className={classnames(styles.productsRow)}>
-              <aside
-                className={classnames(
-                  styles.productsCol,
-                  styles.productsColLeft
-                )}
-              >
-                <FilterProducts
-                  filter={filter}
-                  updateProductsFilterField={updateProductsFilterField}
-                  resetProductsFilter={resetProductsFilter}
-                />
-              </aside>
-              <div
-                className={classnames(
-                  styles.productsCol,
-                  styles.productsColRight
-                )}
-              >
-                <HeaderProducts header={'Список товаров'} />
-                <ListProducts list={list} />
-              </div>
-            </div>
-          </section>
-        )}
-      </Context.Consumer>
+      <section className={classnames(styles.products)}>
+        <div className={classnames(styles.productsRow)}>
+          <aside
+            className={classnames(styles.productsCol, styles.productsColLeft)}
+          >
+            <FilterProductsContainer
+              filterProductsFilterField={this.filterProductsFilterField}
+            />
+          </aside>
+          <div
+            className={classnames(styles.productsCol, styles.productsColRight)}
+          >
+            <HeaderProducts header={'Список товаров'} />
+            <ListProductsContainer
+              filterProductsFilterField={this.filterProductsFilterField}
+            />
+          </div>
+        </div>
+      </section>
     );
   }
 }

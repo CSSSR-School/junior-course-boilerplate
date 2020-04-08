@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -7,72 +7,71 @@ import InputFilterProductsNumberPrice from '../input-filter-products-number-pric
 import InputFilterProductsNumberDiscount from '../input-filter-products-number-discount';
 import InputFilterProductsCategory from '../input-filter-products-category';
 
-class FilterProducts extends PureComponent {
-  render() {
-    const {
-      filter: {
-        price: { min, max },
-        discount: { total: totalDiscount },
-        categories
-      },
-      updateProductsFilterField,
-      resetProductsFilter
-    } = this.props;
+const FilterProducts = props => {
+  const {
+    filter: {
+      price: { min, max },
+      discount: { total: totalDiscount },
+      categories
+    },
+    updateProductsFilterField,
+    setHistoryInitialURL,
+    setInitialState
+  } = props;
 
-    const mappedCategories = Object.keys(categories).map((category, index) => (
-      <InputFilterProductsCategory
-        key={index}
-        name={category}
-        value={`${category[0].toUpperCase()}${category.slice(1)}`}
-        isActive={categories[category].isActive}
+  const mappedCategories = Object.keys(categories).map((category, index) => (
+    <InputFilterProductsCategory
+      key={index}
+      name={category}
+      value={`${category[0].toUpperCase()}${category.slice(1)}`}
+      isActive={categories[category].isActive}
+      updateProductsFilterField={updateProductsFilterField}
+    />
+  ));
+
+  return (
+    <form className={classnames('productsFilter', styles.filterProducts)}>
+      <section className={classnames(styles.filterProductsWrapper)}>
+        <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
+        <div className={classnames(styles.filterProductsInner)}>
+          от
+          <InputFilterProductsNumberPrice
+            name="min"
+            value={min.value}
+            isValid={min.isValid}
+            updateProductsFilterField={updateProductsFilterField}
+          />
+          до
+          <InputFilterProductsNumberPrice
+            name="max"
+            value={max.value}
+            isValid={max.isValid}
+            updateProductsFilterField={updateProductsFilterField}
+          />
+        </div>
+      </section>
+      <InputFilterProductsNumberDiscount
+        title="Скидка"
+        name="total"
+        value={totalDiscount.value}
+        isValid={totalDiscount.isValid}
         updateProductsFilterField={updateProductsFilterField}
+        parentClassName={classnames(styles.filterProductsWrapper)}
       />
-    ));
-
-    return (
-      <form className={classnames('productsFilter', styles.filterProducts)}>
-        <section className={classnames(styles.filterProductsWrapper)}>
-          <h3 className={classnames(styles.filterProductsHeader)}>Цена</h3>
-          <div className={classnames(styles.filterProductsInner)}>
-            от
-            <InputFilterProductsNumberPrice
-              name="min"
-              value={min.value}
-              isValid={min.isValid}
-              updateProductsFilterField={updateProductsFilterField}
-            />
-            до
-            <InputFilterProductsNumberPrice
-              name="max"
-              value={max.value}
-              isValid={max.isValid}
-              updateProductsFilterField={updateProductsFilterField}
-            />
-          </div>
-        </section>
-        <InputFilterProductsNumberDiscount
-          title="Скидка"
-          name="total"
-          value={totalDiscount.value}
-          isValid={totalDiscount.isValid}
-          updateProductsFilterField={updateProductsFilterField}
-          parentClassName={classnames(styles.filterProductsWrapper)}
-        />
-        <section className={classnames(styles.filterProductsWrapper)}>
-          <h3 className={classnames(styles.filterProductsHeader)}>Категории</h3>
-          <div className={styles.filterProductsInner}>{mappedCategories}</div>
-        </section>
-        <input
-          type="button"
-          value="Сбросить фильтры"
-          readOnly={true}
-          className={classnames(styles.filterProductsReset)}
-          onClick={resetProductsFilter}
-        />
-      </form>
-    );
-  }
-}
+      <section className={classnames(styles.filterProductsWrapper)}>
+        <h3 className={classnames(styles.filterProductsHeader)}>Категории</h3>
+        <div className={styles.filterProductsInner}>{mappedCategories}</div>
+      </section>
+      <input
+        type="button"
+        value="Сбросить фильтры"
+        readOnly={true}
+        className={classnames(styles.filterProductsReset)}
+        onClick={() => setInitialState({setHistoryInitialURL})}
+      />
+    </form>
+  );
+};
 
 FilterProducts.propTypes = {
   filter: propTypes.shape({
@@ -97,7 +96,8 @@ FilterProducts.propTypes = {
     })
   }),
   updateProductsFilterField: propTypes.func,
-  resetProductsFilter: propTypes.func
+  setHistoryInitialURL: propTypes.func,
+  setInitialState: propTypes.func,
 };
 
 export default FilterProducts;

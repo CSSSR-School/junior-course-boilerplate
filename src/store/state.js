@@ -1,8 +1,7 @@
-import React from 'react';
 import { minBy, maxBy } from 'csssr-school-utils';
-import dataJSON from '../app/assets/products.json';
+import dataJSON from '../components/app/assets/products.json';
 
-export const getInitialState = data => {
+const getInitialState = data => {
   const listCategories = Array.from(new Set(data.map(item => item.category)));
   return {
     productsFilter: {
@@ -31,6 +30,4 @@ export const getInitialState = data => {
   };
 };
 
-const initialState = getInitialState(dataJSON);
-
-export const Context = React.createContext(initialState);
+export const initialState = getInitialState(dataJSON);
