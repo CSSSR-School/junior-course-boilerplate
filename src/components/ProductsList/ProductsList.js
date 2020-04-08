@@ -6,17 +6,13 @@ import PropTypes from "prop-types";
 
 import styles from "./ProductsList.module.css";
 
-const PRODUCTS_NUMBER = 6;
-
 const ratingComponent = ({ isFilled }) => {
   return <div className={isFilled && "starFill"} />;
 };
 
 export default class ProductsList extends LogRender {
   generateList() {
-    return this.props.products.slice(0, PRODUCTS_NUMBER)
-      .filter((product) => (product.price >= this.props.price.min) && (product.price <= this.props.price.max))
-      .map((item, number) =>
+    return this.props.products.map((item, number) =>
         <li key={number}>
           <ProductItem
             title = {item.name}

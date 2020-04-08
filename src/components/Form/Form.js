@@ -10,10 +10,6 @@ export default class Form extends LogRender {
     this.maxPriceInput = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.state = {
-      price: props.price
-    }
   }
 
   handleSubmit(evt) {
@@ -34,14 +30,14 @@ export default class Form extends LogRender {
           <span>от</span>
           <input
             type="number"
-            defaultValue={this.state.price.min}
+            defaultValue={this.props.price.min}
             ref={this.minPriceInput}/>
         </label>
         <label>
           <span>до</span>
           <input
             type="number"
-            defaultValue={this.state.price.max}
+            defaultValue={this.props.price.max}
             ref={this.maxPriceInput}/>
         </label>
         <button type="submit">Применить</button>
