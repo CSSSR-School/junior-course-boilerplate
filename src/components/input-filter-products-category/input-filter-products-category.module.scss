@@ -14,6 +14,7 @@
   line-height: 1;
   font-weight: 600;
   color: #323c48;
+  text-transform: capitalize;
 
   background-color: transparent;
   border: 1px solid #323c48;
@@ -32,14 +33,13 @@
   &:hover,
   &:focus {
     color: #ffffff;
-    background-color: #437bbf;
-    border: 1px solid #437bbf;
+    background-color: #323c48;
   }
 
   &:active {
     color: #ffffff;
-    background-color: darken(#437bbf, 10%);
-    border: 1px solid darken(#437bbf, 10%);
+    background-color: darken(#323c48, 10%);
+    border: 1px solid darken(#323c48, 10%);
   }
 
   &Active {

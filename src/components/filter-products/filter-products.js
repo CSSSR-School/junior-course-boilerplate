@@ -23,7 +23,7 @@ const FilterProducts = props => {
     <InputFilterProductsCategory
       key={index}
       name={category}
-      value={`${category[0].toUpperCase()}${category.slice(1)}`}
+      value={category}
       isActive={categories[category].isActive}
       updateProductsFilterField={updateProductsFilterField}
     />
