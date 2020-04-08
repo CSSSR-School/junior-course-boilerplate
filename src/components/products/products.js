@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './products.module.scss';
@@ -7,36 +8,28 @@ import FilterProductsContainer from '../../containers/filter-products-container'
 import ListProductsContainer from '../../containers/list-products-container';
 import HeaderProducts from '../header-products';
 
-class Products extends PureComponent {
-  filterProductsFilterField = (filterParams, groupName, fieldName) => {
-    const filterField = filterParams[groupName];
-    return Object.keys(filterField).filter(
-      value => filterField[value][fieldName]
-    );
-  };
-  render() {
-    return (
-      <section className={classnames(styles.products)}>
-        <div className={classnames(styles.productsRow)}>
-          <aside
-            className={classnames(styles.productsCol, styles.productsColLeft)}
-          >
-            <FilterProductsContainer
-              filterProductsFilterField={this.filterProductsFilterField}
-            />
-          </aside>
-          <div
-            className={classnames(styles.productsCol, styles.productsColRight)}
-          >
-            <HeaderProducts header={'Список товаров'} />
-            <ListProductsContainer
-              filterProductsFilterField={this.filterProductsFilterField}
-            />
-          </div>
+const Products = props => {
+  return (
+    <section className={classnames(styles.products)}>
+      <div className={classnames(styles.productsRow)}>
+        <aside
+          className={classnames(styles.productsCol, styles.productsColLeft)}
+        >
+          <FilterProductsContainer {...props} />
+        </aside>
+        <div
+          className={classnames(styles.productsCol, styles.productsColRight)}
+        >
+          <HeaderProducts header={'Список товаров'} />
+          <ListProductsContainer {...props} />
         </div>
-      </section>
-    );
-  }
-}
+      </div>
+    </section>
+  );
+};
+
+Products.propTypes = {
+  filterProductsFilterField: propTypes.func
+};
 
 export default Products;
