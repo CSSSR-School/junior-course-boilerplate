@@ -1,9 +1,14 @@
 import { initialState } from './state';
+import {
+  UPDATE_PRODUCTS_FILTER_FIELD,
+  UPDATE_PRODUCTS_FILTER_CATEGORIES,
+  SET_INITIAL_STATE
+} from './action-types';
 
 export const reducer = (state = initialState, action) => {
   const { type, payload = {} } = action;
   switch (type) {
-    case 'UPDATE_PRODUCTS-FILTER_FIELD':
+    case UPDATE_PRODUCTS_FILTER_FIELD:
       const { groupName, fieldName, fieldData } = payload;
       return {
         ...state,
@@ -15,7 +20,8 @@ export const reducer = (state = initialState, action) => {
           }
         }
       };
-    case 'UPDATE_PRODUCTS-FILTER_CATEGORIES':
+
+    case UPDATE_PRODUCTS_FILTER_CATEGORIES:
       const { state: historyState } = payload;
       return {
         ...state,
@@ -32,14 +38,10 @@ export const reducer = (state = initialState, action) => {
           }
         }
       };
-    case 'SET_INITIAL_STATE':
-      const { setHistoryInitialURL } = payload;
-      setHistoryInitialURL();
 
-      return {
-        ...state,
-        ...initialState
-      };
+    case SET_INITIAL_STATE:
+      return initialState;
+
     default:
       return state;
   }

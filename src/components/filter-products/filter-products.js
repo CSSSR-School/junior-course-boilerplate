@@ -15,8 +15,7 @@ const FilterProducts = props => {
       categories
     },
     updateProductsFilterField,
-    setHistoryInitialURL,
-    setInitialState
+    setInitialState,
   } = props;
 
   const mappedCategories = Object.keys(categories).map((category, index) => (
@@ -67,7 +66,7 @@ const FilterProducts = props => {
         value="Сбросить фильтры"
         readOnly={true}
         className={classnames(styles.filterProductsReset)}
-        onClick={() => setInitialState({setHistoryInitialURL})}
+        onClick={setInitialState}
       />
     </form>
   );

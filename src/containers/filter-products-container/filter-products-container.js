@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import FilterProducts from '../../components/filter-products';
-import * as actions from '../../store/actions';
+import * as actionsCreators from '../../store/action-creators';
 
 class FilterProductsContainer extends PureComponent {
   constructor(props) {
@@ -21,12 +21,19 @@ class FilterProductsContainer extends PureComponent {
     );
   }
 
-  setHistoryInitialURL = () =>
-    window.history.replaceState(
-      {},
-      'categories',
-      window.location.pathname
+  componentDidUpdate() {
+    const { filter, filterProductsFilterField } = this.props;
+    const { categories } = filter;
+
+    this.updateHistory(
+      categories,
+      filterProductsFilterField(filter, 'categories', 'isActive'),
+      'categories'
     );
+  }
+
+  setHistoryInitialURL = () =>
+    window.history.replaceState({}, 'categories', window.location.pathname);
 
   updateHistory = (data, filteredData, title) => {
     const reducedData = filteredData.reduce(
@@ -34,20 +41,14 @@ class FilterProductsContainer extends PureComponent {
       ''
     );
     window.history.pushState(data, title, `?${reducedData}`);
+    console.log(window.history.state);
   };
 
   render() {
-    const { filter, filterProductsFilterField } = this.props;
-    const { categories } = filter;
-    this.updateHistory(
-      categories,
-      filterProductsFilterField(filter, 'categories', 'isActive'),
-      'categories'
-    );
+    const { filter } = this.props;
     return (
       <FilterProducts
         filter={filter}
-        setHistoryInitialURL={this.setHistoryInitialURL}
         updateProductsFilterField={this.props.updateProductsFilterField}
         setInitialState={this.props.setInitialState}
       />
@@ -56,7 +57,10 @@ class FilterProductsContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  return { filter: state.productsFilter }
+  return { filter: state.productsFilter };
 };
 
-export default connect(mapStateToProps, actions)(FilterProductsContainer);
+export default connect(
+  mapStateToProps,
+  actionsCreators
+)(FilterProductsContainer);
