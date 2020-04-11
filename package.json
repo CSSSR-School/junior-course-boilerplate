@@ -3,21 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "eslint-plugin-prettier": "3.1.2",
+    "prettier": "1.19.1",
+    "husky": "3.1.0",
+    "lint-staged": "9.5.0",
     "classnames": "^2.2.6",
-    "csssr-school-utils": "git+https://github.com/CSSSR-School/junior-course-utils.git",
-    "i": "^0.3.6",
-    "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
     "normalize.scss": "latest",
-    "npm": "^6.14.4",
-    "prop-types": "^15.7.2",
+    "webfontloader": "^1.6.28",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-mixin": "^5.0.0",
     "react-redux": "^7.2.0",
     "react-scripts": "3.2.0",
+    "prop-types": "^15.7.2",
     "redux": "^4.0.5",
-    "webfontloader": "^1.6.28"
+    "reselect": "^4.0.0",
+    "csssr-school-utils": "git+https://github.com/CSSSR-School/junior-course-utils.git",
+    "csssr-school-input-discount": "git+https://github.com/CSSSR-School/junior-course-input-discount.git",
+    "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,14 +34,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "csssr-school-input-discount": "git+https://github.com/CSSSR-School/junior-course-input-discount.git",
-    "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git",
-    "eslint-plugin-prettier": "3.1.2",
-    "husky": "3.1.0",
-    "lint-staged": "9.5.0",
-    "prettier": "1.19.1"
-  },
   "lint-staged": {
     "*.+(js|jsx)": [
       "eslint --fix",
