@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import FilterProducts from '../../components/filter-products';
-import * as actionsCreators from '../../store/action-creators';
+import {
+  productsActions,
+  productsSelectors
+} from '../../redux/modules/products';
 
 class FilterProductsContainer extends PureComponent {
   constructor(props) {
@@ -41,7 +45,6 @@ class FilterProductsContainer extends PureComponent {
       ''
     );
     window.history.pushState(data, title, `?${reducedData}`);
-    console.log(window.history.state);
   };
 
   render() {
@@ -57,10 +60,14 @@ class FilterProductsContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  return { filter: state.productsFilter };
+  const { getProductsFilter } = productsSelectors;
+  return { filter: getProductsFilter(state) };
 };
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(productsActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  actionsCreators
+  mapDispatchToProps
 )(FilterProductsContainer);
