@@ -4,11 +4,14 @@ import classnames from 'classnames';
 
 import styles from './products.module.scss';
 
+import { productsSelectors } from '../../redux/modules/products';
 import FilterProductsContainer from '../../containers/filter-products-container';
-import ListProductsContainer from '../../containers/list-products-container';
+import ListProducts from '../../components/list-products';
 import HeaderProducts from '../header-products';
 
 const Products = props => {
+  const { filterProductsList } = productsSelectors;
+  const list = filterProductsList(props.state);
   return (
     <section className={classnames(styles.products)}>
       <div className={classnames(styles.productsRow)}>
@@ -21,7 +24,7 @@ const Products = props => {
           className={classnames(styles.productsCol, styles.productsColRight)}
         >
           <HeaderProducts header={'Список товаров'} />
-          <ListProductsContainer {...props} />
+          <ListProducts list={list} />
         </div>
       </div>
     </section>

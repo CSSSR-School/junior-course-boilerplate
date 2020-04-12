@@ -9,7 +9,7 @@ const getProductsFilterCategories = state => {
   return categories;
 };
 
-const getProducsFilterCategoriesActive = createSelector(
+const getProductsFilterActiveCategoriesList = createSelector(
   getProductsFilterCategories,
   categories =>
     Object.keys(categories).filter(category => categories[category].isActive)
@@ -20,7 +20,7 @@ const getProductsList = ({ productsList }) => {
 };
 
 const filterProductsList = createSelector(
-  [getProductsFilter, getProducsFilterCategoriesActive, getProductsList],
+  [getProductsFilter, getProductsFilterActiveCategoriesList, getProductsList],
   (filterParams, activeCategoriesList, productsList) => {
     const {
       price: {
@@ -47,4 +47,9 @@ const filterProductsList = createSelector(
   }
 );
 
-export { getProductsFilter, getProductsList, filterProductsList };
+export {
+  getProductsFilter,
+  getProductsList,
+  getProductsFilterActiveCategoriesList,
+  filterProductsList
+};

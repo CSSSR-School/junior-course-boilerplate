@@ -1,18 +1,14 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+
 import Products from '../../components/products';
 
 class ProductsContainer extends PureComponent {
-  filterProductsFilterField = (filterParams, groupName, fieldName) => {
-    const filterField = filterParams[groupName];
-    return Object.keys(filterField).filter(
-      value => filterField[value][fieldName]
-    );
-  };
   render() {
-    return (
-      <Products filterProductsFilterField={this.filterProductsFilterField} />
-    );
+    return <Products {...this.props} />;
   }
 }
 
-export default ProductsContainer;
+const mapStateToProps = state => ({state});
+
+export default connect(mapStateToProps)(ProductsContainer);

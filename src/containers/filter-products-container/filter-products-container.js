@@ -26,13 +26,14 @@ class FilterProductsContainer extends PureComponent {
   }
 
   componentDidUpdate() {
-    const { filter, filterProductsFilterField } = this.props;
-    const { categories } = filter;
+    const { state } = this.props;
+    const {productsFilter: { categories }
+    } = state;
+    const { getProductsFilterActiveCategoriesList } = productsSelectors;
 
     this.updateHistory(
       categories,
-      filterProductsFilterField(filter, 'categories', 'isActive'),
-      'categories'
+      getProductsFilterActiveCategoriesList(state)
     );
   }
 
@@ -48,26 +49,19 @@ class FilterProductsContainer extends PureComponent {
   };
 
   render() {
-    const { filter } = this.props;
+    const { state, updateProductsFilterField, setInitialState } = this.props;
+    const { productsFilter } = state;
     return (
       <FilterProducts
-        filter={filter}
-        updateProductsFilterField={this.props.updateProductsFilterField}
-        setInitialState={this.props.setInitialState}
+        filter={productsFilter}
+        updateProductsFilterField={updateProductsFilterField}
+        setInitialState={setInitialState}
       />
     );
   }
 }
 
-const mapStateToProps = state => {
-  const { getProductsFilter } = productsSelectors;
-  return { filter: getProductsFilter(state) };
-};
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(productsActions, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FilterProductsContainer);
+export default connect(null, mapDispatchToProps)(FilterProductsContainer);
