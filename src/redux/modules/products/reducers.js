@@ -30,7 +30,16 @@ const getInitialState = data => {
           {}
         )
       },
-      list: data
+      list: data,
+      pagination: {
+        currentPage: 1,
+        itemsPerPage: 6,
+        upperPageBound: 3,
+        lowerPageBound: 0,
+        isPrevActive: false,
+        isNextActive: true,
+        pageBound: 3
+      }
     }
   };
 };
@@ -52,9 +61,10 @@ export default (state = initialState, action) => {
               [fieldName]: fieldData
             }
           },
-          list: [
-            ...state.products.list
-          ]
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination
+          }
         }
       };
 
@@ -75,9 +85,10 @@ export default (state = initialState, action) => {
               ...historyState
             }
           },
-          list: [
-            ...state.products.list
-          ]
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination
+          }
         }
       };
 

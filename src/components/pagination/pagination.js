@@ -16,6 +16,9 @@ class Pagination extends React.Component {
     isNextActive: true,
     pageBound: 3
   };
+
+  getPagesTotalCount = (length, n) => Math.ceil(length / n);
+
   handleClick = event => {
     event.preventDefault();
     const {
@@ -29,7 +32,10 @@ class Pagination extends React.Component {
   };
   updatePrevNext = value => {
     const { list } = this.props;
-    const pagesTotalCount = Math.ceil(list.length / this.state.itemsPerPage);
+    const pagesTotalCount = this.getPagesTotalCount(
+      list.length,
+      this.state.itemsPerPage
+    );
     this.setState({
       isPrevActive: false,
       isNextActive: false
@@ -61,7 +67,7 @@ class Pagination extends React.Component {
     this.updatePrevNext(this.state.currentPage);
   };
   handlePrevClick = () => {
-    const {currentPage, pageBound} = this.state;
+    const { currentPage, pageBound } = this.state;
     if ((currentPage - 1) % pageBound === 0) {
       this.setState(prevState => ({
         ...prevState,
@@ -69,15 +75,15 @@ class Pagination extends React.Component {
         lowerPageBound: prevState.lowerPageBound - prevState.pageBound
       }));
     }
-
+    const nextPage = currentPage - 1;
     this.setState(prevState => ({
       ...prevState,
-      currentPage: prevState.currentPage - 1
+      currentPage: nextPage
     }));
-    this.updatePrevNext(this.state.currentPage);
+    this.updatePrevNext(nextPage);
   };
   handleNextClick = () => {
-    const {currentPage, upperPageBound} = this.state;
+    const { currentPage, upperPageBound } = this.state;
     if (currentPage + 1 > upperPageBound) {
       this.setState(prevState => ({
         ...prevState,
@@ -85,12 +91,12 @@ class Pagination extends React.Component {
         lowerPageBound: prevState.lowerPageBound + prevState.pageBound
       }));
     }
-
+    const nextPage = currentPage + 1;
     this.setState(prevState => ({
       ...prevState,
-      currentPage: prevState.currentPage + 1
+      currentPage: nextPage
     }));
-    this.updatePrevNext(this.state.currentPage);
+    this.updatePrevNext(nextPage);
   };
   render() {
     const {
@@ -105,15 +111,12 @@ class Pagination extends React.Component {
 
     const lastProductIndex = currentPage * itemsPerPage;
     const firstProductIndex = lastProductIndex - itemsPerPage;
-    const activePageProducts = list.slice(
-      firstProductIndex,
-      lastProductIndex
-    );
+    const activePageProducts = list.slice(firstProductIndex, lastProductIndex);
 
-    const slicedProducts = <ListProducts list={activePageProducts} />;
+    const products = <ListProducts list={activePageProducts} />;
 
     const pagesTotalCount = Array.from(
-      { length: Math.ceil(list.length / itemsPerPage) },
+      { length: this.getPagesTotalCount(list.length, itemsPerPage) },
       (value, index) => index + 1
     );
     const paginationItems = pagesTotalCount.map(number => {
@@ -168,14 +171,15 @@ class Pagination extends React.Component {
       <button
         className={styles.paginationNext}
         onClick={this.handleNextClick}
-        disabled={!isNextActive}
+        disabled={!isNextActive || pagesTotalCount.length === currentPage}
       >
         Вперед
       </button>
     );
+
     return (
       <>
-        {slicedProducts}
+        {products}
         <div className={styles.pagination}>
           <ul className={styles.paginationList}>
             {prevBtn}

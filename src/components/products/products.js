@@ -23,8 +23,12 @@ const Products = props => {
         <div
           className={classnames(styles.productsCol, styles.productsColRight)}
         >
-          <HeaderProducts header={'Список товаров'} />
-          <Pagination list={list} />
+          {list.length !== 0 ? (
+            <>
+              <HeaderProducts header={'Список товаров'} />
+              <Pagination list={list} />
+            </>
+          ) : null}
         </div>
       </div>
     </section>
