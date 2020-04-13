@@ -3,31 +3,35 @@ import dataJSON from '../../../components/app/assets/products.json';
 import * as types from './types';
 
 const getInitialState = data => {
-  const listCategories = Array.from(new Set(data.map(item => item.category)));
+  const productsCategories = Array.from(
+    new Set(data.map(item => item.category))
+  );
   return {
-    productsFilter: {
-      price: {
-        min: {
-          value: minBy(item => item.price, data).price,
-          isValid: true
+    products: {
+      filter: {
+        price: {
+          min: {
+            value: minBy(item => item.price, data).price,
+            isValid: true
+          },
+          max: {
+            value: maxBy(item => item.price, data).price,
+            isValid: true
+          }
         },
-        max: {
-          value: maxBy(item => item.price, data).price,
-          isValid: true
-        }
+        discount: {
+          total: {
+            value: minBy(item => item.discount, data).discount,
+            isValid: true
+          }
+        },
+        categories: productsCategories.reduce(
+          (acc, category) => ({ ...acc, [category]: { isActive: false } }),
+          {}
+        )
       },
-      discount: {
-        total: {
-          value: minBy(item => item.discount, data).discount,
-          isValid: true
-        }
-      },
-      categories: listCategories.reduce(
-        (acc, category) => ({ ...acc, [category]: { isActive: false } }),
-        {}
-      )
-    },
-    productsList: data
+      list: data
+    }
   };
 };
 
@@ -40,12 +44,17 @@ export default (state = initialState, action) => {
       const { groupName, fieldName, fieldData } = payload;
       return {
         ...state,
-        productsFilter: {
-          ...state.productsFilter,
-          [groupName]: {
-            ...state.productsFilter[groupName],
-            [fieldName]: fieldData
-          }
+        products: {
+          filter: {
+            ...state.products.filter,
+            [groupName]: {
+              ...state.products.filter[groupName],
+              [fieldName]: fieldData
+            }
+          },
+          list: [
+            ...state.products.list
+          ]
         }
       };
 
@@ -53,17 +62,22 @@ export default (state = initialState, action) => {
       const { state: historyState } = payload;
       return {
         ...state,
-        productsFilter: {
-          price: {
-            ...state.productsFilter.price
+        products: {
+          filter: {
+            price: {
+              ...state.products.filter.price
+            },
+            discount: {
+              ...state.products.filter.discount
+            },
+            categories: {
+              ...state.products.filter.categories,
+              ...historyState
+            }
           },
-          discount: {
-            ...state.productsFilter.discount
-          },
-          categories: {
-            ...state.productsFilter.categories,
-            ...historyState
-          }
+          list: [
+            ...state.products.list
+          ]
         }
       };
 

@@ -25,9 +25,9 @@ class Pagination extends React.Component {
     this.setState({
       currentPage: value
     });
-    this.setPrevNext(value);
+    this.updatePrevNext(value);
   };
-  setPrevNext = value => {
+  updatePrevNext = value => {
     const { list } = this.props;
     const pagesTotalCount = Math.ceil(list.length / this.state.itemsPerPage);
     this.setState({
@@ -49,7 +49,7 @@ class Pagination extends React.Component {
       lowerPageBound: prevState.lowerPageBound + prevState.pageBound,
       currentPage: prevState.upperPageBound + 1
     }));
-    this.setPrevNext(this.state.currentPage);
+    this.updatePrevNext(this.state.currentPage);
   };
   handleDecClick = () => {
     this.setState(prevState => ({
@@ -58,7 +58,7 @@ class Pagination extends React.Component {
       lowerPageBound: prevState.lowerPageBound - prevState.pageBound,
       currentPage: prevState.upperPageBound - prevState.pageBound
     }));
-    this.setPrevNext(this.state.currentPage);
+    this.updatePrevNext(this.state.currentPage);
   };
   handlePrevClick = () => {
     const {currentPage, pageBound} = this.state;
@@ -74,7 +74,7 @@ class Pagination extends React.Component {
       ...prevState,
       currentPage: prevState.currentPage - 1
     }));
-    this.setPrevNext(this.state.currentPage);
+    this.updatePrevNext(this.state.currentPage);
   };
   handleNextClick = () => {
     const {currentPage, upperPageBound} = this.state;
@@ -90,7 +90,7 @@ class Pagination extends React.Component {
       ...prevState,
       currentPage: prevState.currentPage + 1
     }));
-    this.setPrevNext(this.state.currentPage);
+    this.updatePrevNext(this.state.currentPage);
   };
   render() {
     const {

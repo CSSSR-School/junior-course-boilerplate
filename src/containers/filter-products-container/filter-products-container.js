@@ -27,7 +27,10 @@ class FilterProductsContainer extends PureComponent {
 
   componentDidUpdate() {
     const { state } = this.props;
-    const {productsFilter: { categories }
+    const {
+      products: {
+        filter: { categories }
+      }
     } = state;
     const { getProductsFilterActiveCategoriesList } = productsSelectors;
 
@@ -50,10 +53,12 @@ class FilterProductsContainer extends PureComponent {
 
   render() {
     const { state, updateProductsFilterField, setInitialState } = this.props;
-    const { productsFilter } = state;
+    const {
+      products: { filter }
+    } = state;
     return (
       <FilterProducts
-        filter={productsFilter}
+        filter={filter}
         updateProductsFilterField={updateProductsFilterField}
         setInitialState={setInitialState}
       />

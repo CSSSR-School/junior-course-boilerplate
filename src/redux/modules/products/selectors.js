@@ -1,11 +1,14 @@
 import { createSelector } from 'reselect';
 
-const getProductsFilter = ({ productsFilter }) => {
-  return productsFilter;
+const getProductsFilter = ({ products: { filter } }) => {
+  return filter;
 };
 
-const getProductsFilterCategories = state => {
-  const { categories } = getProductsFilter(state);
+const getProductsFilterCategories = ({
+  products: {
+    filter: { categories }
+  }
+}) => {
   return categories;
 };
 
@@ -15,8 +18,8 @@ const getProductsFilterActiveCategoriesList = createSelector(
     Object.keys(categories).filter(category => categories[category].isActive)
 );
 
-const getProductsList = ({ productsList }) => {
-  return productsList;
+const getProductsList = ({ products: { list } }) => {
+  return list;
 };
 
 const filterProductsList = createSelector(
