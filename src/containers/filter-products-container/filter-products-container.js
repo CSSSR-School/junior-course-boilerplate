@@ -13,16 +13,16 @@ class FilterProductsContainer extends PureComponent {
     super(props);
     this.setHistoryInitialURL();
   }
+
+  handlePopState = ({ state }) =>
+    this.props.updateProductsFilterCategories({ state });
+
   componentDidMount() {
-    window.addEventListener('popstate', ({ state }) =>
-      this.props.updateProductsFilterCategories({ state })
-    );
+    window.addEventListener('popstate', this.handlePopState);
   }
+
   componentWillUnmount() {
-    window.removeEventListener(
-      'popstate',
-      this.props.updateProductsFilterCategories
-    );
+    window.removeEventListener('popstate', this.handlePopState);
   }
 
   componentDidUpdate() {
@@ -66,7 +66,20 @@ class FilterProductsContainer extends PureComponent {
   }
 }
 
+const {
+  setInitialState,
+  updateProductsFilterField,
+  updateProductsFilterCategories
+} = productsActions;
+
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(productsActions, dispatch);
+  bindActionCreators(
+    {
+      setInitialState,
+      updateProductsFilterField,
+      updateProductsFilterCategories
+    },
+    dispatch
+  );
 
 export default connect(null, mapDispatchToProps)(FilterProductsContainer);

@@ -49,6 +49,9 @@ const initialState = getInitialState(dataJSON);
 export default (state = initialState, action) => {
   const { type, payload = {} } = action;
   switch (type) {
+    case types.SET_INITIAL_STATE:
+      return initialState;
+
     case types.UPDATE_PRODUCTS_FILTER_FIELD:
       const { groupName, fieldName, fieldData } = payload;
       return {
@@ -92,9 +95,153 @@ export default (state = initialState, action) => {
         }
       };
 
-    case types.SET_INITIAL_STATE:
-      return initialState;
+    case types.UPDATE_PAGINATION_CURRENT_PAGE:
+      const { currentPage } = payload;
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            currentPage
+          }
+        }
+      };
 
+    case types.MAKE_PAGINATION_CONTROLS_ACTIVE:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            isPrevActive: true,
+            isNextActive: true
+          }
+        }
+      };
+
+    case types.MAKE_PAGINATION_CONTROLS_INACTIVE:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            isPrevActive: false,
+            isNextActive: false
+          }
+        }
+      };
+
+    case types.MAKE_PAGINATION_CONTROL_PREV_ACTIVE:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            isPrevActive: true
+          }
+        }
+      };
+
+    case types.MAKE_PAGINATION_CONTROL_PREV_INACTIVE:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            isPrevActive: false
+          }
+        }
+      };
+
+    case types.MAKE_PAGINATION_CONTROL_NEXT_ACTIVE:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            isNextActive: true
+          }
+        }
+      };
+
+    case types.MAKE_PAGINATION_CONTROL_NEXT_INACTIVE:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            isNextActive: false
+          }
+        }
+      };
+
+    case types.SHIFT_PAGINATION_PAGE_BOUNDS_FORWARD:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            upperPageBound:
+              state.products.pagination.upperPageBound +
+              state.products.pagination.pageBound,
+            lowerPageBound:
+              state.products.pagination.lowerPageBound +
+              state.products.pagination.pageBound,
+          }
+        }
+      };
+
+    case types.SHIFT_PAGINATION_PAGE_BOUNDS_BACK:
+      return {
+        ...state,
+        products: {
+          filter: {
+            ...state.products.filter
+          },
+          list: [...state.products.list],
+          pagination: {
+            ...state.products.pagination,
+            upperPageBound:
+              state.products.pagination.upperPageBound -
+              state.products.pagination.pageBound,
+            lowerPageBound:
+              state.products.pagination.lowerPageBound -
+              state.products.pagination.pageBound,
+          }
+        }
+      };
     default:
       return state;
   }

@@ -1,113 +1,117 @@
 import React from 'react';
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './pagination.module.scss';
-
 import ListProducts from '../../components/list-products';
 
 class Pagination extends React.Component {
-  state = {
-    currentPage: 1,
-    itemsPerPage: 6,
-    upperPageBound: 3,
-    lowerPageBound: 0,
-    isPrevActive: false,
-    isNextActive: true,
-    pageBound: 3
-  };
-
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
 
   handleClick = event => {
+    const { updatePaginationCurrentPage } = this.props;
     event.preventDefault();
     const {
       target: { textContent }
     } = event;
     const value = Number(textContent);
-    this.setState({
-      currentPage: value
-    });
+
+    updatePaginationCurrentPage({ currentPage: value });
     this.updatePrevNext(value);
   };
+
   updatePrevNext = value => {
-    const { list } = this.props;
-    const pagesTotalCount = this.getPagesTotalCount(
-      list.length,
-      this.state.itemsPerPage
-    );
-    this.setState({
-      isPrevActive: false,
-      isNextActive: false
-    });
+    const {
+      pagination: { itemsPerPage },
+      list,
+      makePaginationControlsActive,
+      makePaginationControlsInactive,
+      makePaginationControlPrevActive,
+      makePaginationControlNextActive
+    } = this.props;
+    const pagesTotalCount = this.getPagesTotalCount(list.length, itemsPerPage);
+    makePaginationControlsInactive();
     if (pagesTotalCount === value && pagesTotalCount > 1) {
-      this.setState({ isPrevActive: true });
+      makePaginationControlPrevActive();
     } else if (value === 1 && pagesTotalCount > 1) {
-      this.setState({ isNextActive: true });
+      makePaginationControlNextActive();
     } else if (pagesTotalCount > 1) {
-      this.setState({ isNextActive: true, isPrevActive: true });
+      makePaginationControlsActive();
     }
   };
+
   handleIncClick = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      upperPageBound: prevState.upperPageBound + prevState.pageBound,
-      lowerPageBound: prevState.lowerPageBound + prevState.pageBound,
-      currentPage: prevState.upperPageBound + 1
-    }));
-    this.updatePrevNext(this.state.currentPage);
+    const {
+      pagination: { upperPageBound },
+      updatePaginationCurrentPage,
+      shiftPaginationPageBoundsForward
+    } = this.props;
+    shiftPaginationPageBoundsForward();
+    updatePaginationCurrentPage({ currentPage: upperPageBound + 1 });
+
+    const {
+      pagination: { currentPage }
+    } = this.props;
+    this.updatePrevNext(currentPage);
   };
+
   handleDecClick = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      upperPageBound: prevState.upperPageBound - prevState.pageBound,
-      lowerPageBound: prevState.lowerPageBound - prevState.pageBound,
-      currentPage: prevState.upperPageBound - prevState.pageBound
-    }));
-    this.updatePrevNext(this.state.currentPage);
+    const {
+      pagination: { upperPageBound, pageBound },
+      updatePaginationCurrentPage,
+      shiftPaginationPageBoundsBack
+    } = this.props;
+    shiftPaginationPageBoundsBack();
+    updatePaginationCurrentPage({ currentPage: upperPageBound - pageBound });
+
+    const {
+      pagination: { currentPage }
+    } = this.props;
+    this.updatePrevNext(currentPage);
   };
+
   handlePrevClick = () => {
-    const { currentPage, pageBound } = this.state;
-    if ((currentPage - 1) % pageBound === 0) {
-      this.setState(prevState => ({
-        ...prevState,
-        upperPageBound: prevState.upperPageBound - prevState.pageBound,
-        lowerPageBound: prevState.lowerPageBound - prevState.pageBound
-      }));
+    const {
+      pagination: { currentPage, pageBound },
+      shiftPaginationPageBoundsBack,
+      updatePaginationCurrentPage
+    } = this.props;
+    const prevPage = currentPage - 1;
+    if (prevPage % pageBound === 0) {
+      shiftPaginationPageBoundsBack();
     }
-    const nextPage = currentPage - 1;
-    this.setState(prevState => ({
-      ...prevState,
-      currentPage: nextPage
-    }));
-    this.updatePrevNext(nextPage);
+
+    updatePaginationCurrentPage({ currentPage: prevPage });
+    this.updatePrevNext(prevPage);
   };
+
   handleNextClick = () => {
-    const { currentPage, upperPageBound } = this.state;
-    if (currentPage + 1 > upperPageBound) {
-      this.setState(prevState => ({
-        ...prevState,
-        upperPageBound: prevState.upperPageBound + prevState.pageBound,
-        lowerPageBound: prevState.lowerPageBound + prevState.pageBound
-      }));
-    }
+    const {
+      pagination: { currentPage, upperPageBound },
+      shiftPaginationPageBoundsForward,
+      updatePaginationCurrentPage
+    } = this.props;
     const nextPage = currentPage + 1;
-    this.setState(prevState => ({
-      ...prevState,
-      currentPage: nextPage
-    }));
+
+    if (nextPage > upperPageBound) {
+      shiftPaginationPageBoundsForward();
+    }
+    updatePaginationCurrentPage({ currentPage: nextPage });
     this.updatePrevNext(nextPage);
   };
+
   render() {
     const {
-      currentPage,
-      itemsPerPage,
-      upperPageBound,
-      lowerPageBound,
-      isPrevActive,
-      isNextActive
-    } = this.state;
-    const { list } = this.props;
+      pagination: {
+        currentPage,
+        itemsPerPage,
+        upperPageBound,
+        lowerPageBound,
+        isPrevActive,
+        isNextActive
+      },
+      list
+    } = this.props;
 
     const lastProductIndex = currentPage * itemsPerPage;
     const firstProductIndex = lastProductIndex - itemsPerPage;
@@ -194,21 +198,21 @@ class Pagination extends React.Component {
   }
 }
 
-Pagination.propTypes = {
-  productsList: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.number,
-      isInStock: propTypes.bool,
-      img: propTypes.string,
-      title: propTypes.node,
-      price: propTypes.node,
-      subPriceContent: propTypes.node,
-      maxRating: propTypes.number,
-      rating: propTypes.number,
-      discount: propTypes.number,
-      category: propTypes.string
-    })
-  )
-};
+// Pagination.propTypes = {
+//   productsList: propTypes.arrayOf(
+//     propTypes.shape({
+//       id: propTypes.number,
+//       isInStock: propTypes.bool,
+//       img: propTypes.string,
+//       title: propTypes.node,
+//       price: propTypes.node,
+//       subPriceContent: propTypes.node,
+//       maxRating: propTypes.number,
+//       rating: propTypes.number,
+//       discount: propTypes.number,
+//       category: propTypes.string
+//     })
+//   )
+// };
 
 export default Pagination;

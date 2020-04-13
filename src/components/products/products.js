@@ -1,17 +1,19 @@
 import React from 'react';
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './products.module.scss';
 
 import { productsSelectors } from '../../redux/modules/products';
 import FilterProductsContainer from '../../containers/filter-products-container';
-import Pagination from '../pagination';
+// import ListProducts from '../list-products';
+import PaginationContainer from '../../containers/pagination-container';
 import HeaderProducts from '../header-products';
 
 const Products = props => {
+  const { state } = props;
   const { filterProductsList } = productsSelectors;
-  const list = filterProductsList(props.state);
+  const list = filterProductsList(state);
   return (
     <section className={classnames(styles.products)}>
       <div className={classnames(styles.productsRow)}>
@@ -26,7 +28,7 @@ const Products = props => {
           {list.length !== 0 ? (
             <>
               <HeaderProducts header={'Список товаров'} />
-              <Pagination list={list} />
+              <PaginationContainer />
             </>
           ) : null}
         </div>
@@ -35,8 +37,8 @@ const Products = props => {
   );
 };
 
-Products.propTypes = {
-  filterProductsFilterField: propTypes.func
-};
+// Products.propTypes = {
+//   filterProductsFilterField: propTypes.func
+// };
 
 export default Products;
