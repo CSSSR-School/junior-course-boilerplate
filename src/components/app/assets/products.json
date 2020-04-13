@@ -430,5 +430,77 @@
     "rating": 3,
     "discount": 30,
     "category": "books"
+  },
+  {
+    "id": 37,
+    "isInStock": false,
+    "img": "https://picsum.photos/240/200?random=37",
+    "title": "Имя товара 37",
+    "price": 9250,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 2,
+    "discount": 25,
+    "category": "clothes"
+  },
+  {
+    "id": 38,
+    "isInStock": true,
+    "img": "https://picsum.photos/240/200?random=38",
+    "title": "Имя товара 38",
+    "price": 9500,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 1,
+    "discount": 15,
+    "category": "books"
+  },
+  {
+    "id": 39,
+    "isInStock": false,
+    "img": "https://picsum.photos/240/200?random=39",
+    "title": "Имя товара 39",
+    "price": 9750,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 0,
+    "discount": 10,
+    "category": "clothes"
+  },
+  {
+    "id": 40,
+    "isInStock": true,
+    "img": "https://picsum.photos/240/200?random=40",
+    "title": "Имя товара 40",
+    "price": 10000,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 1,
+    "discount": 5,
+    "category": "books"
+  },
+  {
+    "id": 41,
+    "isInStock": false,
+    "img": "https://picsum.photos/240/200?random=41",
+    "title": "Имя товара 41",
+    "price": 10250,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 2,
+    "discount": 10,
+    "category": "clothes"
+  },
+  {
+    "id": 42,
+    "isInStock": false,
+    "img": "https://picsum.photos/240/200?random=42",
+    "title": "Имя товара 42",
+    "price": 10500,
+    "subPriceContent": null,
+    "maxRating": 5,
+    "rating": 3,
+    "discount": 15,
+    "category": "books"
   }
 ]

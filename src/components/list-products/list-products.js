@@ -4,7 +4,6 @@ import classnames from 'classnames';
 
 import styles from './list-products.module.scss';
 
-import { productsSelectors } from '../../redux/modules/products';
 import ItemListProducts from 'csssr-school-product-card';
 import ItemRating from '../item-rating';
 import Price from '../price';

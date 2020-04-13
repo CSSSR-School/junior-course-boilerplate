@@ -6,7 +6,7 @@ import styles from './products.module.scss';
 
 import { productsSelectors } from '../../redux/modules/products';
 import FilterProductsContainer from '../../containers/filter-products-container';
-import ListProducts from '../../components/list-products';
+import Pagination from '../pagination';
 import HeaderProducts from '../header-products';
 
 const Products = props => {
@@ -24,7 +24,7 @@ const Products = props => {
           className={classnames(styles.productsCol, styles.productsColRight)}
         >
           <HeaderProducts header={'Список товаров'} />
-          <ListProducts list={list} />
+          <Pagination list={list} />
         </div>
       </div>
     </section>
