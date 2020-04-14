@@ -4,11 +4,12 @@ const getProductsFilter = ({ products: { filter } }) => {
   return filter;
 };
 
-const getProductsFilterCategories = ({
-  products: {
-    filter: { categories }
-  }
-}) => {
+const getProductsFilterCategories = (state) => {
+  const {
+    products: {
+      filter: { categories }
+    }
+  } = state;
   return categories;
 };
 

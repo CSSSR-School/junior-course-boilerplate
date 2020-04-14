@@ -37,8 +37,4 @@ const Products = props => {
   );
 };
 
-// Products.propTypes = {
-//   filterProductsFilterField: propTypes.func
-// };
-
 export default Products;

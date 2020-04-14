@@ -1,8 +1,20 @@
-import reducer from './reducers';
+import { combineReducers } from 'redux';
 
+import { productsReducer, paginationReducer } from './reducers';
 import * as productsSelectors from './selectors';
-import * as productsActions from './actions';
+import { productsActions, paginationActions } from './actions';
 import * as productsTypes from './types';
 
-export { productsSelectors, productsActions, productsTypes };
-export default reducer;
+export {
+  productsSelectors,
+  productsActions,
+  paginationActions,
+  productsTypes
+};
+
+const appReducer = combineReducers({
+  products: productsReducer,
+  pagination: paginationReducer
+});
+
+export default appReducer;

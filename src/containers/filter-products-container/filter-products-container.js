@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import FilterProducts from '../../components/filter-products';
 import {
-  productsActions,
-  productsSelectors
+  productsSelectors,
+  productsActions
 } from '../../redux/modules/products';
 
 class FilterProductsContainer extends PureComponent {
@@ -66,19 +66,9 @@ class FilterProductsContainer extends PureComponent {
   }
 }
 
-const {
-  setInitialState,
-  updateProductsFilterField,
-  updateProductsFilterCategories
-} = productsActions;
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    {
-      setInitialState,
-      updateProductsFilterField,
-      updateProductsFilterCategories
-    },
+    productsActions,
     dispatch
   );
 
