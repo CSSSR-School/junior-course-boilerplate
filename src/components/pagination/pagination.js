@@ -3,7 +3,6 @@ import React from 'react';
 import classnames from 'classnames';
 
 import styles from './pagination.module.scss';
-import ListProducts from '../../components/list-products';
 
 class Pagination extends React.Component {
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
@@ -112,13 +111,6 @@ class Pagination extends React.Component {
       },
       list
     } = this.props;
-
-    const lastProductIndex = currentPage * itemsPerPage;
-    const firstProductIndex = lastProductIndex - itemsPerPage;
-    const activePageProducts = list.slice(firstProductIndex, lastProductIndex);
-
-    const products = <ListProducts list={activePageProducts} />;
-
     const pagesTotalCount = Array.from(
       { length: this.getPagesTotalCount(list.length, itemsPerPage) },
       (value, index) => index + 1
@@ -183,7 +175,6 @@ class Pagination extends React.Component {
 
     return (
       <>
-        {products}
         <div className={styles.pagination}>
           <ul className={styles.paginationList}>
             {prevBtn}

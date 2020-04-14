@@ -3,10 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import FilterProducts from '../../components/filter-products';
-import {
-  productsSelectors,
-  productsActions
-} from '../../redux/modules/products';
+import { selectors, productsActions } from '../../redux/modules/products';
 
 class FilterProductsContainer extends PureComponent {
   constructor(props) {
@@ -32,11 +29,12 @@ class FilterProductsContainer extends PureComponent {
         filter: { categories }
       }
     } = state;
-    const { getProductsFilterActiveCategoriesList } = productsSelectors;
+    const { getProductsFilterActiveCategoriesList } = selectors;
 
     this.updateHistory(
       categories,
-      getProductsFilterActiveCategoriesList(state)
+      getProductsFilterActiveCategoriesList(state),
+      'categories'
     );
   }
 
@@ -52,10 +50,13 @@ class FilterProductsContainer extends PureComponent {
   };
 
   render() {
-    const { state, updateProductsFilterField, setInitialState } = this.props;
     const {
-      products: { filter }
-    } = state;
+      state: {
+        products: { filter }
+      },
+      updateProductsFilterField,
+      setInitialState
+    } = this.props;
     return (
       <FilterProducts
         filter={filter}
@@ -67,9 +68,6 @@ class FilterProductsContainer extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    productsActions,
-    dispatch
-  );
+  bindActionCreators(productsActions, dispatch);
 
 export default connect(null, mapDispatchToProps)(FilterProductsContainer);

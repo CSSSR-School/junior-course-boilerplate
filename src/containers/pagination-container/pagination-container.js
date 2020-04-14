@@ -11,15 +11,10 @@ class PaginationContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  list: state.products.list,
-  pagination: state.pagination
-});
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(paginationActions, dispatch);
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(PaginationContainer);
