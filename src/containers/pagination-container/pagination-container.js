@@ -6,6 +6,19 @@ import { paginationActions } from '../../redux/modules/products';
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {
+  componentDidMount() {
+    window.addEventListener('popstate', this.handlePopState);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  handlePopState = ({ state }) => {
+  const { currentPage } = state;
+  this.props.updatePaginationCurrentPage({ currentPage });
+  }
+
   render() {
     return <Pagination {...this.props} />;
   }
@@ -14,7 +27,4 @@ class PaginationContainer extends PureComponent {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(paginationActions, dispatch);
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(PaginationContainer);
+export default connect(null, mapDispatchToProps)(PaginationContainer);

@@ -3,17 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import FilterProducts from '../../components/filter-products';
-import { selectors, productsActions } from '../../redux/modules/products';
+import { productsActions } from '../../redux/modules/products';
 
 class FilterProductsContainer extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.setHistoryInitialURL();
-  }
-
-  handlePopState = ({ state }) =>
-    this.props.updateProductsFilterCategories({ state });
-
   componentDidMount() {
     window.addEventListener('popstate', this.handlePopState);
   }
@@ -22,33 +14,13 @@ class FilterProductsContainer extends PureComponent {
     window.removeEventListener('popstate', this.handlePopState);
   }
 
-  componentDidUpdate() {
-    const { state } = this.props;
-    const {
-      products: {
-        filter: { categories }
-      }
-    } = state;
-    const { getProductsFilterActiveCategoriesList } = selectors;
+  handlePopState = ({ state }) => {
 
-    this.updateHistory(
-      categories,
-      getProductsFilterActiveCategoriesList(state),
-      'categories'
-    );
+    if (state.hasOwnProperty('categories')) {
+      const {categories} = state;
+      this.props.updateProductsFilterCategories({ categories });
+    }
   }
-
-  setHistoryInitialURL = () =>
-    window.history.replaceState({}, 'categories', window.location.pathname);
-
-  updateHistory = (data, filteredData, title) => {
-    const reducedData = filteredData.reduce(
-      (acc, key, index) => `${acc}${index === 0 ? '' : '&'}category=${key}`,
-      ''
-    );
-    window.history.pushState(data, title, `?${reducedData}`);
-  };
-
   render() {
     const {
       state: {

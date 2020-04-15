@@ -55,6 +55,11 @@ const filterProductsList = createSelector(
   }
 );
 
+const isFilteredProductsListEmpty = createSelector(
+  filterProductsList,
+  filteredProductsList => filteredProductsList.length === 0
+);
+
 const getVisibleProductsList = createSelector(
   [getPagination, filterProductsList],
   (pagination, filteredProducts) => {
@@ -70,5 +75,6 @@ export {
   getProductsList,
   getProductsFilterActiveCategoriesList,
   filterProductsList,
+  isFilteredProductsListEmpty,
   getVisibleProductsList
 };

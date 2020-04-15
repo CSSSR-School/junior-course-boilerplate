@@ -53,7 +53,7 @@ export const productsReducer = (state = initialState, action) => {
       };
 
     case types.UPDATE_PRODUCTS_FILTER_CATEGORIES:
-      const { state: historyState } = payload;
+      const { categories } = payload;
       return {
         ...state,
         filter: {
@@ -64,8 +64,7 @@ export const productsReducer = (state = initialState, action) => {
             ...state.filter.discount
           },
           categories: {
-            ...state.filter.categories,
-            ...historyState
+            ...categories
           }
         },
         list: [...state.list]
