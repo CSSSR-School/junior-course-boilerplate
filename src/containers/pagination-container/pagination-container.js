@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { paginationActions } from '../../redux/modules/products';
+import { paginationActions } from '../../redux';
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {

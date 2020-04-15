@@ -1,7 +1,7 @@
-import * as types from '../types';
+import * as types from './types';
 import { minBy, maxBy } from 'csssr-school-utils';
 
-import dataJSON from '../../../../components/app/assets/products.json';
+import dataJSON from '../../../components/app/assets/products.json';
 
 const productsCategories = Array.from(
   new Set(dataJSON.map(item => item.category))
@@ -32,7 +32,7 @@ const initialState = {
   list: dataJSON
 };
 
-export const productsReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   const { type, payload = {} } = action;
   switch (type) {
     case types.SET_INITIAL_STATE:

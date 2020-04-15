@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { selectors } from '../../redux/modules/products';
+import { selectors } from '../../redux';
 import Products from '../../components/products';
 
 const {

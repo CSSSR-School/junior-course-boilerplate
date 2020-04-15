@@ -1,4 +1,4 @@
-import * as types from '../types';
+import * as types from './types';
 
 const initialState = {
   currentPage: 1,
@@ -10,7 +10,7 @@ const initialState = {
   pageBound: 3
 };
 
-export const paginationReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   const { type, payload = {} } = action;
   switch (type) {
     case types.UPDATE_PAGINATION_CURRENT_PAGE:

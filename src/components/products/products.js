@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import styles from './products.module.scss';
 
-import { selectors } from '../../redux/modules/products';
+import { selectors } from '../../redux';
 import FilterProductsContainer from '../../containers/filter-products-container';
 import PaginationContainer from '../../containers/pagination-container';
 import HeaderProducts from '../header-products';

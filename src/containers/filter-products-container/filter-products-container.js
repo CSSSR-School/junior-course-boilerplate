@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import FilterProducts from '../../components/filter-products';
-import { productsActions } from '../../redux/modules/products';
+import { productsActions } from '../../redux';
 
 class FilterProductsContainer extends PureComponent {
   componentDidMount() {

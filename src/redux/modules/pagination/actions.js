@@ -1,4 +1,4 @@
-import * as types from '../types';
+import * as types from './types';
 
 export const updatePaginationCurrentPage = payload => ({
   type: types.UPDATE_PAGINATION_CURRENT_PAGE,

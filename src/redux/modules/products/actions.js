@@ -1,4 +1,4 @@
-import * as types from '../types';
+import * as types from './types';
 
 export const setInitialState = () => ({
   type: types.SET_INITIAL_STATE
