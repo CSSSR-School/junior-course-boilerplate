@@ -16,29 +16,20 @@ class Pagination extends React.Component {
     const value = Number(textContent);
 
     updatePaginationCurrentPage({ currentPage: value });
-    this.updatePrevNext(value);
   };
 
   updatePrevNext = value => {
     const {
       pagination: { itemsPerPage },
       list: productsList,
-      makePaginationControlsActive,
-      makePaginationControlsInactive,
-      makePaginationControlPrevActive,
-      makePaginationControlNextActive
     } = this.props;
     const pagesTotalCount = this.getPagesTotalCount(
       productsList.length,
       itemsPerPage
     );
-    makePaginationControlsInactive();
     if (pagesTotalCount === value && pagesTotalCount > 1) {
-      makePaginationControlPrevActive();
     } else if (value === 1 && pagesTotalCount > 1) {
-      makePaginationControlNextActive();
     } else if (pagesTotalCount > 1) {
-      makePaginationControlsActive();
     }
   };
 
@@ -50,11 +41,6 @@ class Pagination extends React.Component {
     } = this.props;
     shiftPaginationPageBoundsForward();
     updatePaginationCurrentPage({ currentPage: upperPageBound + 1 });
-
-    const {
-      pagination: { currentPage }
-    } = this.props;
-    this.updatePrevNext(currentPage);
   };
 
   handleDecClick = () => {
@@ -65,11 +51,6 @@ class Pagination extends React.Component {
     } = this.props;
     shiftPaginationPageBoundsBack();
     updatePaginationCurrentPage({ currentPage: upperPageBound - pageBound });
-
-    const {
-      pagination: { currentPage }
-    } = this.props;
-    this.updatePrevNext(currentPage);
   };
 
   handlePrevClick = () => {
@@ -109,8 +90,6 @@ class Pagination extends React.Component {
         itemsPerPage,
         upperPageBound,
         lowerPageBound,
-        isPrevActive,
-        isNextActive
       },
       list: productsList
     } = this.props;
@@ -140,13 +119,19 @@ class Pagination extends React.Component {
     });
     const inc =
       pagesTotalCount.length > upperPageBound ? (
-        <button className={classnames(styles.paginationBtn, styles.paginationBtnInc)} onClick={this.handleIncClick}>
+        <button
+          className={classnames(styles.paginationBtn, styles.paginationBtnInc)}
+          onClick={this.handleIncClick}
+        >
           &hellip;
         </button>
       ) : null;
     const dec =
       lowerPageBound >= 1 ? (
-        <button className={classnames(styles.paginationBtn, styles.paginationBtnDec)} onClick={this.handleDecClick}>
+        <button
+          className={classnames(styles.paginationBtn, styles.paginationBtnDec)}
+          onClick={this.handleDecClick}
+        >
           &hellip;
         </button>
       ) : null;
@@ -154,7 +139,7 @@ class Pagination extends React.Component {
       <button
         className={classnames(styles.paginationBtn, styles.paginationBtnPrev)}
         onClick={this.handlePrevClick}
-        disabled={!isPrevActive}
+        disabled={currentPage === 1 || (pagesTotalCount !== currentPage && pagesTotalCount < 1)}
       >
         Назад
       </button>
@@ -163,7 +148,10 @@ class Pagination extends React.Component {
       <button
         className={classnames(styles.paginationBtn, styles.paginationBtnNext)}
         onClick={this.handleNextClick}
-        disabled={!isNextActive || pagesTotalCount.length === currentPage}
+        disabled={
+          pagesTotalCount.length === currentPage ||
+          (currentPage !== 1 && pagesTotalCount < 1)
+        }
       >
         Вперед
       </button>
