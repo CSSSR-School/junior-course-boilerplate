@@ -115,23 +115,18 @@ class Pagination extends React.Component {
       { length: this.getPagesTotalCount(list.length, itemsPerPage) },
       (value, index) => index + 1
     );
-    const paginationItems = pagesTotalCount.map(number => {
+    const paginationPages = pagesTotalCount.map(number => {
       if (number < upperPageBound + 1 && number > lowerPageBound) {
         return (
-          <li
+          <button
             key={number}
-            className={classnames(styles.paginationItem, {
-              [styles.paginationItemActive]: number === currentPage
+            className={classnames(styles.paginationPage, {
+              [styles.paginationPageActive]: number === currentPage
             })}
+            onClick={this.handleClick}
           >
-            <a
-              className={styles.paginationLink}
-              href={`?page=${number}`}
-              onClick={this.handleClick}
-            >
-              {number}
-            </a>
-          </li>
+            {number}
+          </button>
         );
       }
       return null;
@@ -139,7 +134,7 @@ class Pagination extends React.Component {
     const incBtn =
       pagesTotalCount.length > upperPageBound ? (
         <button
-          className={styles.paginationIncrement}
+          className={styles.paginationInc}
           onClick={this.handleIncClick}
         >
           &hellip;
@@ -148,7 +143,7 @@ class Pagination extends React.Component {
     const decBtn =
       lowerPageBound >= 1 ? (
         <button
-          className={styles.paginationDecrement}
+          className={styles.paginationDec}
           onClick={this.handleDecClick}
         >
           &hellip;
@@ -179,7 +174,7 @@ class Pagination extends React.Component {
           <ul className={styles.paginationList}>
             {prevBtn}
             {decBtn}
-            {paginationItems}
+            {paginationPages}
             {incBtn}
             {nextBtn}
           </ul>

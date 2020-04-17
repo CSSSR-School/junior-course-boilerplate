@@ -12,9 +12,9 @@
 
     list-style: none;
   }
-  &Item,
-  &Increment,
-  &Decrement {
+  &Page,
+  &Inc,
+  &Dec {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -31,6 +31,7 @@
     background-color: transparent;
     border: 1px solid #c5cfde;
 
+    outline: none;
     transition: all 0.5s;
 
     &:hover,
@@ -47,19 +48,9 @@
     }
   }
 
-  &Increment,
-  &Decrement {
+  &Inc,
+  &Dec {
     outline: none;
-  }
-
-  &Link {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    padding: 8px;
-
-    color: inherit;
-    text-decoration: none;
   }
 
   &Next,
@@ -96,17 +87,11 @@
     }
 
     &:disabled {
+      color: #fff;
+      border: 1px solid #c5cfde;
+      background-color: #c5cfde;
+
       cursor: not-allowed;
-
-      &:hover {
-        border: 1px solid #c5cfde;
-        background-color: #c5cfde;
-      }
-
-      &:active {
-        border: 1px solid darken(#c5cfde, 10%);
-        background-color: darken(#c5cfde, 10%);
-      }
     }
   }
 
