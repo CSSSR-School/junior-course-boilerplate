@@ -3,17 +3,27 @@ import { combineReducers } from 'redux';
 import productsReducer from './modules/products';
 import paginationReducer from './modules/pagination';
 
-import { productsTypes, productsActions } from './modules/products';
-import { paginationTypes, paginationActions } from './modules/pagination';
+import {
+  productsTypes,
+  productsActions,
+  productsSelectors
+} from './modules/products';
+import {
+  paginationTypes,
+  paginationActions,
+  paginationSelectors
+} from './modules/pagination';
 
 import * as selectors from './selectors';
 
 export {
   selectors,
-  productsActions,
-  paginationActions,
   productsTypes,
+  productsActions,
+  productsSelectors,
   paginationTypes,
+  paginationActions,
+  paginationSelectors
 };
 
 const appReducer = combineReducers({

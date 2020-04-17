@@ -3,16 +3,14 @@ import classnames from 'classnames';
 
 import styles from './products.module.scss';
 
-import { selectors } from '../../redux';
 import FilterProductsContainer from '../../containers/filter-products-container';
 import PaginationContainer from '../../containers/pagination-container';
 import HeaderProducts from '../header-products';
 import ListProducts from '../list-products';
 
 const Products = props => {
-  const { state } = props;
-  const { filterProductsList, getVisibleProductsList } = selectors;
-  const filteredList = filterProductsList(state);
+  const { state, getFilteredProductsList, getVisibleProductsList } = props;
+  const filteredList = getFilteredProductsList(state);
   const visibleList = getVisibleProductsList(state);
   return (
     <section className={classnames(styles.products)}>
@@ -20,7 +18,7 @@ const Products = props => {
         <aside
           className={classnames(styles.productsCol, styles.productsColLeft)}
         >
-          <FilterProductsContainer {...props}/>
+          <FilterProductsContainer {...props} />
         </aside>
         <div
           className={classnames(styles.productsCol, styles.productsColRight)}
@@ -29,7 +27,10 @@ const Products = props => {
             <>
               <HeaderProducts header={'Список товаров'} />
               <ListProducts list={visibleList} />
-              <PaginationContainer pagination={state.pagination} list={filteredList} />
+              <PaginationContainer
+                pagination={state.pagination}
+                list={filteredList}
+              />
             </>
           ) : null}
         </div>

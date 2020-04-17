@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { paginationSelectors } from '../pagination';
 
 const getProductsFilter = ({ products: { filter } }) => {
   return filter;
@@ -6,10 +7,6 @@ const getProductsFilter = ({ products: { filter } }) => {
 
 const getProductsList = ({ products: { list } }) => {
   return list;
-};
-
-const getPagination = ({ pagination }) => {
-  return pagination;
 };
 
 const getProductsFilterCategories = state => {
@@ -54,6 +51,8 @@ const getFilteredProductsList = createSelector(
     return filteredProducts;
   }
 );
+
+const { getPagination } = paginationSelectors;
 
 const getVisibleProductsList = createSelector(
   [getPagination, getFilteredProductsList],

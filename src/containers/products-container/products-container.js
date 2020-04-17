@@ -5,7 +5,8 @@ import { selectors } from '../../redux';
 import Products from '../../components/products';
 
 const {
-  isFilteredProductsListEmpty,
+  getFilteredProductsList,
+  getVisibleProductsList,
   getProductsFilterActiveCategoriesList
 } = selectors;
 
@@ -54,7 +55,9 @@ class ProductsContainer extends PureComponent {
       pagination: { currentPage }
     } = state;
 
-    if (isFilteredProductsListEmpty(state)) {
+    const filteredProductsList = getFilteredProductsList(state);
+
+    if (filteredProductsList.length === 0) {
       window.history.replaceState({}, 'params', window.location.pathname);
     } else {
       if (snapshot !== null) {
@@ -103,6 +106,11 @@ class ProductsContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({ state });
+const mapStateToProps = state => ({
+  state,
+  getFilteredProductsList,
+  getVisibleProductsList,
+  getProductsFilterActiveCategoriesList
+});
 
 export default connect(mapStateToProps)(ProductsContainer);
