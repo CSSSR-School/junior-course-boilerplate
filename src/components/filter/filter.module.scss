@@ -1,0 +1,92 @@
+.Filter {
+  $Filter: &;
+
+  display: flex;
+  flex-flow: row wrap;
+
+  &Wrapper,
+  section {
+    flex-basis: 100%;
+
+    &:not(:last-of-type) {
+      margin-bottom: 30px;
+    }
+
+    #{$Filter}Header,
+    > h3 {
+      display: flex;
+      flex-flow: row nowrap;
+
+      margin: 0;
+      padding: 0;
+      padding-bottom: 16px;
+
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 600;
+      color: #323c48;
+    }
+
+    #{$Filter}Inner,
+    > div {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      flex-basis: 100%;
+
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 600;
+      color: #323c48;
+
+      input:not([type="button"]) {
+        display: flex;
+        flex-flow: row nowrap;
+        flex-grow: 1;
+        margin: 0;
+        margin-left: 8px;
+        margin-right: 8px;
+        padding-left: 16px;
+        padding-right: 16px;
+        height: 30px;
+
+        font: inherit;
+        color: inherit;
+      }
+    }
+  }
+
+  &Reset,
+  input[type="button"][readonly] {
+    flex-basis: 100%;
+    padding: 8px;
+    margin: 0;
+    margin-top: 25px;
+
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+    color: #323c48;
+
+    background-color: transparent;
+    border: 1px solid #323c48;
+
+    transition: all 0.5s;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:focus {
+      color: #ffffff;
+      background-color: #323c48;
+    }
+
+    &:active {
+      color: #ffffff;
+      background-color: darken(#323c48, 10%);
+      border: 1px solid darken(#323c48, 10%);
+    }
+  }
+}

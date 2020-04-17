@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { paginationSelectors } from '../pagination';
 
 const getProductsFilter = ({ products: { filter } }) => {
   return filter;
@@ -52,22 +51,9 @@ const getFilteredProductsList = createSelector(
   }
 );
 
-const { getPagination } = paginationSelectors;
-
-const getVisibleProductsList = createSelector(
-  [getPagination, getFilteredProductsList],
-  (pagination, filteredProducts) => {
-    const { currentPage, itemsPerPage } = pagination;
-    const lastProductIndex = currentPage * itemsPerPage;
-    const firstProductIndex = lastProductIndex - itemsPerPage;
-    return filteredProducts.slice(firstProductIndex, lastProductIndex);
-  }
-);
-
 export {
   getProductsFilter,
   getProductsList,
   getProductsFilterActiveCategoriesList,
   getFilteredProductsList,
-  getVisibleProductsList
 };

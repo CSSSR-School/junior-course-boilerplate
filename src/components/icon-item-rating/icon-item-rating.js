@@ -6,7 +6,7 @@ import styles from './icon-item-rating.module.scss';
 
 const IconItemRating = ({ isFilled }) => (
   <svg
-    className={classnames('itemRatingIcon', styles.iconItemRating)}
+    className={classnames('ItemRatingIcon', styles.IconItemRating)}
     viewBox="0 0 13.33329 12.66665"
   >
     <title>star</title>
@@ -36,7 +36,7 @@ L9.18,10.45335L8.51334,7.6l2.21335-1.92L7.80667,5.42667l-1.14-2.69333L5.53334,5.
 );
 
 IconItemRating.propTypes = {
-  isInteger: propTypes.bool
+  isFilled: propTypes.bool
 };
 
 export default IconItemRating;

@@ -3,10 +3,9 @@ import classnames from 'classnames';
 
 import styles from './products.module.scss';
 
-import FilterProductsContainer from '../../containers/filter-products-container';
+import FilterProductsContainer from '../../containers/filter-container';
 import PaginationContainer from '../../containers/pagination-container';
-import HeaderProducts from '../header-products';
-import ListProducts from '../list-products';
+import ListProducts from '../list';
 
 const Products = props => {
   const { state, getFilteredProductsList, getVisibleProductsList } = props;
@@ -25,7 +24,6 @@ const Products = props => {
         >
           {filteredList.length !== 0 ? (
             <>
-              <HeaderProducts header={'Список товаров'} />
               <ListProducts list={visibleList} />
               <PaginationContainer
                 pagination={state.pagination}

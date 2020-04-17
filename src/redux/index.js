@@ -8,16 +8,14 @@ import {
   productsActions,
   productsSelectors
 } from './modules/products';
+
 import {
   paginationTypes,
   paginationActions,
   paginationSelectors
 } from './modules/pagination';
 
-import * as selectors from './selectors';
-
 export {
-  selectors,
   productsTypes,
   productsActions,
   productsSelectors,

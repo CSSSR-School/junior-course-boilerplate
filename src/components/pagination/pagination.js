@@ -1,8 +1,9 @@
 import React from 'react';
-// import propTypes from 'prop-types';
+import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './pagination.module.scss';
+import Btn from './btn';
 
 class Pagination extends React.Component {
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
@@ -16,21 +17,6 @@ class Pagination extends React.Component {
     const value = Number(textContent);
 
     updatePaginationCurrentPage({ currentPage: value });
-  };
-
-  updatePrevNext = value => {
-    const {
-      pagination: { itemsPerPage },
-      list: productsList,
-    } = this.props;
-    const pagesTotalCount = this.getPagesTotalCount(
-      productsList.length,
-      itemsPerPage
-    );
-    if (pagesTotalCount === value && pagesTotalCount > 1) {
-    } else if (value === 1 && pagesTotalCount > 1) {
-    } else if (pagesTotalCount > 1) {
-    }
   };
 
   handleIncClick = () => {
@@ -65,7 +51,6 @@ class Pagination extends React.Component {
     }
 
     updatePaginationCurrentPage({ currentPage: prevPage });
-    this.updatePrevNext(prevPage);
   };
 
   handleNextClick = () => {
@@ -80,17 +65,11 @@ class Pagination extends React.Component {
       shiftPaginationPageBoundsForward();
     }
     updatePaginationCurrentPage({ currentPage: nextPage });
-    this.updatePrevNext(nextPage);
   };
 
   render() {
     const {
-      pagination: {
-        currentPage,
-        itemsPerPage,
-        upperPageBound,
-        lowerPageBound,
-      },
+      pagination: { currentPage, itemsPerPage, upperPageBound, lowerPageBound },
       list: productsList
     } = this.props;
     const pagesTotalCount = Array.from(
@@ -100,94 +79,102 @@ class Pagination extends React.Component {
     const pages = pagesTotalCount.map(number => {
       if (number < upperPageBound + 1 && number > lowerPageBound) {
         return (
-          <button
+          <Btn
             key={number}
-            className={classnames(
-              styles.paginationBtn,
-              styles.paginationBtnPage,
+            classList={classnames(
+              styles.PaginationBtn,
+              styles.PaginationBtnPage,
               {
-                [styles.paginationBtnActive]: number === currentPage
+                [styles.PaginationBtnActive]: number === currentPage
               }
             )}
             onClick={this.handleClick}
-          >
-            {number}
-          </button>
+            value={String(number)}
+          />
         );
       }
       return null;
     });
     const inc =
       pagesTotalCount.length > upperPageBound ? (
-        <button
-          className={classnames(styles.paginationBtn, styles.paginationBtnInc)}
-          onClick={this.handleIncClick}
-        >
-          &hellip;
-        </button>
+        <Btn
+          classList={classnames(styles.PaginationBtn, styles.PaginationBtnInc)}
+          handleClick={this.handleIncClick}
+          value="&hellip;"
+        />
       ) : null;
     const dec =
       lowerPageBound >= 1 ? (
-        <button
-          className={classnames(styles.paginationBtn, styles.paginationBtnDec)}
-          onClick={this.handleDecClick}
-        >
-          &hellip;
-        </button>
+        <Btn
+          classList={classnames(styles.PaginationBtn, styles.PaginationBtnDec)}
+          handleClick={this.handleDecClick}
+          value="&hellip;"
+        />
       ) : null;
-    const prev = (
-      <button
-        className={classnames(styles.paginationBtn, styles.paginationBtnPrev)}
-        onClick={this.handlePrevClick}
-        disabled={currentPage === 1 || (pagesTotalCount !== currentPage && pagesTotalCount < 1)}
-      >
-        Назад
-      </button>
-    );
-    const next = (
-      <button
-        className={classnames(styles.paginationBtn, styles.paginationBtnNext)}
-        onClick={this.handleNextClick}
-        disabled={
-          pagesTotalCount.length === currentPage ||
-          (currentPage !== 1 && pagesTotalCount < 1)
-        }
-      >
-        Вперед
-      </button>
-    );
+    const prev =
+      pages.length !== 0 ? (
+        <Btn
+          classList={classnames(styles.PaginationBtn, styles.PaginationBtnPrev)}
+          handleClick={this.handlePrevClick}
+          isDisabled={
+            currentPage === 1 ||
+            (pagesTotalCount !== currentPage && pagesTotalCount < 1)
+          }
+          value="Назад"
+        />
+      ) : null;
+    const next =
+      pages.length !== 0 ? (
+        <Btn
+          classList={classnames(styles.PaginationBtn, styles.PaginationBtnNext)}
+          handleClick={this.handleNextClick}
+          isDisabled={
+            pagesTotalCount.length === currentPage ||
+            (currentPage !== 1 && pagesTotalCount < 1)
+          }
+          value="Вперед"
+        />
+      ) : null;
 
     return (
-      <>
-        <div className={styles.pagination}>
-          <ul className={styles.paginationList}>
-            {prev}
-            {dec}
-            {pages}
-            {inc}
-            {next}
-          </ul>
-        </div>
-      </>
+      <div className={styles.Pagination}>
+        <ul className={styles.PaginationList}>
+          {prev}
+          {dec}
+          {pages}
+          {inc}
+          {next}
+        </ul>
+      </div>
     );
   }
 }
 
-// Pagination.propTypes = {
-//   productsList: propTypes.arrayOf(
-//     propTypes.shape({
-//       id: propTypes.number,
-//       isInStock: propTypes.bool,
-//       img: propTypes.string,
-//       title: propTypes.node,
-//       price: propTypes.node,
-//       subPriceContent: propTypes.node,
-//       maxRating: propTypes.number,
-//       rating: propTypes.number,
-//       discount: propTypes.number,
-//       category: propTypes.string
-//     })
-//   )
-// };
+Pagination.propTypes = {
+  pagination: propTypes.shape({
+    currentPage: propTypes.number,
+    itemsPerPage: propTypes.number,
+    upperPageBound: propTypes.number,
+    lowerPageBound: propTypes.number,
+    pageBound: propTypes.number
+  }),
+  list: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number,
+      isInStock: propTypes.bool,
+      img: propTypes.string,
+      title: propTypes.node,
+      price: propTypes.node,
+      subPriceContent: propTypes.node,
+      maxRating: propTypes.number,
+      rating: propTypes.number,
+      discount: propTypes.number,
+      category: propTypes.string
+    })
+  ),
+  updatePaginationCurrentPage: propTypes.func,
+  shiftPaginationPageBoundsBack: propTypes.func,
+  shiftPaginationPageBoundsForward: propTypes.func
+};
 
 export default Pagination;

@@ -1,0 +1,19 @@
+.InputFilter {
+  &Discount {
+    input {
+      &:focus {
+        outline: none;
+        border: 1px solid #437bbf;
+      }
+    }
+  }
+
+  &Invalid {
+    input {
+      border: 1px solid #bf4343;
+      &:focus {
+        border: 1px solid #437bbf;
+      }
+    }
+  }
+}

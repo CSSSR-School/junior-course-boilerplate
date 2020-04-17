@@ -35,10 +35,10 @@ const initialState = {
 export default (state = initialState, action) => {
   const { type, payload = {} } = action;
   switch (type) {
-    case types.SET_INITIAL_STATE:
+    case types.RESET_STATE:
       return initialState;
 
-    case types.UPDATE_PRODUCTS_FILTER_FIELD:
+    case types.UPDATE_FILTER_FIELD:
       const { groupName, fieldName, fieldData } = payload;
       return {
         ...state,
@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
         list: [...state.list]
       };
 
-    case types.UPDATE_PRODUCTS_FILTER_CATEGORIES:
+    case types.UPDATE_FILTER_CATEGORIES:
       const { categories } = payload;
       return {
         ...state,

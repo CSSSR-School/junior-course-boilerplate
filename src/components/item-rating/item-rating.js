@@ -9,7 +9,7 @@ const ItemRating = ({isFilled}) => (
   <div
     className={
       classnames(
-        styles.itemRating,
+        styles.ItemRating,
         {[styles.itemRatingIsFilled]: isFilled},
       )
     }

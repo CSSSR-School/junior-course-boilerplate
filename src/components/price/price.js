@@ -4,21 +4,21 @@ import classnames from 'classnames';
 
 import styles from './price.module.scss';
 
-const Price = ({ value, isPrimary = true }) => (
+const Price = ({ price, isPrimary = true }) => (
   <span
     className={classnames(
-      'itemListProductsprice',
-      styles.price,
-      { [styles.pricePrimary]: isPrimary },
-      { [styles.priceSecondary]: !isPrimary }
+      'ItemListsprice',
+      styles.Price,
+      { [styles.PricePrimary]: isPrimary },
+      { [styles.PriceSecondary]: !isPrimary }
     )}
   >
-    {value.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8381;
+    {price.toLocaleString('en-US').replace(/,/g, ' ')}&nbsp;&#8381;
   </span>
 );
 
 Price.propTypes = {
-  value: propTypes.number,
+  price: propTypes.number,
   isPrimary: propTypes.bool
 };
 

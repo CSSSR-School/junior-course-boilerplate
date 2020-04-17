@@ -1,13 +1,13 @@
 import * as types from './types';
 
-export const setInitialState = () => ({
-  type: types.SET_INITIAL_STATE
+export const resetState = () => ({
+  type: types.RESET_STATE
 });
-export const updateProductsFilterField = payload => ({
-  type: types.UPDATE_PRODUCTS_FILTER_FIELD,
+export const updateFilterField = payload => ({
+  type: types.UPDATE_FILTER_FIELD,
   payload
 });
-export const updateProductsFilterCategories = payload => ({
-  type: types.UPDATE_PRODUCTS_FILTER_CATEGORIES,
+export const updateFilterCategories = payload => ({
+  type: types.UPDATE_FILTER_CATEGORIES,
   payload
 });

@@ -1,7 +1,7 @@
-import withInputProductsNumberHandler from './with-input-products-number-handler';
-import withInputProductsCategoryHandler from './with-input-products-category-handler';
+import withInputFilterNumberHandler from './with-input-filter-number-handler';
+import withInputFilterCategoryHandler from './with-input-filter-category-handler';
 
 export {
-  withInputProductsNumberHandler,
-  withInputProductsCategoryHandler,
+  withInputFilterNumberHandler,
+  withInputFilterCategoryHandler,
 };
