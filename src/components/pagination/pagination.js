@@ -22,13 +22,13 @@ class Pagination extends React.Component {
   updatePrevNext = value => {
     const {
       pagination: { itemsPerPage },
-      list,
+      list: productsList,
       makePaginationControlsActive,
       makePaginationControlsInactive,
       makePaginationControlPrevActive,
       makePaginationControlNextActive
     } = this.props;
-    const pagesTotalCount = this.getPagesTotalCount(list.length, itemsPerPage);
+    const pagesTotalCount = this.getPagesTotalCount(productsList.length, itemsPerPage);
     makePaginationControlsInactive();
     if (pagesTotalCount === value && pagesTotalCount > 1) {
       makePaginationControlPrevActive();
@@ -109,10 +109,10 @@ class Pagination extends React.Component {
         isPrevActive,
         isNextActive
       },
-      list
+      list: productsList
     } = this.props;
     const pagesTotalCount = Array.from(
-      { length: this.getPagesTotalCount(list.length, itemsPerPage) },
+      { length: this.getPagesTotalCount(productsList.length, itemsPerPage) },
       (value, index) => index + 1
     );
     const paginationPages = pagesTotalCount.map(number => {
