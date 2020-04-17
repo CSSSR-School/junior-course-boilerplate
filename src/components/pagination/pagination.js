@@ -118,7 +118,7 @@ class Pagination extends React.Component {
       { length: this.getPagesTotalCount(productsList.length, itemsPerPage) },
       (value, index) => index + 1
     );
-    const paginationPages = pagesTotalCount.map(number => {
+    const pages = pagesTotalCount.map(number => {
       if (number < upperPageBound + 1 && number > lowerPageBound) {
         return (
           <button
@@ -175,7 +175,7 @@ class Pagination extends React.Component {
           <ul className={styles.paginationList}>
             {prev}
             {dec}
-            {paginationPages}
+            {pages}
             {inc}
             {next}
           </ul>
