@@ -28,7 +28,10 @@ class Pagination extends React.Component {
       makePaginationControlPrevActive,
       makePaginationControlNextActive
     } = this.props;
-    const pagesTotalCount = this.getPagesTotalCount(productsList.length, itemsPerPage);
+    const pagesTotalCount = this.getPagesTotalCount(
+      productsList.length,
+      itemsPerPage
+    );
     makePaginationControlsInactive();
     if (pagesTotalCount === value && pagesTotalCount > 1) {
       makePaginationControlPrevActive();
@@ -120,9 +123,13 @@ class Pagination extends React.Component {
         return (
           <button
             key={number}
-            className={classnames(styles.paginationPage, {
-              [styles.paginationPageActive]: number === currentPage
-            })}
+            className={classnames(
+              styles.paginationBtn,
+              styles.paginationBtnPage,
+              {
+                [styles.paginationBtnActive]: number === currentPage
+              }
+            )}
             onClick={this.handleClick}
           >
             {number}
@@ -131,36 +138,30 @@ class Pagination extends React.Component {
       }
       return null;
     });
-    const incBtn =
+    const inc =
       pagesTotalCount.length > upperPageBound ? (
-        <button
-          className={styles.paginationInc}
-          onClick={this.handleIncClick}
-        >
+        <button className={classnames(styles.paginationBtn, styles.paginationBtnInc)} onClick={this.handleIncClick}>
           &hellip;
         </button>
       ) : null;
-    const decBtn =
+    const dec =
       lowerPageBound >= 1 ? (
-        <button
-          className={styles.paginationDec}
-          onClick={this.handleDecClick}
-        >
+        <button className={classnames(styles.paginationBtn, styles.paginationBtnDec)} onClick={this.handleDecClick}>
           &hellip;
         </button>
       ) : null;
-    const prevBtn = (
+    const prev = (
       <button
-        className={styles.paginationPrevious}
+        className={classnames(styles.paginationBtn, styles.paginationBtnPrev)}
         onClick={this.handlePrevClick}
         disabled={!isPrevActive}
       >
         Назад
       </button>
     );
-    const nextBtn = (
+    const next = (
       <button
-        className={styles.paginationNext}
+        className={classnames(styles.paginationBtn, styles.paginationBtnNext)}
         onClick={this.handleNextClick}
         disabled={!isNextActive || pagesTotalCount.length === currentPage}
       >
@@ -172,11 +173,11 @@ class Pagination extends React.Component {
       <>
         <div className={styles.pagination}>
           <ul className={styles.paginationList}>
-            {prevBtn}
-            {decBtn}
+            {prev}
+            {dec}
             {paginationPages}
-            {incBtn}
-            {nextBtn}
+            {inc}
+            {next}
           </ul>
         </div>
       </>
