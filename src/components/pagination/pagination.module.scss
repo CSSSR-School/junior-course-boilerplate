@@ -18,6 +18,9 @@
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    min-width: 34px;
+    min-height: 32px;
+    margin-right: 2px;
 
     font-size: 14px;
     line-height: 1;
@@ -41,14 +44,6 @@
     &:active {
       border: 1px solid darken(#5695ed, 10%);
       background-color: darken(#5695ed, 10%);
-    }
-
-    &Page,
-    &Inc,
-    &Dec {
-      min-width: 34px;
-      min-height: 32px;
-      margin-right: 2px;
     }
 
     &Next,
