@@ -7,12 +7,51 @@ import { productsActions } from '../../redux';
 import { productsSelectors } from '../../redux/modules/products';
 
 class FilterContainer extends PureComponent {
-  render() {
+  componentDidMount() {
     const {
-      filter,
-      updateFilterField,
-      resetState
+      filter: { categories }
     } = this.props;
+
+    window.history.pushState(
+      { ...window.history.state, categories },
+      'params',
+    );
+    window.addEventListener('popstate', this.handlePopState);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  // componentDidUpdate() {
+  //   const {
+  //     filter: { categories }
+  //   } = this.props;
+
+    // const searchParams = new URLSearchParams(window.location.search);
+    // searchParams.delete('category');
+
+    // Object.keys(categories).forEach(category => {
+    //   if (categories[category].isActive) {
+    //     searchParams.append('category', category);
+    //   }
+    // });
+
+    // window.history.pushState(
+    //   { ...window.history.state, categories },
+    //   'params',
+    //   `?${searchParams.toString()}`
+    // );
+  // }
+
+  handlePopState = ({ state }) => {
+    if (state.hasOwnProperty('categories')) {
+      const { categories } = state;
+      this.props.updateFilterCategories({ categories });
+    }
+  };
+  render() {
+    const { filter, updateFilterField, resetState } = this.props;
     return (
       <Filter
         filter={filter}

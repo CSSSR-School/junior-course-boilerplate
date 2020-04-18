@@ -10,6 +10,36 @@ import { paginationActions } from '../../redux';
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {
+  componentDidMount() {
+    window.addEventListener('popstate', this.handlePopState);
+
+    const {
+      pagination: { currentPage }
+    } = this.props;
+    window.history.replaceState(
+      { ...window.history.state, currentPage },
+      'params',
+      `?currentPage=${currentPage}`
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  handlePopState = ({ state }) => {
+  const { currentPage } = state;
+  this.props.updatePaginationCurrentPage({ currentPage });
+  }
+
+  updateHistoryState = (params, value) => {
+    params.set('currentPage', value);
+    window.history.pushState(
+        {...window.history.state, currentPage: value},
+        'pagination',
+        `?${params.toString()}`);
+  };
+
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
 
   handleClick = (event, type) => {
@@ -22,6 +52,8 @@ class PaginationContainer extends PureComponent {
       updatePaginationCurrentPage
     } = this.props;
 
+    const searchParams = new URLSearchParams(window.location.search);
+
     switch (type) {
       case 'prev':
         const prevPage = currentPage - 1;
@@ -29,12 +61,16 @@ class PaginationContainer extends PureComponent {
           shiftPaginationPageBoundsBack();
         }
         updatePaginationCurrentPage({ currentPage: prevPage });
+        this.updateHistoryState(searchParams, prevPage);
         break;
       case 'dec':
+        const decPage = upperPageBound - pageBound;
         shiftPaginationPageBoundsBack();
         updatePaginationCurrentPage({
-          currentPage: upperPageBound - pageBound
+          currentPage: decPage
         });
+
+        this.updateHistoryState(searchParams, decPage);
         break;
       case 'current':
         const {
@@ -42,10 +78,15 @@ class PaginationContainer extends PureComponent {
         } = event;
         const value = Number(textContent);
         updatePaginationCurrentPage({ currentPage: value });
+
+        this.updateHistoryState(searchParams, value);
         break;
       case 'inc':
+        const incPage = upperPageBound + 1;
         shiftPaginationPageBoundsForward();
         updatePaginationCurrentPage({ currentPage: upperPageBound + 1 });
+
+        this.updateHistoryState(searchParams, incPage);
         break;
       case 'next':
         const nextPage = currentPage + 1;
@@ -54,6 +95,8 @@ class PaginationContainer extends PureComponent {
           shiftPaginationPageBoundsForward();
         }
         updatePaginationCurrentPage({ currentPage: nextPage });
+
+        this.updateHistoryState(searchParams, nextPage);
         break;
       default:
         throw new Error(`Unknown type: ${type}`);

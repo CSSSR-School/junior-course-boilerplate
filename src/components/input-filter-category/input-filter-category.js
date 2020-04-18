@@ -12,11 +12,9 @@ const InputFilterCategory = ({
   ...restProps
 }) => (
   <input
-    className={classnames(
-      styles.InputFilter,
-      styles.InputFilterCategory,
-      { [styles.InputFilterActive]: isActive }
-    )}
+    className={classnames(styles.InputFilter, styles.InputFilterCategory, {
+      [styles.InputFilterActive]: isActive
+    })}
     type="button"
     onClick={event => handleClick(event, 'categories')}
     {...restProps}

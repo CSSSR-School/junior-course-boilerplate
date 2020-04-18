@@ -23,7 +23,8 @@ const Filter = props => {
       key={index}
       name={category}
       value={category}
-      isActive={categories[category].isActive}
+      categories={categories}
+      // isActive={categories[category].isActive}
       updateFilterField={updateFilterField}
     />
   ));
