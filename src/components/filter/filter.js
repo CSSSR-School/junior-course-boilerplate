@@ -15,7 +15,8 @@ const Filter = props => {
       categories
     },
     updateFilterField,
-    resetState
+    resetFilterState,
+    makeHistoryCategoriesInactive,
   } = props;
 
   const mappedCategories = Object.keys(categories).map((category, index) => (
@@ -64,7 +65,10 @@ const Filter = props => {
         value="Сбросить фильтры"
         readOnly={true}
         className={classnames(styles.FilterReset)}
-        onClick={resetState}
+        onClick={() => {
+          resetFilterState();
+          makeHistoryCategoriesInactive();
+        }}
       />
     </form>
   );
@@ -93,7 +97,7 @@ Filter.propTypes = {
     })
   }),
   updateFilterField: propTypes.func,
-  resetState: propTypes.func
+  resetFilterState: propTypes.func
 };
 
 export default Filter;

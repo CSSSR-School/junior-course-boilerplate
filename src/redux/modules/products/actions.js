@@ -1,7 +1,7 @@
 import * as types from './types';
 
-export const resetState = () => ({
-  type: types.RESET_STATE
+export const resetFilterState = () => ({
+  type: types.RESET_FILTER_STATE
 });
 export const updateFilterField = payload => ({
   type: types.UPDATE_FILTER_FIELD,

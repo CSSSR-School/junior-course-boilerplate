@@ -35,7 +35,7 @@ const initialState = {
 export default (state = initialState, action) => {
   const { type, payload = {} } = action;
   switch (type) {
-    case types.RESET_STATE:
+    case types.RESET_FILTER_STATE:
       return initialState;
 
     case types.UPDATE_FILTER_FIELD:

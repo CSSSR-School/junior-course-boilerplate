@@ -5,13 +5,9 @@ import Button from '../button';
 import styles from '../button/button.module.scss';
 
 const renderButton = (
-  {
-    pagination: { currentPage },
-    pagesLength,
-    handleClick
-  },
+  { pagination: { currentPage }, pagesLength, handleClick },
   type,
-  value = type,
+  value = type
 ) => {
   switch (type) {
     case 'prev':

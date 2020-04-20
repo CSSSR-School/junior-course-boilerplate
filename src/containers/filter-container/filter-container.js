@@ -5,17 +5,13 @@ import { connect } from 'react-redux';
 import Filter from '../../components/filter';
 import { productsActions } from '../../redux';
 import { productsSelectors } from '../../redux/modules/products';
+import { paginationSelectors } from '../../redux/modules/pagination';
 
 class FilterContainer extends PureComponent {
   componentDidMount() {
-    const {
-      filter: { categories }
-    } = this.props;
+    const { categories } = this.props;
 
-    window.history.pushState(
-      { ...window.history.state, categories },
-      'params',
-    );
+    window.history.pushState({ ...window.history.state, categories }, 'params');
     window.addEventListener('popstate', this.handlePopState);
   }
 
@@ -29,24 +25,46 @@ class FilterContainer extends PureComponent {
         const { categories } = state;
         this.props.updateFilterCategories({ categories });
       }
-    })
+    });
+  };
+
+  makeHistoryCategoriesInactive = () => {
+    const {
+      categories,
+      pagination: { currentPage }
+    } = this.props;
+    window.history.pushState(
+      {
+        ...window.history.state,
+        categories: Object.keys(categories).reduce(
+          (acc, category) => ({ ...acc, [category]: { isActive: false } }),
+          {}
+        )
+      },
+      'params',
+      `?currentPage=${currentPage}`
+    );
   };
   render() {
-    const { filter, updateFilterField, resetState } = this.props;
+    const { filter, updateFilterField, resetFilterState } = this.props;
     return (
       <Filter
         filter={filter}
         updateFilterField={updateFilterField}
-        resetState={resetState}
+        resetFilterState={resetFilterState}
+        makeHistoryCategoriesInactive={this.makeHistoryCategoriesInactive}
       />
     );
   }
 }
 
-const { getProductsFilter } = productsSelectors;
+const { getProductsFilter, getProductsFilterCategories } = productsSelectors;
+const { getPagination } = paginationSelectors;
 
 const mapStateToProps = state => ({
-  filter: getProductsFilter(state)
+  filter: getProductsFilter(state),
+  categories: getProductsFilterCategories(state),
+  pagination: getPagination(state)
 });
 
 const mapDispatchToProps = dispatch =>
