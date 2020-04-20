@@ -24,6 +24,7 @@ const Filter = props => {
       key={index}
       name={category}
       value={category}
+      isActive={categories[category].isActive}
     />
   ));
 
