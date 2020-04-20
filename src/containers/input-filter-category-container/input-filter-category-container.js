@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import InputFilterCategory from '../../components/input-filter-category';
 import { productsActions } from '../../redux';
-import { productsSelectors } from '../../redux/modules/products';
 
 class InputFilterCategoryContainer extends PureComponent {
   handleClick = event => {
@@ -56,18 +55,12 @@ class InputFilterCategoryContainer extends PureComponent {
   }
 }
 
-const { getProductsFilterCategories } = productsSelectors;
-
-const mapStateToProps = state => ({
-  categories: getProductsFilterCategories(state)
-});
-
 const mapDispatchToProps = dispatch => {
   const {updateFilterCategories} = bindActionCreators(productsActions, dispatch);
   return {updateFilterCategories};
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(InputFilterCategoryContainer);
