@@ -8,14 +8,13 @@ const getProductsList = ({ products: { list } }) => {
   return list;
 };
 
-const getProductsFilterCategories = state => {
-  const {
-    products: {
-      filter: { categories }
-    }
-  } = state;
-  return categories;
-};
+const getProductsFilterCategories = createSelector(
+  getProductsFilter,
+  filter => {
+    const { categories } = filter;
+    return categories;
+  }
+);
 
 const getProductsFilterActiveCategoriesList = createSelector(
   getProductsFilterCategories,
@@ -53,7 +52,8 @@ const getFilteredProductsList = createSelector(
 
 export {
   getProductsFilter,
+  getProductsFilterCategories,
   getProductsList,
   getProductsFilterActiveCategoriesList,
-  getFilteredProductsList,
+  getFilteredProductsList
 };

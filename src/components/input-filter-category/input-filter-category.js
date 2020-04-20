@@ -3,11 +3,10 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import styles from './input-filter-category.module.scss';
-import { withInputFilterCategoryHandler } from '../hoc-helpers';
 
 const InputFilterCategory = ({
+  categories,
   isActive,
-  updateFilterField,
   handleClick,
   ...restProps
 }) => (
@@ -16,7 +15,7 @@ const InputFilterCategory = ({
       [styles.InputFilterActive]: isActive
     })}
     type="button"
-    onClick={event => handleClick(event, 'categories')}
+    onClick={handleClick}
     {...restProps}
   />
 );
@@ -29,4 +28,4 @@ InputFilterCategory.propTypes = {
   updateFilterField: propTypes.func
 };
 
-export default withInputFilterCategoryHandler(InputFilterCategory);
+export default InputFilterCategory;

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import styles from './filter.module.scss';
 import InputFilterPrice from '../input-filter-price';
 import InputFilterDiscount from '../input-filter-discount';
-import InputFilterCategory from '../input-filter-category';
+import InputFilterCategoryContainer from '../../containers/input-filter-category-container';
 
 const Filter = props => {
   const {
@@ -15,17 +15,14 @@ const Filter = props => {
       categories
     },
     updateFilterField,
-    resetState,
+    resetState
   } = props;
 
   const mappedCategories = Object.keys(categories).map((category, index) => (
-    <InputFilterCategory
+    <InputFilterCategoryContainer
       key={index}
       name={category}
       value={category}
-      categories={categories}
-      // isActive={categories[category].isActive}
-      updateFilterField={updateFilterField}
     />
   ));
 
@@ -96,7 +93,7 @@ Filter.propTypes = {
     })
   }),
   updateFilterField: propTypes.func,
-  resetState: propTypes.func,
+  resetState: propTypes.func
 };
 
 export default Filter;
