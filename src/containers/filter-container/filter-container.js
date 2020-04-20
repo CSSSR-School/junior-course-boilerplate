@@ -23,27 +23,6 @@ class FilterContainer extends PureComponent {
     window.removeEventListener('popstate', this.handlePopState);
   }
 
-  // componentDidUpdate() {
-  //   const {
-  //     filter: { categories }
-  //   } = this.props;
-
-    // const searchParams = new URLSearchParams(window.location.search);
-    // searchParams.delete('category');
-
-    // Object.keys(categories).forEach(category => {
-    //   if (categories[category].isActive) {
-    //     searchParams.append('category', category);
-    //   }
-    // });
-
-    // window.history.pushState(
-    //   { ...window.history.state, categories },
-    //   'params',
-    //   `?${searchParams.toString()}`
-    // );
-  // }
-
   handlePopState = ({ state }) => {
     if (state.hasOwnProperty('categories')) {
       const { categories } = state;
