@@ -1,76 +1,31 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import classnames from 'classnames';
 
 import styles from './pagination.module.scss';
-import Btn from './btn';
+import { renderButton } from './utils';
 
 class Pagination extends React.Component {
-
   render() {
     const {
-      pagination: { currentPage, upperPageBound, lowerPageBound },
-      pagesLength,
+      pagination: { upperPageBound, lowerPageBound },
+      pagesLength
     } = this.props;
     const pagesData = Array.from(
       { length: pagesLength },
       (value, index) => index + 1
     );
     const pages = pagesData.map(number => {
-      if (number < upperPageBound + 1 && number > lowerPageBound) {
-        return (
-          <Btn
-            key={number}
-            classList={classnames(styles.PaginationBtn, {
-              [styles.PaginationBtnActive]: number === currentPage
-            })}
-            value={String(number)}
-            handleClick={event => this.props.handleClick(event, 'current')}
-          />
-        );
-      }
-      return null;
+      return (
+        number < upperPageBound + 1 &&
+        number > lowerPageBound &&
+        renderButton(this.props, number)
+      );
     });
     const inc =
-    pagesData.length > upperPageBound ? (
-        <Btn
-          classList={classnames(styles.PaginationBtn)}
-          value="&hellip;"
-          handleClick={event => this.props.handleClick(event, 'inc')}
-        />
-      ) : null;
-    const dec =
-      lowerPageBound >= 1 ? (
-        <Btn
-          classList={classnames(styles.PaginationBtn)}
-          value="&hellip;"
-          handleClick={event => this.props.handleClick(event, 'dec')}
-        />
-      ) : null;
-    const prev =
-    pagesData.length !== 0 ? (
-        <Btn
-          classList={classnames(styles.PaginationBtn, styles.PaginationBtnPrev)}
-          isDisabled={
-            currentPage === 1 ||
-            (pagesData !== currentPage && pagesData < 1)
-          }
-          value="Назад"
-          handleClick={event => this.props.handleClick(event, 'prev')}
-        />
-      ) : null;
-    const next =
-    pagesData.length !== 0 ? (
-        <Btn
-          classList={classnames(styles.PaginationBtn, styles.PaginationBtnNext)}
-          isDisabled={
-            pagesData.length === currentPage ||
-            (currentPage !== 1 && pagesData < 1)
-          }
-          value="Вперед"
-          handleClick={event => this.props.handleClick(event, 'next')}
-        />
-      ) : null;
+      pagesData.length > upperPageBound && renderButton(this.props, 'inc');
+    const dec = lowerPageBound >= 1 && renderButton(this.props, 'dec');
+    const prev = pagesLength !== 0 && renderButton(this.props, 'prev');
+    const next = pagesLength !== 0 && renderButton(this.props, 'next');
 
     return (
       <div className={styles.Pagination}>
@@ -95,7 +50,7 @@ Pagination.propTypes = {
     pageBound: propTypes.number
   }),
   pagesLength: propTypes.number,
-  handleClick: propTypes.func,
+  handleClick: propTypes.func
 };
 
 export default Pagination;

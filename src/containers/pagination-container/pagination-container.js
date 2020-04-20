@@ -28,16 +28,17 @@ class PaginationContainer extends PureComponent {
   }
 
   handlePopState = ({ state }) => {
-  const { currentPage } = state;
-  this.props.updatePaginationCurrentPage({ currentPage });
-  }
+    const { currentPage } = state;
+    this.props.updatePaginationCurrentPage({ currentPage });
+  };
 
   updateHistoryState = (params, value) => {
     params.set('currentPage', value);
     window.history.pushState(
-        {...window.history.state, currentPage: value},
-        'pagination',
-        `?${params.toString()}`);
+      { ...window.history.state, currentPage: value },
+      'pagination',
+      `?${params.toString()}`
+    );
   };
 
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
@@ -72,15 +73,6 @@ class PaginationContainer extends PureComponent {
 
         this.updateHistoryState(searchParams, decPage);
         break;
-      case 'current':
-        const {
-          target: { textContent }
-        } = event;
-        const value = Number(textContent);
-        updatePaginationCurrentPage({ currentPage: value });
-
-        this.updateHistoryState(searchParams, value);
-        break;
       case 'inc':
         const incPage = upperPageBound + 1;
         shiftPaginationPageBoundsForward();
@@ -99,7 +91,13 @@ class PaginationContainer extends PureComponent {
         this.updateHistoryState(searchParams, nextPage);
         break;
       default:
-        throw new Error(`Unknown type: ${type}`);
+        const {
+          target: { textContent }
+        } = event;
+        const value = Number(textContent);
+        updatePaginationCurrentPage({ currentPage: value });
+
+        this.updateHistoryState(searchParams, value);
     }
   };
   render() {

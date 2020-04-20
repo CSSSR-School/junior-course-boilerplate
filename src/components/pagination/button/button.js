@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const Btn = props => {
+const Button = props => {
   const { classList, value, isDisabled, handleClick } = props;
   return (
     <button
@@ -14,11 +14,11 @@ const Btn = props => {
   );
 };
 
-Btn.propTypes = {
+Button.propTypes = {
   classList: propTypes.string,
   value: propTypes.string,
   disabled: propTypes.bool,
   onClick: propTypes.func
 };
 
-export default Btn;
+export default Button;
