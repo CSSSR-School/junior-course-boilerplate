@@ -34,12 +34,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const { type, payload = {} } = action;
+
   switch (type) {
     case types.RESET_FILTER_STATE:
       return initialState;
 
     case types.UPDATE_FILTER_FIELD:
       const { groupName, fieldName, fieldData } = payload;
+
       return {
         ...state,
         filter: {
@@ -54,6 +56,7 @@ export default (state = initialState, action) => {
 
     case types.UPDATE_FILTER_CATEGORIES:
       const { categories } = payload;
+
       return {
         ...state,
         filter: {
@@ -69,6 +72,7 @@ export default (state = initialState, action) => {
         },
         list: [...state.list]
       };
+
     default:
       return state;
   }

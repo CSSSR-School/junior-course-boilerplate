@@ -17,8 +17,10 @@ const withInputFilterNumberHandler = WrappedComponent => {
           isValid: value > 0
         }
       };
+
       updateFilterField(payload);
     };
+
     render() {
       return <WrappedComponent handleChange={this.handleChange} {...this.props} />;
     }

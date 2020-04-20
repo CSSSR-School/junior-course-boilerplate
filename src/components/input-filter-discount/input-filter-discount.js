@@ -31,6 +31,7 @@ const InputFilterDiscount = ({
 );
 
 InputFilterDiscount.propTypes = {
+  title: propTypes.string,
   name: propTypes.string,
   value: propTypes.number,
   parentClassName: propTypes.string,

@@ -16,6 +16,7 @@ class PaginationContainer extends PureComponent {
     const {
       pagination: { currentPage }
     } = this.props;
+
     window.history.replaceState(
       { ...window.history.state, currentPage },
       'params',
@@ -29,11 +30,13 @@ class PaginationContainer extends PureComponent {
 
   handlePopState = ({ state }) => {
     const { currentPage } = state;
+
     this.props.updatePaginationCurrentPage({ currentPage });
   };
 
   updateHistoryState = (params, value) => {
     params.set('currentPage', value);
+
     window.history.pushState(
       { ...window.history.state, currentPage: value },
       'pagination',
@@ -58,26 +61,28 @@ class PaginationContainer extends PureComponent {
     switch (type) {
       case 'prev':
         const prevPage = currentPage - 1;
+
         if (prevPage % pageBound === 0) {
           shiftPaginationPageBoundsBack();
         }
+
         updatePaginationCurrentPage({ currentPage: prevPage });
         this.updateHistoryState(searchParams, prevPage);
         break;
       case 'dec':
         const decPage = upperPageBound - pageBound;
+
         shiftPaginationPageBoundsBack();
         updatePaginationCurrentPage({
           currentPage: decPage
         });
-
         this.updateHistoryState(searchParams, decPage);
         break;
       case 'inc':
         const incPage = upperPageBound + 1;
+
         shiftPaginationPageBoundsForward();
         updatePaginationCurrentPage({ currentPage: upperPageBound + 1 });
-
         this.updateHistoryState(searchParams, incPage);
         break;
       case 'next':
@@ -87,7 +92,6 @@ class PaginationContainer extends PureComponent {
           shiftPaginationPageBoundsForward();
         }
         updatePaginationCurrentPage({ currentPage: nextPage });
-
         this.updateHistoryState(searchParams, nextPage);
         break;
       default:
@@ -95,14 +99,15 @@ class PaginationContainer extends PureComponent {
           target: { textContent }
         } = event;
         const value = Number(textContent);
-        updatePaginationCurrentPage({ currentPage: value });
 
+        updatePaginationCurrentPage({ currentPage: value });
         this.updateHistoryState(searchParams, value);
     }
   };
   render() {
     const { pagination, list } = this.props;
     const { itemsPerPage } = pagination;
+
     return (
       <Pagination
         pagination={pagination}
@@ -114,7 +119,6 @@ class PaginationContainer extends PureComponent {
 }
 
 const { getFilteredProductsList } = productsSelectors;
-
 const { getPagination } = paginationSelectors;
 
 const mapStateToProps = state => ({

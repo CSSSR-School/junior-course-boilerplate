@@ -51,6 +51,7 @@ const getFilteredProductsList = createSelector(
         activeCategoriesList.includes(category)
       );
     }
+
     return filteredProducts;
   }
 );

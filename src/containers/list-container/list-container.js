@@ -11,6 +11,7 @@ const {
 class ListContainer extends PureComponent {
   render() {
     const {list} = this.props;
+
     return <List list={list} />;
   }
 }

@@ -13,6 +13,7 @@ const getVisibleProductsList = createSelector(
     const { currentPage, itemsPerPage } = pagination;
     const lastProductIndex = currentPage * itemsPerPage;
     const firstProductIndex = lastProductIndex - itemsPerPage;
+
     return filteredProducts.slice(firstProductIndex, lastProductIndex);
   }
 );

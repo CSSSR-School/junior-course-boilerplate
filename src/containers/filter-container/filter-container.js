@@ -23,6 +23,7 @@ class FilterContainer extends PureComponent {
     Object.keys(state).forEach(key => {
       if (key === 'categories') {
         const { categories } = state;
+
         this.props.updateFilterCategories({ categories });
       }
     });
@@ -33,6 +34,7 @@ class FilterContainer extends PureComponent {
       categories,
       pagination: { currentPage }
     } = this.props;
+
     window.history.pushState(
       {
         ...window.history.state,
@@ -45,8 +47,10 @@ class FilterContainer extends PureComponent {
       `?currentPage=${currentPage}`
     );
   };
+
   render() {
     const { filter, updateFilterField, resetFilterState } = this.props;
+
     return (
       <Filter
         filter={filter}

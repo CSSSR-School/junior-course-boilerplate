@@ -21,6 +21,7 @@ const List = props => {
       maxRating,
       rating
     } = product;
+
     return (
       <li
         key={id}

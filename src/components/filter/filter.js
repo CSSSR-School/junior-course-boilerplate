@@ -99,7 +99,8 @@ Filter.propTypes = {
     })
   }),
   updateFilterField: propTypes.func,
-  resetFilterState: propTypes.func
+  resetFilterState: propTypes.func,
+  makeHistoryCategoriesInactive: propTypes.func,
 };
 
 export default Filter;

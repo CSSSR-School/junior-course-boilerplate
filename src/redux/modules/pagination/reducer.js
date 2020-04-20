@@ -10,6 +10,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const { type, payload = {} } = action;
+
   switch (type) {
     case types.UPDATE_PAGINATION_CURRENT_PAGE:
       const { currentPage } = payload;
@@ -35,6 +36,7 @@ export default (state = initialState, action) => {
         lowerPageBound:
           state.lowerPageBound - state.pageBound
       };
+
     default:
       return state;
   }
