@@ -24,10 +24,12 @@ class FilterContainer extends PureComponent {
   }
 
   handlePopState = ({ state }) => {
-    if (state.hasOwnProperty('categories')) {
-      const { categories } = state;
-      this.props.updateFilterCategories({ categories });
-    }
+    Object.keys(state).forEach(key => {
+      if (key === 'categories') {
+        const { categories } = state;
+        this.props.updateFilterCategories({ categories });
+      }
+    })
   };
   render() {
     const { filter, updateFilterField, resetState } = this.props;
