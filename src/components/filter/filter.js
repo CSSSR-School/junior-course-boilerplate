@@ -15,7 +15,7 @@ const Filter = props => {
       categories
     },
     updateFilterField,
-    resetFilterState,
+    resetFilter,
     makeHistoryCategoriesInactive,
   } = props;
 
@@ -68,7 +68,7 @@ const Filter = props => {
         readOnly={true}
         className={classnames(styles.FilterReset)}
         onClick={() => {
-          resetFilterState();
+          resetFilter();
           makeHistoryCategoriesInactive();
         }}
       />
@@ -99,7 +99,7 @@ Filter.propTypes = {
     })
   }),
   updateFilterField: propTypes.func,
-  resetFilterState: propTypes.func,
+  resetFilter: propTypes.func,
   makeHistoryCategoriesInactive: propTypes.func,
 };
 

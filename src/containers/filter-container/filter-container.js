@@ -3,9 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Filter from '../../components/filter';
-import { productsActions } from '../../redux';
-import { productsSelectors } from '../../redux/modules/products';
-import { paginationSelectors } from '../../redux/modules/pagination';
+import {
+  filterActions,
+  filterSelectors,
+  paginationSelectors
+} from '../../redux';
 
 class FilterContainer extends PureComponent {
   componentDidMount() {
@@ -49,29 +51,29 @@ class FilterContainer extends PureComponent {
   };
 
   render() {
-    const { filter, updateFilterField, resetFilterState } = this.props;
+    const { filter, updateFilterField, resetFilter } = this.props;
 
     return (
       <Filter
         filter={filter}
         updateFilterField={updateFilterField}
-        resetFilterState={resetFilterState}
+        resetFilter={resetFilter}
         makeHistoryCategoriesInactive={this.makeHistoryCategoriesInactive}
       />
     );
   }
 }
 
-const { getProductsFilter, getProductsFilterCategories } = productsSelectors;
+const { getFilter, getFilterCategories } = filterSelectors;
 const { getPagination } = paginationSelectors;
 
 const mapStateToProps = state => ({
-  filter: getProductsFilter(state),
-  categories: getProductsFilterCategories(state),
+  filter: getFilter(state),
+  categories: getFilterCategories(state),
   pagination: getPagination(state)
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(productsActions, dispatch);
+  bindActionCreators(filterActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer);

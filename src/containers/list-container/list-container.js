@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { paginationSelectors } from '../../redux/modules/pagination';
+import { paginationSelectors } from '../../redux';
 import List from '../../components/list';
 
 const {

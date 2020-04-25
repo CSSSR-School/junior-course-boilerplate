@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { productsSelectors } from '../../redux/modules/products';
-import { paginationSelectors } from '../../redux/modules/pagination';
-
-import { paginationActions } from '../../redux';
+import {
+  paginationActions,
+  dataSelectors,
+  paginationSelectors
+} from '../../redux';
 
 import Pagination from '../../components/pagination';
 
@@ -118,12 +119,12 @@ class PaginationContainer extends PureComponent {
   }
 }
 
-const { getFilteredProductsList } = productsSelectors;
+const { getFilteredData } = dataSelectors;
 const { getPagination } = paginationSelectors;
 
 const mapStateToProps = state => ({
   pagination: getPagination(state),
-  list: getFilteredProductsList(state)
+  list: getFilteredData(state)
 });
 
 const mapDispatchToProps = dispatch =>

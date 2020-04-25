@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import InputFilterCategory from '../../components/input-filter-category';
-import { productsActions } from '../../redux';
+import { filterActions } from '../../redux';
 
 class InputFilterCategoryContainer extends PureComponent {
   handleClick = event => {
@@ -46,11 +46,7 @@ class InputFilterCategoryContainer extends PureComponent {
   };
 
   render() {
-    const {
-      categories,
-      updateFilterCategories,
-      ...restProps
-    } = this.props;
+    const { categories, updateFilterCategories, ...restProps } = this.props;
 
     return (
       <InputFilterCategory handleClick={this.handleClick} {...restProps} />
@@ -59,12 +55,12 @@ class InputFilterCategoryContainer extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => {
-  const {updateFilterCategories} = bindActionCreators(productsActions, dispatch);
+  const { updateFilterCategories } = bindActionCreators(
+    filterActions,
+    dispatch
+  );
 
-  return {updateFilterCategories};
-}
+  return { updateFilterCategories };
+};
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(InputFilterCategoryContainer);
+export default connect(null, mapDispatchToProps)(InputFilterCategoryContainer);

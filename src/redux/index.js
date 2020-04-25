@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
 
-import productsReducer from './modules/products';
+import dataReducer from './modules/data';
+import filterReducer from './modules/filter';
 import paginationReducer from './modules/pagination';
 
-import {
-  productsTypes,
-  productsActions,
-  productsSelectors
-} from './modules/products';
+import { filterTypes, filterActions, filterSelectors } from './modules/filter';
+
+import { dataTypes, dataActions, dataSelectors } from './modules/data';
 
 import {
   paginationTypes,
@@ -16,16 +15,20 @@ import {
 } from './modules/pagination';
 
 export {
-  productsTypes,
-  productsActions,
-  productsSelectors,
+  filterTypes,
+  filterActions,
+  filterSelectors,
+  dataTypes,
+  dataActions,
+  dataSelectors,
   paginationTypes,
   paginationActions,
   paginationSelectors
 };
 
 const appReducer = combineReducers({
-  products: productsReducer,
+  filter: filterReducer,
+  data: dataReducer,
   pagination: paginationReducer
 });
 
