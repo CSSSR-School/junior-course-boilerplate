@@ -4,15 +4,15 @@ import { filterSelectors } from '../filter';
 const getData = ({ data }) => data;
 
 const getItemById = ({ data }, id) => {
-  const [ item ] = data.filter(value => value.id === Number(id));
+  const [item] = data.filter(value => value.id === Number(id));
   return item;
-}
+};
 
 const getFilteredData = createSelector(
   [
     filterSelectors.getFilter,
     filterSelectors.getFilterActiveCategories,
-    getData,
+    getData
   ],
   (filter, filterActiveCategories, data) => {
     const {

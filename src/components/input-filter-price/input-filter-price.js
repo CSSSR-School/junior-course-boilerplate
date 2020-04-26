@@ -12,11 +12,9 @@ const InputFilterPrice = ({
   ...restProps
 }) => (
   <input
-    className={classnames(
-      styles.inputFilter,
-      styles.inputFilterPrice,
-      { [styles.inputFilterInvalid]: !isValid }
-    )}
+    className={classnames(styles.inputFilter, styles.inputFilterPrice, {
+      [styles.inputFilterInvalid]: !isValid
+    })}
     onChange={event => handleChange(event, 'price')}
     {...restProps}
   />

@@ -48,11 +48,7 @@ const List = props => {
     );
   });
 
-  return (
-    <ul className={classnames(styles.List)}>
-      {listElements}
-    </ul>
-  );
+  return <ul className={classnames(styles.List)}>{listElements}</ul>;
 };
 
 List.propTypes = {

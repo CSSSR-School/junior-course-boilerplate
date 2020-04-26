@@ -13,8 +13,4 @@ const getFilterActiveCategories = createSelector(
     Object.keys(categories).filter(category => categories[category].isActive)
 );
 
-export {
-  getFilter,
-  getFilterCategories,
-  getFilterActiveCategories,
-};
+export { getFilter, getFilterCategories, getFilterActiveCategories };

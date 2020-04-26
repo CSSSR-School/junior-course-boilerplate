@@ -15,7 +15,7 @@ const Filter = props => {
       categories
     },
     updateFilterField,
-    resetFilter,
+    resetFilter
   } = props;
 
   const mappedCategories = Object.keys(categories).map((category, index) => (
@@ -97,7 +97,7 @@ Filter.propTypes = {
     })
   }),
   updateFilterField: propTypes.func,
-  resetFilter: propTypes.func,
+  resetFilter: propTypes.func
 };
 
 export default Filter;

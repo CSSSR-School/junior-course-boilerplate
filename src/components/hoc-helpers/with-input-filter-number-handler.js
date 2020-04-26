@@ -22,7 +22,9 @@ const withInputFilterNumberHandler = WrappedComponent => {
     };
 
     render() {
-      return <WrappedComponent handleChange={this.handleChange} {...this.props} />;
+      return (
+        <WrappedComponent handleChange={this.handleChange} {...this.props} />
+      );
     }
   };
 };

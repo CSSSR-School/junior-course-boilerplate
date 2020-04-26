@@ -22,19 +22,15 @@ export default (state = initialState, action) => {
     case types.SHIFT_PAGINATION_PAGE_BOUNDS_FORWARD:
       return {
         ...state,
-        upperPageBound:
-        state.upperPageBound + state.pageBound,
-      lowerPageBound:
-        state.lowerPageBound + state.pageBound
+        upperPageBound: state.upperPageBound + state.pageBound,
+        lowerPageBound: state.lowerPageBound + state.pageBound
       };
 
     case types.SHIFT_PAGINATION_PAGE_BOUNDS_BACK:
       return {
         ...state,
-        upperPageBound:
-          state.upperPageBound - state.pageBound,
-        lowerPageBound:
-          state.lowerPageBound - state.pageBound
+        upperPageBound: state.upperPageBound - state.pageBound,
+        lowerPageBound: state.lowerPageBound - state.pageBound
       };
 
     default:

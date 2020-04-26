@@ -37,7 +37,7 @@ InputFilterDiscount.propTypes = {
   parentClassName: propTypes.string,
   isValid: propTypes.bool,
   handleChange: propTypes.func,
-  updateFilterField: propTypes.func,
+  updateFilterField: propTypes.func
 };
 
 export default withInputFilterNumberHandler(InputFilterDiscount);
