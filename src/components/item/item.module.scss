@@ -1,0 +1,48 @@
+.Item {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  &Wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: 100%;
+
+    margin-bottom: 50px;
+  }
+  &Header {
+    margin: 0;
+    padding: 0;
+
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 300;
+    color: #323c48;
+  }
+  &Link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-right: 20px;
+
+    transition-duration: 1s;
+    transition-property: all;
+
+    svg {
+      --fill: #000000;
+
+      width: 18px;
+      height: 12px;
+
+      transition-duration: inherit;
+      transition-property: inherit;
+    }
+
+    &:hover {
+      svg {
+        --fill: #5695ed;
+      }
+    }
+  }
+}

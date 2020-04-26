@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 
 import dataReducer from './modules/data';
 import filterReducer from './modules/filter';
@@ -26,10 +27,13 @@ export {
   paginationSelectors
 };
 
-const appReducer = combineReducers({
-  filter: filterReducer,
-  data: dataReducer,
-  pagination: paginationReducer
-});
+const createRootReducer = history =>
+  combineReducers({
+    router: connectRouter(history),
 
-export default appReducer;
+    filter: filterReducer,
+    data: dataReducer,
+    pagination: paginationReducer
+  });
+
+export default createRootReducer;

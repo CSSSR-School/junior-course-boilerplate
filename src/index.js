@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import configureStore, { history } from './redux/store';
 
-import { store } from './redux/store';
 import App from './components/app';
 import WebFont from 'webfontloader';
 
 import 'normalize.scss/normalize.scss';
 import './index.scss';
+
+const store = configureStore();
 
 WebFont.load({
   google: {
@@ -17,7 +20,9 @@ WebFont.load({
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

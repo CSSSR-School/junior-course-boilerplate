@@ -2,11 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
-import styles from './icon-item-rating.module.scss';
+import styles from './icon-product-rating.module.scss';
 
-const IconItemRating = ({ isFilled }) => (
+const IconProductRating = ({ isFilled }) => (
   <svg
-    className={classnames('ItemRatingIcon', styles.IconItemRating)}
+    className={classnames('ProductRatingIcon', styles.IconProductRating)}
     viewBox="0 0 13.33329 12.66665"
   >
     <title>star</title>
@@ -35,8 +35,8 @@ L9.18,10.45335L8.51334,7.6l2.21335-1.92L7.80667,5.42667l-1.14-2.69333L5.53334,5.
   </svg>
 );
 
-IconItemRating.propTypes = {
+IconProductRating.propTypes = {
   isFilled: propTypes.bool
 };
 
-export default IconItemRating;
+export default IconProductRating;

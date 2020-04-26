@@ -20,29 +20,6 @@ class InputFilterCategoryContainer extends PureComponent {
     );
 
     updateFilterCategories({ categories: updatedCategories });
-
-    const state = window.history.state;
-    const searchParams = new URLSearchParams(window.location.search);
-
-    searchParams.delete('category');
-
-    Object.keys(updatedCategories).forEach(category => {
-      if (updatedCategories[category].isActive) {
-        searchParams.append('category', category);
-      }
-    });
-
-    window.history.pushState(
-      {
-        ...state,
-        categories: {
-          ...state.categories,
-          ...updatedCategories
-        }
-      },
-      'params',
-      `?${searchParams.toString()}`
-    );
   };
 
   render() {

@@ -3,6 +3,11 @@ import { filterSelectors } from '../filter';
 
 const getData = ({ data }) => data;
 
+const getItemById = ({ data }, id) => {
+  const [ item ] = data.filter(value => value.id === Number(id));
+  return item;
+}
+
 const getFilteredData = createSelector(
   [
     filterSelectors.getFilter,
@@ -35,4 +40,4 @@ const getFilteredData = createSelector(
   }
 );
 
-export { getData, getFilteredData };
+export { getData, getItemById, getFilteredData };
