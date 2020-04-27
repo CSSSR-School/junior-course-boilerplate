@@ -1,4 +1,5 @@
 import * as types from './types';
+
 import { minBy, maxBy } from 'csssr-school-utils';
 
 import dataJSON from '../../../components/app/assets/products.json';
@@ -6,6 +7,7 @@ import dataJSON from '../../../components/app/assets/products.json';
 const dataJSONCategories = Array.from(
   new Set(dataJSON.map(item => item.category))
 );
+
 const initialState = {
   price: {
     min: {

@@ -1,9 +1,13 @@
 import React from 'react';
 
 import styles from './products.module.scss';
+
 import Header from '../header';
+
 import FilterContainer from '../../containers/filter-container/';
+
 import ListContainer from '../../containers/list-container';
+
 import PaginationContainer from '../../containers/pagination-container';
 
 const Products = () => {

@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
+
 import { connectRouter } from 'connected-react-router';
 
 import dataReducer from './modules/data';
+
 import filterReducer from './modules/filter';
+
 import paginationReducer from './modules/pagination';
 
 import { filterTypes, filterActions, filterSelectors } from './modules/filter';

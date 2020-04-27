@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
+
 import { bindActionCreators } from 'redux';
+
 import { connect } from 'react-redux';
+
 import { push } from 'connected-react-router';
 
 import {
@@ -16,12 +19,14 @@ class PaginationContainer extends PureComponent {
 
   updateHistory = (params, value) => {
     const { pathname, push } = this.props;
+
     params.set('currentPage', value);
     push(`${pathname}?${params.toString()}`);
   };
 
   handleClick = (event, type) => {
     event.preventDefault();
+
     const {
       pagination: { currentPage, upperPageBound, pageBound },
       search,
@@ -67,6 +72,7 @@ class PaginationContainer extends PureComponent {
         if (nextPage > upperPageBound) {
           shiftPaginationPageBoundsForward();
         }
+
         updatePaginationCurrentPage({ currentPage: nextPage });
         this.updateHistory(searchParams, nextPage);
         break;
@@ -74,6 +80,7 @@ class PaginationContainer extends PureComponent {
         const {
           target: { textContent }
         } = event;
+
         const value = Number(textContent);
 
         updatePaginationCurrentPage({ currentPage: value });
@@ -82,6 +89,7 @@ class PaginationContainer extends PureComponent {
   };
   render() {
     const { pagination, list } = this.props;
+
     const { itemsPerPage } = pagination;
 
     return (
@@ -95,6 +103,7 @@ class PaginationContainer extends PureComponent {
 }
 
 const { getFilteredData } = dataSelectors;
+
 const { getPagination } = paginationSelectors;
 
 const mapStateToProps = state => ({

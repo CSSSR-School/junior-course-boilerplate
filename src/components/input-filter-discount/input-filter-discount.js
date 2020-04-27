@@ -1,9 +1,13 @@
 import React from 'react';
+
 import propTypes from 'prop-types';
+
 import classnames from 'classnames';
+
 import CSSSRSchoolInputDiscount from 'csssr-school-input-discount';
 
 import styles from './input-filter-discount.module.scss';
+
 import { withInputFilterNumberHandler } from '../hoc-helpers';
 
 const InputFilterDiscount = ({

@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
+
 import { filterSelectors } from '../filter';
 
 const getData = ({ data }) => data;
 
 const getItemById = ({ data }, id) => {
   const [item] = data.filter(value => value.id === Number(id));
+
   return item;
 };
 
@@ -24,6 +26,7 @@ const getFilteredData = createSelector(
         total: { value: discountValue }
       }
     } = filter;
+
     const filteredProducts = data.filter(
       ({ price, discount: productDiscount }) =>
         price >= minValue &&
@@ -36,6 +39,7 @@ const getFilteredData = createSelector(
         filterActiveCategories.includes(category)
       );
     }
+
     return filteredProducts;
   }
 );

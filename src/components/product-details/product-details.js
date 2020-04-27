@@ -1,16 +1,22 @@
 import React from 'react';
+
 import propTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 
 import classnames from 'classnames';
+
 import styles from './product-details.module.scss';
 
 import ProductCard from 'csssr-school-product-card';
+
 import ProductRating from '../product-rating';
+
 import Price from '../price';
 
 const ProductDetails = props => {
   const { product = {} } = props;
+
   const { title = 'Товар не найден' } = product;
 
   return (

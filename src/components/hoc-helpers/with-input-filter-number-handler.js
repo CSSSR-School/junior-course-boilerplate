@@ -8,7 +8,9 @@ const withInputFilterNumberHandler = WrappedComponent => {
 
     handleChange = ({ target: { value, name: fieldName } }, groupName) => {
       const { updateFilterField } = this.props;
+
       const maskedValue = this.addNumberMask(value);
+
       const payload = {
         groupName,
         fieldName,
@@ -28,4 +30,5 @@ const withInputFilterNumberHandler = WrappedComponent => {
     }
   };
 };
+
 export default withInputFilterNumberHandler;

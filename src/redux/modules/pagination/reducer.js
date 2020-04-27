@@ -14,6 +14,7 @@ export default (state = initialState, action) => {
   switch (type) {
     case types.UPDATE_PAGINATION_CURRENT_PAGE:
       const { currentPage } = payload;
+
       return {
         ...state,
         currentPage

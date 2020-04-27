@@ -1,5 +1,7 @@
 import React from 'react';
+
 import propTypes from 'prop-types';
+
 import classnames from 'classnames';
 
 import styles from './icon-product-rating.module.scss';

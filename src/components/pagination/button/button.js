@@ -1,8 +1,10 @@
 import React from 'react';
+
 import propTypes from 'prop-types';
 
 const Button = props => {
   const { classList, value, isDisabled, handleClick } = props;
+
   return (
     <button
       className={classList}

@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
+
 import { bindActionCreators } from 'redux';
+
 import { connect } from 'react-redux';
 
 import Filter from '../../components/filter';
+
 import {
   filterActions,
   filterSelectors,
@@ -24,6 +27,7 @@ class FilterContainer extends PureComponent {
 }
 
 const { getFilter, getFilterCategories } = filterSelectors;
+
 const { getPagination } = paginationSelectors;
 
 const mapStateToProps = state => ({

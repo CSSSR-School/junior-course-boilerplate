@@ -4,6 +4,7 @@ const getFilter = ({ filter }) => filter;
 
 const getFilterCategories = createSelector(getFilter, filter => {
   const { categories } = filter;
+
   return categories;
 });
 
