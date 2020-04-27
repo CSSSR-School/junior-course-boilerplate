@@ -1,5 +1,6 @@
 import { createBrowserHistory } from 'history';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { routerMiddleware } from 'connected-react-router';
 import createRootReducer from '.';
 
@@ -9,7 +10,7 @@ export default function configureStore(preloadedState) {
   const store = createStore(
     createRootReducer(history),
     preloadedState,
-    compose(applyMiddleware(routerMiddleware(history)))
+    composeWithDevTools(applyMiddleware(routerMiddleware(history)))
   );
 
   return store;
