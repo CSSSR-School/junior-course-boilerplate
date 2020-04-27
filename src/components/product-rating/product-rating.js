@@ -1,12 +1,9 @@
 import React from 'react';
-
 import propTypes from 'prop-types';
-
 import classnames from 'classnames';
 
 import styles from './product-rating.module.scss';
-
-import IconProductRating from '../icon-product-rating';
+import Icon from '../icon';
 
 const ProductRating = ({ isFilled }) => (
   <div
@@ -14,7 +11,7 @@ const ProductRating = ({ isFilled }) => (
       [styles.ProductRatingIsFilled]: isFilled
     })}
   >
-    <IconProductRating isFilled={isFilled} />
+    <Icon name="rating" isFilled={isFilled} />
   </div>
 );
 
