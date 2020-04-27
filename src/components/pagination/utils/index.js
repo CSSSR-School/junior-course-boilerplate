@@ -1,3 +1,3 @@
-import { renderLink } from './render-link';
+import { renderButton } from './render-button';
 
-export { renderLink };
+export { renderButton };

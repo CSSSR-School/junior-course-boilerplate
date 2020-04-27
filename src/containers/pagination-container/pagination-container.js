@@ -21,6 +21,7 @@ class PaginationContainer extends PureComponent {
   };
 
   handleClick = (event, type) => {
+    event.preventDefault();
     const {
       pagination: { currentPage, upperPageBound, pageBound },
       search,
@@ -104,8 +105,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  ...bindActionCreators(paginationActions, dispatch),
-  push
+  ...bindActionCreators({ ...paginationActions, push }, dispatch)
 });
 
 export default connect(
