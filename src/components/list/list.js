@@ -4,8 +4,8 @@ import classnames from 'classnames';
 
 import styles from './list.module.scss';
 
-import ItemList from 'csssr-school-product-card';
-import ItemRating from '../product-rating';
+import ProductCard from 'csssr-school-product-card';
+import ProductRating from '../product-rating';
 import Price from '../price';
 
 const List = props => {
@@ -28,7 +28,7 @@ const List = props => {
         className={classnames(styles.ListItem)}
         onClick={() => handleClick(id)}
       >
-        <ItemList
+        <ProductCard
           isInStock={isInStock}
           img={img}
           title={title}
@@ -42,7 +42,7 @@ const List = props => {
               ''
             )
           }
-          ratingComponent={ItemRating}
+          ratingComponent={ProductRating}
         />
       </li>
     );

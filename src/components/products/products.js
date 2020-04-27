@@ -6,7 +6,7 @@ import FilterContainer from '../../containers/filter-container/';
 import ListContainer from '../../containers/list-container';
 import PaginationContainer from '../../containers/pagination-container';
 
-const HomePage = () => {
+const Products = () => {
   return (
     <div className={styles.Products}>
       <div className={styles.ProductsHeader}>
@@ -25,4 +25,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Products;

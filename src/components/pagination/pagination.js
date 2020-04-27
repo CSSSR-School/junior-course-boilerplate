@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styles from './pagination.module.scss';
-import { renderButton } from './utils';
+import { renderLink } from './utils';
 
 class Pagination extends React.Component {
   render() {
@@ -18,14 +18,14 @@ class Pagination extends React.Component {
       return (
         number < upperPageBound + 1 &&
         number > lowerPageBound &&
-        renderButton(this.props, number)
+        renderLink(this.props, number)
       );
     });
     const inc =
-      pagesData.length > upperPageBound && renderButton(this.props, 'inc');
-    const dec = lowerPageBound >= 1 && renderButton(this.props, 'dec');
-    const prev = pagesLength !== 0 && renderButton(this.props, 'prev');
-    const next = pagesLength !== 0 && renderButton(this.props, 'next');
+      pagesData.length > upperPageBound && renderLink(this.props, 'inc');
+    const dec = lowerPageBound >= 1 && renderLink(this.props, 'dec');
+    const prev = pagesLength !== 0 && renderLink(this.props, 'prev');
+    const next = pagesLength !== 0 && renderLink(this.props, 'next');
 
     return (
       <div className={styles.Pagination}>

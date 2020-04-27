@@ -14,8 +14,10 @@ class ListContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  list: getVisibleProductsList(state)
-});
+const mapStateToProps = state => {
+  return {
+    list: getVisibleProductsList(state)
+  }
+};
 
 export default connect(mapStateToProps, { push })(ListContainer);

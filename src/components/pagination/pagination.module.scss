@@ -12,4 +12,64 @@
 
     list-style: none;
   }
+
+  &Link {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    min-width: 34px;
+    min-height: 32px;
+    margin-right: 2px;
+
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 300;
+    color: #7e8fa4;
+    text-decoration: none;
+
+    background-color: transparent;
+    border: 1px solid #c5cfde;
+
+    outline: none;
+    transition: all 0.5s;
+
+    &:hover,
+    &Active {
+      color: #fff;
+
+      border: 1px solid #5695ed;
+      background-color: #5695ed;
+    }
+
+    &:active {
+      border: 1px solid darken(#5695ed, 10%);
+      background-color: darken(#5695ed, 10%);
+    }
+
+    &Disabled {
+      color: #fff;
+      border: 1px solid #c5cfde;
+      background-color: #c5cfde;
+
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &Next,
+    &Prev {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    &Next {
+      margin-left: 16px;
+    }
+
+    &Prev {
+      margin-right: 16px;
+    }
+  }
 }
