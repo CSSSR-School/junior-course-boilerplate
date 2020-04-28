@@ -1,15 +1,10 @@
 import React from 'react';
-
 import propTypes from 'prop-types';
-
 import classnames from 'classnames';
 
 import styles from './filter.module.scss';
-
 import InputFilterPrice from '../input-filter-price';
-
 import InputFilterDiscount from '../input-filter-discount';
-
 import InputFilterCategoryContainer from '../../containers/input-filter-category-container';
 
 const Filter = props => {
@@ -29,7 +24,6 @@ const Filter = props => {
       name={category}
       value={category}
       isActive={categories[category].isActive}
-      categories={categories}
     />
   ));
 

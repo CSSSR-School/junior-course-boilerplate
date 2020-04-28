@@ -14,6 +14,8 @@ const ProductDetails = props => {
 
   const { title = 'Товар не найден' } = product;
 
+  console.log(product);
+
   return (
     <div className={classnames(styles.ProductDetails)}>
       <div className={classnames(styles.ProductDetailsWrapper)}>

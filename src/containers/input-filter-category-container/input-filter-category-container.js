@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
-
 import { bindActionCreators } from 'redux';
-
 import { connect } from 'react-redux';
 
+import { filterActions, filterSelectors } from '../../redux';
 import InputFilterCategory from '../../components/input-filter-category';
-
-import { filterActions } from '../../redux';
 
 class InputFilterCategoryContainer extends PureComponent {
   handleClick = event => {
@@ -37,6 +34,10 @@ class InputFilterCategoryContainer extends PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  categories: filterSelectors.getFilterCategories(state)
+});
+
 const mapDispatchToProps = dispatch => {
   const { updateFilterCategories } = bindActionCreators(
     filterActions,
@@ -46,4 +47,7 @@ const mapDispatchToProps = dispatch => {
   return { updateFilterCategories };
 };
 
-export default connect(null, mapDispatchToProps)(InputFilterCategoryContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InputFilterCategoryContainer);
