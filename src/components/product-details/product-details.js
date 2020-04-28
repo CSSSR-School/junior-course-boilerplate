@@ -14,8 +14,6 @@ const ProductDetails = props => {
 
   const { title = 'Товар не найден' } = product;
 
-  console.log(product);
-
   return (
     <div className={classnames(styles.ProductDetails)}>
       <div className={classnames(styles.ProductDetailsWrapper)}>
@@ -55,16 +53,15 @@ const ProductDetails = props => {
 };
 
 ProductDetails.propTypes = {
-  item: propTypes.shape({
-    isInStock: propTypes.bool,
-    img: propTypes.string,
-    title: propTypes.node,
-    price: propTypes.node,
-    subPriceContent: propTypes.node,
-    maxRating: propTypes.number,
-    rating: propTypes.number,
-    discount: propTypes.number,
-    category: propTypes.string
+  product: propTypes.shape({
+    isInStock: propTypes.bool.isRequired,
+    img: propTypes.string.isRequired,
+    title: propTypes.string.isRequired,
+    price: propTypes.node.isRequired,
+    subPriceContent: propTypes.node.isRequired,
+    maxRating: propTypes.number.isRequired,
+    rating: propTypes.number.isRequired,
+    ratingComponent: propTypes.func.isRequired
   })
 };
 
