@@ -15,6 +15,23 @@ import {
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {
+  componentDidMount() {
+    window.addEventListener('popstate', this.handlePopState);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  handlePopState = () => {
+    const searchParams = new URLSearchParams(this.props.search);
+
+    const currentPage =
+      Number(searchParams.get('currentPage')) || 1;
+
+    this.props.updatePaginationCurrentPage({ currentPage });
+  };
+
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
 
   updateHistory = (params, value) => {
