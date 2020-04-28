@@ -1,15 +1,9 @@
 import React from 'react';
-
 import propTypes from 'prop-types';
-
 import classnames from 'classnames';
-
 import styles from './list.module.scss';
-
 import ProductCard from 'csssr-school-product-card';
-
 import ProductRating from '../product-rating';
-
 import Price from '../price';
 
 const List = props => {

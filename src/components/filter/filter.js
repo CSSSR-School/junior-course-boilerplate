@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -60,15 +61,13 @@ const Filter = props => {
         <h3 className={classnames(styles.FilterHeader)}>Категории</h3>
         <div className={styles.FilterInner}>{mappedCategories}</div>
       </section>
-      <input
-        type="button"
-        value="Сбросить фильтры"
-        readOnly={true}
+      <Link
+        to="/"
         className={classnames(styles.FilterReset)}
-        onClick={() => {
-          resetFilter();
-        }}
-      />
+        onClick={resetFilter}
+      >
+        Сбросить фильтры
+      </Link>
     </form>
   );
 };

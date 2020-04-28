@@ -1,10 +1,7 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-
-import Button from '../button';
-
-import styles from '../button/button.module.scss';
+import styles from '../pagination.module.scss';
 
 const renderButton = (
   { pagination: { currentPage }, pagesLength, handleClick },
@@ -14,54 +11,74 @@ const renderButton = (
   switch (type) {
     case 'prev':
       return (
-        <Button
-          classList={classnames(styles.Btn, styles.BtnPrev)}
-          isDisabled={
-            currentPage === 1 ||
-            (pagesLength !== currentPage && pagesLength < 1)
-          }
-          value="Назад"
-          handleClick={event => handleClick(event, 'prev')}
-        />
+        <Link
+          to={location => `${location.pathname}${location.search}`}
+          className={classnames(
+            styles.PaginationBtn,
+            styles.PaginationBtnPrev,
+            {
+              [styles.PaginationBtnDisabled]:
+                currentPage === 1 ||
+                (pagesLength !== currentPage && pagesLength < 1)
+            }
+          )}
+          onClick={event => handleClick(event, 'prev')}
+        >
+          Назад
+        </Link>
       );
     case 'dec':
       return (
-        <Button
-          classList={classnames(styles.Btn)}
-          value="&hellip;"
-          handleClick={event => handleClick(event, 'dec')}
-        />
+        <Link
+          to={location => `${location.pathname}${location.search}`}
+          className={classnames(styles.PaginationBtn)}
+          onClick={event => handleClick(event, 'dec')}
+        >
+          &hellip;
+        </Link>
       );
     case 'inc':
       return (
-        <Button
-          classList={classnames(styles.Btn)}
-          value="&hellip;"
-          handleClick={event => handleClick(event, 'inc')}
-        />
+        <Link
+          to={location => `${location.pathname}${location.search}`}
+          className={classnames(styles.PaginationBtn)}
+          onClick={event => handleClick(event, 'inc')}
+        >
+          &hellip;
+        </Link>
       );
     case 'next':
       return (
-        <Button
-          classList={classnames(styles.Btn, styles.BtnNext)}
-          isDisabled={
-            pagesLength === currentPage ||
-            (currentPage !== 1 && pagesLength < 1)
-          }
-          value="Вперед"
-          handleClick={event => handleClick(event, 'next')}
-        />
+        <Link
+          to={location => `${location.pathname}${location.search}`}
+          className={classnames(
+            styles.PaginationBtn,
+            styles.PaginationBtnNext,
+            {
+              [styles.PaginationBtnDisabled]:
+                pagesLength === currentPage ||
+                (currentPage !== 1 && pagesLength < 1)
+            }
+          )}
+          onClick={event => handleClick(event, 'next')}
+        >
+          Вперед
+        </Link>
       );
     default:
       return (
-        <Button
-          key={value}
-          classList={classnames(styles.Btn, {
-            [styles.BtnActive]: value === currentPage
+        <Link
+          to={location => {
+            return `${location.pathname}${location.search}`;
+          }}
+          key={type}
+          className={classnames(styles.PaginationBtn, {
+            [styles.PaginationBtnActive]: value === currentPage
           })}
-          value={String(value)}
-          handleClick={handleClick}
-        />
+          onClick={event => handleClick(event, null, value)}
+        >
+          {value}
+        </Link>
       );
   }
 };

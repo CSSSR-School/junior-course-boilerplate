@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
-
 import { bindActionCreators } from 'redux';
-
 import { connect } from 'react-redux';
-
 import { push } from 'connected-react-router';
 
 import {
@@ -15,46 +12,26 @@ import {
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {
-  componentDidMount() {
-    window.addEventListener('popstate', this.handlePopState);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('popstate', this.handlePopState);
-  }
-
-  handlePopState = () => {
-    const searchParams = new URLSearchParams(this.props.search);
-
-    const currentPage =
-      Number(searchParams.get('currentPage')) || 1;
-
-    this.props.updatePaginationCurrentPage({ currentPage });
-  };
-
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
 
-  updateHistory = (params, value) => {
-    const { pathname, push } = this.props;
+  updateHistory = (value) => {
+    const {push, pathname, search} = this.props;
 
-    params.set('currentPage', value);
-    push(`${pathname}?${params.toString()}`);
-  };
+    const searchParams = new URLSearchParams(search);
 
-  handleClick = (event, type) => {
+    searchParams.set('currentPage', value);
+    push(`${pathname}?${searchParams.toString()}`);
+  }
+
+  handleClick = (event, type, value) => {
     event.preventDefault();
 
     const {
       pagination: { currentPage, upperPageBound, pageBound },
-      search,
       shiftPaginationPageBoundsBack,
       shiftPaginationPageBoundsForward,
       updatePaginationCurrentPage
     } = this.props;
-
-    const searchParams = new URLSearchParams(
-      search.length === 0 ? `currentPage=${currentPage}` : search
-    );
 
     switch (type) {
       case 'prev':
@@ -65,24 +42,32 @@ class PaginationContainer extends PureComponent {
         }
 
         updatePaginationCurrentPage({ currentPage: prevPage });
-        this.updateHistory(searchParams, prevPage);
+
+        this.updateHistory(prevPage);
         break;
+
       case 'dec':
         const decPage = upperPageBound - pageBound;
 
         shiftPaginationPageBoundsBack();
+
         updatePaginationCurrentPage({
           currentPage: decPage
         });
-        this.updateHistory(searchParams, decPage);
+
+        this.updateHistory(decPage);
         break;
+
       case 'inc':
         const incPage = upperPageBound + 1;
 
         shiftPaginationPageBoundsForward();
+
         updatePaginationCurrentPage({ currentPage: incPage });
-        this.updateHistory(searchParams, incPage);
+
+        this.updateHistory(incPage);
         break;
+
       case 'next':
         const nextPage = currentPage + 1;
 
@@ -91,19 +76,17 @@ class PaginationContainer extends PureComponent {
         }
 
         updatePaginationCurrentPage({ currentPage: nextPage });
-        this.updateHistory(searchParams, nextPage);
+
+        this.updateHistory(nextPage);
         break;
+
       default:
-        const {
-          target: { textContent }
-        } = event;
-
-        const value = Number(textContent);
-
         updatePaginationCurrentPage({ currentPage: value });
-        this.updateHistory(searchParams, value);
+
+        this.updateHistory(value);
     }
   };
+
   render() {
     const { pagination, list } = this.props;
 
@@ -119,13 +102,9 @@ class PaginationContainer extends PureComponent {
   }
 }
 
-const { getFilteredData } = dataSelectors;
-
-const { getPagination } = paginationSelectors;
-
 const mapStateToProps = state => ({
-  pagination: getPagination(state),
-  list: getFilteredData(state),
+  pagination: paginationSelectors.getPagination(state),
+  list: dataSelectors.getFilteredData(state),
   pathname: state.router.location.pathname,
   search: state.router.location.search
 });
