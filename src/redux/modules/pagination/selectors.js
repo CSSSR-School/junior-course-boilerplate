@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-
 import { dataSelectors } from '../data';
 
 const getPagination = ({ pagination }) => {

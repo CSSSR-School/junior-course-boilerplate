@@ -1,7 +1,5 @@
 import * as types from './types';
-
 import { minBy, maxBy } from 'csssr-school-utils';
-
 import dataJSON from '../../../components/app/assets/products.json';
 
 const dataJSONCategories = Array.from(

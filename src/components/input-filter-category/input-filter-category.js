@@ -1,9 +1,6 @@
 import React from 'react';
-
 import propTypes from 'prop-types';
-
 import classnames from 'classnames';
-
 import styles from './input-filter-category.module.scss';
 
 const InputFilterCategory = ({

@@ -1,17 +1,10 @@
 import { combineReducers } from 'redux';
-
 import { connectRouter } from 'connected-react-router';
-
 import dataReducer from './modules/data';
-
 import filterReducer from './modules/filter';
-
 import paginationReducer from './modules/pagination';
-
 import { filterTypes, filterActions, filterSelectors } from './modules/filter';
-
 import { dataTypes, dataActions, dataSelectors } from './modules/data';
-
 import {
   paginationTypes,
   paginationActions,
@@ -33,7 +26,6 @@ export {
 const createRootReducer = history =>
   combineReducers({
     router: connectRouter(history),
-
     filter: filterReducer,
     data: dataReducer,
     pagination: paginationReducer

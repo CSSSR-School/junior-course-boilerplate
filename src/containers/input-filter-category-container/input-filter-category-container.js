@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-
 import { filterActions, filterSelectors } from '../../redux';
 import InputFilterCategory from '../../components/input-filter-category';
 

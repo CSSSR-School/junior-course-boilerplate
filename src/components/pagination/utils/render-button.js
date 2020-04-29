@@ -27,6 +27,7 @@ const renderButton = (
           Назад
         </Link>
       );
+
     case 'dec':
       return (
         <Link
@@ -37,6 +38,7 @@ const renderButton = (
           &hellip;
         </Link>
       );
+
     case 'inc':
       return (
         <Link
@@ -47,6 +49,7 @@ const renderButton = (
           &hellip;
         </Link>
       );
+
     case 'next':
       return (
         <Link
@@ -65,6 +68,7 @@ const renderButton = (
           Вперед
         </Link>
       );
+
     default:
       return (
         <Link

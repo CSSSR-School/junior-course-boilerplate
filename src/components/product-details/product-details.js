@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
-
 import styles from './product-details.module.scss';
 import Icon from '../icon';
 import ProductCard from 'csssr-school-product-card';
@@ -26,6 +25,7 @@ const ProductDetails = props => {
         </Link>
         <h3 className={classnames(styles.ProductDetailsHeader)}>{title}</h3>
       </div>
+
       {Object.entries(product).length !== 0 ? (
         <ProductCard
           isInStock={product.isInStock}

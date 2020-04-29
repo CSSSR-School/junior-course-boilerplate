@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
-
 import styles from './filter.module.scss';
 import InputFilterPrice from '../input-filter-price';
 import InputFilterDiscount from '../input-filter-discount';
@@ -49,6 +48,7 @@ const Filter = props => {
           />
         </div>
       </section>
+
       <InputFilterDiscount
         title="Скидка"
         name="total"
@@ -57,10 +57,12 @@ const Filter = props => {
         updateFilterField={updateFilterField}
         parentClassName={classnames(styles.FilterWrapper)}
       />
+
       <section className={classnames(styles.FilterWrapper)}>
         <h3 className={classnames(styles.FilterHeader)}>Категории</h3>
         <div className={styles.FilterInner}>{mappedCategories}</div>
       </section>
+
       <Link
         to="/"
         className={classnames(styles.FilterReset)}

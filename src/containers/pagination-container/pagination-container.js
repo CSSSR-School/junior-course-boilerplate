@@ -2,13 +2,11 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-
 import {
   paginationActions,
   dataSelectors,
   paginationSelectors
 } from '../../redux';
-
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {
