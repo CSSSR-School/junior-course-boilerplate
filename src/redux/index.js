@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
+import { connectRouter as routerReducer } from 'connected-react-router';
 import dataReducer from './modules/data';
 import filterReducer from './modules/filter';
 import paginationReducer from './modules/pagination';
 import { filterTypes, filterActions, filterSelectors } from './modules/filter';
-import { dataTypes, dataActions, dataSelectors } from './modules/data';
+import { dataSelectors } from './modules/data';
+import { routerSelectors } from './modules/router';
 import {
   paginationTypes,
   paginationActions,
@@ -15,17 +16,16 @@ export {
   filterTypes,
   filterActions,
   filterSelectors,
-  dataTypes,
-  dataActions,
-  dataSelectors,
   paginationTypes,
   paginationActions,
-  paginationSelectors
+  paginationSelectors,
+  dataSelectors,
+  routerSelectors,
 };
 
 const createRootReducer = history =>
   combineReducers({
-    router: connectRouter(history),
+    router: routerReducer(history),
     filter: filterReducer,
     data: dataReducer,
     pagination: paginationReducer

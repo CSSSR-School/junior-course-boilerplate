@@ -4,15 +4,23 @@ import classnames from 'classnames';
 import styles from '../pagination.module.scss';
 
 const renderButton = (
-  { pagination: { currentPage }, pagesLength, handleClick },
+  {
+    currentPage,
+    pageBound,
+    pagesRange: { upperPageBound },
+    pagesLength,
+    getPaginationSearchLink
+  },
   type,
   value = type
 ) => {
   switch (type) {
     case 'prev':
+      const prevPage = currentPage - 1;
+
       return (
         <Link
-          to={location => `${location.pathname}${location.search}`}
+          to={getPaginationSearchLink(prevPage)}
           className={classnames(
             styles.PaginationBtn,
             styles.PaginationBtnPrev,
@@ -22,38 +30,41 @@ const renderButton = (
                 (pagesLength !== currentPage && pagesLength < 1)
             }
           )}
-          onClick={event => handleClick(event, 'prev')}
         >
           Назад
         </Link>
       );
 
     case 'dec':
+      const decPage = upperPageBound - pageBound;
+
       return (
         <Link
-          to={location => `${location.pathname}${location.search}`}
+          to={getPaginationSearchLink(decPage)}
           className={classnames(styles.PaginationBtn)}
-          onClick={event => handleClick(event, 'dec')}
         >
           &hellip;
         </Link>
       );
 
     case 'inc':
+      const incPage = upperPageBound + 1;
+
       return (
         <Link
-          to={location => `${location.pathname}${location.search}`}
+          to={getPaginationSearchLink(incPage)}
           className={classnames(styles.PaginationBtn)}
-          onClick={event => handleClick(event, 'inc')}
         >
           &hellip;
         </Link>
       );
 
     case 'next':
+      const nextPage = currentPage + 1;
+
       return (
         <Link
-          to={location => `${location.pathname}${location.search}`}
+          to={getPaginationSearchLink(nextPage)}
           className={classnames(
             styles.PaginationBtn,
             styles.PaginationBtnNext,
@@ -63,7 +74,6 @@ const renderButton = (
                 (currentPage !== 1 && pagesLength < 1)
             }
           )}
-          onClick={event => handleClick(event, 'next')}
         >
           Вперед
         </Link>
@@ -72,14 +82,11 @@ const renderButton = (
     default:
       return (
         <Link
-          to={location => {
-            return `${location.pathname}${location.search}`;
-          }}
+          to={getPaginationSearchLink(value)}
           key={type}
           className={classnames(styles.PaginationBtn, {
-            [styles.PaginationBtnActive]: value === currentPage
+            [styles.PaginationBtnActive]: currentPage === value
           })}
-          onClick={event => handleClick(event, null, value)}
         >
           {value}
         </Link>

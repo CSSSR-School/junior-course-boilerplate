@@ -4,8 +4,6 @@ import { push } from 'connected-react-router';
 import { paginationSelectors } from '../../redux/modules/pagination';
 import List from '../../components/list';
 
-const { getVisibleProductsList } = paginationSelectors;
-
 class ListContainer extends PureComponent {
   render() {
     const { list, push } = this.props;
@@ -16,8 +14,8 @@ class ListContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    list: getVisibleProductsList(state)
-  }
+    list: paginationSelectors.getVisibleProductsList(state)
+  };
 };
 
 export default connect(mapStateToProps, { push })(ListContainer);

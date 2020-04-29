@@ -6,7 +6,7 @@ import { renderButton } from './utils';
 class Pagination extends React.Component {
   render() {
     const {
-      pagination: { upperPageBound, lowerPageBound },
+      pagesRange: { upperPageBound, lowerPageBound },
       pagesLength
     } = this.props;
 
