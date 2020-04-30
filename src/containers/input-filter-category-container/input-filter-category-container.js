@@ -1,75 +1,57 @@
 import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
-import { filterActions, filterSelectors } from '../../redux';
+import { routerSelectors } from '../../redux';
 import InputFilterCategory from '../../components/input-filter-category';
 
 class InputFilterCategoryContainer extends PureComponent {
-  handleClick = event => {
-    event.preventDefault();
-
-    const {
-      name,
-      categories,
-      pathname,
-      search,
-      push,
-      updateFilterCategories
-    } = this.props;
-
-    const updatedCategories = Object.keys(categories).reduce(
-      (acc, category) => {
-        if (category === name) {
-          return { ...acc, [name]: { isActive: !acc[name].isActive } };
-        }
-
-        return acc;
-      },
-      categories
-    );
+  updateSearchWithCategory = name => {
+    const { search } = this.props;
 
     const searchParams = new URLSearchParams(search);
 
+    const searchCategories = searchParams.getAll('category');
+
     searchParams.delete('category');
 
-    Object.keys(updatedCategories).forEach(category => {
-      if (updatedCategories[category].isActive) {
-        searchParams.append('category', category);
-      }
-    });
+    if (searchCategories.length !== 0) {
+      let categories = [];
 
-    updateFilterCategories({ categories: updatedCategories });
-    push(`${pathname}?${searchParams.toString()}`);
+      if (searchCategories.includes(name)) {
+        categories = searchCategories.filter(category => category !== name);
+      } else {
+        categories = [...searchCategories, name];
+      }
+
+      categories.forEach(category =>
+        searchParams.has('category')
+          ? searchParams.append('category', category)
+          : searchParams.set('category', category)
+      );
+
+      return { search: searchParams.toString() };
+    }
+
+    searchParams.set('category', name);
+
+    return { search: searchParams.toString() };
   };
 
   render() {
-    const {
-      categories,
-      updateFilterCategories,
-      updateFilterField,
-      resetFilter,
-      push,
-      ...restProps
-    } = this.props;
+    const { isActive, name, value } = this.props;
 
     return (
-      <InputFilterCategory handleClick={this.handleClick} {...restProps} />
+      <InputFilterCategory
+        name={name}
+        value={value}
+        updateSearchWithCategory={this.updateSearchWithCategory}
+        isActive={isActive}
+      />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  categories: filterSelectors.getFilterCategories(state),
-  pathname: state.router.location.pathname,
-  search: state.router.location.search
+  search: routerSelectors.getRouterSearch(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  ...bindActionCreators({ ...filterActions, push }, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InputFilterCategoryContainer);
+export default connect(mapStateToProps)(InputFilterCategoryContainer);

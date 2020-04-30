@@ -47,15 +47,14 @@ class Pagination extends React.Component {
 }
 
 Pagination.propTypes = {
-  pagination: propTypes.shape({
-    currentPage: propTypes.number,
-    itemsPerPage: propTypes.number,
-    upperPageBound: propTypes.number,
+  pageBound: propTypes.number,
+  currentPage: propTypes.number,
+  pagesRange: propTypes.shape({
     lowerPageBound: propTypes.number,
-    pageBound: propTypes.number
+    upperPageBound: propTypes.number
   }),
   pagesLength: propTypes.number,
-  handleClick: propTypes.func
+  updateSearchWithCurrentPage: propTypes.func
 };
 
 export default Pagination;

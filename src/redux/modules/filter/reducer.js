@@ -47,22 +47,6 @@ export default (state = initialState, action) => {
         }
       };
 
-    case types.UPDATE_FILTER_CATEGORIES:
-      const { categories } = payload;
-
-      return {
-        ...state,
-        price: {
-          ...state.price
-        },
-        discount: {
-          ...state.discount
-        },
-        categories: {
-          ...categories
-        }
-      };
-
     default:
       return state;
   }

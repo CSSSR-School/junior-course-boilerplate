@@ -7,11 +7,9 @@ const getPagination = ({ pagination }) => {
 };
 
 const getVisibleProductsList = createSelector(
-  [getPagination, dataSelectors.getFilteredData, routerSelectors.getRouter],
-  (pagination, filteredProducts, router) => {
+  [getPagination, dataSelectors.getFilteredData, routerSelectors.getRouterSearch],
+  (pagination, filteredProducts, search) => {
     const { itemsPerPage } = pagination;
-
-    const { location: { search } } = router;
 
     const searchParams = new URLSearchParams(search)
 

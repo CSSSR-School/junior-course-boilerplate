@@ -8,8 +8,3 @@ export const updateFilterField = payload => ({
   type: types.UPDATE_FILTER_FIELD,
   payload
 });
-
-export const updateFilterCategories = payload => ({
-  type: types.UPDATE_FILTER_CATEGORIES,
-  payload
-});

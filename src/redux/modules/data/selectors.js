@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { filterSelectors } from '../filter';
+import { routerSelectors } from '../router';
 
 const getData = ({ data }) => data;
 
@@ -12,20 +13,18 @@ const getItemById = ({ data }, id) => {
 
 const getFilteredData = createSelector(
   [
-    filterSelectors.getFilter,
-    filterSelectors.getFilterActiveCategories,
+    filterSelectors.getFilterPrice,
+    filterSelectors.getFilterDiscount,
+    routerSelectors.getRouterSearch,
     getData
   ],
-  (filter, filterActiveCategories, data) => {
+  (filterPrice, filterDiscount, search, data) => {
     const {
-      price: {
-        min: { value: minValue },
-        max: { value: maxValue }
-      },
-      discount: {
-        total: { value: discountValue }
-      }
-    } = filter;
+      min: { value: minValue },
+      max: { value: maxValue }
+    } = filterPrice;
+
+    const {total: { value: discountValue }} = filterDiscount;
 
     const filteredProducts = data.filter(
       ({ price, discount: productDiscount }) =>
@@ -34,9 +33,11 @@ const getFilteredData = createSelector(
         productDiscount >= discountValue
     );
 
-    if (filterActiveCategories.length !== 0) {
+    const searchCategories = new URLSearchParams(search).getAll('category');
+
+    if (searchCategories.length !== 0) {
       return filteredProducts.filter(({ category }) =>
-        filterActiveCategories.includes(category)
+        searchCategories.includes(category)
       );
     }
 

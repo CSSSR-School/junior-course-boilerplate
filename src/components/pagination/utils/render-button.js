@@ -9,7 +9,7 @@ const renderButton = (
     pageBound,
     pagesRange: { upperPageBound },
     pagesLength,
-    getPaginationSearchLink
+    updateSearchWithCurrentPage
   },
   type,
   value = type
@@ -20,7 +20,7 @@ const renderButton = (
 
       return (
         <Link
-          to={getPaginationSearchLink(prevPage)}
+          to={updateSearchWithCurrentPage(prevPage)}
           className={classnames(
             styles.PaginationBtn,
             styles.PaginationBtnPrev,
@@ -40,7 +40,7 @@ const renderButton = (
 
       return (
         <Link
-          to={getPaginationSearchLink(decPage)}
+          to={updateSearchWithCurrentPage(decPage)}
           className={classnames(styles.PaginationBtn)}
         >
           &hellip;
@@ -52,7 +52,7 @@ const renderButton = (
 
       return (
         <Link
-          to={getPaginationSearchLink(incPage)}
+          to={updateSearchWithCurrentPage(incPage)}
           className={classnames(styles.PaginationBtn)}
         >
           &hellip;
@@ -64,7 +64,7 @@ const renderButton = (
 
       return (
         <Link
-          to={getPaginationSearchLink(nextPage)}
+          to={updateSearchWithCurrentPage(nextPage)}
           className={classnames(
             styles.PaginationBtn,
             styles.PaginationBtnNext,
@@ -82,7 +82,7 @@ const renderButton = (
     default:
       return (
         <Link
-          to={getPaginationSearchLink(value)}
+          to={updateSearchWithCurrentPage(value)}
           key={type}
           className={classnames(styles.PaginationBtn, {
             [styles.PaginationBtnActive]: currentPage === value

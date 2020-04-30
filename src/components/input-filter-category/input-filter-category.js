@@ -1,30 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './input-filter-category.module.scss';
 
-const InputFilterCategory = ({
-  categories,
-  isActive,
-  handleClick,
-  ...restProps
-}) => (
-  <input
+const InputFilterCategory = ({ name, value, isActive, updateSearchWithCategory }) => (
+  <Link
+    to={updateSearchWithCategory(name)}
     className={classnames(styles.InputFilter, styles.InputFilterCategory, {
       [styles.InputFilterActive]: isActive
     })}
-    type="button"
-    onClick={handleClick}
-    {...restProps}
-  />
+  >
+    {value}
+  </Link>
 );
 
 InputFilterCategory.propTypes = {
-  name: propTypes.string,
   value: propTypes.string,
   isActive: propTypes.bool,
-  handleClick: propTypes.func,
-  updateFilterField: propTypes.func
+  updateSearchWithCategory: propTypes.func
 };
 
 export default InputFilterCategory;

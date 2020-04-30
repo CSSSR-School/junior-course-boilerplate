@@ -34,7 +34,7 @@ class PaginationContainer extends PureComponent {
     return { lowerPageBound, upperPageBound };
   };
 
-  getPaginationSearchLink = currentPage => {
+  updateSearchWithCurrentPage = currentPage => {
     const { search } = this.props;
 
     const searchParams = new URLSearchParams(search);
@@ -63,7 +63,7 @@ class PaginationContainer extends PureComponent {
         currentPage={Number(currentPage)}
         pagesRange={this.getPagesRange(currentPage, pageBound)}
         pagesLength={this.getPagesTotalCount(list.length, itemsPerPage)}
-        getPaginationSearchLink={this.getPaginationSearchLink}
+        updateSearchWithCurrentPage={this.updateSearchWithCurrentPage}
       />
     );
   }

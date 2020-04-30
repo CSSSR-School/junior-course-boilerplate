@@ -2,10 +2,7 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Filter from '../../components/filter';
-import {
-  filterActions,
-  filterSelectors,
-} from '../../redux';
+import { filterActions, filterSelectors } from '../../redux';
 
 class FilterContainer extends PureComponent {
   render() {
@@ -21,9 +18,15 @@ class FilterContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  filter: filterSelectors.getFilter(state),
-});
+const mapStateToProps = state => {
+  return {
+    filter: {
+      price: filterSelectors.getFilterPrice(state),
+      discount: filterSelectors.getFilterDiscount(state),
+      categories: filterSelectors.getFilterCategories(state)
+    }
+  };
+};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(filterActions, dispatch);

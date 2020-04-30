@@ -93,7 +93,8 @@ Filter.propTypes = {
       })
     }),
     categories: propTypes.shape({
-      isActive: propTypes.bool
+      books: propTypes.shape({ isActive: propTypes.bool }),
+      clothes: propTypes.shape({ isActive: propTypes.bool })
     })
   }),
   updateFilterField: propTypes.func,

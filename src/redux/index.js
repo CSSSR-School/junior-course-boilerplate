@@ -7,8 +7,6 @@ import { filterTypes, filterActions, filterSelectors } from './modules/filter';
 import { dataSelectors } from './modules/data';
 import { routerSelectors } from './modules/router';
 import {
-  paginationTypes,
-  paginationActions,
   paginationSelectors
 } from './modules/pagination';
 
@@ -16,8 +14,6 @@ export {
   filterTypes,
   filterActions,
   filterSelectors,
-  paginationTypes,
-  paginationActions,
   paginationSelectors,
   dataSelectors,
   routerSelectors,
