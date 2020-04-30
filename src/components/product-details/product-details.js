@@ -54,14 +54,14 @@ const ProductDetails = props => {
 
 ProductDetails.propTypes = {
   product: propTypes.shape({
-    isInStock: propTypes.bool.isRequired,
-    img: propTypes.string.isRequired,
-    title: propTypes.string.isRequired,
-    price: propTypes.node.isRequired,
-    subPriceContent: propTypes.node.isRequired,
-    maxRating: propTypes.number.isRequired,
-    rating: propTypes.number.isRequired,
-    ratingComponent: propTypes.func.isRequired
+    isInStock: propTypes.bool,
+    img: propTypes.string,
+    title: propTypes.string,
+    price: propTypes.node,
+    subPriceContent: propTypes.node,
+    maxRating: propTypes.number,
+    rating: propTypes.number,
+    ratingComponent: propTypes.func
   })
 };
 

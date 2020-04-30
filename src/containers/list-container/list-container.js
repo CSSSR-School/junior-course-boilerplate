@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import { paginationSelectors } from '../../redux/modules/pagination';
 import List from '../../components/list';
 
 class ListContainer extends PureComponent {
   render() {
-    const { list, push } = this.props;
+    const { list } = this.props;
 
-    return <List list={list} handleClick={id => push(`/product/${id}`)} />;
+    return <List list={list} />;
   }
 }
 
@@ -18,4 +17,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { push })(ListContainer);
+export default connect(mapStateToProps)(ListContainer);

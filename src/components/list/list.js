@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './list.module.scss';
@@ -7,7 +8,7 @@ import ProductRating from '../product-rating';
 import Price from '../price';
 
 const List = props => {
-  const { list, handleClick } = props;
+  const { list } = props;
 
   const listElements = list.map(product => {
     const {
@@ -22,10 +23,10 @@ const List = props => {
     } = product;
 
     return (
-      <li
+      <Link
+        to={`/product/${id}`}
         key={id}
         className={classnames(styles.ListItem)}
-        onClick={() => handleClick(id)}
       >
         <ProductCard
           isInStock={isInStock}
@@ -43,7 +44,7 @@ const List = props => {
           }
           ratingComponent={ProductRating}
         />
-      </li>
+      </Link>
     );
   });
 

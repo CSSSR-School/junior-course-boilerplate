@@ -11,6 +11,7 @@
 
   &Item {
     margin-bottom: 50px;
+    text-decoration: none;
     cursor: pointer;
 
     &:not(:nth-child(3n)) {
