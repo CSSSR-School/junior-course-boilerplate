@@ -1,5 +1,4 @@
 const initialState = {
-  currentPage: 1,
   itemsPerPage: 6,
   pageBound: 3
 };

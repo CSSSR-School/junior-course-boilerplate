@@ -7,22 +7,16 @@ const getPagination = ({ pagination }) => {
 };
 
 const getCurrentPage = createSelector(
-  [routerSelectors.getRouterSearchParams, getPagination],
-  (searchParams, pagination) => {
-    const { currentPage } = pagination;
-
+  [routerSelectors.getRouterSearchParams],
+  searchParams => {
     return searchParams.has('currentPage')
-    ? Number(searchParams.get('currentPage'))
-    : currentPage;
+      ? Number(searchParams.get('currentPage'))
+      : 1;
   }
 );
 
 const getVisibleProductsList = createSelector(
-  [
-    getPagination,
-    getCurrentPage,
-    dataSelectors.getFilteredData,
-  ],
+  [getPagination, getCurrentPage, dataSelectors.getFilteredData],
   (pagination, currentPage, filteredProducts) => {
     const { itemsPerPage } = pagination;
 

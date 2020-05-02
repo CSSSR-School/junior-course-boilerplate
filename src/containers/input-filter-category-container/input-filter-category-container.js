@@ -10,6 +10,7 @@ class InputFilterCategoryContainer extends PureComponent {
     const searchParams = new URLSearchParams(search);
 
     searchParams.delete('category');
+    searchParams.delete('currentPage');
 
     if (searchCategories.length !== 0) {
       let categories = [];
