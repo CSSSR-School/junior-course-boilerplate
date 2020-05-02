@@ -5,9 +5,7 @@ import InputFilterCategory from '../../components/input-filter-category';
 
 class InputFilterCategoryContainer extends PureComponent {
   updateSearchWithCategory = name => {
-    const { search, searchCategories } = this.props;
-
-    const searchParams = new URLSearchParams(search);
+    const { searchParams, searchCategories } = this.props;
 
     searchParams.delete('category');
     searchParams.delete('currentPage');
@@ -36,21 +34,21 @@ class InputFilterCategoryContainer extends PureComponent {
   };
 
   render() {
-    const { isActive, name, value } = this.props;
+    const { searchCategories, name, value } = this.props;
 
     return (
       <InputFilterCategory
         name={name}
         value={value}
         updateSearchWithCategory={this.updateSearchWithCategory}
-        isActive={isActive}
+        isActive={searchCategories.includes(name)}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  search: routerSelectors.getRouterSearch(state),
+  searchParams: routerSelectors.getRouterSearchParams(state),
   searchCategories: routerSelectors.getRouterSearchCategories(state)
 });
 
