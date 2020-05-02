@@ -37,7 +37,11 @@ class PaginationContainer extends PureComponent {
   updateSearchWithCurrentPage = currentPage => {
     const { searchParams } = this.props;
 
-    searchParams.set('currentPage', currentPage);
+    if (currentPage === 1) {
+      searchParams.delete('currentPage');
+    } else {
+      searchParams.set('currentPage', currentPage);
+    }
 
     return {
       search: searchParams.toString()
