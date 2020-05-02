@@ -7,4 +7,18 @@ const getRouterSearch = createSelector(
   ({ location: { search } }) => search
 );
 
-export { getRouter, getRouterSearch };
+const getRouterSearchParams = createSelector(
+  getRouterSearch,
+  search => new URLSearchParams(search)
+);
+
+const getRouterSearchCategories = createSelector(getRouterSearchParams, searchParams =>
+  searchParams.getAll('category')
+);
+
+export {
+  getRouter,
+  getRouterSearch,
+  getRouterSearchParams,
+  getRouterSearchCategories
+};

@@ -35,9 +35,7 @@ class PaginationContainer extends PureComponent {
   };
 
   updateSearchWithCurrentPage = currentPage => {
-    const { search } = this.props;
-
-    const searchParams = new URLSearchParams(search);
+    const { searchParams } = this.props;
 
     searchParams.set('currentPage', currentPage);
 
@@ -47,20 +45,14 @@ class PaginationContainer extends PureComponent {
   };
 
   render() {
-    const { pagination, search, list } = this.props;
+    const { pagination, currentPage, list } = this.props;
 
     const { itemsPerPage, pageBound } = pagination;
-
-    const searchParams = new URLSearchParams(search);
-
-    const currentPage = searchParams.has('currentPage')
-      ? searchParams.get('currentPage')
-      : pagination.currentPage;
 
     return (
       <Pagination
         pageBound={pageBound}
-        currentPage={Number(currentPage)}
+        currentPage={currentPage}
         pagesRange={this.getPagesRange(currentPage, pageBound)}
         pagesLength={this.getPagesTotalCount(list.length, itemsPerPage)}
         updateSearchWithCurrentPage={this.updateSearchWithCurrentPage}
@@ -72,7 +64,8 @@ class PaginationContainer extends PureComponent {
 const mapStateToProps = state => ({
   pagination: paginationSelectors.getPagination(state),
   list: dataSelectors.getFilteredData(state),
-  search: routerSelectors.getRouterSearch(state)
+  searchParams: routerSelectors.getRouterSearchParams(state),
+  currentPage: paginationSelectors.getCurrentPage(state)
 });
 
 export default connect(mapStateToProps)(PaginationContainer);

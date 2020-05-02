@@ -15,10 +15,10 @@ const getFilteredData = createSelector(
   [
     filterSelectors.getFilterPrice,
     filterSelectors.getFilterDiscount,
-    routerSelectors.getRouterSearch,
+    routerSelectors.getRouterSearchCategories,
     getData
   ],
-  (filterPrice, filterDiscount, search, data) => {
+  (filterPrice, filterDiscount, searchCategories, data) => {
     const {
       min: { value: minValue },
       max: { value: maxValue }
@@ -32,8 +32,6 @@ const getFilteredData = createSelector(
         price <= maxValue &&
         productDiscount >= discountValue
     );
-
-    const searchCategories = new URLSearchParams(search).getAll('category');
 
     if (searchCategories.length !== 0) {
       return filteredProducts.filter(({ category }) =>

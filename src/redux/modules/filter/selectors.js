@@ -9,16 +9,16 @@ const getFilterDiscount = createSelector(getFilter, filter => filter.discount);
 
 const getFilterCategories = createSelector(
   getFilter,
-  routerSelectors.getRouterSearch,
-  (filter, search) => {
-    const searchCategories = new URLSearchParams(search).getAll('category');
+  routerSelectors.getRouterSearchCategories,
+  (filter, searchCategories) => {
+    const { categories: filterCategories } = filter;
 
-    return Object.keys(filter.categories).reduce(
+    return Object.keys(filterCategories).reduce(
       (acc, category) => ({
         ...acc,
         [category]: { isActive: searchCategories.includes(category) }
       }),
-      filter.categories
+      filterCategories
     );
   }
 );

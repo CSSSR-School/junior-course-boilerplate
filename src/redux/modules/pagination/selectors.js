@@ -6,16 +6,25 @@ const getPagination = ({ pagination }) => {
   return pagination;
 };
 
+const getCurrentPage = createSelector(
+  [routerSelectors.getRouterSearchParams, getPagination],
+  (searchParams, pagination) => {
+    const { currentPage } = pagination;
+
+    return searchParams.has('currentPage')
+    ? Number(searchParams.get('currentPage'))
+    : currentPage;
+  }
+);
+
 const getVisibleProductsList = createSelector(
-  [getPagination, dataSelectors.getFilteredData, routerSelectors.getRouterSearch],
-  (pagination, filteredProducts, search) => {
+  [
+    getPagination,
+    getCurrentPage,
+    dataSelectors.getFilteredData,
+  ],
+  (pagination, currentPage, filteredProducts) => {
     const { itemsPerPage } = pagination;
-
-    const searchParams = new URLSearchParams(search)
-
-    const currentPage = searchParams.has('currentPage')
-      ? searchParams.get('currentPage')
-      : pagination.currentPage;
 
     const lastProductIndex = currentPage * itemsPerPage;
 
@@ -25,4 +34,4 @@ const getVisibleProductsList = createSelector(
   }
 );
 
-export { getPagination, getVisibleProductsList };
+export { getPagination, getCurrentPage, getVisibleProductsList };
