@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './list.module.scss';
 import ProductCard from 'csssr-school-product-card';
+import { maxBy } from 'csssr-school-utils';
 import ProductRating from '../product-rating';
 import Price from '../price';
 
@@ -13,13 +14,13 @@ const List = props => {
   const listElements = list.map(product => {
     const {
       id,
-      isInStock,
+      name,
       img,
-      title,
       price,
+      status,
       subPriceContent,
-      maxRating,
-      rating
+      maxRating = maxBy(item => item.stars, list).stars,
+      stars
     } = product;
 
     return (
@@ -29,11 +30,11 @@ const List = props => {
         className={classnames(styles.ListItem)}
       >
         <ProductCard
-          isInStock={isInStock}
+          isInStock={status === 'IN_STOCK'}
           img={img}
-          title={title}
+          title={name}
           maxRating={maxRating}
-          rating={rating}
+          rating={stars}
           price={<Price price={price} />}
           subPriceContent={
             subPriceContent ? (

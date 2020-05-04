@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import {
   dataSelectors,
   paginationSelectors,
@@ -8,6 +9,11 @@ import {
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {
+  componentDidMount() {
+    const { push, currentPage } = this.props;
+
+    push(this.updateSearchWithCurrentPage(currentPage));
+  }
   getPagesTotalCount = (length, n) => Math.ceil(length / n);
 
   getPagesRange = (currentPage, pageBound) => {
@@ -35,13 +41,11 @@ class PaginationContainer extends PureComponent {
   };
 
   updateSearchWithCurrentPage = currentPage => {
-    const { searchParams } = this.props;
+    const { search } = this.props;
 
-    if (currentPage === 1) {
-      searchParams.delete('currentPage');
-    } else {
-      searchParams.set('currentPage', currentPage);
-    }
+    const searchParams = new URLSearchParams(search);
+
+    searchParams.set('currentPage', currentPage);
 
     return {
       search: searchParams.toString()
@@ -68,8 +72,8 @@ class PaginationContainer extends PureComponent {
 const mapStateToProps = state => ({
   pagination: paginationSelectors.getPagination(state),
   list: dataSelectors.getFilteredData(state),
-  searchParams: routerSelectors.getRouterSearchParams(state),
-  currentPage: paginationSelectors.getCurrentPage(state)
+  currentPage: routerSelectors.getRouterSearchCurrentPage(state),
+  search: routerSelectors.getRouterSearch(state),
 });
 
-export default connect(mapStateToProps)(PaginationContainer);
+export default connect(mapStateToProps, { push })(PaginationContainer);

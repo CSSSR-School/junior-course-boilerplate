@@ -15,10 +15,10 @@ const InputFilterDiscount = ({
   <section
     className={classnames(
       parentClassName,
-      styles.inputFilter,
-      styles.inputFilterDiscount,
+      styles.InputFilter,
+      styles.InputFilterDiscount,
       {
-        [styles.inputFilterInvalid]: !isValid
+        [styles.InputFilterInvalid]: !isValid
       }
     )}
   >

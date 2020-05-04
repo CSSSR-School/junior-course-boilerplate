@@ -1,32 +1,24 @@
 import * as types from './types';
 import { minBy, maxBy } from 'csssr-school-utils';
-import dataJSON from '../../../components/app/assets/products.json';
-
-const dataJSONCategories = Array.from(
-  new Set(dataJSON.map(item => item.category))
-);
 
 const initialState = {
   price: {
     min: {
-      value: minBy(item => item.price, dataJSON).price,
-      isValid: true
+      value: 0,
+      isValid: false
     },
     max: {
-      value: maxBy(item => item.price, dataJSON).price,
-      isValid: true
+      value: 0,
+      isValid: false
     }
   },
   discount: {
     total: {
-      value: minBy(item => item.discount, dataJSON).discount,
-      isValid: true
+      value: 100,
+      isValid: false
     }
   },
-  categories: dataJSONCategories.reduce(
-    (acc, category) => ({ ...acc, [category]: { isActive: false } }),
-    {}
-  )
+  categories: {}
 };
 
 export default (state = initialState, action) => {
@@ -45,6 +37,54 @@ export default (state = initialState, action) => {
           ...state[groupName],
           [fieldName]: fieldData
         }
+      };
+
+    case types.FILL_FILTER_WITH_DATA:
+      const { list } = payload;
+
+      const minPrice = minBy(item => item.price, list).price;
+
+      const maxPrice = maxBy(item => item.price, list).price;
+
+      const discount = minBy(item => item.discount, list).discount;
+
+      const categories = Array.from(
+        new Set(list.map(item => item.category))
+      ).reduce(
+        (acc, category) => ({ ...acc, [category]: { isActive: false } }),
+        {}
+      );
+
+      initialState.price = {
+        ...initialState.price,
+        min: {
+          ...initialState.price.min,
+          value: minPrice,
+          isValid: minPrice > 0
+        },
+        max: {
+          ...initialState.price.max,
+          value: maxPrice,
+          isValid: maxPrice > 0
+        }
+      };
+
+      initialState.discount = {
+        ...initialState.discount,
+        total: {
+          value: discount,
+          isValid: discount < 100
+        }
+      };
+
+      initialState.categories = {
+        ...initialState.categories,
+        ...categories,
+      }
+
+      return {
+        ...state,
+        ...initialState
       };
 
     default:

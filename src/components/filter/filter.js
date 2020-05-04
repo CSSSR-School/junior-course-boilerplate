@@ -63,7 +63,9 @@ const Filter = props => {
       </section>
 
       <Link
-        to="/"
+        to={{
+          search: 'currentPage=1'
+        }}
         className={classnames(styles.FilterReset)}
         onClick={resetFilter}
       >

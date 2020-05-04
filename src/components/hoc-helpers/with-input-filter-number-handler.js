@@ -5,7 +5,7 @@ import { routerSelectors } from '../../redux';
 
 const withInputFilterNumberHandler = WrappedComponent => {
   const mapStateToProps = state => ({
-    searchParams: routerSelectors.getRouterSearchParams(state)
+    search: routerSelectors.getRouterSearch(state)
   });
 
   return connect(mapStateToProps, { push })(
@@ -15,9 +15,10 @@ const withInputFilterNumberHandler = WrappedComponent => {
       };
 
       handleChange = ({ target: { value, name: fieldName } }, groupName) => {
+
         const {
           push,
-          searchParams,
+          search,
           updateFilterField
         } = this.props;
 
@@ -28,9 +29,11 @@ const withInputFilterNumberHandler = WrappedComponent => {
           fieldName,
           fieldData: {
             value: maskedValue,
-            isValid: value > 0
+            isValid: fieldName === 'min' || fieldName === 'max' ? value > 0 : value < 100
           }
         };
+
+        const searchParams = new URLSearchParams(search);
 
         searchParams.set('currentPage', 1);
 

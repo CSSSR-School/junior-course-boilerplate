@@ -4,7 +4,7 @@ import dataReducer from './modules/data';
 import filterReducer from './modules/filter';
 import paginationReducer from './modules/pagination';
 import { filterTypes, filterActions, filterSelectors } from './modules/filter';
-import { dataSelectors } from './modules/data';
+import { dataTypes, dataActions, dataSelectors } from './modules/data';
 import { routerSelectors } from './modules/router';
 import {
   paginationSelectors
@@ -15,6 +15,8 @@ export {
   filterActions,
   filterSelectors,
   paginationSelectors,
+  dataTypes,
+  dataActions,
   dataSelectors,
   routerSelectors,
 };

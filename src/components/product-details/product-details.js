@@ -4,14 +4,15 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './product-details.module.scss';
 import Icon from '../icon';
+import Header from '../header';
 import ProductCard from 'csssr-school-product-card';
 import ProductRating from '../product-rating';
 import Price from '../price';
 
 const ProductDetails = props => {
-  const { product = {} } = props;
+  const { product, maxRating } = props;
 
-  const { title = 'Товар не найден' } = product;
+  const { name = 'Товар не найден' } = product;
 
   return (
     <div className={classnames(styles.ProductDetails)}>
@@ -23,17 +24,17 @@ const ProductDetails = props => {
         >
           <Icon name="arrow" />
         </Link>
-        <h3 className={classnames(styles.ProductDetailsHeader)}>{title}</h3>
+        <Header header={name} className={styles.ProductDetailsHeader}/>
       </div>
 
       {Object.entries(product).length !== 0 ? (
         <ProductCard
-          isInStock={product.isInStock}
+          title={name}
           img={product.img}
-          title={title}
-          maxRating={product.maxRating}
-          rating={product.rating}
           price={<Price price={product.price} />}
+          isInStock={product.status === 'IN_STOCK'}
+          maxRating={maxRating}
+          rating={product.stars}
           subPriceContent={
             product.subPriceContent ? (
               <Price price={product.subPriceContent} isPrimary={false} />

@@ -1,19 +1,19 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { paginationSelectors } from '../../redux/modules/pagination';
+import { paginationSelectors } from '../../redux/';
 import List from '../../components/list';
 
 class ListContainer extends PureComponent {
   render() {
-    const { list } = this.props;
+    const { items } = this.props;
 
-    return <List list={list} />;
+    return <List list={items} />;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    list: paginationSelectors.getVisibleProductsList(state)
+    items: paginationSelectors.getVisibleProductsList(state)
   };
 };
 

@@ -8,7 +8,7 @@ const InputFilterCategory = ({ name, value, isActive, updateSearchWithCategory }
   <Link
     to={updateSearchWithCategory(name)}
     className={classnames(styles.InputFilter, styles.InputFilterCategory, {
-      [styles.InputFilterActive]: isActive
+      [styles.InputFilterCategoryActive]: isActive
     })}
   >
     {value}

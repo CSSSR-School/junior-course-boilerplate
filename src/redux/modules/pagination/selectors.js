@@ -6,17 +6,8 @@ const getPagination = ({ pagination }) => {
   return pagination;
 };
 
-const getCurrentPage = createSelector(
-  [routerSelectors.getRouterSearchParams],
-  searchParams => {
-    return searchParams.has('currentPage')
-      ? Number(searchParams.get('currentPage'))
-      : 1;
-  }
-);
-
 const getVisibleProductsList = createSelector(
-  [getPagination, getCurrentPage, dataSelectors.getFilteredData],
+  [getPagination, routerSelectors.getRouterSearchCurrentPage, dataSelectors.getFilteredData],
   (pagination, currentPage, filteredProducts) => {
     const { itemsPerPage } = pagination;
 
@@ -28,4 +19,4 @@ const getVisibleProductsList = createSelector(
   }
 );
 
-export { getPagination, getCurrentPage, getVisibleProductsList };
+export { getPagination, getVisibleProductsList };

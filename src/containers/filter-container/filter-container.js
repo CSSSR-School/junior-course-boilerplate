@@ -24,7 +24,7 @@ const mapStateToProps = state => {
       price: filterSelectors.getFilterPrice(state),
       discount: filterSelectors.getFilterDiscount(state),
       categories: filterSelectors.getFilterCategories(state)
-    }
+    },
   };
 };
 

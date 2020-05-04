@@ -2,23 +2,27 @@ import { createSelector } from 'reselect';
 
 const getRouter = ({ router }) => router;
 
+const getRouterLocation = createSelector(getRouter, ({ location }) => location);
+
 const getRouterSearch = createSelector(
-  getRouter,
-  ({ location: { search } }) => search
+  getRouterLocation,
+  ({ search }) => search
 );
 
-const getRouterSearchParams = createSelector(
-  getRouterSearch,
-  search => new URLSearchParams(search)
+const getRouterSearchCategories = createSelector(getRouterSearch, search =>
+  new URLSearchParams(search).getAll('category')
 );
 
-const getRouterSearchCategories = createSelector(getRouterSearchParams, searchParams =>
-  searchParams.getAll('category')
-);
+const getRouterSearchCurrentPage = createSelector(getRouterSearch, search => {
+  const searchParams = new URLSearchParams(search);
+
+  return searchParams.has('currentPage')
+    ? Number(searchParams.get('currentPage'))
+    : 1;
+});
 
 export {
-  getRouter,
   getRouterSearch,
-  getRouterSearchParams,
-  getRouterSearchCategories
+  getRouterSearchCategories,
+  getRouterSearchCurrentPage
 };

@@ -1,32 +1,40 @@
 import { createSelector } from 'reselect';
-
 import { filterSelectors } from '../filter';
 import { routerSelectors } from '../router';
 
-const getData = ({ data }) => data;
+const getData = state => {
+  const { data } = state;
 
-const getItemById = ({ data }, id) => {
-  const [item] = data.filter(value => value.id === Number(id));
-
-  return item;
+  return data;
 };
+
+const getItems = createSelector(getData, ({ items }) => items);
+
+const getItemById = (state, id) =>
+  createSelector(getItems, items => {
+    const [item] = items.filter(value => value.id === Number(id));
+
+    return item;
+  })(state);
 
 const getFilteredData = createSelector(
   [
     filterSelectors.getFilterPrice,
     filterSelectors.getFilterDiscount,
     routerSelectors.getRouterSearchCategories,
-    getData
+    getItems
   ],
-  (filterPrice, filterDiscount, searchCategories, data) => {
+  (filterPrice, filterDiscount, searchCategories, items) => {
     const {
       min: { value: minValue },
       max: { value: maxValue }
     } = filterPrice;
 
-    const {total: { value: discountValue }} = filterDiscount;
+    const {
+      total: { value: discountValue }
+    } = filterDiscount;
 
-    const filteredProducts = data.filter(
+    const filteredProducts = items.filter(
       ({ price, discount: productDiscount }) =>
         price >= minValue &&
         price <= maxValue &&
@@ -43,4 +51,4 @@ const getFilteredData = createSelector(
   }
 );
 
-export { getData, getItemById, getFilteredData };
+export { getData, getItems, getItemById, getFilteredData };
