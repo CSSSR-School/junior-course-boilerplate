@@ -7,12 +7,7 @@ import ProductDetails from '../../components/product-details';
 
 class ProductDetailsContainer extends PureComponent {
   render() {
-    const { product = {}, items = [] } = this.props;
-
-    const maxRating =
-      items.length !== 0
-        ? maxBy(item => item.stars, items).stars
-        : product.stars;
+    const { product = {}, maxRating = [] } = this.props;
 
     return <ProductDetails product={product} maxRating={maxRating} />;
   }
@@ -21,7 +16,7 @@ class ProductDetailsContainer extends PureComponent {
 const mapStateToProps = (state, { id }) => {
   return {
     product: productsSelectors.getProductsListItemById(state, id),
-    items: productsSelectors.getProducts(state)
+    maxRating: productsSelectors.reduceProductsList(state, maxBy, 'stars')
   };
 };
 

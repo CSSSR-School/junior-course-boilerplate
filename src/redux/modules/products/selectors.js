@@ -17,6 +17,11 @@ const getProductsListItemById = (state, id) =>
     return item;
   })(state);
 
+const reduceProductsList = (state, reducer, value) =>
+  createSelector(getProductsList, list => {
+    return reducer(item => item.value, list)[value];
+  })(state);
+
 const getFilteredProducts = createSelector(
   [
     filterSelectors.getFilterPrice,
@@ -54,6 +59,7 @@ const getFilteredProducts = createSelector(
 export {
   getProducts,
   getProductsList,
+  reduceProductsList,
   getProductsListItemById,
   getFilteredProducts
 };
