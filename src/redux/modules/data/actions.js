@@ -1,17 +1,10 @@
 import axios from 'axios';
 import * as types from './types';
 import { fillFilterWithData } from '../filter/actions';
-import { delay } from '../../../helpers';
 
 const API = 'https://course-api.csssr.school/';
 
 const PARAM_PRODUCTS = 'products';
-
-// const PARAM_EMPTY = 'empty';
-
-// const PARAM_ERROR = 'error';
-
-const INTERVAL = 3000;
 
 export const fetchDataStarted = () => ({
   type: types.FETCH_DATA_STARTED
@@ -32,8 +25,6 @@ export const fetchData = () => {
     dispatch(fetchDataStarted());
 
     try {
-      await delay(INTERVAL);
-
       const {
         data: { products = [] }
       } = await axios.get(`${API}${PARAM_PRODUCTS}`);
