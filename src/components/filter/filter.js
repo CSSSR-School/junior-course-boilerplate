@@ -15,7 +15,8 @@ const Filter = props => {
       categories
     },
     updateFilterField,
-    resetFilter
+    resetFilter,
+    resetHistoryCurrentPage
   } = props;
 
   const mappedCategories = Object.keys(categories).map((category, index) => (
@@ -27,7 +28,10 @@ const Filter = props => {
   ));
 
   return (
-    <form className={classnames(styles.Filter)}>
+    <form
+      className={classnames(styles.Filter)}
+      onChange={resetHistoryCurrentPage}
+    >
       <section className={classnames(styles.FilterWrapper)}>
         <h3 className={classnames(styles.FilterHeader)}>Цена</h3>
         <div className={classnames(styles.FilterInner)}>

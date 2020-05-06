@@ -1,10 +1,21 @@
 import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import Filter from '../../components/filter';
-import { filterActions, filterSelectors } from '../../redux';
+import { filterActions, filterSelectors, routerSelectors } from '../../redux';
 
 class FilterContainer extends PureComponent {
+  resetHistoryCurrentPage = () => {
+    const { search, push } = this.props;
+
+    const searchParams = new URLSearchParams(search);
+
+    searchParams.set('currentPage', 1);
+
+    push({ search: searchParams.toString() });
+  };
+
   render() {
     const { filter, updateFilterField, resetFilter } = this.props;
 
@@ -13,6 +24,7 @@ class FilterContainer extends PureComponent {
         filter={filter}
         updateFilterField={updateFilterField}
         resetFilter={resetFilter}
+        resetHistoryCurrentPage={this.resetHistoryCurrentPage}
       />
     );
   }
@@ -25,10 +37,11 @@ const mapStateToProps = state => {
       discount: filterSelectors.getFilterDiscount(state),
       categories: filterSelectors.getFilterCategories(state)
     },
+    search: routerSelectors.getRouterSearch(state)
   };
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(filterActions, dispatch);
+  bindActionCreators({...filterActions, push}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer);
