@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import {
-  dataSelectors,
+  productsSelectors,
   paginationSelectors,
   routerSelectors
 } from '../../redux';
@@ -71,7 +71,7 @@ class PaginationContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   pagination: paginationSelectors.getPagination(state),
-  list: dataSelectors.getFilteredData(state),
+  list: productsSelectors.getFilteredProducts(state),
   currentPage: routerSelectors.getRouterSearchCurrentPage(state),
   search: routerSelectors.getRouterSearch(state),
 });

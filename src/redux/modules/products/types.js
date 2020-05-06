@@ -1,0 +1,5 @@
+export const FETCH_PRODUCTS_STARTED = 'app/products/FETCH_PRODUCTS_STARTED';
+
+export const FETCH_PRODUCTS_SUCCESS = 'app/products/FETCH_PRODUCTS_SUCCESS';
+
+export const FETCH_PRODUCTS_FAILURE = 'app/products/FETCH_PRODUCTS_FAILURE';

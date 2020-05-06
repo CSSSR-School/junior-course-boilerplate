@@ -6,11 +6,11 @@ import ProductDetailsContainer from '../../containers/product-details-container'
 import { renderComponent } from './utils/render-component';
 
 const App = props => {
-  const { data } = props;
+  const { products } = props;
 
   return (
     <div className={classnames(styles.App)}>
-      <Route path="/" exact render={() => renderComponent(data)} />
+      <Route path="/" exact render={() => renderComponent(products)} />
 
       <Route
         path="/product/:id"

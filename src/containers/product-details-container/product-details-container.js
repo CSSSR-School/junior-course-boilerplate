@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { goBack } from 'connected-react-router';
 import { maxBy } from 'csssr-school-utils';
-import { dataSelectors } from '../../redux';
+import { productsSelectors } from '../../redux';
 import ProductDetails from '../../components/product-details';
 
 class ProductDetailsContainer extends PureComponent {
@@ -20,8 +20,8 @@ class ProductDetailsContainer extends PureComponent {
 
 const mapStateToProps = (state, { id }) => {
   return {
-    product: dataSelectors.getItemById(state, id),
-    items: dataSelectors.getItems(state)
+    product: productsSelectors.getProductsListItemById(state, id),
+    items: productsSelectors.getProducts(state)
   };
 };
 

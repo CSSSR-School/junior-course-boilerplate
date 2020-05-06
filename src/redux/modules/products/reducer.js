@@ -1,7 +1,7 @@
 import * as types from './types';
 
 const initialState = {
-  items: [],
+  list: [],
   isLoading: false,
   error: null
 };
@@ -10,22 +10,22 @@ export default (state = initialState, action) => {
   const { type, payload = {} } = action;
 
   switch (type) {
-    case types.FETCH_DATA_STARTED:
+    case types.FETCH_PRODUCTS_STARTED:
       return {
         ...state,
         isLoading: true
       };
 
-    case types.FETCH_DATA_SUCCESS:
-      const { data } = payload;
+    case types.FETCH_PRODUCTS_SUCCESS:
+      const { list } = payload;
 
       return {
         ...state,
-        items: data,
+        list,
         isLoading: false
       };
 
-    case types.FETCH_DATA_FAILURE:
+    case types.FETCH_PRODUCTS_FAILURE:
       const {
         error: { message }
       } = payload;

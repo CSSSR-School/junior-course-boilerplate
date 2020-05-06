@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { dataSelectors } from '../data';
+import { productsSelectors } from '../products';
 import { routerSelectors } from '../router';
 
 const getPagination = ({ pagination }) => {
@@ -7,7 +7,11 @@ const getPagination = ({ pagination }) => {
 };
 
 const getVisibleProductsList = createSelector(
-  [getPagination, routerSelectors.getRouterSearchCurrentPage, dataSelectors.getFilteredData],
+  [
+    getPagination,
+    routerSelectors.getRouterSearchCurrentPage,
+    productsSelectors.getFilteredProducts
+  ],
   (pagination, currentPage, filteredProducts) => {
     const { itemsPerPage } = pagination;
 

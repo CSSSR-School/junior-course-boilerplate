@@ -5,7 +5,7 @@ import Products from '../../products';
 import Header from '../../header';
 import Icon from '../../icon';
 
-const renderComponent = ({ items, isLoading, error }) => {
+const renderComponent = ({ list, isLoading, error }) => {
   if (isLoading) {
     return (
       <div className={styles.AppSpinner}>
@@ -19,7 +19,7 @@ const renderComponent = ({ items, isLoading, error }) => {
         <Icon name="ill-planet" />
       </>
     );
-  } else if (items.length === 0) {
+  } else if (list.length === 0) {
     return (
       <>
         <Header

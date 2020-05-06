@@ -1,29 +1,29 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dataActions, dataSelectors } from '../../redux/';
+import { productsActions, productsSelectors } from '../../redux/';
 import App from '../../components/app';
 
 class AppContainer extends PureComponent {
   componentDidMount() {
-    this.props.fetchData();
+    this.props.fetchProducts();
   }
 
   render() {
-    return <App data={this.props.data} />;
+    return <App products={this.props.products} />;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    data: dataSelectors.getData(state),
+    products: productsSelectors.getProducts(state),
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  const { fetchData } = bindActionCreators(dataActions, dispatch);
+  const { fetchProducts } = bindActionCreators(productsActions, dispatch);
 
-  return { fetchData };
+  return { fetchProducts };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

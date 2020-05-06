@@ -4,32 +4,32 @@ import { fillFilterWithData } from '../filter/actions';
 
 const API = 'https://course-api.csssr.school/';
 
-const PARAM_PRODUCTS = 'products';
+const PARAM = 'products';
 
-export const fetchDataStarted = () => ({
-  type: types.FETCH_DATA_STARTED
+export const fetchProductsStarted = () => ({
+  type: types.FETCH_PRODUCTS_STARTED
 });
 
-export const fetchDataSuccess = payload => ({
-  type: types.FETCH_DATA_SUCCESS,
+export const fetchProductsSuccess = payload => ({
+  type: types.FETCH_PRODUCTS_SUCCESS,
   payload
 });
 
 export const fetchDataFailure = payload => ({
-  type: types.FETCH_DATA_FAILURE,
+  type: types.FETCH_PRODUCTS_FAILURE,
   payload
 });
 
-export const fetchData = () => {
+export const fetchProducts = () => {
   return async dispatch => {
-    dispatch(fetchDataStarted());
+    dispatch(fetchProductsStarted());
 
     try {
       const {
         data: { products = [] }
-      } = await axios.get(`${API}${PARAM_PRODUCTS}`);
+      } = await axios.get(`${API}${PARAM}`);
 
-      dispatch(fetchDataSuccess({ data: products }));
+      dispatch(fetchProductsSuccess({ list: products }));
       dispatch(fillFilterWithData({ list: products }));
     } catch (error) {
       dispatch(fetchDataFailure({ error }));
