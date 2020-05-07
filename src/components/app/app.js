@@ -3,14 +3,14 @@ import { Route, withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import styles from './app.module.scss';
 import ProductDetailsContainer from '../../containers/product-details-container';
-import { renderComponent } from './utils/render-component';
+import { renderContent } from './utils/render-content';
 
 const App = props => {
   const { products } = props;
 
   return (
     <div className={classnames(styles.App)}>
-      <Route path="/" exact render={() => renderComponent(products)} />
+      <Route path="/" exact render={() => renderContent(products)} />
 
       <Route
         path="/product/:id"

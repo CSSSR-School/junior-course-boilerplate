@@ -1,3 +1,3 @@
-import { renderComponent } from './render-component';
+import { renderContent } from './render-content';
 
-export { renderComponent };
+export { renderContent };

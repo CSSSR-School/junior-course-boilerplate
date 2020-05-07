@@ -5,7 +5,7 @@ import Products from '../../products';
 import Header from '../../header';
 import Icon from '../../icon';
 
-const renderComponent = ({ list, isLoading, error }) => {
+const renderContent = ({ list, isLoading, error }) => {
   if (isLoading) {
     return (
       <div className={styles.AppSpinner}>
@@ -42,4 +42,4 @@ const renderComponent = ({ list, isLoading, error }) => {
   );
 };
 
-export { renderComponent };
+export { renderContent };
