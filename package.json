@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
     "csssr-school-input-discount": "git+https://github.com/CSSSR-School/junior-course-input-discount.git",

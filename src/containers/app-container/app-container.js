@@ -6,7 +6,7 @@ import App from '../../components/app';
 
 class AppContainer extends PureComponent {
   componentDidMount() {
-    this.props.fetchProducts();
+    this.props.fetchProducts('https://course-api.csssr.school/products');
   }
 
   render() {
