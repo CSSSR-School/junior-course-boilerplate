@@ -1,23 +1,29 @@
 import React from 'react';
 
-import Arrow from './Arrow';
-import IllPlanet from './IllPlanet';
-import Island from './Island';
-import Rating from './Rating';
-import Spinner from './Spinner';
+import ArrowIcon from './arrow-icon';
+import IllPlanetIcon from './ill-planet-icon';
+import IslandIcon from './island-icon';
+import RatingIcon from './rating-icon';
+import SpinnerIcon from './spinner-icon';
+import BasketIcon from './basket-icon';
+import TickIcon from './tick-icon';
 
 const Icon = props => {
   switch (props.name) {
     case 'arrow':
-      return <Arrow {...props} />;
+      return <ArrowIcon {...props} />;
     case 'ill-planet':
-      return <IllPlanet {...props} />;
-      case 'island':
-        return <Island {...props} />;
+      return <IllPlanetIcon {...props} />;
+    case 'island':
+      return <IslandIcon {...props} />;
     case 'rating':
-      return <Rating {...props} />;
-      case 'spinner':
-        return <Spinner {...props} />;
+      return <RatingIcon {...props} />;
+    case 'spinner':
+      return <SpinnerIcon {...props} />;
+    case 'basket':
+      return <BasketIcon {...props} />;
+    case 'tick':
+      return <TickIcon {...props} />;
     default:
       return;
   }
