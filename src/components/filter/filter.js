@@ -16,8 +16,11 @@ const Filter = props => {
     },
     updateFilterField,
     resetFilter,
-    resetHistoryCurrentPage
+    resetHistoryCurrentPage,
+    productsList
   } = props;
+
+  const isDisabled = productsList.length === 0;
 
   const mappedCategories = Object.keys(categories).map((category, index) => (
     <InputFilterCategoryContainer
@@ -61,16 +64,20 @@ const Filter = props => {
         parentClassName={classnames(styles.FilterWrapper)}
       />
 
-      <section className={classnames(styles.FilterWrapper)}>
-        <h3 className={classnames(styles.FilterHeader)}>Категории</h3>
-        <div className={styles.FilterInner}>{mappedCategories}</div>
-      </section>
+      {Object.keys(categories).length !== 0 && (
+        <section className={classnames(styles.FilterWrapper)}>
+          <h3 className={classnames(styles.FilterHeader)}>Категории</h3>
+          <div className={styles.FilterInner}>{mappedCategories}</div>
+        </section>
+      )}
 
       <Link
         to={{
           search: 'currentPage=1'
         }}
-        className={classnames(styles.FilterReset)}
+        className={classnames(classnames(styles.FilterReset), {
+          [classnames(styles.FilterResetDisabled)]: isDisabled
+        })}
         onClick={resetFilter}
       >
         Сбросить фильтры

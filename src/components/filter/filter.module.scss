@@ -89,5 +89,13 @@
       background-color: darken(#323c48, 10%);
       border: 1px solid darken(#323c48, 10%);
     }
+
+    &Disabled {
+      color: #fff;
+      border: 1px solid #c5cfde;
+      background-color: #c5cfde;
+
+      cursor: not-allowed;
+    }
   }
 }
