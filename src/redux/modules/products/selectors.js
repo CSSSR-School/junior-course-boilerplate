@@ -58,6 +58,7 @@ const getFilteredProducts = createSelector(
 
 export {
   getProducts,
+  getProductsList,
   reduceProductsList,
   getProductsListItemById,
   getFilteredProducts

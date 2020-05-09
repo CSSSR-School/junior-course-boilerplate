@@ -16,7 +16,7 @@ export const fetchDataFailure = payload => ({
 });
 
 export const fetchProducts = url => {
-  return async dispatch => {
+  return dispatch => {
     dispatch(fetchProductsStarted());
 
     fetch(url)

@@ -7,6 +7,7 @@ import ProductCard from 'csssr-school-product-card';
 import { maxBy } from 'csssr-school-utils';
 import ProductRating from '../product-rating';
 import Price from '../price';
+import ProductToggleContainer from '../../containers/product-toggle-container';
 
 const List = props => {
   const { list } = props;
@@ -45,6 +46,8 @@ const List = props => {
           }
           ratingComponent={ProductRating}
         />
+
+        <ProductToggleContainer id={id} />
       </Link>
     );
   });

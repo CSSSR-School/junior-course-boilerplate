@@ -5,8 +5,14 @@
 
   &Sidebar {
     width: 255px;
-    margin-top: 100px;
-    margin-right: 50px;
+
+    &Left {
+      margin-right: 50px;
+    }
+
+    &Right {
+      margin-left: 50px;
+    }
   }
 
   &Main {
