@@ -1,36 +1,8 @@
 .App {
-  $offset: 140px;
-
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   width: 1340px;
   margin: auto;
-  margin-top: $offset;
-
-  &Header {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    flex-basis: 100%;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 55px;
-
-    font-size: 36px;
-    font-weight: 300;
-    line-height: 48px;
-    color: #323c48;
-
-    &Products {
-      padding-left: 305px;
-    }
-  }
-
-  &Spinner {
-    position: absolute;
-    top: calc(50% - #{$offset});
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+  padding-top: 140px;
 }

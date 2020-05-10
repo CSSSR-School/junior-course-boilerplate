@@ -4,15 +4,13 @@ import classnames from 'classnames';
 import styles from './app.module.scss';
 import ProductDetailsContainer from '../../containers/product-details-container';
 import NotFound from '../not-found';
-import { renderContent } from './utils/render-content';
+import ProductsContainer from '../../containers/products-container';
 
-const App = props => {
-  const { products } = props;
-
+const App = () => {
   return (
     <div className={classnames(styles.App)}>
       <Switch>
-        <Route path="/" exact render={() => renderContent(products)} />
+        <Route path="/" component={ProductsContainer} />
 
         <Route
           path="/product/:id"

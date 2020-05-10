@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { basketActions, basketSelectors } from '../../redux/';
 import ProductToggle from '../../components/product-toggle';
+import { withApi } from '../../components/hoc-helpers';
 
 class ProductToggleContainer extends PureComponent {
-  _apiBase = 'https://course-api.csssr.school/';
-
   handleClick = (event, id) => {
     event.preventDefault();
 
@@ -18,7 +17,7 @@ class ProductToggleContainer extends PureComponent {
 
     switch (label) {
       case 'добавить':
-        saveBasket(`${this._apiBase}save`, id);
+        saveBasket(`${this.props.apiBase}save`, id);
         break;
       case 'удалить':
         removeItemFromBasket({ id });
@@ -63,4 +62,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProductToggleContainer);
+)(withApi(ProductToggleContainer));

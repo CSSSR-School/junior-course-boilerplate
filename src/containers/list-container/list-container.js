@@ -5,15 +5,15 @@ import List from '../../components/list';
 
 class ListContainer extends PureComponent {
   render() {
-    const { items } = this.props;
+    const { list } = this.props;
 
-    return <List list={items} />;
+    return <List list={list} />;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    items: paginationSelectors.getVisibleProductsList(state)
+    list: paginationSelectors.getVisibleProductsList(state)
   };
 };
 
