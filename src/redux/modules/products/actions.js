@@ -16,9 +16,8 @@ export const fetchDataFailure = payload => ({
 });
 
 export const fetchProducts = url => {
-  return dispatch => {
+  return async dispatch => {
     dispatch(fetchProductsStarted());
-
     fetch(url)
       .then(response => {
         if (response.ok) {
@@ -32,6 +31,12 @@ export const fetchProducts = url => {
       .then(data => {
         const { products } = data;
 
+        if (!products) {
+          const { message } = data;
+
+          throw new Error(message);
+        }
+
         dispatch(fetchProductsSuccess({ list: products }));
 
         return data;
@@ -39,7 +44,9 @@ export const fetchProducts = url => {
       .then(data => {
         const { products } = data;
 
-        dispatch(fillFilterWithData({ list: products }));
+        if (products.length !== 0) {
+          dispatch(fillFilterWithData({ list: products }));
+        }
       })
       .catch(error => {
         dispatch(fetchDataFailure({ error }));

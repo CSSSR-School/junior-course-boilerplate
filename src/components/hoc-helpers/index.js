@@ -1,5 +1,4 @@
 import withInputFilterNumberHandler from './with-input-filter-number-handler';
+import withApi from './with-api';
 
-export {
-  withInputFilterNumberHandler,
-};
+export { withApi, withInputFilterNumberHandler };
