@@ -1,22 +1,45 @@
+@import '../app/assets/variables.scss';
+
 .Products {
+  position: relative;
+
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-between;
+  align-items: flex-start;
 
   &Sidebar {
+    display: flex;
+    align-items: flex-start;
     width: 255px;
 
     &Left {
       margin-right: 50px;
+
+      @media #{$portable} {
+        position: absolute;
+        top: 95px;
+
+        margin-right: initial;
+      }
     }
 
     &Right {
       margin-left: 50px;
+
+      @media #{$portable} {
+        order: -1;
+        margin-left: initial;
+      }
     }
   }
 
   &Main {
     width: 732px;
+
+    @media #{$phone} {
+      width: 478px;
+    }
 
     &Wrapper {
       display: flex;
@@ -31,7 +54,6 @@
     margin: 0;
     margin-bottom: 55px;
     padding: 0;
-    max-width: 50%;
 
     font-size: 36px;
     font-weight: 300;

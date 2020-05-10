@@ -9,21 +9,23 @@ import ProductsContainer from '../../containers/products-container';
 const App = () => {
   return (
     <div className={classnames(styles.App)}>
-      <Switch>
-        <Route path="/" component={ProductsContainer} />
+      <div className={classnames(styles.AppContainer)}>
+        <Switch>
+          <Route path="/" component={ProductsContainer} />
 
-        <Route
-          path="/product/:id"
-          exact
-          render={({ match: { params } }) => {
-            const { id } = params;
+          <Route
+            path="/product/:id"
+            exact
+            render={({ match: { params } }) => {
+              const { id } = params;
 
-            return <ProductDetailsContainer id={Number(id)} />;
-          }}
-        />
+              return <ProductDetailsContainer id={Number(id)} />;
+            }}
+          />
 
-        <Route component={NotFound}/>
-      </Switch>
+          <Route component={NotFound} />
+        </Switch>
+      </div>
     </div>
   );
 };

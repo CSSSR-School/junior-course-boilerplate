@@ -1,0 +1,9 @@
+$min-width: 800px;
+$mid-width: 1042px;
+$max-width: 1342px;
+
+$phone: 'only screen and (max-width: #{$mid-width - 1})';
+$tablet: 'only screen and (min-width: #{$mid-width}) and (max-width: #{$max-width - 1})';
+$desktop: 'only screen and (min-width: #{$max-width})';
+$portable: 'only screen and (max-width: #{$max-width - 1})';
+
