@@ -11,7 +11,7 @@ const App = () => {
     <div className={classnames(styles.App)}>
       <div className={classnames(styles.AppContainer)}>
         <Switch>
-          <Route path="/" component={ProductsContainer} />
+          <Route path="/" exact component={ProductsContainer} />
 
           <Route
             path="/product/:id"
