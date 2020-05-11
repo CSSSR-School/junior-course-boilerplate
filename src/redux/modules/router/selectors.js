@@ -17,7 +17,7 @@ const getRouterSearchCurrentPage = createSelector(getRouterSearch, search => {
   const searchParams = new URLSearchParams(search);
 
   return searchParams.has('currentPage')
-    ? Number(searchParams.get('currentPage'))
+    ? Number(searchParams.get('currentPage')) || 1
     : 1;
 });
 
