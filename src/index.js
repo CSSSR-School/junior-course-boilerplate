@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from './redux/store';
-import App from './components/app';
+import AppContainer from './containers/app-container';
 import WebFont from 'webfontloader';
 import 'normalize.scss/normalize.scss';
 import './index.scss';
@@ -19,7 +19,7 @@ WebFont.load({
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <AppContainer />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
