@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { filterSelectors } from '../filter';
 import { routerSelectors } from '../router';
+import { basketSelectors } from '../basket';
 
 const getProducts = state => {
   const { products } = state;
@@ -17,14 +18,26 @@ const getProductsListItemById = (state, id) =>
     return item;
   })(state);
 
-const reduceProductsList = (state, reducer, value) =>
+const reduceProductsList = (state, reducer, propName) =>
   createSelector(getProductsList, list => {
     if (list.length === 0) {
       return 0;
     }
 
-    return reducer(item => item.value, list)[value];
+    return reducer(item => item.value, list)[propName];
   })(state);
+
+const filterProductsListByBasketList = state =>
+  createSelector(
+    [getProductsList, basketSelectors.getBasketList],
+    (productsList, basketList) =>
+      productsList.filter(value => basketList.includes(value.id))
+  )(state);
+
+const mapProductsList = (state, propName) =>
+  createSelector(filterProductsListByBasketList, filteredProductsList =>
+    filteredProductsList.map(value => value[propName])
+  )(state);
 
 const getFilteredProducts = createSelector(
   [
@@ -65,5 +78,6 @@ export {
   getProductsList,
   reduceProductsList,
   getProductsListItemById,
+  mapProductsList,
   getFilteredProducts
 };

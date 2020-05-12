@@ -13,11 +13,11 @@ class ProductToggleContainer extends PureComponent {
       target: { textContent: label }
     } = event;
 
-    const { saveBasket, removeItemFromBasket } = this.props;
+    const { addItemToBasket, removeItemFromBasket } = this.props;
 
     switch (label) {
       case 'добавить':
-        saveBasket(`${this.props.apiBase}save`, id);
+        addItemToBasket({ id });
         break;
       case 'удалить':
         removeItemFromBasket({ id });
@@ -28,7 +28,10 @@ class ProductToggleContainer extends PureComponent {
   };
 
   render() {
-    const { basketList, basketStatus: { isSending }, id, } = this.props;
+    const {
+      basketList,
+      id,
+    } = this.props;
 
     const label = basketList.includes(id) ? 'удалить' : 'добавить';
 
@@ -36,27 +39,26 @@ class ProductToggleContainer extends PureComponent {
       <ProductToggle
         id={id}
         label={label}
-        isSending={isSending}
         handleClick={this.handleClick}
       />
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     basketList: basketSelectors.getBasketList(state),
-    basketStatus: basketSelectors.getBasketStatus(state),
+    basketStatus: basketSelectors.getBasketStatus(state)
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  const { saveBasket, removeItemFromBasket } = bindActionCreators(
+  const { addItemToBasket, removeItemFromBasket } = bindActionCreators(
     basketActions,
     dispatch
   );
 
-  return { saveBasket, removeItemFromBasket };
+  return { addItemToBasket, removeItemFromBasket };
 };
 
 export default connect(

@@ -6,7 +6,7 @@ const initialState = {
     isSuccessful: false,
     error: null
   },
-  list: []
+  list: [],
 };
 
 export default (state = initialState, action) => {
@@ -31,7 +31,6 @@ export default (state = initialState, action) => {
           isSuccessful: true,
           isSending: false
         },
-        list: Array.from(new Set([...state.list, payload.id]))
       };
 
     case types.SAVE_BASKET_FAILURE:
@@ -46,6 +45,12 @@ export default (state = initialState, action) => {
           error: message
         }
       };
+
+      case types.ADD_ITEM_TO_BASKET:
+        return {
+          ...state,
+          list: Array.from(new Set([...state.list, payload.id])),
+        };
 
     case types.REMOVE_ITEM_FROM_BASKET:
       return {

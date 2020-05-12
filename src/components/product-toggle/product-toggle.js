@@ -3,12 +3,10 @@ import styles from './product-toggle.module.scss';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
-const ProductToggle = ({ label, id, isSending, handleClick }) => {
+const ProductToggle = ({ label, id, handleClick }) => {
   return (
     <button
-      className={classnames(styles.ProductToggle, {
-        [styles.ProductToggleDisabled]: isSending
-      })}
+      className={classnames(styles.ProductToggle)}
       onClick={event => handleClick(event, id)}
     >
       {label}
@@ -18,6 +16,7 @@ const ProductToggle = ({ label, id, isSending, handleClick }) => {
 
 ProductToggle.propTypes = {
   id: propTypes.number,
+  label: propTypes.string,
   handleClick: propTypes.func
 };
 

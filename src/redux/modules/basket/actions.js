@@ -14,6 +14,11 @@ export const saveBasketSuccess = payload => ({
   payload
 });
 
+export const addItemToBasket = payload => ({
+  type: types.ADD_ITEM_TO_BASKET,
+  payload
+});
+
 export const removeItemFromBasket = payload => ({
   type: types.REMOVE_ITEM_FROM_BASKET,
   payload
@@ -23,14 +28,14 @@ export const emptyBasket = () => ({
   type: types.EMPTY_BASKET,
 });
 
-export const saveBasket = (url, id) => {
+export const saveBasket = (url, basketList) => {
   return async dispatch => {
     dispatch(saveBasketStarted());
 
     try {
       const response = await fetch(url, {
         method: 'POST',
-        body: JSON.stringify({ id }),
+        body: JSON.stringify(basketList),
         mode: 'cors',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -38,7 +43,7 @@ export const saveBasket = (url, id) => {
       });
 
       if (response.ok) {
-        dispatch(saveBasketSuccess({ id }));
+        dispatch(saveBasketSuccess());
       } else {
         throw new Error(`Could not fetch ${url}, received ${response.status}`);
       }

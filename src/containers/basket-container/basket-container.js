@@ -7,27 +7,44 @@ import {
   productsSelectors
 } from '../../redux/';
 import Basket from '../../components/basket';
+import { withApi } from '../../components/hoc-helpers';
 
 class BasketContainer extends PureComponent {
   handleClick = event => {
     event.preventDefault();
-    this.props.emptyBasket();
+
+    const {
+      target: { textContent: label }
+    } = event;
+
+    switch (label) {
+      case 'Очистить корзину':
+        this.props.emptyBasket();
+        break;
+
+      case 'Cохранить корзину':
+        this.props.saveBasket(`${this.props.apiBase}save`);
+        break;
+
+      default:
+        throw new Error(`Unknown label: ${label}`);
+    }
   };
 
   render() {
     const {
       basketStatus: { isSending, isSuccessful },
-      productsList,
-      basketList
+      basketList,
+      mappedProductsList
     } = this.props;
 
-    const productsListLength = `${productsList.length}`.length;
+    const sum = mappedProductsList.reduce((acc, value) => acc + value, 0);
 
     const basketListLength = basketList.length;
 
     return (
       <Basket
-        productsListLength={productsListLength}
+        sum={sum}
         basketListLength={basketListLength}
         isSending={isSending}
         isSuccessful={isSuccessful}
@@ -39,18 +56,22 @@ class BasketContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    productsList: productsSelectors.getProductsList(state),
     basketStatus: basketSelectors.getBasketStatus(state),
-    basketList: basketSelectors.getBasketList(state)
+    basketList: basketSelectors.getBasketList(state),
+    mappedProductsList: productsSelectors.mapProductsList(state, 'price')
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  const { emptyBasket } = bindActionCreators(basketActions, dispatch);
+  const { saveBasket, emptyBasket } = bindActionCreators(
+    basketActions,
+    dispatch
+  );
 
   return {
+    saveBasket,
     emptyBasket
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BasketContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withApi(BasketContainer));
