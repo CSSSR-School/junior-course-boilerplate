@@ -1,5 +1,3 @@
-@import '../app/assets/variables.scss';
-
 .Products {
   position: relative;
 
@@ -15,31 +13,15 @@
 
     &Left {
       margin-right: 50px;
-
-      @media #{$portable} {
-        position: absolute;
-        top: 95px;
-
-        margin-right: initial;
-      }
     }
 
     &Right {
       margin-left: 50px;
-
-      @media #{$portable} {
-        order: -1;
-        margin-left: initial;
-      }
     }
   }
 
   &Main {
     width: 732px;
-
-    @media #{$phone} {
-      width: 478px;
-    }
 
     &Wrapper {
       display: flex;

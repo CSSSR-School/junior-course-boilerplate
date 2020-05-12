@@ -22,8 +22,9 @@ const Products = ({ fetchData }) => {
       <main className={styles.ProductsMain}>
         <div className={styles.ProductsMainWrapper}>
           {renderList(fetchData)}
+          <PaginationContainer />
         </div>
-        <PaginationContainer />
+        {/* <PaginationContainer /> */}
       </main>
 
       <aside
