@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import {
   basketActions,
   basketSelectors,
-  productsSelectors
+  productsSelectors,
+  routerSelectors
 } from '../../redux/';
 import Basket from '../../components/basket';
 import { withApi } from '../../components/hoc-helpers';
@@ -35,7 +36,8 @@ class BasketContainer extends PureComponent {
     const {
       basketStatus: { isSending, isSuccessful },
       basketList,
-      mappedProductsList
+      mappedProductsList,
+      location: {pathname},
     } = this.props;
 
     const sum = mappedProductsList.reduce((acc, value) => acc + value, 0);
@@ -44,6 +46,7 @@ class BasketContainer extends PureComponent {
 
     return (
       <Basket
+        path={pathname.slice(1)}
         sum={sum}
         basketListLength={basketListLength}
         isSending={isSending}
@@ -56,6 +59,7 @@ class BasketContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
+    location: routerSelectors.getRouterLocation(state),
     basketStatus: basketSelectors.getBasketStatus(state),
     basketList: basketSelectors.getBasketList(state),
     mappedProductsList: productsSelectors.mapProductsList(state, 'price')

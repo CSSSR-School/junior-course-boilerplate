@@ -76,8 +76,9 @@ const getFilteredProducts = createSelector(
 export {
   getProducts,
   getProductsList,
+  filterProductsListByBasketList,
   reduceProductsList,
-  getProductsListItemById,
   mapProductsList,
+  getProductsListItemById,
   getFilteredProducts
 };

@@ -7,7 +7,14 @@ import Icon from '../icon';
 import Delayed from '../../containers/delayed-container';
 
 const Basket = props => {
-  const { sum, basketListLength, isSending, isSuccessful, handleClick } = props;
+  const {
+    path,
+    sum,
+    basketListLength,
+    isSending,
+    isSuccessful,
+    handleClick
+  } = props;
 
   const isDisabled = isSending || basketListLength === 0;
 
@@ -55,7 +62,9 @@ const Basket = props => {
 
       <Link
         to={{ pathname: '/basket' }}
-        className={classnames(styles.BasketLink)}
+        className={classnames(styles.BasketLink, {
+          [styles.BasketLinkHidden]: path === 'basket'
+        })}
       >
         Перейти в корзину
       </Link>

@@ -5,6 +5,7 @@ import styles from './app.module.scss';
 import NotFound from '../not-found';
 import ProductsPage from '../pages/products-page';
 import ProductDetailsPage from '../pages/product-details-page';
+import BasketPage from '../pages/basket-page';
 
 const App = () => {
   return (
@@ -22,6 +23,9 @@ const App = () => {
               return <ProductDetailsPage id={Number(id)} />;
             }}
           />
+
+
+          <Route path="/basket" exact component={BasketPage} />
 
           <Route component={NotFound} />
         </Switch>

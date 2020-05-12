@@ -1,6 +1,6 @@
 import React from 'react';
-import BasketContainer from '../../containers/basket-container';
+import BasketDetailsContainer from '../../containers/basket-details-container';
 
-const BasketPage = () => <BasketContainer />;
+const BasketPage = () => <BasketDetailsContainer />;
 
 export default BasketPage;

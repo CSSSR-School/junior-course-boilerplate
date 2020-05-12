@@ -136,5 +136,9 @@
     &:active {
       color: darken(#5695ed, 10%);
     }
+
+    &Hidden {
+      display: none;
+    }
   }
 }

@@ -23,6 +23,7 @@ const getRouterSearchCurrentPage = createSelector(getRouterSearch, search => {
 
 export {
   getRouterSearch,
+  getRouterLocation,
   getRouterSearchCategories,
   getRouterSearchCurrentPage
 };
