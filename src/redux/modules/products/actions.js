@@ -18,6 +18,7 @@ export const fetchDataFailure = payload => ({
 export const fetchProducts = url => {
   return async dispatch => {
     dispatch(fetchProductsStarted());
+
     fetch(url)
       .then(response => {
         if (response.ok) {

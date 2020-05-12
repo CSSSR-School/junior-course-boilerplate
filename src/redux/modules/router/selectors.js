@@ -26,3 +26,4 @@ export {
   getRouterSearchCategories,
   getRouterSearchCurrentPage
 };
+

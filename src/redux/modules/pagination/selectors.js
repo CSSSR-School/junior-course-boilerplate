@@ -6,6 +6,12 @@ const getPagination = ({ pagination }) => {
   return pagination;
 };
 
+const getPagesTotalCount = createSelector(
+  [getPagination, productsSelectors.getFilteredProducts],
+  ({ itemsPerPage }, filteredProducts) =>
+    Math.ceil(filteredProducts.length / itemsPerPage)
+);
+
 const getVisibleProductsList = createSelector(
   [
     getPagination,
@@ -23,4 +29,4 @@ const getVisibleProductsList = createSelector(
   }
 );
 
-export { getPagination, getVisibleProductsList };
+export { getPagination, getVisibleProductsList, getPagesTotalCount };
