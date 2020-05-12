@@ -2,16 +2,16 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import styles from './app.module.scss';
-import ProductDetailsContainer from '../../containers/product-details-container';
 import NotFound from '../not-found';
-import ProductsContainer from '../../containers/products-container';
+import ProductsPage from '../pages/products-page';
+import ProductDetailsPage from '../pages/product-details-page';
 
 const App = () => {
   return (
     <div className={classnames(styles.App)}>
       <div className={classnames(styles.AppContainer)}>
         <Switch>
-          <Route path="/" exact component={ProductsContainer} />
+          <Route path="/" exact component={ProductsPage} />
 
           <Route
             path="/product/:id"
@@ -19,7 +19,7 @@ const App = () => {
             render={({ match: { params } }) => {
               const { id } = params;
 
-              return <ProductDetailsContainer id={Number(id)} />;
+              return <ProductDetailsPage id={Number(id)} />;
             }}
           />
 
