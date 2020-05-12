@@ -7,7 +7,7 @@ import ProductDetails from '../../components/product-details';
 
 class ProductDetailsContainer extends PureComponent {
   render() {
-    const { product = {}, maxRating = [], ...restProps } = this.props;
+    const { product = {}, maxRating, ...restProps } = this.props;
 
     return <ProductDetails product={product} maxRating={maxRating} {...restProps} />;
   }

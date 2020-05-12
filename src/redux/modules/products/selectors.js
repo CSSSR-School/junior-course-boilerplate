@@ -19,9 +19,11 @@ const getProductsListItemById = (state, id) =>
 
 const reduceProductsList = (state, reducer, value) =>
   createSelector(getProductsList, list => {
-    if (!list.length === 0) {
-      return reducer(item => item.value, list)[value];
+    if (list.length === 0) {
+      return 0;
     }
+
+    return reducer(item => item.value, list)[value];
   })(state);
 
 const getFilteredProducts = createSelector(
