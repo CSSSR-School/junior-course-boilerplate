@@ -8,23 +8,14 @@
     flex-flow: row nowrap;
     align-items: center;
     height: 100%;
-
-    margin-bottom: 50px;
   }
-  &Header {
-    margin: 0;
-    padding: 0;
 
-    font-size: 36px;
-    line-height: 1;
-    font-weight: 300;
-    color: #323c48;
-  }
   &Link {
     display: flex;
     align-items: center;
     height: 100%;
     margin-right: 20px;
+    margin-bottom: 50px;
 
     transition-duration: 1s;
     transition-property: all;

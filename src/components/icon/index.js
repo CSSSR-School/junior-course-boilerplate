@@ -1,32 +1,24 @@
 import React from 'react';
-
-import ArrowIcon from './arrow-icon';
-import IllPlanetIcon from './ill-planet-icon';
-import IslandIcon from './island-icon';
-import RatingIcon from './rating-icon';
-import SpinnerIcon from './spinner-icon';
-import BasketIcon from './basket-icon';
-import TickIcon from './tick-icon';
+import propTypes from 'prop-types';
+import classnames from 'classnames';
+import { renderIcon } from './utils/render-icon';
+import styles from './icon.module.scss';
 
 const Icon = props => {
-  switch (props.name) {
-    case 'arrow':
-      return <ArrowIcon {...props} />;
-    case 'ill-planet':
-      return <IllPlanetIcon {...props} />;
-    case 'island':
-      return <IslandIcon {...props} />;
-    case 'rating':
-      return <RatingIcon {...props} />;
-    case 'spinner':
-      return <SpinnerIcon {...props} />;
-    case 'basket':
-      return <BasketIcon {...props} />;
-    case 'tick':
-      return <TickIcon {...props} />;
-    default:
-      return;
-  }
+  const { name, style: IconInlineStyles, ...restProps } = props;
+
+  return (
+    <div
+      className={classnames(styles.Icon)}
+      style={IconInlineStyles}
+    >
+      {renderIcon({ name, ...restProps })}
+    </div>
+  );
+};
+
+Icon.propTypes = {
+  name: propTypes.string
 };
 
 export default Icon;

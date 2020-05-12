@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import {
-  productsSelectors,
   paginationSelectors,
   routerSelectors
 } from '../../redux';
@@ -14,7 +13,6 @@ class PaginationContainer extends PureComponent {
 
     push(this.updateSearchWithCurrentPage(currentPage));
   }
-  getPagesTotalCount = (length, n) => Math.ceil(length / n);
 
   getPagesRange = (currentPage, pageBound) => {
     let counter;
@@ -41,11 +39,15 @@ class PaginationContainer extends PureComponent {
   };
 
   updateSearchWithCurrentPage = currentPage => {
-    const { search } = this.props;
+    const { search, pagesLength } = this.props;
 
     const searchParams = new URLSearchParams(search);
 
-    searchParams.set('currentPage', currentPage);
+    if (currentPage > pagesLength) {
+      searchParams.set('currentPage', 1);
+    } else {
+      searchParams.set('currentPage', currentPage);
+    }
 
     return {
       search: searchParams.toString()
@@ -53,16 +55,16 @@ class PaginationContainer extends PureComponent {
   };
 
   render() {
-    const { pagination, currentPage, list } = this.props;
+    const { pagination, currentPage, pagesLength } = this.props;
 
-    const { itemsPerPage, pageBound } = pagination;
+    const { pageBound } = pagination;
 
     return (
       <Pagination
         pageBound={pageBound}
         currentPage={currentPage}
         pagesRange={this.getPagesRange(currentPage, pageBound)}
-        pagesLength={this.getPagesTotalCount(list.length, itemsPerPage)}
+        pagesLength={pagesLength}
         updateSearchWithCurrentPage={this.updateSearchWithCurrentPage}
       />
     );
@@ -71,9 +73,9 @@ class PaginationContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   pagination: paginationSelectors.getPagination(state),
-  list: productsSelectors.getFilteredProducts(state),
+  pagesLength: paginationSelectors.getPagesTotalCount(state),
   currentPage: routerSelectors.getRouterSearchCurrentPage(state),
-  search: routerSelectors.getRouterSearch(state),
+  search: routerSelectors.getRouterSearch(state)
 });
 
 export default connect(mapStateToProps, { push })(PaginationContainer);

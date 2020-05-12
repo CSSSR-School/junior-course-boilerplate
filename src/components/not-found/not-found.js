@@ -5,7 +5,7 @@ import Header from '../header';
 
 const NotFound = () => (
   <div className={styles.NotFound}>
-    <Icon name="island" />
+    <Icon name="island" style={{ marginBottom: '50px' }} />
     <Header header={404} className={styles.NotFoundHeader} />
   </div>
 );

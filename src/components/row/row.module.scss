@@ -1,0 +1,33 @@
+.Row {
+  position: relative;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &Sidebar {
+    display: flex;
+    align-items: flex-start;
+    width: 255px;
+
+    &Left {
+      margin-right: 50px;
+    }
+
+    &Right {
+      margin-left: 50px;
+    }
+  }
+
+  &Main {
+    width: 732px;
+
+    &Wrapper {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
