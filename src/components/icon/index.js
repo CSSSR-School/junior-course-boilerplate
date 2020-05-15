@@ -8,10 +8,7 @@ const Icon = props => {
   const { name, style: IconInlineStyles, ...restProps } = props;
 
   return (
-    <div
-      className={classnames(styles.Icon)}
-      style={IconInlineStyles}
-    >
+    <div className={classnames(styles.Icon)} style={IconInlineStyles}>
       {renderIcon({ name, ...restProps })}
     </div>
   );

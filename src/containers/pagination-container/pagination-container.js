@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import {
-  paginationSelectors,
-  routerSelectors
-} from '../../redux';
+import { paginationSelectors, routerSelectors } from '../../redux';
 import Pagination from '../../components/pagination';
 
 class PaginationContainer extends PureComponent {

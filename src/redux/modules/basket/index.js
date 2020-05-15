@@ -3,10 +3,6 @@ import * as basketTypes from './types';
 import * as basketActions from './actions';
 import * as basketSelectors from './selectors';
 
-export {
-  basketTypes,
-  basketActions,
-  basketSelectors
-};
+export { basketTypes, basketActions, basketSelectors };
 
 export default basketReducer;

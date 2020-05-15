@@ -79,8 +79,8 @@ export default (state = initialState, action) => {
 
       initialState.categories = {
         ...initialState.categories,
-        ...categories,
-      }
+        ...categories
+      };
 
       return {
         ...state,

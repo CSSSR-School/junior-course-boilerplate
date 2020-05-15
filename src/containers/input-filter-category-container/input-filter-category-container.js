@@ -51,7 +51,7 @@ class InputFilterCategoryContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   search: routerSelectors.getRouterSearch(state),
-  searchCategories: routerSelectors.getRouterSearchCategories(state),
+  searchCategories: routerSelectors.getRouterSearchCategories(state)
 });
 
 export default connect(mapStateToProps)(InputFilterCategoryContainer);

@@ -24,7 +24,6 @@ const App = () => {
             }}
           />
 
-
           <Route path="/basket" exact component={BasketPage} />
 
           <Route component={NotFound} />

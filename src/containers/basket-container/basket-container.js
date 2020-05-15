@@ -37,7 +37,7 @@ class BasketContainer extends PureComponent {
       basketStatus: { isSending, isSuccessful },
       basketList,
       mappedProductsList,
-      location: {pathname},
+      location: { pathname }
     } = this.props;
 
     const sum = mappedProductsList.reduce((acc, value) => acc + value, 0);
@@ -78,4 +78,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withApi(BasketContainer));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withApi(BasketContainer));

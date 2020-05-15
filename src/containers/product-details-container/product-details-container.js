@@ -9,7 +9,9 @@ class ProductDetailsContainer extends PureComponent {
   render() {
     const { product = {}, maxRating, ...restProps } = this.props;
 
-    return <ProductDetails product={product} maxRating={maxRating} {...restProps} />;
+    return (
+      <ProductDetails product={product} maxRating={maxRating} {...restProps} />
+    );
   }
 }
 

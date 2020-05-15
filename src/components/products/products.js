@@ -9,11 +9,7 @@ const Products = ({ fetchData }) => {
   return (
     <Row
       left={<FilterContainer />}
-      center={
-        <>
-          {renderList(fetchData)}
-        </>
-      }
+      center={<>{renderList(fetchData)}</>}
       right={<BasketContainer />}
     />
   );

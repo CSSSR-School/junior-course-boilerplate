@@ -4,7 +4,12 @@ import propTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './input-filter-category.module.scss';
 
-const InputFilterCategory = ({ name, value, isActive, updateSearchWithCategory }) => (
+const InputFilterCategory = ({
+  name,
+  value,
+  isActive,
+  updateSearchWithCategory
+}) => (
   <Link
     to={updateSearchWithCategory(name)}
     className={classnames(styles.InputFilter, styles.InputFilterCategory, {

@@ -28,19 +28,12 @@ class ProductToggleContainer extends PureComponent {
   };
 
   render() {
-    const {
-      basketList,
-      id,
-    } = this.props;
+    const { basketList, id } = this.props;
 
     const label = basketList.includes(id) ? 'удалить' : 'добавить';
 
     return (
-      <ProductToggle
-        id={id}
-        label={label}
-        handleClick={this.handleClick}
-      />
+      <ProductToggle id={id} label={label} handleClick={this.handleClick} />
     );
   }
 }

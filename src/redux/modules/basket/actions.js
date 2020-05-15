@@ -25,7 +25,7 @@ export const removeItemFromBasket = payload => ({
 });
 
 export const emptyBasket = () => ({
-  type: types.EMPTY_BASKET,
+  type: types.EMPTY_BASKET
 });
 
 export const saveBasket = (url, basketList) => {

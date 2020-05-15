@@ -8,8 +8,8 @@ import SpinnerIcon from '../spinner-icon';
 import BasketIcon from '../basket-icon';
 import TickIcon from '../tick-icon';
 
-const renderIcon = (props) => {
-  const {name} = props;
+const renderIcon = props => {
+  const { name } = props;
 
   switch (name) {
     case 'arrow':
@@ -32,7 +32,7 @@ const renderIcon = (props) => {
 };
 
 renderIcon.propTypes = {
-  name: propTypes.string,
+  name: propTypes.string
 };
 
 export { renderIcon };
