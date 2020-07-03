@@ -1,4 +1,4 @@
-.productsList {
+.products {
   margin: 0;
   padding: 0;
 
@@ -8,13 +8,13 @@
   list-style: none;
 }
 
-.productsList li {
+.products  li {
   width: calc(33% - 18px);
   margin-right: 30px;
   margin-bottom: 25px;
 }
 
 
-.productsList li:nth-child(3n) {
+.products  li:nth-child(3n) {
   margin-right: 0;
 }

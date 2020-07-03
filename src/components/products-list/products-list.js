@@ -1,10 +1,10 @@
 import React from "react";
 
-import LogRender from "../LogRender/LogRender";
+import LogRender from "../logrender/log-render";
 import ProductItem from "csssr-school-product-card";
 import PropTypes from "prop-types";
 
-import styles from "./ProductsList.module.css";
+import styles from "./list.module.css";
 
 const ratingComponent = ({ isFilled }) => {
   return <div className={isFilled && "starFill"} />;
@@ -25,7 +25,7 @@ export default class ProductsList extends LogRender {
 
   render() {
     return (
-      <ul className={styles.productsList}>
+      <ul className={styles.products}>
         {this.generateList()}
       </ul>
     )

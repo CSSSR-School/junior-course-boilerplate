@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import ProductList from "./components/ProductsList/ProductsList"
-import Title from "./components/Title/Title"
-import Form from  "./components/Form/Form";
+import ProductList from "./components/products-list/products-list"
+import Title from "./components/title/title"
+import Form from "./components/form/form";
 import products from "./products.json";
 
 import "./index.css"
@@ -45,6 +45,7 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className='appWrapper'>
         <Title text='Список товаров'/>
