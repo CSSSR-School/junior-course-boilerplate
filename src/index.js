@@ -8,6 +8,8 @@ import products from "./products.json";
 
 import "./index.css"
 
+const DEFAULT_SALE_SIZE = 50;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +33,8 @@ class App extends React.Component {
   getMinAndMaxPrice() {
     return {
       min: this.getMinPrice(),
-      max: this.getMaxPrice()
+      max: this.getMaxPrice(),
+      sale: DEFAULT_SALE_SIZE
     }
   }
 
@@ -40,13 +43,17 @@ class App extends React.Component {
   }
 
   filter() {
+    const currentPrice = this.state.price;
+    const saleSize = currentPrice.sale / 100 ;
+
+
     return this.state.products.filter((product) =>
-      (product.price >= this.state.price.min) && (product.price <= this.state.price.max))
+      (product.price >= currentPrice.min)
+        && (product.price <= currentPrice.max)
+        && (product.price === (product.subPriceContent - product.subPriceContent * saleSize)))
   }
 
   render() {
-    console.log(this.state);
-
     return (
       <div className='appWrapper'>
         <Title text='Список товаров'/>

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./form.module.css";
 import LogRender from "../logrender/log-render";
 import InputNumber from "../input-number/input-number";
+import InputDiscount from "../discount/discount";
 
 export default class Form extends LogRender {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class Form extends LogRender {
           <InputNumber
             value={this.props.price.min}
             name='min'
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
           />
         </label>
         <label>
@@ -41,9 +42,10 @@ export default class Form extends LogRender {
           <InputNumber
             value={this.props.price.max}
             name='max'
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
           />
         </label>
+        <InputDiscount title="Скидка" name="sale" value={this.props.price.sale} onChange={this.handleChange} />
       </form>
     );
   }

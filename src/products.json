@@ -2,25 +2,25 @@
     {
         "id": 1,
         "name": "Имя товара1",
-        "price": 1000,
-        "subPriceContent": 1500
+        "price": 900,
+        "subPriceContent": 1000
     },
     {
         "id": 2,
         "name": "Имя товара2",
-        "price": 300,
+        "price": 800,
         "subPriceContent": 800
     },
     {
         "id": 3,
         "name": "Имя товара3",
-        "price": 1300,
+        "price": 1400,
         "subPriceContent": 2800
     },
     {
         "id": 4,
         "name": "Имя товара4",
-        "price": 3100,
+        "price": 2500,
         "subPriceContent": 5000
     },
     {

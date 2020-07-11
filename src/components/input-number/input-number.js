@@ -8,9 +8,7 @@ export default class InputNumber extends LogRender {
 
   handleChange = (evt) => {
     const inputValue = toInt(evt.target.value);
-
-    this.setState({ value:  inputValue});
-    this.props.handleChange && this.props.handleChange(evt, inputValue);
+    this.props.onChange && this.props.onChange(evt, inputValue);
   }
 
   render() {
