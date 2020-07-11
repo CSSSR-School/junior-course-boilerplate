@@ -2,15 +2,14 @@ import React from "react";
 
 import LogRender from "../logrender/log-render";
 import styles from "./input.module.css";
+import toInt from "csssr-school-utils/lib/toInt";
 
 export default class InputNumber extends LogRender {
 
   handleChange = (evt) => {
-    if (isNaN(parseInt(evt.target.value))) {
-      return;
-    }
-    const inputValue = parseInt(evt.target.value.replace(/\D+/g, ''));
-    // this.setState({ value: evt.target.value.replace(/\D+/g, '') });
+    const inputValue = toInt(evt.target.value);
+
+    this.setState({ value:  inputValue});
     this.props.handleChange && this.props.handleChange(evt, inputValue);
   }
 

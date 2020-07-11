@@ -8,6 +8,8 @@
     "react-scripts": "3.2.0",
     "csssr-school-utils": "https://github.com/CSSSR-School/junior-course-utils.git",
     "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git",
+    "react-css-modules": "^4.7.11",
+    "react-input-mask": "^2.0.4",
     "prop-types": "^15.7.2"
   },
   "scripts": {
