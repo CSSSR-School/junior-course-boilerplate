@@ -17,11 +17,14 @@ export default class Form extends LogRender {
 
   handleChange(evt, value) {
     const name = evt.target.name;
+    const isNewValue = value !== this.props.price[name];
 
-    this.updatePriceFilter({
-        ...this.props.price,
-        [name]: value
-    })
+    if (isNewValue) {
+        this.updatePriceFilter({
+            ...this.props.price,
+            [name]: value
+        })
+    }
   }
 
   render() {

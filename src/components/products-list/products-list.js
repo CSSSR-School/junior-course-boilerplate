@@ -1,14 +1,22 @@
 import React from "react";
 
-import LogRender from "../logrender/log-render";
-import ProductItem from "csssr-school-product-card";
+import ProductItemUI from "csssr-school-product-card";
 import PropTypes from "prop-types";
+import LogRender from "../logrender/log-render";
 
 import styles from "./list.module.css";
 
 const ratingComponent = ({ isFilled }) => {
   return <div className={isFilled && "starFill"} />;
 };
+
+class ProductItem extends LogRender {
+  render() {
+    return (
+        <ProductItemUI {...this.props} />
+    )
+  }
+}
 
 export default class ProductsList extends LogRender {
   generateList() {

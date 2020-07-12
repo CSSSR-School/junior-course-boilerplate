@@ -42,13 +42,13 @@ class App extends React.Component {
     this.setState({price: value})
   }
 
-  filter() {
+  getProducts() {
     const currentPrice = this.state.price;
     const saleSize = currentPrice.sale / 100 ;
 
 
     return this.state.products.filter((product) =>
-      (product.price >= currentPrice.min)
+        (product.price >= currentPrice.min)
         && (product.price <= currentPrice.max)
         && (product.price === (product.subPriceContent - product.subPriceContent * saleSize)))
   }
@@ -61,7 +61,7 @@ class App extends React.Component {
           <Form
             price={this.state.price}
             updateData={this.updateData}/>
-          <ProductList products={this.filter()}/>
+          <ProductList products={this.getProducts()}/>
         </div>
       </div>
     )

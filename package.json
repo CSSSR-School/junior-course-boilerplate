@@ -6,11 +6,12 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.2.0",
+    "prop-types": "^15.7.2",
     "csssr-school-utils": "https://github.com/CSSSR-School/junior-course-utils.git",
     "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git",
+    "react-addons-shallow-compare": "^15.6.2",
     "react-css-modules": "^4.7.11",
-    "react-input-mask": "^2.0.4",
-    "prop-types": "^15.7.2"
+    "react-input-mask": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
