@@ -2,15 +2,9 @@ import React from "react";
 
 import LogRender from "../logrender/log-render";
 import styles from "./input.module.css";
-import toInt from "csssr-school-utils/lib/toInt";
+import withMask from "../with-mask/with-mask";
 
-export default class InputNumber extends LogRender {
-
-  handleChange = (evt) => {
-    const inputValue = toInt(evt.target.value);
-    this.props.onChange && this.props.onChange(evt, inputValue);
-  }
-
+class InputNumberUI extends LogRender {
   render() {
     return (
       <input
@@ -18,8 +12,12 @@ export default class InputNumber extends LogRender {
         type='text'
         name={this.props.name}
         value={this.props.value}
-        onChange={this.handleChange}
+        onChange={this.props.handleChange}
       />
     )
   }
 }
+
+const InputNumber = withMask(InputNumberUI);
+
+export default InputNumber;
