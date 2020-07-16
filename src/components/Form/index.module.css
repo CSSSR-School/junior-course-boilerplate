@@ -25,8 +25,13 @@
   align-items: center;
 
   width: 47%;
+  margin-bottom: 15px;
 
   font-weight: 600;
+}
+
+.form label:hover {
+  cursor: pointer;
 }
 
 .form button {
@@ -38,7 +43,7 @@
   padding: 9px 15px;
 
   color: white;
-  background-color: #323C48;
+  background-color: #323c48;
   border: none;
   text-align: center;
   cursor: pointer;
@@ -47,6 +52,10 @@
 
 .form button:hover {
   opacity: 0.7;
+}
+
+.form__discount {
+  width: 100%;
 }
 
 input::-webkit-outer-spin-button,

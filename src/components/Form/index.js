@@ -1,8 +1,7 @@
-import React from "react";
-import styles from "./form.module.css";
-import LogRender from "../logrender/log-render";
-import InputNumber from "../input-number/input-number";
-import InputDiscount from "../discount/discount";
+import React from 'react';
+import styles from './index.module.css';
+import LogRender from '../LogRender';
+import Input from '../Input';
 
 export default class Form extends LogRender {
   constructor(props) {
@@ -19,12 +18,14 @@ export default class Form extends LogRender {
     const name = evt.target.name;
     const isNewValue = value !== this.props.price[name];
 
-    if (isNewValue) {
-        this.updatePriceFilter({
-            ...this.props.price,
-            [name]: value
-        })
+    if (!isNewValue) {
+      return;
     }
+
+    this.updatePriceFilter({
+        ...this.props.price,
+        [name]: value
+    })
   }
 
   render() {
@@ -34,7 +35,7 @@ export default class Form extends LogRender {
         <h2>Цена</h2>
         <label>
           <span>от</span>
-          <InputNumber
+          <Input
             value={this.props.price.min}
             name='min'
             onChange={this.handleChange}
@@ -42,13 +43,23 @@ export default class Form extends LogRender {
         </label>
         <label>
           <span>до</span>
-          <InputNumber
+          <Input
             value={this.props.price.max}
             name='max'
             onChange={this.handleChange}
           />
         </label>
-        <InputDiscount title="Скидка" name="sale" value={this.props.price.sale} onChange={this.handleChange} />
+        <h2>Скидка</h2>
+        <label className='form__discount'>
+          <span>от</span>
+          <Input
+            title="Скидка"
+            name="sale"
+            value={this.props.price.sale}
+            onChange={this.handleChange}
+          />
+          <span>%</span>
+        </label>
       </form>
     );
   }

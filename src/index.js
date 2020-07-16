@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import ProductList from "./components/products-list/products-list"
-import Title from "./components/title/title"
-import Form from "./components/form/form";
-import products from "./products.json";
+import ProductList from './components/ProductList'
+import Title from './components/Title'
+import Form from './components/Form';
+import products from './products.json';
 
-import "./index.css"
+import './index.css'
 
 const DEFAULT_SALE_SIZE = 50;
 
@@ -16,7 +16,7 @@ class App extends React.Component {
 
     this.state = {
       products: this.props.products,
-      price: this.getMinAndMaxPrice()
+      price: this.getPrice()
     };
 
     this.updateData = this.updateData.bind(this);
@@ -30,7 +30,7 @@ class App extends React.Component {
     return this.props.products.reduce((a,b) => a.price > b.price ? a : b).price;
   }
 
-  getMinAndMaxPrice() {
+  getPrice() {
     return {
       min: this.getMinPrice(),
       max: this.getMaxPrice(),

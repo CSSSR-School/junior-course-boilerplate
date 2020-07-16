@@ -1,5 +1,5 @@
-import React from "react";
-import logger from "csssr-school-utils/lib/logger";
+import React from 'react';
+import logger from 'csssr-school-utils/lib/logger';
 import shallowCompare from 'react-addons-shallow-compare';
 
 export default class LogRender extends React.Component {

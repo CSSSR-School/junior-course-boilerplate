@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import ProductItemUI from "csssr-school-product-card";
-import PropTypes from "prop-types";
-import LogRender from "../logrender/log-render";
+import ProductItemUI from 'csssr-school-product-card';
+import PropTypes from 'prop-types';
+import LogRender from '../LogRender';
 
-import styles from "./list.module.css";
+import styles from './index.module.css';
 
 const ratingComponent = ({ isFilled }) => {
-  return <div className={isFilled && "starFill"} />;
+  return <div className={isFilled && 'starFill'} />;
 };
 
 class ProductItem extends LogRender {
@@ -18,7 +18,7 @@ class ProductItem extends LogRender {
   }
 }
 
-export default class ProductsList extends LogRender {
+export default class ProductList extends LogRender {
   generateList() {
     return this.props.products.map((item, number) =>
         <li key={number}>
@@ -53,10 +53,10 @@ ProductItem.propTypes = {
 
 ProductItem.defaultProps = {
   isInStock: true,
-  img: "",
-  title: "Название первого товара",
-  price: "23 000",
-  subPriceContent: "23 000",
+  img: '',
+  title: 'Название первого товара',
+  price: '23 000',
+  subPriceContent: '23 000',
   maxRating: 5,
   rating: 4,
   ratingComponent: ratingComponent
