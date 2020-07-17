@@ -5,22 +5,22 @@ import LogRender from '../LogRender';
 import WithNumberMask from '../WithNumberMask';
 
 class InputUI extends LogRender {
-    render() {
-        return (
-                <input
-                    className={styles.input}
-                    name={this.props.name}
-                    value={this.props.value}
-                    onChange={this.props.handleChange} />
+  render() {
+    return (
+      <input
+        className={styles.input}
+        name={this.props.name}
+        value={this.props.value}
+        onChange={this.props.handleChange} />
         );
     }
 }
 
 InputUI.propTypes = {
-    value: pt.number.isRequired,
-    onChange: pt.func.isRequired,
-    name: pt.string.isRequired,
-    title: pt.string.isRequired
+  value: pt.number.isRequired,
+  onChange: pt.func.isRequired,
+  name: pt.string.isRequired,
+  title: pt.string.isRequired
 };
 
 const Input = WithNumberMask(InputUI);

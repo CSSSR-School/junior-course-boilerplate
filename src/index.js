@@ -18,19 +18,17 @@ class App extends React.Component {
       products: this.props.products,
       price: this.getPrice()
     };
-
-    this.updateData = this.updateData.bind(this);
   }
 
-  getMinPrice() {
+  getMinPrice = () => {
     return this.props.products.reduce((a,b) => a.price < b.price ? a : b).price;
   }
 
-  getMaxPrice() {
+  getMaxPrice = () => {
     return this.props.products.reduce((a,b) => a.price > b.price ? a : b).price;
   }
 
-  getPrice() {
+  getPrice = () => {
     return {
       min: this.getMinPrice(),
       max: this.getMaxPrice(),
@@ -38,11 +36,11 @@ class App extends React.Component {
     }
   }
 
-  updateData(value) {
+  updateData = (value) =>  {
     this.setState({price: value})
   }
 
-  getProducts() {
+  getProducts = () => {
     const currentPrice = this.state.price;
     const saleSize = currentPrice.sale / 100 ;
 

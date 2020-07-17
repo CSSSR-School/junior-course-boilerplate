@@ -13,7 +13,7 @@ const ratingComponent = ({ isFilled }) => {
 class ProductItem extends LogRender {
   render() {
     return (
-        <ProductItemUI {...this.props} />
+      <ProductItemUI {...this.props} />
     )
   }
 }
@@ -21,13 +21,13 @@ class ProductItem extends LogRender {
 export default class ProductList extends LogRender {
   generateList() {
     return this.props.products.map((item, number) =>
-        <li key={number}>
-          <ProductItem
-            title = {item.name}
-            price = {item.price}
-            subPriceContent = {item.subPriceContent}
-          />
-        </li>
+      <li key={number}>
+        <ProductItem
+          title = {item.name}
+          price = {item.price}
+          subPriceContent = {item.subPriceContent}
+        />
+      </li>
       )
   }
 

@@ -6,16 +6,16 @@ const getDisplayName = (WrappedComponent) => {
 }
 
 const WithNumberMask = (WrappedComponent) => {
-    class WithNumberMask extends React.Component {
-        handleChange = (evt) => {
-            const inputValue = toInt(evt.target.value);
-            this.props.onChange && this.props.onChange(evt, inputValue);
-        };
+  class WithNumberMask extends React.Component {
+    handleChange = (evt) => {
+      const inputValue = toInt(evt.target.value);
+      this.props.onChange && this.props.onChange(evt, inputValue);
+  };
 
-        render() {
-            return <WrappedComponent {...this.props} handleChange={this.handleChange}/>
-        }
+    render() {
+      return <WrappedComponent {...this.props} handleChange={this.handleChange}/>
     }
+  }
 
   WithNumberMask.displayName = `WithMask(${getDisplayName(WrappedComponent)}`
     return WithNumberMask;

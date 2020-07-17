@@ -4,7 +4,7 @@ import LogRender from '../LogRender';
 import Input from '../Input';
 
 export default class Form extends LogRender {
-  updatePriceFilter(data) {
+  updatePriceFilter = (data) => {
     this.props.updateData(data);
   }
 

@@ -3,7 +3,7 @@ import logger from 'csssr-school-utils/lib/logger';
 import shallowCompare from 'react-addons-shallow-compare';
 
 export default class LogRender extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate = (nextProps, nextState) => {
     const isStateOrPropsChanged = shallowCompare(this, nextProps, nextState);
 
     if (!isStateOrPropsChanged) {
