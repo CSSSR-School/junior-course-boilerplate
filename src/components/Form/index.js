@@ -30,16 +30,16 @@ export default class Form extends LogRender {
         <label className={styles.form__price}>
           <span>от</span>
           <Input
-            value={this.props.price.min}
             name='min'
+            value={this.props.price.min}
             onChange={this.handleChange}
           />
         </label>
         <label className={styles.form__price}>
           <span>до</span>
           <Input
-            value={this.props.price.max}
             name='max'
+            value={this.props.price.max}
             onChange={this.handleChange}
           />
         </label>
@@ -47,7 +47,6 @@ export default class Form extends LogRender {
         <label>
           <span>от</span>
           <Input
-            title="Скидка"
             name="sale"
             value={this.props.price.sale}
             onChange={this.handleChange}
