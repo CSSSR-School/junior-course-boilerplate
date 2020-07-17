@@ -4,17 +4,11 @@ import LogRender from '../LogRender';
 import Input from '../Input';
 
 export default class Form extends LogRender {
-  constructor(props) {
-    super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
   updatePriceFilter(data) {
     this.props.updateData(data);
   }
 
-  handleChange(evt, value) {
+  handleChange = (evt, value) => {
     const name = evt.target.name;
     const isNewValue = value !== this.props.price[name];
 
@@ -23,8 +17,8 @@ export default class Form extends LogRender {
     }
 
     this.updatePriceFilter({
-        ...this.props.price,
-        [name]: value
+      ...this.props.price,
+      [name]: value
     })
   }
 
