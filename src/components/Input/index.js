@@ -4,7 +4,7 @@ import styles from './index.module.css';
 import LogRender from '../LogRender';
 import WithNumberMask from '../WithNumberMask';
 
-class InputUI extends LogRender {
+class Input extends LogRender {
   render() {
     return (
       <input
@@ -16,12 +16,11 @@ class InputUI extends LogRender {
     }
 }
 
-InputUI.propTypes = {
+Input.propTypes = {
   value: pt.number.isRequired,
   onChange: pt.func.isRequired,
   name: pt.string.isRequired,
   title: pt.string.isRequired
 };
 
-const Input = WithNumberMask(InputUI);
-export default Input;
+export default WithNumberMask(Input);
