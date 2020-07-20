@@ -18,7 +18,7 @@
   font-weight: 600;
 }
 
-.form label {
+.label {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -33,7 +33,7 @@
   cursor: pointer;
 }
 
-.form__price {
+.price {
   width: 47%;
 }
 
@@ -57,11 +57,12 @@
   opacity: 0.7;
 }
 
-.form__discount {
-  width: 100%;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
 }

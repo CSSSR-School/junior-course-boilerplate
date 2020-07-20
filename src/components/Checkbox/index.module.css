@@ -1,0 +1,29 @@
+.checkbox label {
+  margin-right: 15px;
+  padding: 8px 16px;
+  border-radius: 15px;
+  border: 1px solid #7e8fa4;
+  font-size: 14px;
+  color: #7e8fa4;
+  transition: opacity ease-in 0.3s;
+}
+
+.checkbox label:hover {
+  opacity: 0.5;
+}
+
+.checkbox input {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+}
+
+.checked label {
+  background-color: #323c48;
+  color: #fff;
+}

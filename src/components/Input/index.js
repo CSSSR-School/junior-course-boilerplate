@@ -1,8 +1,10 @@
 import React from 'react';
-import pt from 'prop-types';
-import styles from './index.module.css';
+import propTypes from 'prop-types';
+
 import LogRender from '../LogRender';
 import WithNumberMask from '../WithNumberMask';
+
+import styles from './index.module.css';
 
 class Input extends LogRender {
   render() {
@@ -17,10 +19,9 @@ class Input extends LogRender {
 }
 
 Input.propTypes = {
-  value: pt.number.isRequired,
-  onChange: pt.func.isRequired,
-  name: pt.string.isRequired,
-  title: pt.string.isRequired
+  value: propTypes.number.isRequired,
+  onChange: propTypes.func.isRequired,
+  name: propTypes.string.isRequired,
 };
 
 export default WithNumberMask(Input);
