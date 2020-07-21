@@ -7,10 +7,6 @@ import Checkbox from '../Checkbox';
 import styles from './index.module.css';
 
 export default class Form extends LogRender {
-  updatePriceFilter = (data) => {
-    this.props.updateData(data);
-  }
-
   handlePriceChange = (evt, value) => {
     const name = evt.target.name;
     const isNewValue = value !== this.props.price[name];
@@ -19,24 +15,48 @@ export default class Form extends LogRender {
       return;
     }
 
-    console.log(value);
-
-    this.updatePriceFilter({
+    const newValue = {};
+    newValue.price = {
       ...this.props.price,
       [name]: value
-    })
+    };
+
+    this.props.updateData(newValue);
   }
 
   handleFilterChange = (evt) => {
-    const value = evt.target.value;
-    const currentFilterState = this.props.filters[value];
+    const filterName = evt.target.value;
+    const currentFilterState = this.props.filters[filterName].checked;
+
+    const newValue = {};
+    newValue.filters = {
+      ...this.props.filters,
+      [filterName]: {
+        ...this.props.filters[filterName],
+        checked: !currentFilterState
+      }
+    }
+
+    this.props.updateData(newValue);
   }
 
   renderFilters = () => {
     const filters = Object.values(this.props.filters);
+    console.log(filters);
     return filters.map((filter, index) => (
       <Checkbox text={filter.name} onChange={this.handleFilterChange} checked={filter.checked} key={index}/>
     ))
+  }
+
+  handleReset = (evt) => {
+    evt.preventDefault();
+    const filters = Object.values(this.props.filters);
+    filters.forEach(filter => filter.checked = false);
+
+    const newValue = {};
+    newValue.filters = filters;
+
+    this.props.updateData(newValue);
   }
 
 
@@ -75,7 +95,7 @@ export default class Form extends LogRender {
         <div className={styles.filters}>
           {this.renderFilters()}
         </div>
-        <button>Сбросить фильтры</button>
+        <button onClick={this.handleReset}>Сбросить фильтры</button>
       </form>
     );
   }

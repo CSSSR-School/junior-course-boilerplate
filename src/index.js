@@ -38,9 +38,7 @@ class App extends React.Component {
     }
   }
 
-  updateData = (name, value) =>  {
-    this.setState({[name]: value})
-  }
+  updateData = (value) =>  this.setState(value);
 
   getFilters = () => {
     const allProductsCategories = this.props.products.map(product => product.category);

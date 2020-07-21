@@ -45,12 +45,13 @@
   margin-top: 24px;
   padding: 9px 15px;
 
-  color: white;
-  background-color: #323c48;
-  border: none;
+  border: 1px solid #323c48;
+  background-color: transparent;
+  color: #323c48;
   text-align: center;
   cursor: pointer;
   transition: opacity ease-in 0.3s;
+  outline: none;
 }
 
 .form button:hover {
