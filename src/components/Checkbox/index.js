@@ -25,7 +25,7 @@ class Checkbox extends LogRender {
 
   render() {
     return(
-      <div className={`${styles.checkbox} ${this.state.checked ? styles.checked : ''}`}>
+      <div className={`${styles.checkbox} ${this.props.checked ? styles.checked : ''}`}>
         <input
           type='checkbox'
           id={this.props.text}

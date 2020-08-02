@@ -42,16 +42,17 @@ export default class Form extends LogRender {
 
   renderFilters = () => {
     const filters = Object.values(this.props.filters);
-    console.log(filters);
     return filters.map((filter, index) => (
-      <Checkbox text={filter.name} onChange={this.handleFilterChange} checked={filter.checked} key={index}/>
+        <Checkbox text={filter.name} onChange={this.handleFilterChange} checked={filter.checked} key={index} />
     ))
   }
 
   handleReset = (evt) => {
     evt.preventDefault();
-    const filters = Object.values(this.props.filters);
-    filters.forEach(filter => filter.checked = false);
+    const filters = Object.assign({}, this.props.filters);
+
+    const filtersName = Object.keys(filters);
+    filtersName.forEach(name => filters[name].checked = false);
 
     const newValue = {};
     newValue.filters = filters;
