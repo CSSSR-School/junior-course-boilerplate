@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import LogRender from '../LogRender';
-import { makeUcFirst } from '../../utils/utils'
+import { makeUcFirst } from '../../utils'
 
 import styles from './index.module.css';
 
