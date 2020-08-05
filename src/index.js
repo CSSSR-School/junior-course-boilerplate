@@ -20,8 +20,6 @@ class App extends React.Component {
     };
   }
 
-  updateData = (value) =>  this.setState(value);
-
   getActiveFilters = () => {
     const filters = Object.values(this.state.filters);
     return filters.filter(filter => filter.checked).map(filter => filter.name)
@@ -40,6 +38,53 @@ class App extends React.Component {
       )
   }
 
+  handlePriceChange = (evt, value) => {
+    const name = evt.target.name;
+    const isNewValue = value !== this.state.price[name];
+
+    if (!isNewValue) {
+      return;
+    }
+
+    const newValue = {};
+    newValue.price = {
+      ...this.state.price,
+      [name]: value
+    };
+
+    this.setState(newValue);
+  }
+
+  handleFilterChange = (evt) => {
+    const filterName = evt.target.value;
+    const currentFilterState = this.state.filters[filterName].checked;
+
+    const newValue = {};
+    newValue.filters = {
+      ...this.state.filters,
+      [filterName]: {
+        ...this.state.filters[filterName],
+        checked: !currentFilterState
+      }
+    }
+
+    this.setState(newValue);
+  }
+
+  handleReset = (evt) => {
+    evt.preventDefault();
+    const filters = Object.assign({}, this.state.filters);
+
+    const filtersName = Object.keys(filters);
+    filtersName.forEach(name => filters[name].checked = false);
+
+    const newValue = {};
+    newValue.filters = filters;
+
+    this.setState(filters);
+  }
+
+
   render() {
     return (
       <FieldsContext.Provider value={{
@@ -50,8 +95,11 @@ class App extends React.Component {
           <Title text='Список товаров'/>
           <div className='wrapper'>
             <Form
-              updateData={this.updateData}/>
-            <ProductList products={this.getProducts()}/>
+              handlePriceChange={this.handlePriceChange}
+              handleFilterChange={this.handleFilterChange}
+              handleReset={this.handleReset}
+            />
+            <ProductList products={this.getProducts()} />
           </div>
         </div>
       </FieldsContext.Provider>
