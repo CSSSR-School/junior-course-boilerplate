@@ -25,8 +25,9 @@ class App extends React.Component {
 
   componentDidMount = () => {
     let checkedFilters = this.getCheckedFilters(this.state.filters);
+    const currentUrl = window.location.search;
 
-    if (window.location.search) {
+    if (currentUrl && currentUrl.includes('=')) {
       checkedFilters = window.location.search.split('=')[1].split(',');
     }
 
@@ -140,11 +141,11 @@ class App extends React.Component {
   setFromHistory = evt => {
     if (evt.state === DEFAULT_URL) {
       this.handleReset(evt);
-    } else {
-      const checkedFilters = evt.state;
-
-      this.setState(this.setFilters(checkedFilters));
+      return;
     }
+
+    const checkedFilters = evt.state;
+    this.setState(this.setFilters(checkedFilters));
   }
 
   render() {
