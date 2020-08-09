@@ -9,6 +9,9 @@ import { FieldsContext, defaultPrice, defaultFilters } from './contex';
 
 import './index.css'
 
+const PAGE_TITLE = 'Интернет магазин'
+const DEFAULT_URL = window.location.pathname;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,21 +23,37 @@ class App extends React.Component {
     };
   }
 
-  getActiveFilters = () => {
-    const filters = Object.values(this.state.filters);
-    return filters.filter(filter => filter.checked).map(filter => filter.name)
+  componentDidMount = () => {
+    let checkedFilters = this.getCheckedFilters(this.state.filters);
+
+    if (window.location.search) {
+      checkedFilters = window.location.search.split('=')[1].split(',');
+    }
+
+    this.addCheckedFiltersUrl(checkedFilters);
+    this.setState(this.setFilters(checkedFilters));
+    window.addEventListener('popstate', this.setFromHistory);
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('popstate', this.setFromHistory);
+  }
+
+  getCheckedFilters = (filters) => {
+    const currentFilters = Object.values(filters);
+    return currentFilters.filter(filter => filter.checked).map(filter => filter.name)
   }
 
   getProducts = () => {
     const currentPrice = this.state.price;
     const saleSize = currentPrice.sale / 100 ;
-    const activeFilters = this.getActiveFilters();
+    const checkedFilters = this.getCheckedFilters(this.state.filters);
 
     return this.state.products.filter((product) =>
       (product.price >= currentPrice.min)
       && (product.price <= currentPrice.max)
       && (product.price === (product.subPriceContent - product.subPriceContent * saleSize))
-      && (activeFilters.includes(product.category))
+      && (checkedFilters.includes(product.category))
       )
   }
 
@@ -55,20 +74,42 @@ class App extends React.Component {
     this.setState(newValue);
   }
 
-  handleFilterChange = (evt) => {
-    const filterName = evt.target.value;
-    const currentFilterState = this.state.filters[filterName].checked;
-
+  updateFiltersState = updateFilterName => {
     const newValue = {};
-    newValue.filters = {
+    newValue.filters = this.getNewFiltersState(updateFilterName);
+
+    this.setState(newValue);
+  }
+
+  getNewFiltersState = updateFilterName => {
+    const currentFilterState = this.state.filters[updateFilterName].checked;
+
+    return {
       ...this.state.filters,
-      [filterName]: {
-        ...this.state.filters[filterName],
+      [updateFilterName]: {
+        ...this.state.filters[updateFilterName],
         checked: !currentFilterState
       }
     }
+  }
 
-    this.setState(newValue);
+  addCheckedFiltersUrl = (checkedFilters) => {
+    const filtersURl = `?filters=${checkedFilters.join()}`;
+    window.history.pushState(checkedFilters, PAGE_TITLE, filtersURl)
+  }
+
+  handleFilterChange = evt => {
+    const filterName = evt.target.value;
+    const currentFilters = this.getNewFiltersState(filterName);
+    const checkedFilters = Object.values(currentFilters).filter(filter => filter.checked).map(filter => filter.name);
+
+    if (checkedFilters.length !== 0) {
+      this.addCheckedFiltersUrl(checkedFilters)
+    } else {
+      window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
+    }
+
+    this.updateFiltersState(filterName);
   }
 
   handleReset = (evt) => {
@@ -82,8 +123,29 @@ class App extends React.Component {
     newValue.filters = filters;
 
     this.setState(filters);
+    window.history.pushState(DEFAULT_URL, `${PAGE_TITLE}`, DEFAULT_URL);
   }
 
+  setFilters = (checkedFilters) => {
+    const currentFilters = Object.values(this.state.filters);
+    return currentFilters.map(filter => {
+      if (checkedFilters.includes(filter.name)) {
+        return filter.checked = true;
+      }
+
+      return filter.checked = false;
+    })
+  }
+
+  setFromHistory = evt => {
+    if (evt.state === DEFAULT_URL) {
+      this.handleReset(evt);
+    } else {
+      const checkedFilters = evt.state;
+
+      this.setState(this.setFilters(checkedFilters));
+    }
+  }
 
   render() {
     return (

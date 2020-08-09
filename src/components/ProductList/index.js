@@ -7,7 +7,7 @@ import LogRender from '../LogRender';
 import styles from './index.module.css';
 
 const ratingComponent = ({ isFilled }) => {
-  return <div className={isFilled && 'starFill'} />;
+  return <div className={isFilled ? 'starFill' : undefined} />;
 };
 
 class ProductItem extends LogRender {
