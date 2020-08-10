@@ -2,25 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
-import produtcs from './products.json';
+import products from './products.json';
 
+import ProductList from './productList/index';
+import PageTitle from './pageTitle/index';
 
-function ProductList() {
-  const productItems = produtcs.slice(0, 3).map((item) =>
-    <li class="list-item">{item.name}</li>
-  );
-
+function ProductPage() {
   return (
     <div>
-      <h1>Список товаров</h1>
-      <ul class="list">
-        {productItems}
-      </ul>
+      <PageTitle name="Список товаров" />
+      <ProductList products={ products.slice(0, 3) }>
+      </ProductList>
     </div>
   );
 }
 
 ReactDOM.render(
-  <ProductList />,
+  <ProductPage />,
   document.getElementById('root')
 );
