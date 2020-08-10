@@ -4,8 +4,8 @@
     "isInStock": true,
     "img": "http://www.sobaka.ru/images/image/01/12/89/80/_normal.jpg",
     "title": "Имя товара1",
-    "price": "3000",
-    "subPriceContent": "4000",
+    "price": 3000,
+    "subPriceContent": 4000,
     "maxRating": 25,
     "rating": 12
   },
@@ -14,8 +14,8 @@
     "isInStock": true,
     "img": "http://www.sobaka.ru/images/image/01/12/89/80/_normal.jpg",
     "title": "Имя товара2",
-    "price": "300",
-    "subPriceContent": "4000",
+    "price": 300,
+    "subPriceContent": 4000,
     "maxRating": 5,
     "rating": 2
   },
@@ -24,8 +24,8 @@
     "isInStock": false,
     "img": "http://www.sobaka.ru/images/image/01/12/89/80/_normal.jpg",
     "title": "Имя товара3",
-    "price": "2000",
-    "subPriceContent": "3000",
+    "price": 2000,
+    "subPriceContent": 3000,
     "maxRating": 15,
     "rating": 4
   },
@@ -34,8 +34,8 @@
     "isInStock": true,
     "img": "http://www.sobaka.ru/images/image/01/12/89/80/_normal.jpg",
     "title": "Имя товара4",
-    "price": "2000",
-    "subPriceContent": "3000",
+    "price": 5000,
+    "subPriceContent": 3000,
     "maxRating": 15,
     "rating": 4
   },
@@ -44,8 +44,8 @@
     "isInStock": true,
     "img": "http://www.sobaka.ru/images/image/01/12/89/80/_normal.jpg",
     "title": "Имя товара5",
-    "price": "2000",
-    "subPriceContent": "3000",
+    "price": 2000,
+    "subPriceContent": 3000,
     "maxRating": 15,
     "rating": 4
   },
@@ -54,8 +54,8 @@
     "isInStock": true,
     "img": "http://www.sobaka.ru/images/image/01/12/89/80/_normal.jpg",
     "title": "Имя товара6",
-    "price": "2000",
-    "subPriceContent": "3000",
+    "price": 5120,
+    "subPriceContent": 3000,
     "maxRating": 15,
     "rating": 4
   }
