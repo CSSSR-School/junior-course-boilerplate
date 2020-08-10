@@ -18,7 +18,6 @@ class UserFilters extends BaseComponent {
     const { filterName, value } = changes;
 
     setTimeout(() => this.props.onChangeFilter({
-      ...this.props.filters,
       [filterName]: value
     }), 500)
   }
@@ -26,20 +25,13 @@ class UserFilters extends BaseComponent {
   render() {
     return (
       <div style={ filtersContainerStyle }>
-        <PriceFilter
-          minPrice={ this.props.filters.minPrice }
-          maxPrice={ this.props.filters.maxPrice }
-          onChangeFilter={ this.handleFilterChange }/>
+        <PriceFilter onChangeFilter={ this.handleFilterChange }/>
       </div>
     )
   }
 }
 
 UserFilters.propTypes = {
-  filters: PropTypes.shape({
-    minPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    maxPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  }).isRequired,
   onChangeFilter: PropTypes.func
 }
 export default UserFilters;

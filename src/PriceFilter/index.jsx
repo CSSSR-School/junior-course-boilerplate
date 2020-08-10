@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import BaseComponent from '../BaseComponent/index';
+import FiltersContext from '../FilterContext';
 
 const filterTitleStyle = {
   marginBottom: '8px',
@@ -36,31 +37,34 @@ class PriceFilter extends BaseComponent {
         <div style={ filterTitleStyle }>
           <span>Цена</span>
         </div>
-        <div>
-          <label style={ labelStyle }>
-            <span style={ labelTitleStyle }>От:</span>
-            <input style={ inuputStyle }
-                  type="text"
-                defaultValue={ this.props.minPrice || 0 }
-                onChange={(event)=> this.handleControlChange('minPrice', parseInt(event.target.value, 10))}/>
-          </label>
+        <FiltersContext.Consumer>
+          {
+            ({ minPrice, maxPrice }) =>
+            <div>
+              <label style={ labelStyle }>
+                <span style={ labelTitleStyle }>От:</span>
+                <input style={ inuputStyle }
+                      type="text"
+                    defaultValue={ minPrice || 0 }
+                    onChange={(event)=> this.handleControlChange('minPrice', parseInt(event.target.value, 10))}/>
+              </label>
 
-          <label style={ labelStyle }>
-            <span style={ labelTitleStyle }>До:</span>
-            <input style={ inuputStyle }
-                  type="text"
-                defaultValue={ this.props.maxPrice || 0 }
-                onChange={(event)=> this.handleControlChange('maxPrice', parseInt(event.target.value, 10))}/>
-          </label>
-        </div>
+              <label style={ labelStyle }>
+                <span style={ labelTitleStyle }>До:</span>
+                <input style={ inuputStyle }
+                      type="text"
+                    defaultValue={ maxPrice || 0 }
+                    onChange={(event)=> this.handleControlChange('maxPrice', parseInt(event.target.value, 10))}/>
+              </label>
+            </div>
+          }
+        </FiltersContext.Consumer>
       </div>
     )
   }
 }
 
 PriceFilter.propTypes = {
-  minPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChangeFilter: PropTypes.func
 }
 export default PriceFilter

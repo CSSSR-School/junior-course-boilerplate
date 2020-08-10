@@ -7,6 +7,7 @@ import allProducts from './products.json';
 import ProductList from './productList/index';
 import PageTitle from './pageTitle/index';
 import UserFilters from './UserFilters/index';
+import FiltersContext from './FilterContext'
 
 const rightBlockStyle = {
   width: '25%'
@@ -28,6 +29,7 @@ const wrapperStyle = {
 const pageStyle = {
   padding: '0 16px'
 }
+
 
 class ProductPage extends React.Component {
   constructor(props) {
@@ -53,9 +55,14 @@ class ProductPage extends React.Component {
   }
 
   handleChangeFilter(value) {
+    const userFilters = {
+      ...this.state.userFilters,
+      ...value
+    };
+
     this.setState({
-        userFilters: value,
-        products: this.filterProducts(allProducts, value)
+      userFilters,
+      products: this.filterProducts(allProducts, userFilters)
     });
   }
 
@@ -88,8 +95,9 @@ class ProductPage extends React.Component {
 
         <div style={ wrapperStyle }>
           <div style={ rightBlockStyle }>
-            <UserFilters filters={ this.state.userFilters }
-                        onChangeFilter={ this.handleChangeFilter } />
+            <FiltersContext.Provider value={ this.state.userFilters }>
+              <UserFilters onChangeFilter={ this.handleChangeFilter } />
+            </FiltersContext.Provider>
           </div>
 
           <div style={ centerBlockStyle }>
