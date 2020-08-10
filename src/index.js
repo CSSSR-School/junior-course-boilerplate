@@ -8,11 +8,32 @@ import ProductList from './productList/index';
 import PageTitle from './pageTitle/index';
 import UserFilters from './UserFilters/index';
 
-const MAX_VISIBLE_PRODUCTS = 3;
+const rightBlockStyle = {
+  width: '25%'
+};
+
+const centerBlockStyle = {
+  width: '50%'
+}
+
+const leftBlockStyle = {
+  width: '25%'
+}
+
+const wrapperStyle = {
+    display: 'flex',
+    flexDirection: 'row'
+}
+
+const pageStyle = {
+  padding: '0 16px'
+}
 
 class ProductPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleChangeFilter = this.handleChangeFilter.bind(this);
 
     this.state = {
       userFilters: {
@@ -33,14 +54,9 @@ class ProductPage extends React.Component {
 
   handleChangeFilter(value) {
     this.setState({
-      userFilters: value
-    })
-
-    this.setState((prevState) => {
-      return {
-        products: this.filterProducts(allProducts, prevState.userFilters)
-      }
-    })
+        userFilters: value,
+        products: this.filterProducts(allProducts, value)
+    });
   }
 
   filterProducts(products, filters) {
@@ -67,12 +83,21 @@ class ProductPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={ pageStyle }>
         <PageTitle name="Список товаров" />
-        <UserFilters filters={ this.state.userFilters }
-                     onChangeFilter={ (event) => this.handleChangeFilter(event) } />
-        <ProductList products={ this.state.products.slice(0, MAX_VISIBLE_PRODUCTS) }>
-        </ProductList>
+
+        <div style={ wrapperStyle }>
+          <div style={ rightBlockStyle }>
+            <UserFilters filters={ this.state.userFilters }
+                        onChangeFilter={ this.handleChangeFilter } />
+          </div>
+
+          <div style={ centerBlockStyle }>
+            <ProductList products={ this.state.products } />
+          </div>
+
+          <div style={ leftBlockStyle }></div>
+        </div>
       </div>
     );
   }
