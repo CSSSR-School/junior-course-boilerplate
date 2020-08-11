@@ -17,9 +17,9 @@ class UserFilters extends BaseComponent {
   handleFilterChange(changes) {
     const { filterName, value } = changes;
 
-    setTimeout(() => this.props.onChangeFilter({
+    this.props.onChangeFilter({
       [filterName]: value
-    }), 500)
+    })
   }
 
   render() {

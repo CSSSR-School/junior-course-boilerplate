@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import debounce from 'lodash-es/debounce';
 
 import BaseComponent from '../BaseComponent/index';
 import FiltersContext from '../FilterContext';
@@ -23,12 +24,16 @@ const inuputStyle ={
 }
 
 class PriceFilter extends BaseComponent {
+  constructor(props) {
+    super(props);
+    this.handleControlChange = debounce(this.handleControlChange.bind(this), 500)
+  }
 
   handleControlChange(filterName, value) {
-    setTimeout(() => this.props.onChangeFilter({
+    this.props.onChangeFilter({
       filterName,
       value
-    }), 500);
+    })
   }
 
   render() {

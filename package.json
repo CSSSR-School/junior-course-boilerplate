@@ -5,6 +5,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "csssr-school-utils": "git+https://github.com/CSSSR-School/junior-course-utils.git",
+    "lodash-es": "^4.17.15",
     "react": "^16.12.0",
     "react-addons-shallow-compare": "^15.6.2",
     "react-dom": "^16.12.0",
