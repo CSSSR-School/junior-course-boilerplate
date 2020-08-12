@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 
-import ProductItem from '../productCard';
-import BaseComponent from '../BaseComponent/index';
+import ProductItem from '../../components/productCard';
+import BaseComponent from '../../components/baseComponent/index';
+import { filteredProductsSelector } from '../../store/selectors';
 
 const MAX_VISIBLE_PRODUCTS = 3;
 
@@ -46,7 +47,10 @@ class ProductList extends BaseComponent {
   }
 };
 
-ProductList.propTypes = {
-  products: PropTypes.array
+const mapStateToProps = function(state) {
+  return {
+    products: filteredProductsSelector(state)
+  }
 }
-export default ProductList;
+
+export default connect(mapStateToProps)(ProductList);

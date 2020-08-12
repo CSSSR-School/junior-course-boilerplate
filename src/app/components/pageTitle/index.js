@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../BaseComponent/index';
+import BaseComponent from '../baseComponent/index';
 
 const pageTitleStyle = {
   fontStyle: 'normal',
