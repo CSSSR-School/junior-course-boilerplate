@@ -2,10 +2,11 @@ import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import ProductList from '../../../app/containers/productList/index';
+import Products from '../../containers/products/index';
 import PageTitle from '../../../app/components/pageTitle/index';
 import UserFilters from '../../../app/containers/userFilters/index';
 import BaseComponent from '../../components/baseComponent/index';
+import ProductsPagination from '../../containers/productsPagination/index';
 import { getProducts } from '../../store/actionCreators';
 
 const rightBlockStyle = {
@@ -47,7 +48,8 @@ class ProductPage extends BaseComponent {
           </div>
 
           <div style={ centerBlockStyle }>
-            <ProductList/>
+            <Products/>
+            <ProductsPagination />
           </div>
 
           <div style={ leftBlockStyle }></div>

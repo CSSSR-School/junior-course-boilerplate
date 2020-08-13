@@ -1,32 +1,54 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
+import { get, chunk } from 'lodash-es';
 
-export const productsSelector = state => state.products;
-export const filtersSelector = state => state.filters;
+import { filterProducts } from './helper';
+
+
+export const appSelector = state => state.app;
+export const routerSelector = state => state.router;
+
+export const routerLocationSelector = state => routerSelector(state).location;
+
+export const pageIdSelector = createSelector(
+  routerLocationSelector,
+  (location) => {
+    const path = get(location, 'pathname', '');
+
+    return path.split('/')[2];
+  }
+);
+
+export const maxVisibleProductsSelector = state => appSelector(state).maxVisibleProducts;
+export const productsSelector = state => appSelector(state).products;
+export const filtersSelector = state => appSelector(state).filters;
 
 export const filteredProductsSelector = createSelector(
   productsSelector,
   filtersSelector,
-  (producst, filters) => filterProducts(producst, filters)
+  (products, filters) => filterProducts(products, filters)
 );
 
-function filterProducts(products, filters) {
-  let filteredProducts = products;
+export const visibleProductsSelector = createSelector(
+  filteredProductsSelector,
+  pageIdSelector,
+  maxVisibleProductsSelector,
+  (products, pageId, maxVisible) => {
+    const chunks = chunk(products, maxVisible);
 
-  if (parseInt(filters.minPrice, 10) > 0) {
-    filteredProducts = filterByMinPrice(filteredProducts, filters.minPrice);
+    return chunks[--pageId] || [];
   }
+);
 
-  if (parseInt(filters.maxPrice, 10) > 0) {
-    filteredProducts = filterByMaxPrice(filteredProducts, filters.maxPrice);
+export const productsPageCountSelector = createSelector(
+  filteredProductsSelector,
+  maxVisibleProductsSelector,
+  (products, maxVisible) => {
+    if (!products) {
+      return 0;
+    }
+    const intCount = products.length / maxVisible;
+
+    return Number.isInteger(intCount) ? intCount : (parseInt(intCount, 10) + 1);
   }
+);
 
-  return filteredProducts;
-}
-
-function filterByMinPrice(products, minVal) {
-  return products.filter((product) => product.price >= minVal);
-}
-
-function filterByMaxPrice(products, maxValue) {
-  return products.filter((product) => product.price <= maxValue);
-}

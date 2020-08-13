@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.item {
+  margin: 0 2px;
+  padding: 4px 0;
+  width: 34px;
+  border: 1px solid #c5cfde;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  color: #7e8fa4;
+}
+
+.item.active {
+  background: red;
+}
