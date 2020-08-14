@@ -5,7 +5,8 @@ import ProductList from './components/ProductList'
 import Title from './components/Title'
 import Form from './components/Form';
 import products from './products.json';
-import { FieldsContext, defaultPrice, defaultFilters } from './contex';
+import { FieldsContext, defaultPrice, defaultCategories } from './context';
+import { getUrlVars } from './utils';
 
 import './index.css'
 
@@ -19,43 +20,56 @@ class App extends React.Component {
     this.state = {
       products: products,
       price: defaultPrice,
-      filters: defaultFilters,
+      categories: defaultCategories,
     };
   }
 
   componentDidMount = () => {
-    let checkedFilters = this.getCheckedFilters(this.state.filters);
-    const currentUrl = window.location.search;
+    const searchParams = window.location.search;
 
-    if (currentUrl && currentUrl.includes('=')) {
-      checkedFilters = window.location.search.split('=')[1].split(',');
+    if (searchParams && searchParams.includes('?categories=')) {
+      const checkedCategories = getUrlVars()['categories'];
+      this.addCheckedCategoriesUrl(checkedCategories);
+      this.setState(this.setCategories(checkedCategories));
+    } else {
+      window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
     }
 
-    this.addCheckedFiltersUrl(checkedFilters);
-    this.setState(this.setFilters(checkedFilters));
     window.addEventListener('popstate', this.setFromHistory);
+  }
+
+  componentDidUpdate = () => {
+
   }
 
   componentWillUnmount = () => {
     window.removeEventListener('popstate', this.setFromHistory);
   }
 
-  getCheckedFilters = (filters) => {
-    const currentFilters = Object.values(filters);
-    return currentFilters.filter(filter => filter.checked).map(filter => filter.name)
+  getCheckedCategories = (categories) => {
+    const currentCategories = Object.values(categories);
+    return currentCategories.filter(category => category.checked).map(category  => category.name)
   }
 
   getProducts = () => {
     const currentPrice = this.state.price;
     const saleSize = currentPrice.sale / 100 ;
-    const checkedFilters = this.getCheckedFilters(this.state.filters);
+    const checkedCategories = this.getCheckedCategories(this.state.categories);
+    const getProductByMinPrice = (product) => product.price >= currentPrice.min;
+    const getProductByMaxPrice = (product) => product.price <= currentPrice.max;
+    const getProductBySale = (product) =>
+      product.price === (product.subPriceContent - product.subPriceContent * saleSize);
 
-    return this.state.products.filter((product) =>
-      (product.price >= currentPrice.min)
-      && (product.price <= currentPrice.max)
-      && (product.price === (product.subPriceContent - product.subPriceContent * saleSize))
-      && (checkedFilters.includes(product.category))
-      )
+    const getProductByCategory = (product) =>
+      checkedCategories.length === 0 ? true : checkedCategories.includes(product.category);
+
+    const setFilter = (product) =>
+      getProductByMinPrice(product)
+      && getProductByMaxPrice(product)
+      && getProductBySale(product)
+      && getProductByCategory(product)
+
+    return this.state.products.filter((product) => setFilter(product))
   }
 
   handlePriceChange = (evt, value) => {
@@ -75,66 +89,68 @@ class App extends React.Component {
     this.setState(newValue);
   }
 
-  updateFiltersState = updateFilterName => {
+  updateCategoriesState = categoryName => {
     const newValue = {};
-    newValue.filters = this.getNewFiltersState(updateFilterName);
+    newValue.categories = this.getNewCategoriesState(categoryName);
 
     this.setState(newValue);
   }
 
-  getNewFiltersState = updateFilterName => {
-    const currentFilterState = this.state.filters[updateFilterName].checked;
+  getNewCategoriesState = updateCategoryName => {
+    const currentCategoriesState = this.state.categories[updateCategoryName].checked;
 
     return {
-      ...this.state.filters,
-      [updateFilterName]: {
-        ...this.state.filters[updateFilterName],
-        checked: !currentFilterState
+      ...this.state.categories,
+      [updateCategoryName]: {
+        ...this.state.categories[updateCategoryName],
+        checked: !currentCategoriesState
       }
     }
   }
 
-  addCheckedFiltersUrl = (checkedFilters) => {
-    const filtersURl = `?filters=${checkedFilters.join()}`;
-    window.history.pushState(checkedFilters, PAGE_TITLE, filtersURl)
+  addCheckedCategoriesUrl = (checkedCategories) => {
+    const categoriesURl = `?categories=${checkedCategories}`;
+    window.history.pushState(checkedCategories, PAGE_TITLE, categoriesURl)
   }
 
-  handleFilterChange = evt => {
-    const filterName = evt.target.value;
-    const currentFilters = this.getNewFiltersState(filterName);
-    const checkedFilters = Object.values(currentFilters).filter(filter => filter.checked).map(filter => filter.name);
+  handleCategoryChange = evt => {
+    const categoryName = evt.target.value;
+    const currentCategories = this.getNewCategoriesState(categoryName);
+    const checkedCategories = Object.values(currentCategories)
+      .filter(category => category.checked)
+      .map(category => category.name);
 
-    if (checkedFilters.length !== 0) {
-      this.addCheckedFiltersUrl(checkedFilters)
+    if (checkedCategories.length !== 0) {
+      this.addCheckedCategoriesUrl(checkedCategories)
     } else {
       window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
     }
 
-    this.updateFiltersState(filterName);
+    this.updateCategoriesState(categoryName);
   }
 
   handleReset = (evt) => {
     evt.preventDefault();
-    const filters = Object.assign({}, this.state.filters);
+    const categories = Object.assign({}, this.state.categories);
 
-    const filtersName = Object.keys(filters);
-    filtersName.forEach(name => filters[name].checked = false);
+    const categoriesNames = Object.keys(categories);
+    categoriesNames.forEach(name => categories[name].checked = false);
 
     const newValue = {};
-    newValue.filters = filters;
+    newValue.categories = categories;
 
-    this.setState(filters);
+    this.setState(categories);
     window.history.pushState(DEFAULT_URL, `${PAGE_TITLE}`, DEFAULT_URL);
   }
 
-  setFilters = (checkedFilters) => {
-    const currentFilters = Object.values(this.state.filters);
-    return currentFilters.map(filter => {
-      if (checkedFilters.includes(filter.name)) {
-        return filter.checked = true;
+  setCategories = (checkedCategories) => {
+    const currentCategories = Object.values(this.state.categories);
+    return currentCategories.map(category => {
+      if (checkedCategories.includes(category.name)) {
+        return category.checked = true;
       }
 
-      return filter.checked = false;
+      return category.checked = false;
     })
   }
 
@@ -144,22 +160,22 @@ class App extends React.Component {
       return;
     }
 
-    const checkedFilters = evt.state;
-    this.setState(this.setFilters(checkedFilters));
+    const checkedCategories = evt.state;
+    this.setState(this.setCategories(checkedCategories));
   }
 
   render() {
     return (
       <FieldsContext.Provider value={{
         price: this.state.price,
-        filters: this.state.filters,
+        categories: this.state.categories,
       }}>
         <div className='appWrapper'>
           <Title text='Список товаров'/>
           <div className='wrapper'>
             <Form
               handlePriceChange={this.handlePriceChange}
-              handleFilterChange={this.handleFilterChange}
+              handleCategoryChange={this.handleCategoryChange}
               handleReset={this.handleReset}
             />
             <ProductList products={this.getProducts()} />

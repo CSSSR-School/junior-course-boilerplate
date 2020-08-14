@@ -3,15 +3,15 @@ import React from 'react';
 import LogRender from '../LogRender';
 import Input from '../Input';
 import Checkbox from '../Checkbox';
-import { FieldsContext } from '../../contex';
+import { FieldsContext } from '../../context';
 
 import styles from './index.module.css';
 
 export default class Form extends LogRender {
-  renderFilters = (filters) => {
-    const filtersValues = Object.values(filters);
-    return filtersValues.map((filter, index) => (
-        <Checkbox text={filter.name} onChange={this.props.handleFilterChange} checked={filter.checked} key={index} />
+  renderCategoriesFilters = (categories) => {
+    const categoriesValues = Object.values(categories);
+    return categoriesValues.map((category, index) => (
+        <Checkbox text={category.name} onChange={this.props.handleCategoryChange} checked={category.checked} key={index} />
     ))
   }
 
@@ -49,7 +49,7 @@ export default class Form extends LogRender {
           </label>
           <h2>Категории</h2>
           <div className={styles.filters}>
-            {this.renderFilters(value.filters)}
+            {this.renderCategoriesFilters(value.categories)}
           </div>
           <button onClick={this.props.handleReset}>Сбросить фильтры</button>
         </form>

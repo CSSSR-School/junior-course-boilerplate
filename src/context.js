@@ -1,12 +1,11 @@
 import React from 'react';
+import { minBy, maxBy } from 'csssr-school-utils';
 import products from './products.json';
 
 const DEFAULT_SALE_SIZE = 50;
-const DEFAULT_CHECKED_FILTER_INDEX = 0;
 
-const getMinPrice = () => products.reduce((a,b) => a.price < b.price ? a : b).price;
-
-const getMaxPrice = () => products.reduce((a,b) => a.price > b.price ? a : b).price;
+const getMinPrice = () => minBy(obj => obj.price, products).price;
+const getMaxPrice = () => maxBy(obj => obj.price, products).price;
 
 const getPrice = () => {
   return {
@@ -16,15 +15,16 @@ const getPrice = () => {
   }
 }
 
-const getFilters = () => {
+const getCategories = () => {
   const allProductsCategories = products.map(product => product.category);
   const categories = Array.from(new Set(allProductsCategories));
+
   const filters = {};
 
   categories.forEach((category, index) => {
     filters[category] = {
       name: category,
-      checked: index === DEFAULT_CHECKED_FILTER_INDEX
+      checked: false,
     };
   })
 
@@ -32,13 +32,13 @@ const getFilters = () => {
 };
 
 const defaultPrice = getPrice();
-const defaultFilters = getFilters();
+const defaultCategories = getCategories();
 
 const defaultFieldsContextValue = {
   price: defaultPrice,
-  filters: defaultFilters,
+  categories: defaultCategories,
 }
 const FieldsContext = React.createContext(defaultFieldsContextValue);
 
-export { FieldsContext, defaultPrice, defaultFilters };
+export { FieldsContext, defaultPrice, defaultCategories };
 
