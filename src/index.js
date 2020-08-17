@@ -5,7 +5,7 @@ import ProductList from './components/ProductList'
 import Title from './components/Title'
 import Form from './components/Form';
 import products from './products.json';
-import { FieldsContext, defaultPrice, defaultCategories } from './context';
+import { FieldsContext, defaultPrice, allCategories, DEFAULT_CHECKED_CATEGORIES } from './context';
 import { getUrlVars } from './utils';
 
 import './index.css'
@@ -20,7 +20,8 @@ class App extends React.Component {
     this.state = {
       products: products,
       price: defaultPrice,
-      categories: defaultCategories,
+      categories: allCategories,
+      checkedCategories: DEFAULT_CHECKED_CATEGORIES,
     };
   }
 
@@ -29,32 +30,27 @@ class App extends React.Component {
 
     if (searchParams && searchParams.includes('?categories=')) {
       const checkedCategories = getUrlVars()['categories'];
-      this.addCheckedCategoriesUrl(checkedCategories);
-      this.setState(this.setCategories(checkedCategories));
+      const categoriesURl = `?categories=${checkedCategories}`;
+
+      window.history.replaceState(checkedCategories, PAGE_TITLE, categoriesURl);
+      this.setState({
+        checkedCategories: checkedCategories.split(',')
+      })
     } else {
-      window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
+      window.history.replaceState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
     }
 
     window.addEventListener('popstate', this.setFromHistory);
-  }
-
-  componentDidUpdate = () => {
-
   }
 
   componentWillUnmount = () => {
     window.removeEventListener('popstate', this.setFromHistory);
   }
 
-  getCheckedCategories = (categories) => {
-    const currentCategories = Object.values(categories);
-    return currentCategories.filter(category => category.checked).map(category  => category.name)
-  }
-
   getProducts = () => {
     const currentPrice = this.state.price;
     const saleSize = currentPrice.sale / 100 ;
-    const checkedCategories = this.getCheckedCategories(this.state.categories);
+    const checkedCategories = this.state.checkedCategories;
     const getProductByMinPrice = (product) => product.price >= currentPrice.min;
     const getProductByMaxPrice = (product) => product.price <= currentPrice.max;
     const getProductBySale = (product) =>
@@ -89,36 +85,21 @@ class App extends React.Component {
     this.setState(newValue);
   }
 
-  updateCategoriesState = categoryName => {
-    const newValue = {};
-    newValue.categories = this.getNewCategoriesState(categoryName);
-
-    this.setState(newValue);
-  }
-
-  getNewCategoriesState = updateCategoryName => {
-    const currentCategoriesState = this.state.categories[updateCategoryName].checked;
-
-    return {
-      ...this.state.categories,
-      [updateCategoryName]: {
-        ...this.state.categories[updateCategoryName],
-        checked: !currentCategoriesState
-      }
-    }
-  }
-
   addCheckedCategoriesUrl = (checkedCategories) => {
-    const categoriesURl = `?categories=${checkedCategories}`;
+    const categoriesURl = `?categories=${checkedCategories.join()}`;
     window.history.pushState(checkedCategories, PAGE_TITLE, categoriesURl)
   }
 
   handleCategoryChange = evt => {
-    const categoryName = evt.target.value;
-    const currentCategories = this.getNewCategoriesState(categoryName);
-    const checkedCategories = Object.values(currentCategories)
-      .filter(category => category.checked)
-      .map(category => category.name);
+    const changedCategory = evt.target.value;
+    const checkedCategories = this.state.checkedCategories.slice();
+
+    if (checkedCategories.includes(changedCategory)) {
+      const deleteIndex = checkedCategories.indexOf(changedCategory);
+      checkedCategories.splice(deleteIndex, 1);
+    } else {
+      checkedCategories.push(changedCategory);
+    }
 
     if (checkedCategories.length !== 0) {
       this.addCheckedCategoriesUrl(checkedCategories)
@@ -126,32 +107,19 @@ class App extends React.Component {
       window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
     }
 
-    this.updateCategoriesState(categoryName);
+    this.setState({
+      checkedCategories: checkedCategories
+    });
   }
 
   handleReset = (evt) => {
     evt.preventDefault();
-    const categories = Object.assign({}, this.state.categories);
 
-    const categoriesNames = Object.keys(categories);
-    categoriesNames.forEach(name => categories[name].checked = false);
+    this.setState({
+      checkedCategories: []
+    });
 
-    const newValue = {};
-    newValue.categories = categories;
-
-    this.setState(categories);
     window.history.pushState(DEFAULT_URL, `${PAGE_TITLE}`, DEFAULT_URL);
-  }
-
-  setCategories = (checkedCategories) => {
-    const currentCategories = Object.values(this.state.categories);
-    return currentCategories.map(category => {
-      if (checkedCategories.includes(category.name)) {
-        return category.checked = true;
-      }
-
-      return category.checked = false;
-    })
   }
 
   setFromHistory = evt => {
@@ -160,8 +128,15 @@ class App extends React.Component {
       return;
     }
 
-    const checkedCategories = evt.state;
-    this.setState(this.setCategories(checkedCategories));
+    let checkedCategories = evt.state;
+
+    if (!checkedCategories) {
+      checkedCategories = [];
+    }
+
+    this.setState({
+      checkedCategories: checkedCategories
+    })
   }
 
   render() {
@@ -169,6 +144,7 @@ class App extends React.Component {
       <FieldsContext.Provider value={{
         price: this.state.price,
         categories: this.state.categories,
+        checkedCategories: this.state.checkedCategories,
       }}>
         <div className='appWrapper'>
           <Title text='Список товаров'/>

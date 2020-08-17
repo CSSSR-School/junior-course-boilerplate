@@ -3,6 +3,7 @@ import { minBy, maxBy } from 'csssr-school-utils';
 import products from './products.json';
 
 const DEFAULT_SALE_SIZE = 50;
+const DEFAULT_CHECKED_CATEGORIES = [];
 
 const getMinPrice = () => minBy(obj => obj.price, products).price;
 const getMaxPrice = () => maxBy(obj => obj.price, products).price;
@@ -15,30 +16,19 @@ const getPrice = () => {
   }
 }
 
-const getCategories = () => {
+const getAllCategories = () => {
   const allProductsCategories = products.map(product => product.category);
-  const categories = Array.from(new Set(allProductsCategories));
-
-  const filters = {};
-
-  categories.forEach((category, index) => {
-    filters[category] = {
-      name: category,
-      checked: false,
-    };
-  })
-
-  return filters;
-};
+  return Array.from(new Set(allProductsCategories));
+}
 
 const defaultPrice = getPrice();
-const defaultCategories = getCategories();
-
+const allCategories = getAllCategories();
 const defaultFieldsContextValue = {
   price: defaultPrice,
-  categories: defaultCategories,
+  categories: allCategories,
+  checkedCategories: DEFAULT_CHECKED_CATEGORIES,
 }
 const FieldsContext = React.createContext(defaultFieldsContextValue);
 
-export { FieldsContext, defaultPrice, defaultCategories };
+export { FieldsContext, defaultPrice, allCategories, DEFAULT_CHECKED_CATEGORIES};
 

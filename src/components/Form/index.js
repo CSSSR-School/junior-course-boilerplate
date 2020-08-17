@@ -8,11 +8,11 @@ import { FieldsContext } from '../../context';
 import styles from './index.module.css';
 
 export default class Form extends LogRender {
-  renderCategoriesFilters = (categories) => {
-    const categoriesValues = Object.values(categories);
-    return categoriesValues.map((category, index) => (
-        <Checkbox text={category.name} onChange={this.props.handleCategoryChange} checked={category.checked} key={index} />
-    ))
+  renderCategoryButtons = (categories, checkedCategories) => {
+    return categories.map((category, index) => {
+      const isCategoryChecked = checkedCategories.includes(category);
+      return <Checkbox text={category} onChange={this.props.handleCategoryChange} checked={isCategoryChecked} key={index}/>
+    })
   }
 
   render() {
@@ -49,7 +49,7 @@ export default class Form extends LogRender {
           </label>
           <h2>Категории</h2>
           <div className={styles.filters}>
-            {this.renderCategoriesFilters(value.categories)}
+            {this.renderCategoryButtons(value.categories, value.checkedCategories)}
           </div>
           <button onClick={this.props.handleReset}>Сбросить фильтры</button>
         </form>
