@@ -6,7 +6,7 @@ import Title from './components/Title'
 import Form from './components/Form';
 import products from './products.json';
 import { FieldsContext, defaultPrice, allCategories, DEFAULT_CHECKED_CATEGORIES } from './context';
-import { getUrlVars } from './utils';
+import { getUrlVars, isArraysEqual } from './utils';
 
 import './index.css'
 
@@ -29,15 +29,13 @@ class App extends React.Component {
     const searchParams = window.location.search;
 
     if (searchParams && searchParams.includes('?categories=')) {
-      const checkedCategories = getUrlVars()['categories'];
-      const categoriesURl = `?categories=${checkedCategories}`;
+      const checkedCategories = getUrlVars()['categories'].split(',');
 
-      window.history.replaceState(checkedCategories, PAGE_TITLE, categoriesURl);
       this.setState({
-        checkedCategories: checkedCategories.split(',')
+        checkedCategories: checkedCategories
       })
     } else {
-      window.history.replaceState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
+      window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
     }
 
     window.addEventListener('popstate', this.setFromHistory);
@@ -45,6 +43,21 @@ class App extends React.Component {
 
   componentWillUnmount = () => {
     window.removeEventListener('popstate', this.setFromHistory);
+  }
+
+  componentDidUpdate = () => {
+    let historyCategories = [];
+
+    if (window.history.state) {
+      historyCategories = window.history.state.split(',');
+    }
+
+    const currentCheckedCategories = this.state.checkedCategories;
+    const isStatesEqual = isArraysEqual(historyCategories, currentCheckedCategories);
+
+    if (!isStatesEqual) {
+      this.addCheckedCategoriesUrl(currentCheckedCategories);
+    }
   }
 
   getProducts = () => {
@@ -86,8 +99,13 @@ class App extends React.Component {
   }
 
   addCheckedCategoriesUrl = (checkedCategories) => {
+    if (checkedCategories.length === 0) {
+      window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
+      return;
+    }
+
     const categoriesURl = `?categories=${checkedCategories.join()}`;
-    window.history.pushState(checkedCategories, PAGE_TITLE, categoriesURl)
+    window.history.pushState(checkedCategories.join(), PAGE_TITLE, categoriesURl)
   }
 
   handleCategoryChange = evt => {
@@ -99,12 +117,6 @@ class App extends React.Component {
       checkedCategories.splice(deleteIndex, 1);
     } else {
       checkedCategories.push(changedCategory);
-    }
-
-    if (checkedCategories.length !== 0) {
-      this.addCheckedCategoriesUrl(checkedCategories)
-    } else {
-      window.history.pushState(DEFAULT_URL, PAGE_TITLE, DEFAULT_URL);
     }
 
     this.setState({
@@ -123,19 +135,15 @@ class App extends React.Component {
   }
 
   setFromHistory = evt => {
-    if (evt.state === DEFAULT_URL) {
+    const checkedCategories = evt.state;
+
+    if (checkedCategories === DEFAULT_URL) {
       this.handleReset(evt);
       return;
     }
 
-    let checkedCategories = evt.state;
-
-    if (!checkedCategories) {
-      checkedCategories = [];
-    }
-
     this.setState({
-      checkedCategories: checkedCategories
+      checkedCategories: checkedCategories.split(',')
     })
   }
 
