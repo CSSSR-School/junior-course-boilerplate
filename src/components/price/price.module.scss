@@ -1,0 +1,14 @@
+.Price {
+  line-height: 1;
+  font-weight: 600;
+  color: #7e8fa4;
+
+  &Primary {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  &Secondary {
+    font-size: 12px;
+  }
+}

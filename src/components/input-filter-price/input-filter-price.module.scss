@@ -1,0 +1,20 @@
+.InputFilter {
+  &Price {
+    max-width: 90px;
+    border: 1px solid #7e8fa4;
+    transition: all 0.5s;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #437bbf;
+    }
+  }
+
+  &Invalid {
+    border: 1px solid #bf4343;
+
+    &:focus {
+      border: 1px solid #437bbf;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.Products {
+  position: relative;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &Sidebar {
+    display: flex;
+    align-items: flex-start;
+    width: 255px;
+
+    &Left {
+      margin-right: 50px;
+    }
+
+    &Right {
+      margin-left: 50px;
+    }
+  }
+
+  &Main {
+    width: 732px;
+
+    &Wrapper {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &Header {
+    flex-basis: 100%;
+    margin: 0;
+    margin-bottom: 55px;
+    padding: 0;
+
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1;
+    text-align: center;
+    color: #323c48;
+  }
+
+  &Icon {
+    display: flex;
+
+    &CenterVertically {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

@@ -1,0 +1,45 @@
+.ProductToggle {
+  min-width: 224px;
+  max-width: 100%;
+  padding: 8px;
+  margin: 0;
+  margin-top: 25px;
+
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+  color: #323c48;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+
+  background-color: transparent;
+  border: 1px solid #323c48;
+
+  transition: all 0.5s;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover,
+  &:focus {
+    color: #ffffff;
+    background-color: #323c48;
+  }
+
+  &:active {
+    color: #ffffff;
+    background-color: darken(#323c48, 10%);
+    border: 1px solid darken(#323c48, 10%);
+  }
+
+  &Disabled,
+  &:disabled {
+    color: #fff;
+    border: 1px solid #c5cfde;
+    background-color: #c5cfde;
+
+    cursor: not-allowed;
+  }
+}

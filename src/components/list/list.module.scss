@@ -1,0 +1,19 @@
+.List {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  &Item {
+    margin-bottom: 50px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:not(:nth-child(3n)) {
+      margin-right: 30px;
+    }
+  }
+}

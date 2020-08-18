@@ -1,0 +1,12 @@
+.ProductRating {
+  --stroke: #323c48;
+
+  display: inline-flex;
+  margin-right: 10px;
+
+  cursor: pointer;
+
+  &IsFilled {
+    --fill: #323c48;
+  }
+}
