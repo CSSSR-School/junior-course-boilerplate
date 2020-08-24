@@ -2,7 +2,7 @@ import React from 'react';
 import { minBy, maxBy } from 'csssr-school-utils';
 import products from './products.json';
 
-const DEFAULT_SALE_SIZE = 50;
+const DEFAULT_DISCOUNT_SIZE = 50;
 const DEFAULT_CHECKED_CATEGORIES = [];
 
 const getMinPrice = () => minBy(obj => obj.price, products).price;
@@ -12,7 +12,7 @@ const getPrice = () => {
   return {
     min: getMinPrice(),
     max: getMaxPrice(),
-    sale: DEFAULT_SALE_SIZE
+    discount: DEFAULT_DISCOUNT_SIZE
   }
 }
 

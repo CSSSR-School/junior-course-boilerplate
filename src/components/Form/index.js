@@ -41,8 +41,8 @@ export default class Form extends LogRender {
           <label className={styles.label}>
             <span>от</span>
             <Input
-              name="sale"
-              value={value.price.sale}
+              name="discount"
+              value={value.price.discount}
               onChange={this.props.handlePriceChange}
             />
             <span>%</span>

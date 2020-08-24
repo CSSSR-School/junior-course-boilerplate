@@ -2,7 +2,6 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import LogRender from '../LogRender';
-import { makeUcFirst } from '../../utils'
 
 import styles from './index.module.css';
 
@@ -34,7 +33,9 @@ class Checkbox extends LogRender {
           checked={this.state.checked}
           onChange={this.onChange}
         />
-        <label htmlFor={this.props.text}>{makeUcFirst(this.props.text)}</label>
+        <label htmlFor={this.props.text}>
+          <p className={styles.text}>{this.props.text}</p>
+        </label>
       </div>
     )
   }

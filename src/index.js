@@ -6,12 +6,28 @@ import Title from './components/Title'
 import Form from './components/Form';
 import products from './products.json';
 import { FieldsContext, defaultPrice, allCategories, DEFAULT_CHECKED_CATEGORIES } from './context';
-import { getUrlVars, isArraysEqual } from './utils';
+import { getUrlVars } from './utils';
 
 import './index.css'
 
 const PAGE_TITLE = 'Интернет магазин'
 const DEFAULT_URL = window.location.pathname;
+
+const isCategoryFiltersEqual = (prevFilters, curFilters) => {
+  if (prevFilters.length !== curFilters.length) {
+    return false;
+  }
+
+  let result = true;
+
+  prevFilters.forEach(item => {
+    if (!curFilters.includes(item)) {
+      result = false;
+    }
+  })
+
+  return result;
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +45,8 @@ class App extends React.Component {
     const searchParams = window.location.search;
 
     if (searchParams && searchParams.includes('?categories=')) {
-      const checkedCategories = getUrlVars()['categories'].split(',');
+      const url = getUrlVars();
+      const checkedCategories = url['categories'].split(',');
 
       this.setState({
         checkedCategories: checkedCategories
@@ -53,7 +70,7 @@ class App extends React.Component {
     }
 
     const currentCheckedCategories = this.state.checkedCategories;
-    const isStatesEqual = isArraysEqual(historyCategories, currentCheckedCategories);
+    const isStatesEqual = isCategoryFiltersEqual(historyCategories, currentCheckedCategories);
 
     if (!isStatesEqual) {
       this.addCheckedCategoriesUrl(currentCheckedCategories);
@@ -62,21 +79,21 @@ class App extends React.Component {
 
   getProducts = () => {
     const currentPrice = this.state.price;
-    const saleSize = currentPrice.sale / 100 ;
+    const discountSize = currentPrice.discount / 100 ;
     const checkedCategories = this.state.checkedCategories;
-    const getProductByMinPrice = (product) => product.price >= currentPrice.min;
-    const getProductByMaxPrice = (product) => product.price <= currentPrice.max;
-    const getProductBySale = (product) =>
-      product.price === (product.subPriceContent - product.subPriceContent * saleSize);
+    const isMoreThanMinPrice = (product) => product.price >= currentPrice.min;
+    const isLessThanMaxPrice = (product) => product.price <= currentPrice.max;
+    const isRelevantDiscount = (product) =>
+      product.price === (product.subPriceContent - product.subPriceContent * discountSize);
 
-    const getProductByCategory = (product) =>
+    const isRelevantCategory = (product) =>
       checkedCategories.length === 0 ? true : checkedCategories.includes(product.category);
 
     const setFilter = (product) =>
-      getProductByMinPrice(product)
-      && getProductByMaxPrice(product)
-      && getProductBySale(product)
-      && getProductByCategory(product)
+      isMoreThanMinPrice(product)
+      && isLessThanMaxPrice(product)
+      && isRelevantDiscount(product)
+      && isRelevantCategory(product)
 
     return this.state.products.filter((product) => setFilter(product))
   }
