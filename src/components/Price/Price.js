@@ -7,7 +7,6 @@ const Price = ({ value, isOriginalPrice = true }) => {
     style: 'currency',
     currency: 'Rub'
   });
-  console.log(styles);
 
   return (
     <span

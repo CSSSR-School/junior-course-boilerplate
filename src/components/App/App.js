@@ -9,7 +9,7 @@ const App = ({ products }) => {
   return (
     <div className={styles.App}>
       <Goods>
-        <Header />
+        <Header>Список товаров</Header>
         <GoodsList goods={products} />
       </Goods>
     </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ProductItem from 'school-product-card';
 import Rating from '../Rating';
-import styles from './GoodsList.module.sass';
 import Price from '../Price/Price';
+import styles from './GoodsList.module.sass';
 
 const GoodsList = ({ goods }) => {
   return (
