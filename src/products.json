@@ -4,7 +4,7 @@
     "title": "Имя товара1",
     "isInStock": true,
     "img": "https://via.placeholder.com/224x200",
-    "price": 3000,
+    "price": 15000,
     "maxRating": 5,
     "rating": 4
   },
@@ -13,7 +13,7 @@
     "title": "Имя товара2",
     "isInStock": false,
     "img": "https://via.placeholder.com/224x200",
-    "price": 3000,
+    "price": 8000,
     "maxRating": 5,
     "rating": 4
   },
@@ -22,7 +22,7 @@
     "title": "Имя товара3",
     "isInStock": true,
     "img": "https://via.placeholder.com/224x200",
-    "price": 3000,
+    "price": 5000,
     "subPriceContent": 2000,
     "maxRating": 5,
     "rating": 4
@@ -50,7 +50,7 @@
     "title": "Имя товара6",
     "isInStock": false,
     "img": "https://via.placeholder.com/224x200",
-    "price": 3000,
+    "price": 2500,
     "maxRating": 5,
     "rating": 4
   }
