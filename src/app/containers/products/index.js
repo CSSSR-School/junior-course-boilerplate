@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 
 import ProductList from '../../components/productList/index';
-import BaseComponent from '../../components/baseComponent/index';
 import EmptyProducts from '../../components/emptyProducts/index';
 import { visibleProductsSelector } from '../../store/selectors';
 
-class Products extends BaseComponent {
+class Products extends PureComponent {
   render() {
     if(this.props.products.length > 0) {
       return (<ProductList products={ this.props.products }/>)

@@ -5,7 +5,7 @@ import s from './index.module.css';
 
 const range = to => [...Array(to).keys()].map(i => i + 1)
 
-function ProductItem({ isInStock, img, title, price, subPriceContent, maxRating, rating, ratingComponent }) {
+function ProductItem({ isInStock, img, title, price, subPriceContent, maxRating, rating, ratingComponent: Rating }) {
   return (
     <div className={cx(s.goods, { [s.goodsNone]: !isInStock })}>
       <div className={cx(s.goodsType, { [s.goodsTypeNone]: !isInStock })}>
@@ -21,7 +21,7 @@ function ProductItem({ isInStock, img, title, price, subPriceContent, maxRating,
       <div className={s.goodsName}>{title}</div>
       <div>
         {
-          range(maxRating).map(i => React.createElement(ratingComponent, { key: i, isFilled:  i <= rating }))
+          range(maxRating).map(i => (<Rating key={i} isFilled={i <= rating}/>))
         }
       </div>
       <div className={s.goodsPrise}>

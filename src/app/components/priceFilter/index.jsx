@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import debounce from 'lodash-es/debounce';
-
-import BaseComponent from '../baseComponent/index';
 
 const filterTitleStyle = {
   marginBottom: '8px',
@@ -22,7 +20,7 @@ const inuputStyle ={
   width: '6em'
 }
 
-class PriceFilter extends BaseComponent {
+class PriceFilter extends PureComponent {
   constructor(props) {
     super(props);
     this.handleControlChange = debounce(this.handleControlChange.bind(this), 500)

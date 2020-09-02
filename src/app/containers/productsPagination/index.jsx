@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import classnames from 'classnames';
 
 import styles from './index.module.css';
-import BaseComponent from '../../components/baseComponent/index';
 import { productsPageCountSelector } from '../../store/selectors';
 
-class ProductsPagination extends BaseComponent {
+class ProductsPagination extends PureComponent {
 
   get paginationItems() {
     return Array.from(Array(this.props.pageCount), (item, i) => i + 1)

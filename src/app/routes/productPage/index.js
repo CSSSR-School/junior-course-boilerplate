@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import Products from '../../containers/products/index';
 import PageTitle from '../../../app/components/pageTitle/index';
 import UserFilters from '../../../app/containers/userFilters/index';
-import BaseComponent from '../../components/baseComponent/index';
 import ProductsPagination from '../../containers/productsPagination/index';
 import { getProducts } from '../../store/actionCreators';
 
@@ -31,7 +30,7 @@ const pageStyle = {
 }
 
 
-class ProductPage extends BaseComponent {
+class ProductPage extends PureComponent {
   constructor(props) {
     super(props)
     this.props.getProducts();

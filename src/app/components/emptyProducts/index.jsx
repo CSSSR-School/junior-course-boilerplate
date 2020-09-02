@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import classnames from 'classnames';
 
 import styles from './index.module.css';
-import BaseComponent from '../baseComponent/index';
 
-class EmptyProducts extends BaseComponent {
+class EmptyProducts extends PureComponent {
   render() {
     return (
       <div className={ classnames(styles.container) }>
-        <span className={ classnames(styles.emptyText) }>
-          Товары не найдены. Проверьте параметры фильтра.
-        </span>
+        <p className={ classnames(styles.emptyText) }>Товары не найдены.</p>
+        <p className={ classnames(styles.emptyText) }>Проверьте параметры фильтра.</p>
       </div>
     );
   }

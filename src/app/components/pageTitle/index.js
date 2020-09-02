@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
-import BaseComponent from '../baseComponent/index';
 
 const pageTitleStyle = {
   fontStyle: 'normal',
@@ -11,7 +9,7 @@ const pageTitleStyle = {
   textAlign: 'center'
 };
 
-class PagetTitle extends BaseComponent {
+class PagetTitle extends PureComponent {
   render() {
     return (
       <h1 style={ pageTitleStyle }>{this.props.name}</h1>

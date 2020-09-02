@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import BaseComponent from '../../components/baseComponent/index';
 import PriceFilter from '../../components/priceFilter/index';
 import { productsSelector } from '../../store/selectors';
 import { setFilter } from '../../store/actionCreators';
@@ -11,7 +10,7 @@ const filtersContainerStyle = {
   padding: '4px 16px'
 }
 
-class UserFilters extends BaseComponent {
+class UserFilters extends PureComponent {
   constructor(props) {
     super(props);
 

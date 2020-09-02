@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import style from './index.module.css';
 import ProductItem from '../../components/productCard';
-import BaseComponent from '../../components/baseComponent/index';
-
 
 const ratingComponent = ({ isFilled }) => {
   return <div className={isFilled ? 'starFill' : 'none'} />;
 };
 
-class ProductList extends BaseComponent {
+class ProductList extends PureComponent {
   get productItems() {
     return this.props.products
       .map((product) =>
