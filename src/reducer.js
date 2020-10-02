@@ -1,5 +1,5 @@
 import { initialState } from './store';
-import { DEFAULT_URL, PAGE_TITLE } from './index';
+import { DEFAULT_URL, PAGE_TITLE } from './components/App';
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
