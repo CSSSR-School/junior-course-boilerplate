@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ProductItemUI from 'csssr-school-product-card';
 import PropTypes from 'prop-types';
 import LogRender from '../LogRender';

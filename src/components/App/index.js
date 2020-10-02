@@ -83,13 +83,13 @@ class App extends React.PureComponent {
 
   render() {
     return (
-        <div className='appWrapper'>
-          <Title text='Список товаров'/>
-          <div className='wrapper'>
-            <Sidebar />
-            <List />
-          </div>
+      <div className='appWrapper'>
+        <Title text='Список товаров'/>
+        <div className='wrapper'>
+          <Sidebar />
+          <List />
         </div>
+      </div>
     )
   }
 }
