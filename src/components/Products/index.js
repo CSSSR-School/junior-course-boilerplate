@@ -18,9 +18,9 @@ class ProductItem extends LogRender {
   }
 }
 
-export default class ProductList extends LogRender {
-  generateList() {
-    return this.props.products.map((item, number) =>
+export default class Products extends React.PureComponent {
+  generateList = () =>
+    this.props.products.map((item, number) =>
       <li key={number}>
         <ProductItem
           title = {item.name}
@@ -28,8 +28,7 @@ export default class ProductList extends LogRender {
           subPriceContent = {item.subPriceContent}
         />
       </li>
-      )
-  }
+  )
 
   render() {
     return (

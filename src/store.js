@@ -1,5 +1,6 @@
-import React from 'react';
+import { createStore } from 'redux';
 import { minBy, maxBy } from 'csssr-school-utils';
+import reducer from './reducer';
 import products from './products.json';
 
 const DEFAULT_DISCOUNT_SIZE = 50;
@@ -21,14 +22,13 @@ const getAllCategories = () => {
   return Array.from(new Set(allProductsCategories));
 }
 
-const defaultPrice = getPrice();
-const allCategories = getAllCategories();
-const defaultFieldsContextValue = {
-  price: defaultPrice,
-  categories: allCategories,
+export const initialState = {
+  products: products,
+  price: getPrice(),
+  categories: getAllCategories(),
   checkedCategories: DEFAULT_CHECKED_CATEGORIES,
-}
-const FieldsContext = React.createContext(defaultFieldsContextValue);
+};
 
-export { FieldsContext, defaultPrice, allCategories, DEFAULT_CHECKED_CATEGORIES};
+const store = createStore(reducer, initialState);
 
+export default store;

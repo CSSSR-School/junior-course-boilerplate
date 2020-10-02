@@ -1,12 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import LogRender from '../LogRender';
 import WithNumberMask from '../WithNumberMask';
 
 import styles from './index.module.css';
 
-class Input extends LogRender {
+class Input extends React.PureComponent {
   render() {
     return (
       <input

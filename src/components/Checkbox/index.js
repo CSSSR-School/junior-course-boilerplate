@@ -14,12 +14,14 @@ class Checkbox extends LogRender {
     }
   }
 
-  onChange = (evt) => {
+  onChange = evt => {
     this.setState({
       checked: !this.state.checked
     })
 
-    this.props.onChange && this.props.onChange(evt);
+    const changedCategory = evt.target.value;
+
+    this.props.onChange && this.props.onChange(changedCategory);
   }
 
   render() {
