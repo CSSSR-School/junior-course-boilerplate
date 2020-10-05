@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handlePriceChange: (name, value) => dispatch({ type: 'CHANGE_PRICE' , payload: { inputName: name, changedValue: value }}),
-    handleReset: () => dispatch({ type: 'RESET_FILTER' }),
+    resetFilters: () => dispatch({ type: 'RESET_FILTER' }),
     handleCategoryChange: changedCategory => dispatch({ type: 'CHANGE_FILTER', payload: { changedCategory }})
   }
 }

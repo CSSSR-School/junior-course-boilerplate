@@ -12,6 +12,12 @@ export default class Form extends React.PureComponent {
       return <Checkbox text={category} onChange={this.props.handleCategoryChange} checked={isCategoryChecked} key={index}/>
     })
 
+  resetBtnClickHandler = e => {
+    e.preventDefault();
+
+    this.props.resetFilters();
+  }
+
   render() {
     const props = this.props;
 
@@ -36,7 +42,7 @@ export default class Form extends React.PureComponent {
           <div className={styles.filters}>
             {this.renderCategoryButtons(props.categories, props.checkedCategories)}
           </div>
-          <button onClick={props.handleReset}>Сбросить фильтры</button>
+          <button onClick={this.resetBtnClickHandler}>Сбросить фильтры</button>
         </form>
     );
   }
