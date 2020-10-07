@@ -1,21 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import data from './products.json';
+
+import './index.css';
 
 class GoodItem extends React.Component {
 	render() {
-		console.log(this.props.good.id);
-		return (<li key={this.props.good.id}> {this.props.good.name} </li>);
+		return (<li> {this.props.good.name} </li>);
 	}
 }
 
 class GoodsList extends React.Component {
 	render() {
 		return (
-				<div>
+				<div className="goodslist">
 					<h2>Goods list</h2>
 					<ul>
-						{data.slice(0, 3).map(good => (<GoodItem good={good}/>))}
+						{data.slice(0, 3).map(good => (<GoodItem className="gooditem" key={good.id} good={good}/>))}
 					</ul>
 				</div>
 			)

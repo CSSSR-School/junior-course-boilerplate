@@ -1,0 +1,12 @@
+.goodslist {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  height: 1.4em;
+}
+
+.gooditem {
+  margin: 5px;
+  padding: 5px;
+  flex: 0 1 auto;
+}
