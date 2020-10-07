@@ -4,7 +4,7 @@ import data from './products.json';
 
 class GoodItem extends React.Component {
 	render() {
-		console.log(this.props.good);
+		console.log(this.props.good.id);
 		return (<li key={this.props.good.id}> {this.props.good.name} </li>);
 	}
 }
@@ -14,7 +14,9 @@ class GoodsList extends React.Component {
 		return (
 				<div>
 					<h2>Goods list</h2>
-					{data.slice(0, 3).map(good => (<GoodItem good={good}/>))}
+					<ul>
+						{data.slice(0, 3).map(good => (<GoodItem good={good}/>))}
+					</ul>
 				</div>
 			)
 		}
