@@ -1,26 +1,62 @@
 [
   {
     "id": 1,
-    "name": "Имя товара1"
+    "isInStock": true,
+    "img": "/images/samsung-a51.jpg",
+    "title": "Samsung A51",
+    "price": 19450,
+    "subPriceContent": 19450,
+    "maxRating": 5,
+    "rating": 3
   },
   {
     "id": 2,
-    "name": "Имя товара2"
+    "isInStock": true,
+    "img": "/images/samsung-s21-ultra.jpg",
+    "title": "Samsung S21 ultra",
+    "price": 87300,
+    "subPriceContent": 87300,
+    "maxRating": 5,
+    "rating": 4
   },
   {
     "id": 3,
-    "name": "Имя товара3"
+    "isInStock": true,
+    "img": "/images/iPhone-11.jpg",
+    "title": "iPhone 11",
+    "price": 52000,
+    "subPriceContent": 52000,
+    "maxRating": 5,
+    "rating": 5
   },
   {
     "id": 4,
-    "name": "Имя товара4"
+    "isInStock": false,
+    "img": "/images/iPhone-12.jpg",
+    "title": "iPhone 12 blue",
+    "price": 72000,
+    "subPriceContent": 72000,
+    "maxRating": 5,
+    "rating": 5
   },
   {
     "id": 5,
-    "name": "Имя товара5"
+    "isInStock": true,
+    "img": "/images/iPhone-12-pro-max.jpg",
+    "title": "iPhone 12 pro max",
+    "price": 120000,
+    "subPriceContent": 120000,
+    "maxRating": 5,
+    "rating": 4
   },
   {
     "id": 6,
-    "name": "Имя товара6"
+    "isInStock": false,
+    "img": "/images/iPhone-xr.jpg",
+    "title": "iPhone 11",
+    "price": 42000,
+    "subPriceContent": 42000,
+    "maxRating": 5,
+    "rating": 4
   }
 ]
