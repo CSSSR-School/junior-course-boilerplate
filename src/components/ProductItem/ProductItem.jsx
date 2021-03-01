@@ -24,9 +24,9 @@ function ProductItem({
       <img
         className={cx(s.goodsImg, { [s.goodsImgNone]: !isInStock })}
         src={img}
-        alt="placeholder"
+        alt={title}
         width="224"
-        height="200"
+        height="250"
       />
       <div className={s.goodsName}>{title}</div>
       <div className={s.goodsRating}>

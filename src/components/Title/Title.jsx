@@ -2,14 +2,14 @@ import React from 'react';
 import pt from 'prop-types';
 import s from './Title.module.css';
 
-const Title = ({text}) => {
+const Title = ({children}) => {
   return (
-    <h1 className={s.title}>{text}</h1>
+    <h1 className={s.title}>{children}</h1>
   )
 }
 
 Title.propTypes = {
-  text: pt.string.isRequired
+  children: pt.node.isRequired
 };
 
 export default Title;

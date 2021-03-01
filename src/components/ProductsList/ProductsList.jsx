@@ -6,23 +6,38 @@ import ProductRatingItem from '../ProductRatingItem/ProductRatingItem.jsx';
 import {PropValidator} from '../../prop-validator';
 
 const ProductsList = ({products}) => {
+
+  const renderProductsList = () => (
+    products.map((product) => (
+      <li key={product.id}>
+        <ProductItem
+          {...product}
+          ratingComponent={ProductRatingItem}
+        />
+      </li>
+    ))
+  );
+
   return (
-    <div className={s.productsList}>
+    <>
       {
-        products.map((product) => (
-          <ProductItem
-            key={product.id}
-            {...product}
-            ratingComponent={ProductRatingItem}
-          />
-        ))
+        products.length === 0 ?
+          <p className={s.noProducts}>Список товаров пуст</p>
+          :
+          <ul className={s.productsList}>
+            {renderProductsList()}
+          </ul>
       }
-    </div>
+    </>
   )
 }
 
 ProductsList.propTypes = {
   products: pt.arrayOf(PropValidator.PRODUCT_INFO).isRequired
 };
+
+ProductsList.defaultProps = {
+  products: []
+}
 
 export default ProductsList;

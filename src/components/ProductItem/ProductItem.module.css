@@ -5,8 +5,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 224px;
-  margin: 20px 38px;
+  width: 100%;
 }
 
 .goodsNone {

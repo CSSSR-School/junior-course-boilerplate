@@ -1,6 +1,10 @@
 .productsList {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  row-gap: 40px;
+  justify-content: space-between;
+}
+
+.noProducts {
+  text-align: center;
 }

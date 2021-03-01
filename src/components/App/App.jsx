@@ -5,10 +5,12 @@ import products from '../../products.json';
 
 const App = () => {
   return (
-    <div className="container">
-      <Title text="Список товаров"/>
-      <ProductsList products={products}/>
-    </div>
+    <main>
+      <div className="container">
+        <Title>Список товаров</Title>
+        <ProductsList products={products}/>
+      </div>
+    </main>
   )
 }
 
