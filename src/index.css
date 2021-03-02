@@ -1,5 +1,11 @@
 .container {
-  max-width: 747px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 40px 0 80px;
+}
+
+.product-page {
+  display: grid;
+  grid-template-columns: 25% 70%;
+  justify-content: space-between;
 }

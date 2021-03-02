@@ -3,11 +3,13 @@ import pt from 'prop-types';
 import s from './ProductsList.module.css';
 import ProductItem from '../ProductItem/ProductItem.jsx';
 import ProductRatingItem from '../ProductRatingItem/ProductRatingItem.jsx';
+import Title from '../Title/Title.jsx';
 import {PropValidator} from '../../prop-validator';
+import LogRender from '../LogRender/LogRender';
 
-const ProductsList = ({products}) => {
+class ProductsList extends LogRender {
 
-  const renderProductsList = () => (
+  renderProductsList = (products) => (
     products.map((product) => (
       <li key={product.id}>
         <ProductItem
@@ -18,18 +20,22 @@ const ProductsList = ({products}) => {
     ))
   );
 
-  return (
-    <>
-      {
-        products.length === 0 ?
-          <p className={s.noProducts}>Список товаров пуст</p>
-          :
-          <ul className={s.productsList}>
-            {renderProductsList()}
-          </ul>
-      }
-    </>
-  )
+  render() {
+    const {products} = this.props;
+    return (
+      <div className="products">
+        <Title>Список товаров</Title>
+        {
+          products.length === 0 ?
+            <p className={s.noProducts}>Список товаров пуст</p>
+            :
+            <ul className={s.productsList}>
+              {this.renderProductsList(products)}
+            </ul>
+        }
+      </div>
+    )
+  }
 }
 
 ProductsList.propTypes = {
