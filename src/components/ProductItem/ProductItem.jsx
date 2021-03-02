@@ -9,14 +9,8 @@ const range = to => [...Array(to).keys()].map(i => i + 1);
 
 class ProductItem extends LogRender{
   render() {
-    const {title,
-          img,
-          price,
-          rating,
-          maxRating,
-          subPriceContent,
-          ratingComponent: RatingItem,
-          isInStock} = this.props;
+    const {title, img, price, rating, maxRating, subPriceContent, isInStock, ratingComponent: RatingItem} = this.props;
+
     return (
       <div className={cx(s.goods, { [s.goodsNone]: !isInStock })}>
         <div className={cx(s.goodsType, { [s.goodsTypeNone]: !isInStock })}>

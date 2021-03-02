@@ -6,7 +6,15 @@ import LogRender from '../LogRender/LogRender';
 
 class ProductFilterForm extends LogRender{
 
-  changePriceRangeHandler = (e) => this.props.onChangePriceRange(e.target);
+  constructor(props) {
+    super(props);
+    this.minInput = React.createRef();
+    this.maxPrice = React.createRef();
+  }
+
+  changePriceRangeHandler = (e) => {
+    this.props.onChangePriceRange(e.target);
+  }
 
   formSubmitHandler = (e) => {
     e.preventDefault();
@@ -25,7 +33,8 @@ class ProductFilterForm extends LogRender{
               type="number"
               id="min-price"
               name="minPrice"
-              value={minPrice}
+              defaultValue={minPrice}
+              ref={this.minInput}
               onChange={this.changePriceRangeHandler}
             />
           </div>
@@ -35,7 +44,8 @@ class ProductFilterForm extends LogRender{
               type="number"
               id="max-price"
               name="maxPrice"
-              value={maxPrice}
+              defaultValue={maxPrice}
+              ref={this.maxPrice}
               onChange={this.changePriceRangeHandler}
             />
           </div>

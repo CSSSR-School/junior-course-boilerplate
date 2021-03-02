@@ -5,7 +5,7 @@ import LogRender from '../LogRender/LogRender';
 
 class ProductRatingItem extends LogRender {
   render() {
-    const {isFilled} = this.props
+    const {isFilled} = this.props;
     return (
       <div className={s.productRating}>
         <svg width={15} height={15}>
