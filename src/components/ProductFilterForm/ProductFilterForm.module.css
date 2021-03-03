@@ -1,0 +1,48 @@
+.filterForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.formTitle {
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.formBlock {
+  margin-bottom: 20px;
+}
+
+.priceBlock {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  width: 48%;
+}
+
+.price label {
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.price input {
+  width: 100%;
+}
+
+.btn {
+  display: block;
+  padding: 10px 0;
+  color: #ffffff;
+  background: #323c48;
+}
+
+.btnDisabled {
+  opacity: 0.4;
+}
