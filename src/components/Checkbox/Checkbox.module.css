@@ -1,0 +1,17 @@
+.btn {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 14px;
+  margin-right: 8px;
+  border: solid 1px #7e8fa4;
+  border-radius: 50px;
+  background: #ffffff;
+  text-align: center;
+  color: #7e8fa4;
+}
+
+.btnActive {
+  background: #000000;
+  border: solid 1px #000000;
+  color: #ffffff;
+}

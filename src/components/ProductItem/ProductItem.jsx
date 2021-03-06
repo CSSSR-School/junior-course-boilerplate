@@ -2,14 +2,22 @@ import React from 'react';
 import pt from 'prop-types';
 import cx from 'classnames';
 import s from './ProductItem.module.css';
-import {numberWithSpaces} from '../../helpers';
+import {PropValidator} from '../../prop-validator';
+import {numberWithSpaces, range} from '../../helpers';
 import LogRender from '../LogRender/LogRender';
-
-const range = to => [...Array(to).keys()].map(i => i + 1);
 
 class ProductItem extends LogRender{
   render() {
-    const {title, img, price, rating, maxRating, subPriceContent, isInStock, ratingComponent: RatingItem} = this.props;
+    const {product, ratingComponent: RatingItem} = this.props;
+    const {
+      title,
+      img,
+      price,
+      rating,
+      maxRating,
+      subPriceContent,
+      isInStock
+    } = product;
 
     return (
       <div className={cx(s.goods, { [s.goodsNone]: !isInStock })}>
@@ -29,23 +37,19 @@ class ProductItem extends LogRender{
         </div>
         <div className={s.goodsPriceBlock}>
           <span className={s.goodsPrice}>{numberWithSpaces(price)}&nbsp;&#8381;</span>
-          <span className={s.goodsSubPrice}>{numberWithSpaces(subPriceContent)}&nbsp;&#8381;</span>
+          {
+            subPriceContent > price &&
+            <span className={s.goodsSubPrice}>{numberWithSpaces(subPriceContent)}&nbsp;&#8381;</span>
+          }
         </div>
       </div>
     );
   }
-
 };
 
 ProductItem.propTypes = {
-    title: pt.node.isRequired,
-    img: pt.string.isRequired,
-    price: pt.node.isRequired,
-    rating: pt.number.isRequired,
-    maxRating: pt.number.isRequired,
-    subPriceContent: pt.node.isRequired,
-    ratingComponent: pt.func.isRequired,
-    isInStock: pt.bool.isRequired
+  product: PropValidator.PRODUCT_INFO.isRequired,
+  ratingComponent: pt.func.isRequired
 };
 
 export default ProductItem;

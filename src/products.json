@@ -7,56 +7,84 @@
     "price": 19450,
     "subPriceContent": 19450,
     "maxRating": 5,
-    "rating": 3
+    "rating": 3,
+    "category": "phones"
   },
   {
     "id": 2,
     "isInStock": true,
     "img": "/images/samsung-s21-ultra.jpg",
     "title": "Samsung S21 ultra",
-    "price": 87300,
+    "price": 77300,
     "subPriceContent": 87300,
     "maxRating": 5,
-    "rating": 4
+    "rating": 4,
+    "category": "phones"
   },
   {
     "id": 3,
     "isInStock": true,
     "img": "/images/iPhone-11.jpg",
     "title": "iPhone 11",
-    "price": 52000,
+    "price": 42000,
     "subPriceContent": 52000,
     "maxRating": 5,
-    "rating": 5
+    "rating": 5,
+    "category": "phones"
   },
   {
     "id": 4,
     "isInStock": false,
     "img": "/images/iPhone-12.jpg",
     "title": "iPhone 12 blue",
-    "price": 72000,
+    "price": 62000,
     "subPriceContent": 72000,
     "maxRating": 5,
-    "rating": 5
+    "rating": 5,
+    "category": "phones"
   },
   {
     "id": 5,
     "isInStock": true,
     "img": "/images/iPhone-12-pro-max.jpg",
     "title": "iPhone 12 pro max",
-    "price": 120000,
+    "price": 110000,
     "subPriceContent": 120000,
     "maxRating": 5,
-    "rating": 4
+    "rating": 4,
+    "category": "phones"
   },
   {
     "id": 6,
     "isInStock": false,
     "img": "/images/iPhone-xr.jpg",
     "title": "iPhone 11",
-    "price": 42000,
+    "price": 32000,
     "subPriceContent": 42000,
     "maxRating": 5,
-    "rating": 4
+    "rating": 4,
+    "category": "phones"
+  },
+  {
+    "id": 7,
+    "isInStock": true,
+    "img": "/images/ipad-pro.jpg",
+    "title": "iPad pro 2020",
+    "price": 87500,
+    "subPriceContent": 87500,
+    "maxRating": 5,
+    "rating": 4,
+    "category": "tablets"
+  },
+  {
+    "id": 8,
+    "isInStock": true,
+    "img": "/images/xbox-x.jpg",
+    "title": "Xbox series X",
+    "price": 53000,
+    "subPriceContent": 55000,
+    "maxRating": 5,
+    "rating": 5,
+    "category": "consoles"
   }
 ]
