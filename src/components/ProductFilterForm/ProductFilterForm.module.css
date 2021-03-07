@@ -1,0 +1,78 @@
+.filterForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.title {
+  font-family: OpenSans, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #323c48;
+  padding-bottom: 16px;
+}
+
+.formTitle {
+  font-family: OpenSans, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #323c48;
+  padding-bottom: 20px;
+}
+
+.formError {
+  padding: 10px;
+  margin-bottom: 20px;
+  background: rgba(255, 49, 49, 0.1);
+  border: 1px solid #ff3131;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: #ff3131;
+}
+
+.formBlock {
+  margin-bottom: 20px;
+}
+
+.priceBlock {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 48%;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.price input {
+  width: 100%;
+  font-size: 14px;
+  margin-left: 8px;
+  height: 30px;
+  border: solid 1px #7e8fa4;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.discountBlock {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  font-family: OpenSans, sans-serif;
+  color: #323c48;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.categoryBlock {
+  display: flex;
+  justify-content: flex-start;
+}
