@@ -1,0 +1,25 @@
+.app {
+  display: flex;
+  justify-content: center;
+  padding-top: 90px;
+}
+
+.products-card__title {
+  font-family: "Open Sans", sans-serif;
+  font-size: 36px;
+  line-height: 48px;
+  color: #323c48;
+  margin: 0 0 58px 0;
+}
+
+.products-card__list {
+  margin: 0;
+  padding: 0 0 0 30px;
+}
+
+.products-card__item {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 32px;
+  color: #323c48;
+}
