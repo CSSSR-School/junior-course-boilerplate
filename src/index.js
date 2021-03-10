@@ -1,29 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import products from './products.json';
 
-function ProductsCard() {
+const MAX_COUNT_PRODUCTS_TO_SHOW = 3;
+
+function ProductsCard(props) {
+  const productsToShow = props.products.slice(0, MAX_COUNT_PRODUCTS_TO_SHOW);
+
   return (
     <div className="products-card">
       <h2 className="products-card__title">Список товаров</h2>
       <ul className="products-card__list">
-        <li className="products-card__item">Имя товара 1</li>
-        <li className="products-card__item">Имя товара 2</li>
-        <li className="products-card__item">Имя товара 3</li>
+        {
+          productsToShow.map(({ id, name }) => (
+            <li className="products-card__item" key={id}>{name}</li>
+          ))
+        }
       </ul>
     </div>
   );
 }
 
-function App() {
+function App(props) {
   return (
     <div className="app">
-      <ProductsCard />
+      <ProductsCard products={props.products}/>
     </div>
   );
 }
 
 ReactDOM.render(
-  <App />,
+  <App products={products}/>,
   document.getElementById('root')
 );
