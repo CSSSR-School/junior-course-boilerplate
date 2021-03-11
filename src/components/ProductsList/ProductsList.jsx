@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import pt from 'prop-types';
 import s from './ProductsList.module.css';
+import {PropValidator} from '../../prop-validator';
+import isEqual from 'lodash.isequal';
 import ProductItem from '../ProductItem/ProductItem.jsx';
 import ProductRatingItem from '../ProductRatingItem/ProductRatingItem.jsx';
 import Title from '../Title/Title.jsx';
-import {PropValidator} from '../../prop-validator';
-import LogRender from '../LogRender/LogRender';
 
-class ProductsList extends LogRender {
+class ProductsList extends Component {
+
+  shouldComponentUpdate(nextProps) {
+    if (isEqual(this.props.products, nextProps.products)) {
+      return false
+    }
+
+    return true;
+  }
 
   renderProductsList = (products) => (
     products.map((product) => (
       <li key={product.id}>
         <ProductItem
-          {...product}
+          product={product}
           ratingComponent={ProductRatingItem}
         />
       </li>
@@ -22,6 +30,7 @@ class ProductsList extends LogRender {
 
   render() {
     const {products} = this.props;
+
     return (
       <div className="products">
         <Title>Список товаров</Title>

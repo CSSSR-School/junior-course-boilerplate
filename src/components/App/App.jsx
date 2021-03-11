@@ -1,58 +1,80 @@
 import React, {Component} from 'react';
 import ProductsList from '../ProductsList/ProductsList.jsx';
 import ProductFilterForm from '../ProductFilterForm/ProductFilterForm.jsx';
+import {
+  calcDiscount,
+  getMinPrice,
+  getMaxPrice,
+  getDiscount,
+  getCategories
+} from '../../helpers';
 import products from '../../products.json';
-import {maxBy, minBy} from 'csssr-school-utils';
 
 class App extends Component {
 
   constructor (props) {
     super(props);
-
     this.state = {
-      minPrice: this.getProductPrice(minBy),
-      maxPrice: this.getProductPrice(maxBy),
-      isDisabled: false,
-      products,
-      filteredProducts: products
+      minPrice: getMinPrice(products),
+      maxPrice: getMaxPrice(products),
+      discount: getDiscount(products),
+      categories: [],
+      products
     }
+
+    this.minPrice = getMinPrice(products);
+    this.maxPrice = getMaxPrice(products);
+    this.discount = getDiscount(products);
+    this.categoriesList = getCategories(products);
   }
 
-  getProductPrice = (cb) => cb(product => product.price, products).price;
+  filterProducts = () => {
+    const {minPrice, maxPrice, discount, products, categories} = this.state;
 
-  filterProductsByPrice = () => {
-    const {minPrice, maxPrice, products} = this.state;
-    const filteredProducts = products.filter(({price}) => price >= minPrice && price <= maxPrice);
-
-    this.setState({filteredProducts});
+    return products.filter(({price, subPriceContent, category}) => {
+      const prodDiscount = calcDiscount(price, subPriceContent);
+      return (
+        price >= minPrice &&
+        price <= maxPrice &&
+        discount <= prodDiscount &&
+        (categories.length === 0 || categories.includes(category))
+      )
+    });
   }
 
-  changePriceRange = ({name, value}) => {
+  changeFilterInputs = (formData) => {
+    this.setState({...formData});
+  }
+
+  changeFilterCategories = (category) => {
+    const categories = [...this.state.categories];
+    const itemIndex = categories.findIndex((item) => item === category);
+
     this.setState({
-      [name]: Number(value)
-    }, () => this.validateForm())
-  }
-
-  validateForm = () => {
-    const {minPrice, maxPrice} = this.state;
-    const isValid = minPrice <= 0 || maxPrice <= 0 || minPrice >= maxPrice;
-
-    this.setState({isDisabled: isValid});
+      categories: itemIndex !== -1 ?
+                  [
+                    ...categories.slice(0, itemIndex),
+                    ...categories.slice(itemIndex + 1)
+                  ]
+                  :
+                  [...categories, category]
+    });
   }
 
   render () {
-    const {filteredProducts, minPrice, maxPrice, isDisabled} = this.state;
+    const filteredProducts = this.filterProducts();
 
     return (
       <main>
         <div className="container">
           <div className="product-page">
             <ProductFilterForm
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-              isDisabled={isDisabled}
-              onChangePriceRange={this.changePriceRange}
-              onFormSubmit={this.filterProductsByPrice}
+              minPrice={this.minPrice}
+              maxPrice={this.maxPrice}
+              discount={this.discount}
+              categories={this.categoriesList}
+              onChangeFilterInputs={this.changeFilterInputs}
+              onChangeFilterCategories={this.changeFilterCategories}
             />
             <ProductsList products={filteredProducts}/>
           </div>

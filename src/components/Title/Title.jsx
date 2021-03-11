@@ -1,11 +1,15 @@
 import React from 'react';
 import pt from 'prop-types';
 import s from './Title.module.css';
+import LogRender from '../LogRender/LogRender';
 
-const Title = ({children}) => {
-  return (
-    <h1 className={s.title}>{children}</h1>
-  )
+class Title extends LogRender {
+  render() {
+    const {children} = this.props;
+    return (
+      <h1 className={s.title}>{children}</h1>
+    )
+  }
 }
 
 Title.propTypes = {
