@@ -5,12 +5,8 @@
   margin-top: 100px;
 }
 
-.title {
-  font-family: OpenSans, sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: #323c48;
-  padding-bottom: 16px;
+.formHeader {
+  margin-bottom: 20px;
 }
 
 .formTitle {
@@ -18,7 +14,7 @@
   font-size: 24px;
   font-weight: 600;
   color: #323c48;
-  padding-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .formError {
@@ -34,6 +30,14 @@
 
 .formBlock {
   margin-bottom: 20px;
+}
+
+.title {
+  font-family: OpenSans, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #323c48;
+  padding-bottom: 16px;
 }
 
 .priceBlock {
@@ -75,4 +79,11 @@
 .categoryBlock {
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.btn {
+  height: 30px;
+  border: 1px solid #323c48;
+  background: #ffffff;
 }

@@ -1,36 +1,22 @@
-import React, {PureComponent} from 'react';
+import React, {memo} from 'react';
 
-const withInput = (WrappedComponent) => {
-  return class WithInput extends PureComponent {
+const withInput = (WrappedComponent) => memo((props) => {
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        value: this.props.value
-      }
-    }
+  const changeValueHandler = ({target: {name, value}}) => {
+    const pattern = /^(\s*|\d+)$/;
+    const isValid = pattern.test(value);
 
-    changeValueHandler = ({target: {value}}) => {
-      const pattern = /^(\s*|\d+)$/;
-      const isValid = pattern.test(value);
+    if (!isValid) return;
 
-      if (!isValid) return;
-
-      this.setState({value: Number(value)});
-    }
-
-    render() {
-      const {value} = this.state;
-
-      return (
-        <WrappedComponent
-          {...this.props}
-          value={value}
-          onChange={this.changeValueHandler}
-        />
-      )
-    }
+    props.onChangeFilterFields({name, value: Number(value)});
   }
-}
+
+  return (
+    <WrappedComponent
+      {...props}
+      onChange={changeValueHandler}
+    />
+  )
+});
 
 export default withInput;

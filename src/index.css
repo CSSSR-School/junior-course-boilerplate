@@ -9,3 +9,38 @@
   grid-template-columns: 25% 70%;
   justify-content: space-between;
 }
+
+/* .pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* .pagination li {
+  display: block;
+  cursor: pointer;
+} */
+
+/* .pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  display: block;
+  padding: 10px 15px;
+  border: solid 1px #7e8fa4;
+  background: #ffffff;
+  color: #7e8fa4;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pagination li.active a {
+  background: #5695ed;
+  border: solid 1px #5695ed;
+  color: #ffffff;
+}
+
+.pagination li.disabled {
+  opacity: .6;
+}  */
