@@ -7,26 +7,31 @@ import {toUpperCaseLetter} from '../../helpers';
 
 class Checkbox extends LogRender {
 
+  changeCategoriesHandler = () => {
+    const {category, onChangeFilterCategories} = this.props;
+    onChangeFilterCategories(category);
+  };
+
   render() {
-    const {category, isActive, onChangeFilterCategories} = this.props;
+    const { category, isActive } = this.props;
 
     return (
       <button
         className={cx(s.btn, {[s.btnActive]: isActive})}
         type="button"
         name={category}
-        onClick={() => onChangeFilterCategories(category)}
+        onClick={this.changeCategoriesHandler}
       >
         {toUpperCaseLetter(category)}
       </button>
-    )
+    );
   }
 }
 
 Checkbox.propTypes = {
   category: pt.string.isRequired,
   isActive: pt.bool.isRequired,
-  onChangeFilterCategories: pt.func.isRequired
+  onChangeFilterCategories: pt.func.isRequired,
 };
 
 export default Checkbox;

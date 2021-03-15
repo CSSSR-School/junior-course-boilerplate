@@ -1,9 +1,3 @@
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
 .btn {
   height: 30px;
   padding: 0 15px;
@@ -14,7 +8,17 @@
   text-align: center;
 }
 
+.btnDisabled {
+  opacity: 0.2;
+}
+
 .btnPage {
   width: 30px;
   padding: 0;
+}
+
+.btnPageActive {
+  background: #5695ed;
+  border: solid 1px #5695ed;
+  color: #ffffff;
 }
