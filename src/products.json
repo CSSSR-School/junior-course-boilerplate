@@ -86,5 +86,49 @@
     "maxRating": 5,
     "rating": 5,
     "category": "consoles"
+  },
+  {
+    "id": 9,
+    "isInStock": true,
+    "img": "/images/playstation-5.jpg",
+    "title": "PlayStation 5",
+    "price": 60000,
+    "subPriceContent": 65000,
+    "maxRating": 5,
+    "rating": 5,
+    "category": "consoles"
+  },
+  {
+    "id": 10,
+    "isInStock": true,
+    "img": "/images/switch.jpg",
+    "title": "Nintendo Switch",
+    "price": 16500,
+    "subPriceContent": 16500,
+    "maxRating": 5,
+    "rating": 3,
+    "category": "consoles"
+  },
+  {
+    "id": 11,
+    "isInStock": true,
+    "img": "/images/gta-5.jpg",
+    "title": "GTA 5",
+    "price": 2300,
+    "subPriceContent": 3000,
+    "maxRating": 5,
+    "rating": 5,
+    "category": "games"
+  },
+  {
+    "id": 12,
+    "isInStock": true,
+    "img": "/images/red-dead-redemption-2.jpg",
+    "title": "Red Dead Redemption 2",
+    "price": 2200,
+    "subPriceContent": 4600,
+    "maxRating": 5,
+    "rating": 5,
+    "category": "games"
   }
 ]
