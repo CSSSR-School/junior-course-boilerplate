@@ -76,6 +76,18 @@
   margin-bottom: 20px;
 }
 
+.discountBlock input {
+  font-size: 14px;
+  line-height: 14;
+  flex-grow: 1;
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 30px;
+  border: solid 1px #7e8fa4;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .categoryBlock {
   display: flex;
   justify-content: flex-start;

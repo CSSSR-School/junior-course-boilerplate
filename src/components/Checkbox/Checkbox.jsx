@@ -1,37 +1,29 @@
-import React from 'react';
+import React, {memo} from 'react';
 import pt from 'prop-types';
 import cx from 'classnames';
 import s from './Checkbox.module.css';
-import LogRender from '../LogRender/LogRender';
 import {toUpperCaseLetter} from '../../helpers';
 
-class Checkbox extends LogRender {
+const Checkbox = ({isActive, category, onChangeFilter}) => {
 
-  changeCategoriesHandler = () => {
-    const {category, onChangeFilterCategories} = this.props;
-    onChangeFilterCategories(category);
-  };
+  const changeCategoriesHandler = () => onChangeFilter({name: 'categories', value: category});
 
-  render() {
-    const { category, isActive } = this.props;
-
-    return (
-      <button
-        className={cx(s.btn, {[s.btnActive]: isActive})}
-        type="button"
-        name={category}
-        onClick={this.changeCategoriesHandler}
-      >
-        {toUpperCaseLetter(category)}
-      </button>
-    );
-  }
+  return (
+    <button
+      className={cx(s.btn, {[s.btnActive]: isActive})}
+      type="button"
+      name={category}
+      onClick={changeCategoriesHandler}
+    >
+      {toUpperCaseLetter(category)}
+    </button>
+  );
 }
 
 Checkbox.propTypes = {
   category: pt.string.isRequired,
   isActive: pt.bool.isRequired,
-  onChangeFilterCategories: pt.func.isRequired,
+  onChangeFilter: pt.func.isRequired,
 };
 
-export default Checkbox;
+export default memo(Checkbox);

@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-const withInput = (WrappedComponent) => memo((props) => {
+const withInputNumber = (WrappedComponent) => memo((props) => {
 
   const changeValueHandler = ({target: {name, value}}) => {
     const pattern = /^(\s*|\d+)$/;
@@ -8,7 +8,7 @@ const withInput = (WrappedComponent) => memo((props) => {
 
     if (!isValid) return;
 
-    props.onChangeFilterFields({name, value: Number(value)});
+    props.onChangeFilter({name, value: Number(value)});
   }
 
   return (
@@ -19,4 +19,4 @@ const withInput = (WrappedComponent) => memo((props) => {
   )
 });
 
-export default withInput;
+export default withInputNumber;
