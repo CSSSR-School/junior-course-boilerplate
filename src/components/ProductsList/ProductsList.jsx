@@ -23,7 +23,7 @@ const ProductsList = ({products}) => {
     <div className="products">
       <Title>Список товаров</Title>
       {
-        products.length === 0 ?
+        !products.length ?
           <p className={s.noProducts}>Список товаров пуст</p>
           :
           <ul className={s.productsList}>

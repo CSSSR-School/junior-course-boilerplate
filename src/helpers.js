@@ -22,8 +22,6 @@ export const getDiscount = (products) => {
   return Math.min.apply(null, discounts);
 }
 
-export const getCategories = (products) => [...new Set(products.map(({category}) => category))];
-
 export const toUpperCaseLetter = (word) => `${word[0].toUpperCase()}${word.slice(1)}`;
 
 export const toInt = value => {

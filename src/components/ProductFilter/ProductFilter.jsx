@@ -76,7 +76,7 @@ const ProductFilter = ({
         ))}
       </div>
 
-      <button className={s.btn} type="button" onClick={onResetFilter}>
+      <button className={s.btn} type="reset" onClick={onResetFilter}>
         Сбросить фильтры
       </button>
     </form>
