@@ -24,12 +24,12 @@ export const getDiscount = (products) => {
 
 export const toUpperCaseLetter = (word) => `${word[0].toUpperCase()}${word.slice(1)}`;
 
-export const toInt = value => {
+export const toInt = (value) => {
   const integer = (value || '').replace(/\D/g, '');
   return integer.length ? parseInt(integer, 10) : 0;
 };
 
-export const range = to => [...Array(to).keys()].map(i => i + 1);
+export const range = (to) => [...Array(to).keys()].map(i => i + 1);
 
 export const declOfNum = (number, textForms) => {
     const n = Math.abs(number) % 100;
@@ -40,4 +40,4 @@ export const declOfNum = (number, textForms) => {
     return textForms[2];
 }
 
-export const generateCustomArray = (quantity, start) => Array.from(Array(quantity), (_, index) => start + index * 1);
+export const getRange = (quantity, start) => Array.from(Array(quantity), (_, index) => start + index * 1);

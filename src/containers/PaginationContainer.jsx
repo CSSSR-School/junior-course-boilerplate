@@ -12,6 +12,10 @@ import {pushState, getQuery} from '../state/modules/routing'
 import LogRender from '../components/LogRender/LogRender';
 import Pagination from '../components/Pagination/Pagination.jsx';
 
+const MIN_PAGES_COUNT = 5;
+const MIDDLE_PAGES_COUNT = 3;
+const END_PAGES_COUNT = 2;
+
 class PaginationContainer extends LogRender {
 
   componentDidMount() {
@@ -69,6 +73,9 @@ class PaginationContainer extends LogRender {
           <Pagination
             page={page}
             totalPages={totalPages}
+            minPagesCount={MIN_PAGES_COUNT}
+            middlePagesCount={MIDDLE_PAGES_COUNT}
+            endPagesCount={END_PAGES_COUNT}
             onChangePage={this.changePageHandler}
           />
         }
@@ -98,7 +105,9 @@ const mapDispatchToProps = (dispatch) => {
       resetPagination,
       changePage,
       pushState
-    }, dispatch);
+    },
+    dispatch
+  );
 };
 
 export default connect(

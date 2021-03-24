@@ -1,8 +1,8 @@
 import React, {memo} from 'react';
 import pt from 'prop-types';
-import cx from 'classnames';
 import s from './ProductFilter.module.css';
 import {declOfNum} from '../../helpers';
+import FormBlock from '../FormBlock/FormBlock.jsx';
 import FormInput from '../FormInput/FormInput.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
 
@@ -33,8 +33,7 @@ const ProductFilter = ({
         </span>
       </div>
       {isInvalid && <div className={s.formError}>{errorMsg}</div>}
-      <h3 className={s.title}>Цена</h3>
-      <div className={cx(s.formBlock, s.priceBlock)}>
+      <FormBlock title='Цена'>
         <div className={s.price}>
           от
           <FormInput
@@ -51,10 +50,9 @@ const ProductFilter = ({
             onChangeFilter={onChangeFilter}
           />
         </div>
-      </div>
+      </FormBlock>
 
-      <h3 className={s.title}>Скидка</h3>
-      <div className={cx(s.formBlock, s.discountBlock)}>
+      <FormBlock title='Скидка'>
         от
         <FormInput
           name="discount"
@@ -62,10 +60,9 @@ const ProductFilter = ({
           onChangeFilter={onChangeFilter}
         />
         %
-      </div>
+      </FormBlock>
 
-      <h3 className={s.title}>Категории</h3>
-      <div className={cx(s.formBlock, s.categoryBlock)}>
+      <FormBlock title='Категории'>
         {categoriesList.map((category) => (
           <Checkbox
             key={category}
@@ -74,7 +71,7 @@ const ProductFilter = ({
             onChangeFilter={onChangeFilter}
           />
         ))}
-      </div>
+      </FormBlock>
 
       <button className={s.btn} type="reset" onClick={onResetFilter}>
         Сбросить фильтры

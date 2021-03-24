@@ -2,7 +2,8 @@ import React, {memo} from 'react';
 import pt from 'prop-types';
 import s from './ProductRatingItem.module.css';
 
-const ProductRatingItem = (isFilled) => {
+const ProductRatingItem = ({isFilled}) => {
+
   return (
     <div className={s.productRating}>
       <svg width={15} height={15}>

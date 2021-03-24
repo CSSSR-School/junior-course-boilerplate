@@ -14,7 +14,6 @@ import products from '../../products.json';
 export const changeFilter = createAction(`${ActionPrefix.PRODUCT}/CHANGE_FILTER`);
 export const setFilterCategories = createAction(`${ActionPrefix.PRODUCT}/SET_FILTER_CATEGORIES`);
 export const resetFilter = createAction(`${ActionPrefix.PRODUCT}/RESET_FILTER`);
-export const fetchProducts = createAction(`${ActionPrefix.PRODUCT}/FETCH_PRODUCTS`);
 
 // Reducer
 const initialState = {
@@ -29,9 +28,6 @@ const initialState = {
 
 const reducer = createReducer(initialState, builder => {
   builder
-    .addCase(fetchProducts, (state, {payload}) => {
-      state.productsList = payload;
-    })
     .addCase(changeFilter, (state, {payload: {name, value}}) => {
 
       if (name === 'categories') {
@@ -56,7 +52,6 @@ const reducer = createReducer(initialState, builder => {
     .addCase(resetFilter, () => initialState)
     .addDefaultCase((state) => state);
 });
-
 
 // Selectors
 export const getProducts = ({product}) => product.productsList;
