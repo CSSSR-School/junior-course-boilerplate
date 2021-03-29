@@ -1,63 +1,31 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import pt from 'prop-types';
-import {
-  changePage,
-  resetPagination,
-  getTotalPages,
-  getPage
-} from '../state/modules/pagination';
-import {pushState, getQuery} from '../state/modules/routing'
+import {getTotalPages} from '../state/modules/pagination';
+import {getPage, getSearch} from '../state/modules/router';
 import LogRender from '../components/LogRender/LogRender';
 import Pagination from '../components/Pagination/Pagination.jsx';
 
+const INITIAL_PAGE = 1;
 const MIN_PAGES_COUNT = 5;
 const MIDDLE_PAGES_COUNT = 3;
 const END_PAGES_COUNT = 2;
 
 class PaginationContainer extends LogRender {
 
-  componentDidMount() {
-    window.addEventListener('popstate', this.setFromHistory);
-    window.history.replaceState(null, null, this.props.query);
-    this.setFromHistory();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('popstate', this.setFromHistory);
-  }
-
   componentDidUpdate(prevProps) {
-
     if (prevProps.totalPages !== this.props.totalPages) {
-      this.props.resetPagination();
+      this.changePageHandler(INITIAL_PAGE);
     }
-
-    if (prevProps.page !== this.props.page) {
-      this.updateHistory(this.props.page);
-    }
-  }
-
-  setFromHistory = () => {
-    const {totalPages, query, changePage} = this.props;
-    const searchParams = new URLSearchParams(query);
-    const page = searchParams.has('page') ? Number(searchParams.get('page')) : 1;
-    changePage(page <= totalPages && page > 0 ? page : 1);
-  }
-
-  updateHistory = (page) => {
-    const {query, pushState} = this.props;
-    const searchParams = new URLSearchParams(query);
-
-    searchParams.set('page', page);
-    pushState(`?${searchParams.toString()}`);
   }
 
   changePageHandler = (page) => {
-    const {changePage} = this.props;
-    changePage(page);
-    this.updateHistory(page);
+    const {search, history: {push}} = this.props;
+    const searchParams = new URLSearchParams(search);
+
+    searchParams.set('page', page);
+    push(`?${searchParams.toString()}`);
   }
 
   render() {
@@ -80,37 +48,20 @@ class PaginationContainer extends LogRender {
           />
         }
       </>
-    )
+    );
   }
 }
 
 PaginationContainer.propTypes = {
   page: pt.number.isRequired,
-  query: pt.string.isRequired,
-  totalPages: pt.number.isRequired,
-  changePage: pt.func.isRequired,
-  resetPagination: pt.func.isRequired,
-  pushState: pt.func.isRequired
+  search: pt.string.isRequired,
+  totalPages: pt.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
   totalPages: getTotalPages(state),
-  page: getPage(state),
-  query: getQuery(state)
+  search: getSearch(state),
+  page: getPage(state)
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      resetPagination,
-      changePage,
-      pushState
-    },
-    dispatch
-  );
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PaginationContainer);
+export default connect(mapStateToProps)(withRouter(PaginationContainer));

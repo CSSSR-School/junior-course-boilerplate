@@ -1,11 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {productReducer, paginationReducer, routingReducer} from './modules';
+import {productReducer,connectRouter} from './modules';
+import {history} from '../history';
 
 const reducers = {
   product: productReducer,
-  pagination: paginationReducer,
-  routing: routingReducer
-}
+  router: connectRouter(history)
+};
 
 export const store = configureStore({
   reducer: reducers,

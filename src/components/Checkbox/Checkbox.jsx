@@ -4,26 +4,29 @@ import cx from 'classnames';
 import s from './Checkbox.module.css';
 import {toUpperCaseLetter} from '../../helpers';
 
-const Checkbox = ({isActive, category, onChangeFilter}) => {
+const Checkbox = ({
+  isActive,
+  category,
+  onChangeFilterCategories
+}) => {
 
-  const changeCategoriesHandler = () => onChangeFilter({name: 'categories', value: category});
+  const changeCategoriesHandler = () => onChangeFilterCategories(category);
 
   return (
     <button
-      className={cx(s.btn, {[s.btnActive]: isActive})}
-      type="button"
-      name={category}
+      className={cx(s.categoryBtn, {[s.activeCategoryBtn]: isActive})}
+      type='button'
       onClick={changeCategoriesHandler}
     >
       {toUpperCaseLetter(category)}
     </button>
   );
-}
+};
 
 Checkbox.propTypes = {
   category: pt.string.isRequired,
   isActive: pt.bool.isRequired,
-  onChangeFilter: pt.func.isRequired,
+  onChangeFilterCategories: pt.func.isRequired
 };
 
 export default memo(Checkbox);

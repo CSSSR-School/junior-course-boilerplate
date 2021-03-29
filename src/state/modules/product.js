@@ -1,6 +1,6 @@
 import {createAction, createReducer} from '@reduxjs/toolkit';
 import {createSelector} from 'reselect';
-import {getPage} from './pagination';
+import {getCategories, getPage} from './router';
 import {
   getMinPrice,
   getMaxPrice,
@@ -12,7 +12,6 @@ import products from '../../products.json';
 
 // Actions creators
 export const changeFilter = createAction(`${ActionPrefix.PRODUCT}/CHANGE_FILTER`);
-export const setFilterCategories = createAction(`${ActionPrefix.PRODUCT}/SET_FILTER_CATEGORIES`);
 export const resetFilter = createAction(`${ActionPrefix.PRODUCT}/RESET_FILTER`);
 
 // Reducer
@@ -20,8 +19,7 @@ const initialState = {
   filter: {
     minPrice: getMinPrice(products),
     maxPrice: getMaxPrice(products),
-    discount: getDiscount(products),
-    categories: []
+    discount: getDiscount(products)
   },
   productsList: products
 };
@@ -29,25 +27,7 @@ const initialState = {
 const reducer = createReducer(initialState, builder => {
   builder
     .addCase(changeFilter, (state, {payload: {name, value}}) => {
-
-      if (name === 'categories') {
-        const {categories} = state.filter;
-        const itemIndex = categories.findIndex((item) => item === value);
-
-        state.filter[name] = itemIndex !== -1 ?
-          [
-            ...categories.slice(0, itemIndex),
-            ...categories.slice(itemIndex + 1)
-          ]
-          :
-          [...categories, value];
-        return;
-      }
-
       state.filter[name] = value;
-    })
-    .addCase(setFilterCategories, (state, {payload}) => {
-      state.filter.categories = payload;
     })
     .addCase(resetFilter, () => initialState)
     .addDefaultCase((state) => state);
@@ -56,10 +36,11 @@ const reducer = createReducer(initialState, builder => {
 // Selectors
 export const getProducts = ({product}) => product.productsList;
 export const getFilter = ({product}) => product.filter;
+export const getProduct = ({product: {productsList}}, prodID) => productsList.find(({id}) => id === prodID);
 
 export const getFilteredProducts = createSelector(
-  [getProducts, getFilter],
-  (productsList, {minPrice, maxPrice, discount, categories}) => {
+  [getProducts, getFilter, getCategories],
+  (productsList, {minPrice, maxPrice, discount}, categories) => {
     return productsList.filter(({price, subPriceContent, category}) => {
       const prodDiscount = calcDiscount(price, subPriceContent);
       return (
@@ -67,7 +48,7 @@ export const getFilteredProducts = createSelector(
         price <= maxPrice &&
         discount <= prodDiscount &&
         (categories.length === 0 || categories.includes(category))
-      )
+      );
     });
   }
 );

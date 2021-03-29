@@ -20,7 +20,7 @@ export const getDiscount = (products) => {
     return prodDiscount > 0 ? [...acc, prodDiscount] : acc;
   }, []);
   return Math.min.apply(null, discounts);
-}
+};
 
 export const toUpperCaseLetter = (word) => `${word[0].toUpperCase()}${word.slice(1)}`;
 
@@ -38,6 +38,6 @@ export const declOfNum = (number, textForms) => {
     if (n1 > 1 && n1 < 5) return textForms[1];
     if (n1 === 1) return textForms[0];
     return textForms[2];
-}
+};
 
 export const getRange = (quantity, start) => Array.from(Array(quantity), (_, index) => start + index * 1);

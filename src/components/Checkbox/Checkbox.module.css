@@ -1,4 +1,6 @@
-.btn {
+.categoryBtn {
+  display: block;
+  margin-bottom: 10px;
   height: 30px;
   padding: 0 14px;
   font-size: 14px;
@@ -6,10 +8,12 @@
   border-radius: 50px;
   background: #ffffff;
   text-align: center;
+  text-decoration: none;
+  line-height: 25px;
   color: #7e8fa4;
 }
 
-.btnActive {
+.activeCategoryBtn {
   background: #000000;
   border: solid 1px #000000;
   color: #ffffff;

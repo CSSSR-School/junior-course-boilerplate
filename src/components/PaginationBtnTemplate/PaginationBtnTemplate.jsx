@@ -1,12 +1,12 @@
 import React, {memo} from 'react';
 import pt from 'prop-types';
 import cx from 'classnames';
-import s from './PaginationBtn.module.css';
+import s from './PaginationBtnTemplate.module.css';
 import PaginationPageBtn from '../PaginationPageBtn/PaginationPageBtn.jsx';
 import PaginationNavBtn from '../PaginationNavBtn/PaginationNavBtn.jsx';
 import {getRange} from '../../helpers';
 
-const PaginationBtn = ({
+const PaginationBtnTemplate = ({
   name,
   page,
   totalPages,
@@ -46,7 +46,7 @@ const PaginationBtn = ({
           >
             Назад
           </PaginationNavBtn>
-        )
+        );
         break;
       case 'next':
         template = (
@@ -57,7 +57,7 @@ const PaginationBtn = ({
           >
             Вперед
           </PaginationNavBtn>
-          )
+          );
         break;
       case 'start':
         template = (
@@ -131,7 +131,7 @@ const PaginationBtn = ({
   return renderTemplate();
 };
 
-PaginationBtn.propTypes = {
+PaginationBtnTemplate.propTypes = {
   name: pt.string.isRequired,
   page: pt.number.isRequired,
   totalPages: pt.number.isRequired,
@@ -139,6 +139,6 @@ PaginationBtn.propTypes = {
   middlePagesCount: pt.number.isRequired,
   endPagesCount: pt.number.isRequired,
   onChangePage: pt.func.isRequired
-}
+};
 
-export default memo(PaginationBtn);
+export default memo(PaginationBtnTemplate);

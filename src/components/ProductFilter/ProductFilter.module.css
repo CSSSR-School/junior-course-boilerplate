@@ -47,8 +47,10 @@
   padding-right: 10px;
 }
 
-.btn {
-  height: 30px;
+.reset {
+  padding: 10px;
   border: 1px solid #323c48;
   background: #ffffff;
+  text-align: center;
+  color: #323c48;
 }

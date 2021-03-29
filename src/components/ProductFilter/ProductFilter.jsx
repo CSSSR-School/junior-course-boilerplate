@@ -7,12 +7,14 @@ import FormInput from '../FormInput/FormInput.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
 
 const ProductFilter = ({
-  filter: {minPrice, maxPrice, categories, discount},
+  filter: {minPrice, maxPrice, discount},
   isInvalid,
   errorMsg,
   totalProducts,
   categoriesList,
+  searchCategories,
   onChangeFilter,
+  onChangeFilterCategories,
   onResetFilter
 }) => {
   return (
@@ -67,13 +69,19 @@ const ProductFilter = ({
           <Checkbox
             key={category}
             category={category}
-            isActive={categories.includes(category)}
-            onChangeFilter={onChangeFilter}
-          />
+            isActive={searchCategories.includes(category)}
+            onChangeFilterCategories={onChangeFilterCategories}
+          >
+            {category}
+          </Checkbox>
         ))}
       </FormBlock>
 
-      <button className={s.btn} type="reset" onClick={onResetFilter}>
+      <button
+        className={s.reset}
+        type="reset"
+        onClick={onResetFilter}
+      >
         Сбросить фильтры
       </button>
     </form>
@@ -86,8 +94,10 @@ ProductFilter.propTypes = {
   errorMsg: pt.string.isRequired,
   totalProducts: pt.number.isRequired,
   categoriesList: pt.arrayOf(pt.string).isRequired,
+  searchCategories: pt.arrayOf(pt.string).isRequired,
   onChangeFilter: pt.func.isRequired,
-  onResetFilter: pt.func.isRequired
-}
+  onResetFilter: pt.func.isRequired,
+  onChangeFilterCategories: pt.func.isRequired
+};
 
 export default memo(ProductFilter);

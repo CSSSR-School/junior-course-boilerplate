@@ -29,3 +29,25 @@ button {
   font-family: inherit;
   line-height: inherit;
 }
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 25% 70%;
+  justify-content: space-between;
+}
+
+.product,
+.not-found {
+  display: grid;
+  justify-content: center;
+}

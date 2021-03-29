@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import pt from 'prop-types';
 import s from './Pagination.module.css';
-import PaginationBtn from '../PaginationBtn/PaginationBtn.jsx';
+import PaginationBtnTemplate from '../PaginationBtnTemplate/PaginationBtnTemplate.jsx';
 
 const buttons = ['prev', 'start', 'middle', 'end', 'next'];
 
@@ -16,7 +16,7 @@ const Pagination = ({
 
   const renderButtons = (buttons) => {
     return buttons.map((button) => (
-      <PaginationBtn
+      <PaginationBtnTemplate
         key={button}
         name={button}
         page={page}
@@ -26,8 +26,8 @@ const Pagination = ({
         endPagesCount={endPagesCount}
         onChangePage={onChangePage}
       />
-    ))
-  }
+    ));
+  };
 
   return (
     <div className={s.pagination}>

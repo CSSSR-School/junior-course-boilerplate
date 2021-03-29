@@ -11,12 +11,12 @@ const FormBlock = ({title, children}) => {
         {children}
       </div>
     </>
-  )
-}
+  );
+};
 
 FormBlock.propTypes = {
   title: pt.string.isRequired,
   children: pt.node.isRequired
-}
+};
 
 export default memo(FormBlock);

@@ -1,0 +1,13 @@
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-bottom: 60px;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.title a {
+  display: flex;
+  align-items: center;
+}

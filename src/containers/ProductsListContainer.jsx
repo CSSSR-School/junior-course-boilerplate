@@ -13,7 +13,7 @@ class ProductsListContainer extends LogRender {
 
     return (
       <ProductsList products={productsList}/>
-    )
+    );
   }
 }
 

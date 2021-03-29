@@ -1,55 +1,25 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import pt from 'prop-types';
 import {
   changeFilter,
-  setFilterCategories,
   resetFilter,
   getFilter,
   getCategoriesList,
   getTotalFilteredProducts
 } from '../state/modules/product';
-import {pushState, getQuery} from '../state/modules/routing';
-import {resetPagination} from '../state/modules/pagination';
+import {getSearch, getCategories} from '../state/modules/router';
 import LogRender from '../components/LogRender/LogRender';
 import ProductFilter from '../components/ProductFilter/ProductFilter.jsx';
 
 class ProductFilterContainer extends LogRender {
 
-  componentDidMount() {
-    window.addEventListener('popstate', this.setFromHistory);
-    window.history.replaceState(null, null, this.props.query);
-    this.setFromHistory();
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.filter.categories !== this.props.filter.categories) {
       this.updateHistory(this.props.filter);
     }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('popstate', this.setFromHistory);
-  }
-
-  setFromHistory = () => {
-    const {query, setFilterCategories} = this.props;
-    const searchParams = new URLSearchParams(query);
-    const categories = searchParams.getAll('cat');
-
-    if (categories.length) {
-      setFilterCategories(categories);
-    }
-  }
-
-  updateHistory = ({categories}) => {
-    const {query, pushState} = this.props;
-    const searchParams = new URLSearchParams(query);
-
-    searchParams.delete('cat');
-    categories.forEach((category) => searchParams.append('cat', category));
-    pushState(`?${searchParams.toString()}`);
   }
 
   validateFilter = (filter) => {
@@ -69,15 +39,41 @@ class ProductFilterContainer extends LogRender {
     return error;
   }
 
+  changeFilterCategories = (category) => {
+    const {search, searchCategories, history} = this.props;
+    const searchParams = new URLSearchParams(search);
+
+    searchParams.delete('cat');
+
+    if (searchCategories.length) {
+      const itemIndex = searchCategories.indexOf(category);
+      const categories = itemIndex !== -1 ?
+          [
+            ...searchCategories.slice(0, itemIndex),
+            ...searchCategories.slice(itemIndex + 1)
+          ]
+          :
+          [...searchCategories, category];
+
+      categories.forEach((category) => searchParams.append('cat', category));
+      return history.push(`?${searchParams.toString()}`);
+    }
+
+    searchParams.set('cat', category);
+    return history.push(`?${searchParams.toString()}`);
+  }
+
   resetFilter = () => {
-    this.props.resetFilter();
-    this.props.resetPagination();
+    const {resetFilter, history} = this.props;
+    resetFilter();
+    history.push('/');
   }
 
   render() {
     const {
       filter,
       categoriesList,
+      searchCategories,
       totalProducts,
       changeFilter
     } = this.props;
@@ -90,8 +86,10 @@ class ProductFilterContainer extends LogRender {
         isInvalid={isInvalid}
         errorMsg={errorMsg}
         categoriesList={categoriesList}
+        searchCategories={searchCategories}
         totalProducts={totalProducts}
         onChangeFilter={changeFilter}
+        onChangeFilterCategories={this.changeFilterCategories}
         onResetFilter={this.resetFilter}
       />
     );
@@ -100,30 +98,27 @@ class ProductFilterContainer extends LogRender {
 
 ProductFilterContainer.propTypes = {
   filter: pt.object.isRequired,
+  search: pt.string.isRequired,
   totalProducts: pt.number.isRequired,
   categoriesList: pt.arrayOf(pt.string).isRequired,
-  query: pt.string.isRequired,
+  searchCategories: pt.arrayOf(pt.string).isRequired,
   changeFilter: pt.func.isRequired,
-  setFilterCategories: pt.func.isRequired,
-  resetFilter: pt.func.isRequired,
-  resetPagination: pt.func.isRequired
-}
+  resetFilter: pt.func.isRequired
+};
 
 const mapStateToProps = (state) => ({
   totalProducts: getTotalFilteredProducts(state),
   categoriesList: getCategoriesList(state),
   filter: getFilter(state),
-  query: getQuery(state)
+  search: getSearch(state),
+  searchCategories: getCategories(state)
 });
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       changeFilter,
-      setFilterCategories,
-      resetFilter,
-      resetPagination,
-      pushState
+      resetFilter
     },
     dispatch
   );
@@ -132,4 +127,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProductFilterContainer);
+)(withRouter(ProductFilterContainer));

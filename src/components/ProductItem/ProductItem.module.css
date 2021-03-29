@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+.goodsImgBlock {
+  position: relative;
+}
+
 .goodsNone {
   color: #7e8fa4;
 }
@@ -40,11 +44,21 @@
   opacity: 0.5;
 }
 
+.goodsDetails {
+  display: flex;
+  flex-direction: column;
+}
+
 .goodsName {
   font-size: 16px;
   line-height: 1.5;
   margin-top: 15px;
   margin-bottom: 8px;
+  color: #323c48;
+}
+
+.goodsNameLink:hover {
+  color: #ffdd00;
 }
 
 .goodsPriceBlock {
@@ -67,4 +81,12 @@
 
 .goodsRating {
   display: inline-flex;
+}
+
+.detailMode {
+  flex-direction: row;
+}
+
+.detailMode .goodsImgBlock {
+  margin-right: 40px;
 }
