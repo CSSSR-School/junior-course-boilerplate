@@ -5,8 +5,8 @@ import {NotFoundIcon} from '../Icons';
 const NotFound = () => {
   return (
     <>
-      <NotFoundIcon width={512} height={512}/>
-      <h2 className={s.title}>Sorry, page not found!!!</h2>
+      <NotFoundIcon/>
+      <h2 className={s.title}>Страница не найдена!</h2>
     </>
   );
 };

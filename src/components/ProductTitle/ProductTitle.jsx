@@ -9,7 +9,7 @@ const ProductTitle = ({children}) => {
   return (
     <div className={s.title}>
       <Link to='/'>
-        <ArrowIcon width={40} height={15}/>
+        <ArrowIcon/>
       </Link>
       <h2>{children}</h2>
     </div>

@@ -7,7 +7,7 @@ const Product = ({match}) => {
 
   return (
     <div className="product">
-      <ProductContainer prodID={Number(prodID)}/>
+      <ProductContainer prodID={parseInt(prodID, 10)}/>
     </div>
   );
 };

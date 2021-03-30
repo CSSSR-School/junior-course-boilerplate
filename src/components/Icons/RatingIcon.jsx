@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import pt from 'prop-types';
 
-const Rating = ({width, height, isFilled}) => {
+const Rating = ({width = 15, height = 15, isFilled}) => {
 
   return (
     <svg width={width} height={height}>
@@ -31,8 +31,8 @@ const Rating = ({width, height, isFilled}) => {
 };
 
 Rating.propTypes = {
-  width: pt.number.isRequired,
-  height: pt.number.isRequired,
+  width: pt.number,
+  height: pt.number,
   isFilled: pt.bool.isRequired
 };
 

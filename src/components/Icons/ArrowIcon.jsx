@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import pt from 'prop-types';
 
-const ArrowIcon = ({width, height}) => {
+const ArrowIcon = ({width = 40, height = 15}) => {
   return (
     <svg width={width} height={height}>
       <title>Arrow</title>
@@ -14,8 +14,8 @@ const ArrowIcon = ({width, height}) => {
 };
 
 ArrowIcon.propTypes = {
-  width: pt.number.isRequired,
-  height: pt.number.isRequired
+  width: pt.number,
+  height: pt.number
 };
 
 export default memo(ArrowIcon);

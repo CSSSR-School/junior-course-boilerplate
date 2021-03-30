@@ -6,7 +6,7 @@ const NoProduct = () => {
   return (
     <>
       <ProductTitle>Товар не найден</ProductTitle>
-      <PlanetIcon width={512} height={512}/>
+      <PlanetIcon/>
     </>
   );
 };

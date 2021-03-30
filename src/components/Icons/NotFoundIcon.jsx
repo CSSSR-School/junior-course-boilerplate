@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import pt from 'prop-types';
 
-const NotFoundIcon = ({width, height}) => {
+const NotFoundIcon = ({width = 512, height = 512}) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -19,8 +19,8 @@ const NotFoundIcon = ({width, height}) => {
 };
 
 NotFoundIcon.propTypes = {
-  width: pt.number.isRequired,
-  height: pt.number.isRequired
+  width: pt.number,
+  height: pt.number
 };
 
 export default memo(NotFoundIcon);

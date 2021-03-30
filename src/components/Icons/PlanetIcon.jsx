@@ -1,7 +1,7 @@
 import React from 'react';
 import pt from 'prop-types';
 
-const PlanetIcon = ({width, height}) => {
+const PlanetIcon = ({width = 512, height = 512}) => {
   return (
     <svg width={width} height={height}>
       <title>Ill Planet</title>
@@ -229,8 +229,8 @@ const PlanetIcon = ({width, height}) => {
 };
 
 PlanetIcon.propTypes = {
-  width: pt.number.isRequired,
-  height: pt.number.isRequired,
+  width: pt.number,
+  height: pt.number
 };
 
 export default PlanetIcon;

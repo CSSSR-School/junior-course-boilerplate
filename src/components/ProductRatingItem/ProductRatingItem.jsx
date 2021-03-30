@@ -7,7 +7,7 @@ const ProductRatingItem = ({isFilled}) => {
 
   return (
     <div className={s.productRating}>
-      <RatingIcon width={15} height={15} isFilled={isFilled}/>
+      <RatingIcon isFilled={isFilled}/>
     </div>
   );
 };
