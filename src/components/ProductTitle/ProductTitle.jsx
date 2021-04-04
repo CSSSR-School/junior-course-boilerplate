@@ -1,23 +1,33 @@
-import React from 'react';
+import React, {memo} from 'react';
 import pt from 'prop-types';
 import s from './ProductTitle.module.css';
-import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {ArrowIcon} from '../Icons';
 
-const ProductTitle = ({children}) => {
+const ProductTitle = ({isLinkable = true, history, children}) => {
+
+  const goBackHandler = () => history.goBack();
 
   return (
     <div className={s.title}>
-      <Link to='/'>
-        <ArrowIcon/>
-      </Link>
+      {
+        isLinkable &&
+        <button
+          className={s.btnBack}
+          onClick={goBackHandler}
+        >
+          <ArrowIcon/>
+        </button>
+      }
       <h2>{children}</h2>
     </div>
   );
 };
 
 ProductTitle.propTypes = {
+  isLinkable: pt.bool,
+  history: pt.object.isRequired,
   children: pt.node.isRequired
 };
 
-export default ProductTitle;
+export default withRouter(memo(ProductTitle));

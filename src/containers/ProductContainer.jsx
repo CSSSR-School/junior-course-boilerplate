@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import pt from 'prop-types';
 import {PropValidator} from '../prop-validator';
 import {getProduct} from '../state/modules/product';
-import LogRender from '../components/LogRender/LogRender';
 import Product from '../components/Product/Product.jsx';
 import NoProduct from '../components/NoProduct/NoProduct.jsx';
 
-class ProductContainer extends LogRender {
+class ProductContainer extends PureComponent {
 
   render() {
     const {product} = this.props;
@@ -18,7 +17,7 @@ class ProductContainer extends LogRender {
           product ?
             <Product product={product}/>
             :
-            <NoProduct/>
+            <NoProduct title='Товар не найден'/>
         }
       </>
     );

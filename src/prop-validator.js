@@ -1,7 +1,6 @@
 import {
   string,
   number,
-  bool,
   node,
   shape
 } from 'prop-types';
@@ -9,12 +8,12 @@ import {
 export const PropValidator = {
   PRODUCT_INFO: shape({
     id: number.isRequired,
-    isInStock: bool.isRequired,
+    name: node.isRequired,
+    category: string.isRequired,
+    status: string.isRequired,
     img: string.isRequired,
-    title: node.isRequired,
     price: node.isRequired,
-    subPriceContent: node.isRequired,
-    maxRating: number.isRequired,
-    rating: number.isRequired
+    discount: node.isRequired,
+    stars: number.isRequired
   })
 };

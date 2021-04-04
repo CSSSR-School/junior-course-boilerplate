@@ -62,21 +62,18 @@
 }
 
 .goodsPriceBlock {
-  display: flex;
-  align-items: baseline;
   margin-top: 8px;
-}
-
-.goodsPrice {
-  margin-right: 20px;
   font-weight: 600;
   font-size: 20px;
 }
 
-.goodsSubPrice {
-  font-weight: 400;
+.goodsPrice {
+  margin-right: 20px;
+}
+
+.goodsDiscount {
   font-size: 14px;
-  text-decoration: line-through;
+  color: #00b63e;
 }
 
 .goodsRating {

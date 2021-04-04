@@ -11,3 +11,7 @@
   display: flex;
   align-items: center;
 }
+
+.btnBack {
+  background: #ffffff;
+}

@@ -11,14 +11,15 @@ const ProductItem = ({product, isDetailMode = false}) => {
 
   const {
     id,
-    title,
+    name,
     img,
     price,
-    rating,
-    maxRating,
-    subPriceContent,
-    isInStock
+    status,
+    discount,
+    stars
   } = product;
+
+  const isInStock = status === 'IN_STOCK';
 
   return (
     <div className={cx(s.goods, { [s.goodsNone]: !isInStock, [s.detailMode]: isDetailMode })}>
@@ -28,8 +29,8 @@ const ProductItem = ({product, isDetailMode = false}) => {
         </div>
         <img
           className={cx(s.goodsImg, { [s.goodsImgNone]: !isInStock })}
-          src={img}
-          alt={title}
+          src={`/images/${img}`}
+          alt={name}
           width="224"
           height="250"
         />
@@ -37,21 +38,21 @@ const ProductItem = ({product, isDetailMode = false}) => {
       <div className={s.goodsDetails}>
         {
           isDetailMode ?
-          <div className={s.goodsName}>{title}</div>
+          <div className={s.goodsName}>{name}</div>
           :
           <Link
             className={cx(s.goodsName, s.goodsNameLink)}
             to={`/products/${id}`}
           >
-            {title}
+            {name}
           </Link>
         }
         <div className={s.goodsRating}>
           {
-            range(maxRating).map((index) => (
+            range().map((index) => (
               <ProductRatingItem
                 key={index}
-                isFilled={index <= rating}
+                isFilled={index <= stars}
               />
             ))
           }
@@ -59,8 +60,10 @@ const ProductItem = ({product, isDetailMode = false}) => {
         <div className={s.goodsPriceBlock}>
           <span className={s.goodsPrice}>{numberWithSpaces(price)}&nbsp;&#8381;</span>
           {
-            subPriceContent > price &&
-            <span className={s.goodsSubPrice}>{numberWithSpaces(subPriceContent)}&nbsp;&#8381;</span>
+            discount > 0 &&
+            <span className={s.goodsDiscount}>
+              Скидка: {discount}&nbsp;&#x25;
+            </span>
           }
         </div>
       </div>

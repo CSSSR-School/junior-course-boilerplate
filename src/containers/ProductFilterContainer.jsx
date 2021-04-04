@@ -1,20 +1,22 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {withRouter} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import pt from 'prop-types';
 import {
-  changeFilter,
-  resetFilter,
-  getFilter,
+  getProducts,
   getCategoriesList,
-  getTotalFilteredProducts
+  getTotalFilteredProducts,
 } from '../state/modules/product';
+import {
+  changeFilter,
+  setFilter,
+  getFilter
+} from '../state/modules/filter';
 import {getSearch, getCategories} from '../state/modules/router';
-import LogRender from '../components/LogRender/LogRender';
 import ProductFilter from '../components/ProductFilter/ProductFilter.jsx';
+import { PropValidator } from '../prop-validator';
 
-class ProductFilterContainer extends LogRender {
+class ProductFilterContainer extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.filter.categories !== this.props.filter.categories) {
@@ -23,7 +25,7 @@ class ProductFilterContainer extends LogRender {
   }
 
   validateFilter = (filter) => {
-    const {minPrice, maxPrice, discount} = filter;
+    const {minPrice, maxPrice, minDiscount} = filter;
     let error = [false, ''];
 
     if (minPrice > maxPrice) {
@@ -31,7 +33,7 @@ class ProductFilterContainer extends LogRender {
       return error;
     }
 
-    if (discount > 100) {
+    if (minDiscount > 100) {
       error = [true, 'Скидка не может быть более 100%'];
       return error;
     }
@@ -64,8 +66,8 @@ class ProductFilterContainer extends LogRender {
   }
 
   resetFilter = () => {
-    const {resetFilter, history} = this.props;
-    resetFilter();
+    const {setFilter, productsList, history} = this.props;
+    setFilter(productsList);
     history.push('/');
   }
 
@@ -97,16 +99,19 @@ class ProductFilterContainer extends LogRender {
 }
 
 ProductFilterContainer.propTypes = {
+  history: pt.object.isRequired,
   filter: pt.object.isRequired,
+  productsList: pt.arrayOf(PropValidator.PRODUCT_INFO).isRequired,
   search: pt.string.isRequired,
   totalProducts: pt.number.isRequired,
   categoriesList: pt.arrayOf(pt.string).isRequired,
   searchCategories: pt.arrayOf(pt.string).isRequired,
   changeFilter: pt.func.isRequired,
-  resetFilter: pt.func.isRequired
+  setFilter: pt.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  productsList: getProducts(state),
   totalProducts: getTotalFilteredProducts(state),
   categoriesList: getCategoriesList(state),
   filter: getFilter(state),
@@ -114,17 +119,7 @@ const mapStateToProps = (state) => ({
   searchCategories: getCategories(state)
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      changeFilter,
-      resetFilter
-    },
-    dispatch
-  );
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {changeFilter, setFilter}
 )(withRouter(ProductFilterContainer));

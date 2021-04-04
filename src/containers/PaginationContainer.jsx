@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import pt from 'prop-types';
 import {getTotalPages} from '../state/modules/pagination';
 import {getPage, getSearch} from '../state/modules/router';
-import LogRender from '../components/LogRender/LogRender';
 import Pagination from '../components/Pagination/Pagination.jsx';
 
 const INITIAL_PAGE = 1;
@@ -12,7 +11,7 @@ const MIN_PAGES_COUNT = 5;
 const MIDDLE_PAGES_COUNT = 3;
 const END_PAGES_COUNT = 2;
 
-class PaginationContainer extends LogRender {
+class PaginationContainer extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.totalPages !== this.props.totalPages) {
@@ -21,11 +20,11 @@ class PaginationContainer extends LogRender {
   }
 
   changePageHandler = (page) => {
-    const {search, history: {push}} = this.props;
+    const {search, history} = this.props;
     const searchParams = new URLSearchParams(search);
 
     searchParams.set('page', page);
-    push(`?${searchParams.toString()}`);
+    history.push(`?${searchParams.toString()}`);
   }
 
   render() {
@@ -53,6 +52,7 @@ class PaginationContainer extends LogRender {
 }
 
 PaginationContainer.propTypes = {
+  history: pt.object.isRequired,
   page: pt.number.isRequired,
   search: pt.string.isRequired,
   totalPages: pt.number.isRequired

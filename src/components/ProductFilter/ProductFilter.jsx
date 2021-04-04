@@ -7,7 +7,7 @@ import FormInput from '../FormInput/FormInput.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
 
 const ProductFilter = ({
-  filter: {minPrice, maxPrice, discount},
+  filter: {minPrice, maxPrice, minDiscount},
   isInvalid,
   errorMsg,
   totalProducts,
@@ -17,6 +17,20 @@ const ProductFilter = ({
   onChangeFilterCategories,
   onResetFilter
 }) => {
+
+  const renderButtons = () => (
+    categoriesList.map((category) => (
+      <Checkbox
+        key={category}
+        category={category}
+        isActive={searchCategories.includes(category)}
+        onChangeFilterCategories={onChangeFilterCategories}
+      >
+        {category}
+      </Checkbox>
+    ))
+  );
+
   return (
     <form className={s.filterForm} autoComplete="off">
       <div className={s.formHeader}>
@@ -57,24 +71,15 @@ const ProductFilter = ({
       <FormBlock title='Скидка'>
         от
         <FormInput
-          name="discount"
-          value={discount}
+          name="minDiscount"
+          value={minDiscount}
           onChangeFilter={onChangeFilter}
         />
         %
       </FormBlock>
 
       <FormBlock title='Категории'>
-        {categoriesList.map((category) => (
-          <Checkbox
-            key={category}
-            category={category}
-            isActive={searchCategories.includes(category)}
-            onChangeFilterCategories={onChangeFilterCategories}
-          >
-            {category}
-          </Checkbox>
-        ))}
+        {renderButtons()}
       </FormBlock>
 
       <button

@@ -4,10 +4,11 @@ import s from './ProductsList.module.css';
 import {PropValidator} from '../../prop-validator';
 import ProductItem from '../ProductItem/ProductItem.jsx';
 import Title from '../Title/Title.jsx';
+import NoProduct from '../NoProduct/NoProduct.jsx';
 
 const ProductsList = ({products}) => {
 
-  const renderProductsList = (products) => (
+  const renderProducts = () => (
     products.map((product) => (
       <li key={product.id}>
         <ProductItem product={product}/>
@@ -20,10 +21,13 @@ const ProductsList = ({products}) => {
       <Title>Список товаров</Title>
       {
         !products.length ?
-          <p className={s.noProducts}>Список товаров пуст</p>
+          <NoProduct
+            title='По вашему запросу товары не найдены'
+            isLinkable={false}
+          />
           :
           <ul className={s.productsList}>
-            {renderProductsList(products)}
+            {renderProducts()}
           </ul>
       }
     </div>

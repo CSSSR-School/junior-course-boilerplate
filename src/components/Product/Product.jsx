@@ -4,12 +4,12 @@ import ProductItem from '../ProductItem/ProductItem.jsx';
 import ProductTitle from '../ProductTitle/ProductTitle.jsx';
 
 const Product = ({product}) => {
-  const {title} = product;
+  const {name} = product;
 
   return (
     <>
       <ProductTitle>
-        {title}
+        {name}
       </ProductTitle>
       <ProductItem
         product={product}
