@@ -1,0 +1,26 @@
+.cart {
+  margin-top: 100px;
+}
+
+.cartHeader {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 30px;
+}
+
+.cartTitle {
+  margin-left: 5px;
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.cart button {
+  margin-bottom: 15px;
+}
+
+.link {
+  display: block;
+  color: #323c48;
+  text-align: center;
+  font-weight: 500;
+}

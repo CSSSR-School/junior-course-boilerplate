@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {PropValidator} from '../../prop-validator';
-import ProductItem from '../ProductItem/ProductItem.jsx';
 import ProductTitle from '../ProductTitle/ProductTitle.jsx';
+import ProductItemContainer from '../../containers/ProductItemContainer.jsx';
 
 const Product = ({product}) => {
   const {name} = product;
@@ -11,7 +11,7 @@ const Product = ({product}) => {
       <ProductTitle>
         {name}
       </ProductTitle>
-      <ProductItem
+      <ProductItemContainer
         product={product}
         isDetailMode
       />
@@ -23,4 +23,4 @@ Product.propTypes = {
   product: PropValidator.PRODUCT_INFO.isRequired
 };
 
-export default Product;
+export default memo(Product);

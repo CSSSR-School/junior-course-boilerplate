@@ -5,6 +5,8 @@ import {declOfNum} from '../../helpers';
 import FormBlock from '../FormBlock/FormBlock.jsx';
 import FormInput from '../FormInput/FormInput.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
+import ErrorBlock from '../ErrorBlock/ErrorBlock.jsx';
+import Button from '../Button/Button.jsx';
 
 const ProductFilter = ({
   filter: {minPrice, maxPrice, minDiscount},
@@ -48,7 +50,7 @@ const ProductFilter = ({
           }
         </span>
       </div>
-      {isInvalid && <div className={s.formError}>{errorMsg}</div>}
+      {isInvalid && <ErrorBlock>{errorMsg}</ErrorBlock>}
       <FormBlock title='Цена'>
         <div className={s.price}>
           от
@@ -82,13 +84,12 @@ const ProductFilter = ({
         {renderButtons()}
       </FormBlock>
 
-      <button
-        className={s.reset}
+      <Button
         type="reset"
         onClick={onResetFilter}
       >
         Сбросить фильтры
-      </button>
+      </Button>
     </form>
   );
 };

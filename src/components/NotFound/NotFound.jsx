@@ -6,7 +6,7 @@ const NotFound = () => {
   return (
     <>
       <NotFoundIcon/>
-      <h2 className={s.title}>Страница не найдена!</h2>
+      <h2 className={s.title}>404</h2>
     </>
   );
 };

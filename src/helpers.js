@@ -33,3 +33,8 @@ export const declOfNum = (number, textForms) => {
 };
 
 export const getRange = (quantity, start) => Array.from(Array(quantity), (_, index) => start + index * 1);
+
+export const toggleItemInArray = (arr, item) => {
+  const itemIndex = arr.indexOf(item);
+  return itemIndex !== -1 ? [...arr.slice(0, itemIndex), ...arr.slice(itemIndex + 1)] : [...arr, item];
+};

@@ -2,16 +2,16 @@ import React, {memo} from 'react';
 import pt from 'prop-types';
 import s from './ProductsList.module.css';
 import {PropValidator} from '../../prop-validator';
-import ProductItem from '../ProductItem/ProductItem.jsx';
 import Title from '../Title/Title.jsx';
 import NoProduct from '../NoProduct/NoProduct.jsx';
+import ProductItemContainer from '../../containers/ProductItemContainer.jsx';
 
 const ProductsList = ({products}) => {
 
   const renderProducts = () => (
     products.map((product) => (
       <li key={product.id}>
-        <ProductItem product={product}/>
+        <ProductItemContainer product={product}/>
       </li>
     ))
   );

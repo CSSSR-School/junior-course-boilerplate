@@ -4,6 +4,6 @@ export const ActionPrefix = {
   PAGINATION: 'app/pagination',
   PRODUCT: 'app/product',
   FILTER: 'app/filter',
-  APP: 'app'
+  CART: 'app/cart'
 };
 

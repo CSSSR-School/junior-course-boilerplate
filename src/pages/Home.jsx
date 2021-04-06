@@ -1,36 +1,35 @@
-import React, {PureComponent} from 'react';
+import React, {memo} from 'react';
 import pt from 'prop-types';
 import {PropValidator} from '../prop-validator';
 import {connect} from 'react-redux';
 import {getProducts} from '../state/modules/product';
 import ProductFilterContainer from '../containers/ProductFilterContainer.jsx';
 import ProductsListContainer from '../containers/ProductsListContainer.jsx';
+import CartContainer from '../containers/CartContainer.jsx';
 import PaginationContainer from '../containers/PaginationContainer.jsx';
 import NoProduct from '../components/NoProduct/NoProduct.jsx';
 
-class Home extends PureComponent {
+const Home = ({productsList}) => {
 
-  render() {
-    const {productsList} = this.props;
-
-    if (!productsList.length) {
-      return (
-        <NoProduct
-          title='Товары не найдены'
-          isLinkable={false}
-        />
-      );
-    }
-
+  if (!productsList.length) {
     return (
-      <div className='dashboard'>
-        <ProductFilterContainer/>
-        <ProductsListContainer/>
-        <PaginationContainer/>
-      </div>
+      <NoProduct
+        title='Товары не найдены'
+        isLinkable={false}
+      />
     );
   }
-}
+
+  return (
+    <div className='dashboard'>
+      <ProductFilterContainer/>
+      <ProductsListContainer/>
+      <CartContainer/>
+      <PaginationContainer/>
+    </div>
+  );
+
+};
 
 Home.propTypes = {
   productsList: pt.arrayOf(PropValidator.PRODUCT_INFO).isRequired
@@ -40,4 +39,4 @@ const mapStateToProps = (state) => ({
   productsList: getProducts(state)
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(memo(Home));

@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import pt from 'prop-types';
+import {PropValidator} from '../prop-validator';
 import {
   getProducts,
   getCategoriesList,
@@ -13,8 +14,8 @@ import {
   getFilter
 } from '../state/modules/filter';
 import {getSearch, getCategories} from '../state/modules/router';
+import {toggleItemInArray} from '../helpers';
 import ProductFilter from '../components/ProductFilter/ProductFilter.jsx';
-import { PropValidator } from '../prop-validator';
 
 class ProductFilterContainer extends PureComponent {
 
@@ -48,15 +49,7 @@ class ProductFilterContainer extends PureComponent {
     searchParams.delete('cat');
 
     if (searchCategories.length) {
-      const itemIndex = searchCategories.indexOf(category);
-      const categories = itemIndex !== -1 ?
-          [
-            ...searchCategories.slice(0, itemIndex),
-            ...searchCategories.slice(itemIndex + 1)
-          ]
-          :
-          [...searchCategories, category];
-
+      const categories = toggleItemInArray(searchCategories, category);
       categories.forEach((category) => searchParams.append('cat', category));
       return history.push(`?${searchParams.toString()}`);
     }

@@ -6,8 +6,15 @@ import s from './ProductItem.module.css';
 import {PropValidator} from '../../prop-validator';
 import {numberWithSpaces, range} from '../../helpers';
 import ProductRatingItem from '../ProductRatingItem/ProductRatingItem.jsx';
+import Button from '../Button/Button.jsx';
 
-const ProductItem = ({product, isDetailMode = false}) => {
+const ProductItem = ({
+  product,
+  isInCart,
+  isDetailMode,
+  cartStatus,
+  onChangeCart
+}) => {
 
   const {
     id,
@@ -19,7 +26,11 @@ const ProductItem = ({product, isDetailMode = false}) => {
     stars
   } = product;
 
+  const {pending} = cartStatus;
+
   const isInStock = status === 'IN_STOCK';
+
+  const changeCartHandler = () => onChangeCart(id);
 
   return (
     <div className={cx(s.goods, { [s.goodsNone]: !isInStock, [s.detailMode]: isDetailMode })}>
@@ -66,6 +77,16 @@ const ProductItem = ({product, isDetailMode = false}) => {
             </span>
           }
         </div>
+        {
+          isInStock &&
+          <Button
+            type='button'
+            disabled={pending}
+            onClick={changeCartHandler}
+          >
+            {isInCart ? 'Убрать' : 'Добавить'}
+          </Button>
+        }
       </div>
     </div>
   );
@@ -73,7 +94,10 @@ const ProductItem = ({product, isDetailMode = false}) => {
 
 ProductItem.propTypes = {
   product: PropValidator.PRODUCT_INFO.isRequired,
-  isDetailMode: pt.bool
+  isInCart: pt.bool.isRequired,
+  isDetailMode: pt.bool,
+  cartStatus: pt.object.isRequired,
+  onChangeCart: pt.func.isRequired
 };
 
 export default memo(ProductItem);
