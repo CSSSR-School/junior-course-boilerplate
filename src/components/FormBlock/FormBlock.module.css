@@ -13,6 +13,10 @@
   font-weight: 600;
 }
 
+.categoryBlock .inputBlock {
+  justify-content: start;
+}
+
 .title {
   font-family: OpenSans, sans-serif;
   font-size: 20px;

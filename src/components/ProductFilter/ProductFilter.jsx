@@ -80,7 +80,10 @@ const ProductFilter = ({
         %
       </FormBlock>
 
-      <FormBlock title='Категории'>
+      <FormBlock
+        title='Категории'
+        additionalClass='categoryBlock'
+      >
         {renderButtons()}
       </FormBlock>
 
