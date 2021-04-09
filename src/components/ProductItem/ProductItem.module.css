@@ -37,6 +37,7 @@
 }
 
 .goodsImg {
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(50, 60, 72, 0.1);
 }
 

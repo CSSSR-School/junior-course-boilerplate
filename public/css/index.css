@@ -42,7 +42,13 @@ a {
 
 .dashboard {
   display: grid;
-  grid-template-columns: 20% 50% 20%;
+  grid-template-columns: 20% 55% 20%;
+  justify-content: space-between;
+}
+
+.cart {
+  display: grid;
+  grid-template-columns: 75% 20%;
   justify-content: space-between;
 }
 

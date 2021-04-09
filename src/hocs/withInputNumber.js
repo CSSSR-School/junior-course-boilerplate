@@ -1,22 +1,32 @@
 import React, {memo} from 'react';
+import pt from 'prop-types';
 
-const withInputNumber = (WrappedComponent) => memo((props) => {
+const withInputNumber = (WrappedComponent) => {
 
-  const changeValueHandler = ({target: {name, value}}) => {
-    const pattern = /^(\s*|\d+)$/;
-    const isValid = pattern.test(value);
+  const WithInputNumber = (props) => {
 
-    if (!isValid) return;
+    const changeValueHandler = ({target: {name, value}}) => {
+      const pattern = /^(\s*|\d+)$/;
+      const isValid = pattern.test(value);
 
-    props.onChangeFilter({name, value: Number(value)});
-  }
+      if (!isValid) return;
 
-  return (
-    <WrappedComponent
-      {...props}
-      onChange={changeValueHandler}
-    />
-  )
-});
+      props.onChangeFilter({name, value: Number(value)});
+    };
+
+    return (
+      <WrappedComponent
+        {...props}
+        onChange={changeValueHandler}
+      />
+    );
+  };
+
+  WithInputNumber.propTypes = {
+    onChangeFilter: pt.func.isRequired
+  };
+
+  return memo(WithInputNumber);
+};
 
 export default withInputNumber;

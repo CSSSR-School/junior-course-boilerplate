@@ -1,6 +1,7 @@
 import {createAction, createReducer, createAsyncThunk} from '@reduxjs/toolkit';
 import {createSelector} from 'reselect';
 import request from '../../api';
+import {getProducts} from './product';
 import {ActionPrefix} from '../../consts';
 import {toggleItemInArray} from '../../helpers';
 
@@ -11,13 +12,14 @@ export const resetCart = createAction(`${ActionPrefix.CART}/RESET_CART`);
 // Async actions
 export const saveCart = createAsyncThunk(
   `${ActionPrefix.CART}/SAVE_CART`,
-  async (_, {rejectWithValue}) => {
+  async (cartList, {rejectWithValue}) => {
     try {
       await request(
         '/save',
         {
           method: 'POST',
           mode: 'cors',
+          body: JSON.stringify(cartList),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -68,9 +70,19 @@ const reducer = createReducer(initialState, builder => {
 // Selectors
 export const getCart = ({cart}) => cart.cartList;
 export const getCartStatus = ({cart}) => cart.cartStatus;
-export const getTotalCartItems = createSelector(
-  [getCart],
-  (cartList) => cartList.length
+export const getTotalCartItems = ({cart}) => cart.cartList.length;
+export const getProductInCart = ({cart}, prodID) => cart.cartList.includes(prodID);
+
+export const getCartProducts = createSelector(
+  [getProducts, getCart],
+  (productsList, cartList) => {
+    return productsList.filter(({id}) => cartList.includes(id));
+  }
+);
+
+export const getProductsTotalPrice = createSelector(
+  [getCartProducts],
+  (productsList) => productsList.reduce((acc, {price}) => acc + price, 0)
 );
 
 export default reducer;

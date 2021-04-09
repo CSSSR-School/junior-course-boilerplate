@@ -4,3 +4,9 @@
   align-items: center;
   padding: 40px 0 80px;
 }
+
+.loaderTitle {
+  margin-bottom: 60px;
+  font-size: 40px;
+  font-weight: 300;
+}

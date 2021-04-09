@@ -1,0 +1,12 @@
+.cartEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cartEmpty h2 {
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+}

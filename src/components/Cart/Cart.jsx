@@ -1,7 +1,8 @@
 import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import pt from 'prop-types';
 import s from './Cart.module.css';
+import {numberWithSpaces} from '../../helpers';
 import {CartIcon, CheckIcon} from '../Icons';
 import ErrorBlock from '../ErrorBlock/ErrorBlock.jsx';
 import Button from '../Button/Button.jsx';
@@ -9,9 +10,11 @@ import Button from '../Button/Button.jsx';
 const Cart = ({
   cartList,
   cartStatus,
+  sum,
   totalCartItems,
-  onSaveCart,
-  onResetCart
+  isDetailMode = false,
+  saveCart,
+  resetCart
 }) => {
 
   const {
@@ -20,16 +23,32 @@ const Cart = ({
     error
   } = cartStatus;
 
-  const saveCartHandler = () => onSaveCart(cartList);
+  const saveCartHandler = () => saveCart(cartList);
 
   return (
     <div className={s.cart}>
+
       {error && <ErrorBlock>Ошибка! Корзина не сохранена.</ErrorBlock>}
+
       <div className={s.cartHeader}>
         <CartIcon/>
-        <h2 className={s.cartTitle}>Корзина {totalCartItems}</h2>
+        <h2 className={s.cartTitle}>Корзина</h2>
         {success && <CheckIcon/>}
       </div>
+
+      <p className={s.cartAmount}>Товаров: {totalCartItems}</p>
+      <p className={s.cartSum}>Всего: <span>{numberWithSpaces(sum)}&nbsp;&#8381;</span></p>
+
+      {
+        totalCartItems > 0 &&
+        <Button
+          type='reset'
+          disabled={pending}
+          onClick={resetCart}
+        >
+          Очистить корзину
+        </Button>
+      }
 
       <Button
         type='button'
@@ -40,22 +59,14 @@ const Cart = ({
       </Button>
 
       {
-        totalCartItems > 0 &&
-        <Button
-          type='reset'
-          disabled={pending}
-          onClick={onResetCart}
+        !isDetailMode &&
+        <Link
+          to='/cart'
+          className={s.link}
         >
-          Очистить корзину
-        </Button>
+          Перейти в корзину
+        </Link>
       }
-
-      <Link
-        to='/cart'
-        className={s.link}
-      >
-        Перейти в корзину
-      </Link>
     </div>
   );
 };
@@ -64,8 +75,10 @@ Cart.propTypes = {
   cartList: pt.arrayOf(pt.node).isRequired,
   cartStatus: pt.object.isRequired,
   totalCartItems: pt.number.isRequired,
-  onSaveCart: pt.func.isRequired,
-  onResetCart: pt.func.isRequired
+  sum: pt.number.isRequired,
+  isDetailMode: pt.bool,
+  saveCart: pt.func.isRequired,
+  resetCart: pt.func.isRequired
 };
 
-export default memo(Cart);
+export default withRouter(memo(Cart));

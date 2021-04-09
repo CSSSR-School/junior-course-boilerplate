@@ -1,6 +1,18 @@
 .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1/-1;
   margin-bottom: 60px;
-  text-align: center;
-  font-weight: 300;
   font-size: 40px;
+  font-weight: 300;
+}
+
+.btnBack {
+  margin-right: 10px;
+  background: #ffffff;
+}
+
+.btnBack svg {
+  vertical-align: middle;
 }

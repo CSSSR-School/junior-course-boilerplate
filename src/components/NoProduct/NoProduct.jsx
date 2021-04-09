@@ -1,13 +1,13 @@
 import React from 'react';
 import pt from 'prop-types';
 import s from './NoProduct.module.css';
-import ProductTitle from '../ProductTitle/ProductTitle.jsx';
+import Title from '../Title/Title.jsx';
 import {PlanetIcon} from '../Icons';
 
 const NoProduct = ({title, isLinkable = true}) => {
   return (
     <div className={s.noProductBlock}>
-      <ProductTitle isLinkable={isLinkable}>{title}</ProductTitle>
+      <Title isLinkable={isLinkable}>{title}</Title>
       <PlanetIcon/>
     </div>
   );

@@ -1,112 +1,159 @@
-import React, {memo} from 'react';
+import React, {PureComponent} from 'react';
+import {withRouter} from 'react-router-dom';
 import pt from 'prop-types';
+import {PropValidator} from '../../prop-validator';
 import s from './ProductFilter.module.css';
-import {declOfNum} from '../../helpers';
+import {declOfNum, toggleItemInArray} from '../../helpers';
 import FormBlock from '../FormBlock/FormBlock.jsx';
 import FormInput from '../FormInput/FormInput.jsx';
 import Checkbox from '../Checkbox/Checkbox.jsx';
 import ErrorBlock from '../ErrorBlock/ErrorBlock.jsx';
 import Button from '../Button/Button.jsx';
 
-const ProductFilter = ({
-  filter: {minPrice, maxPrice, minDiscount},
-  isInvalid,
-  errorMsg,
-  totalProducts,
-  categoriesList,
-  searchCategories,
-  onChangeFilter,
-  onChangeFilterCategories,
-  onResetFilter
-}) => {
+class ProductFilter extends PureComponent {
 
-  const renderButtons = () => (
+  validateFilter = (filter) => {
+    const {minPrice, maxPrice, minDiscount} = filter;
+    let error = [false, ''];
+
+    if (minPrice > maxPrice) {
+      error = [true, 'Минимальная цена выше максимальной'];
+      return error;
+    }
+
+    if (minDiscount > 100) {
+      error = [true, 'Скидка не может быть более 100%'];
+      return error;
+    }
+
+    return error;
+  }
+
+  changeFilterCategories = (category) => {
+    const {search, searchCategories, history} = this.props;
+    const searchParams = new URLSearchParams(search);
+
+    searchParams.delete('cat');
+
+    if (searchCategories.length) {
+      const categories = toggleItemInArray(searchCategories, category);
+      categories.forEach((category) => searchParams.append('cat', category));
+      return history.push(`?${searchParams.toString()}`);
+    }
+
+    searchParams.set('cat', category);
+    return history.push(`?${searchParams.toString()}`);
+  }
+
+  resetFilter = () => {
+    const {setFilter, productsList, history} = this.props;
+    setFilter(productsList);
+    history.push('/');
+  }
+
+  renderButtons = (categoriesList) => (
     categoriesList.map((category) => (
       <Checkbox
         key={category}
         category={category}
-        isActive={searchCategories.includes(category)}
-        onChangeFilterCategories={onChangeFilterCategories}
+        isActive={this.props.searchCategories.includes(category)}
+        onChangeFilterCategories={this.changeFilterCategories}
       >
         {category}
       </Checkbox>
     ))
   );
 
-  return (
-    <form className={s.filterForm} autoComplete="off">
-      <div className={s.formHeader}>
-        <h2 className={s.formTitle}>Фильтр</h2>
-        <span>
-          {
-            declOfNum(
-              totalProducts,
-              [
-              `Найден ${totalProducts} товар`,
-              `Найдено ${totalProducts} товара`,
-              `Найдено ${totalProducts} товаров`
-              ]
-            )
-          }
-        </span>
-      </div>
-      {isInvalid && <ErrorBlock>{errorMsg}</ErrorBlock>}
-      <FormBlock title='Цена'>
-        <div className={s.price}>
+  renderTotalProducts = (totalFilteredProducts) => {
+    return declOfNum(
+      totalFilteredProducts,
+      [
+        `Найден ${totalFilteredProducts} товар`,
+        `Найдено ${totalFilteredProducts} товара`,
+        `Найдено ${totalFilteredProducts} товаров`
+      ]
+    );
+  }
+
+  render() {
+    const {
+      filter,
+      totalFilteredProducts,
+      categoriesList,
+      changeFilter
+    } = this.props;
+
+    const {minPrice, maxPrice, minDiscount} = filter;
+
+    const [isInvalid, errorMsg] = this.validateFilter(filter);
+
+    return (
+      <form className={s.filterForm} autoComplete="off">
+
+        <div className={s.formHeader}>
+          <h2 className={s.formTitle}>Фильтр</h2>
+          <span>{this.renderTotalProducts(totalFilteredProducts)}</span>
+        </div>
+
+        {isInvalid && <ErrorBlock>{errorMsg}</ErrorBlock>}
+
+        <FormBlock title='Цена'>
+          <div className={s.price}>
+            от
+            <FormInput
+              name="minPrice"
+              value={minPrice}
+              onChangeFilter={changeFilter}
+            />
+          </div>
+          <div className={s.price}>
+            до
+            <FormInput
+              name="maxPrice"
+              value={maxPrice}
+              onChangeFilter={changeFilter}
+            />
+          </div>
+        </FormBlock>
+
+        <FormBlock title='Скидка'>
           от
           <FormInput
-            name="minPrice"
-            value={minPrice}
-            onChangeFilter={onChangeFilter}
+            name="minDiscount"
+            value={minDiscount}
+            onChangeFilter={changeFilter}
           />
-        </div>
-        <div className={s.price}>
-          до
-          <FormInput
-            name="maxPrice"
-            value={maxPrice}
-            onChangeFilter={onChangeFilter}
-          />
-        </div>
-      </FormBlock>
+          %
+        </FormBlock>
 
-      <FormBlock title='Скидка'>
-        от
-        <FormInput
-          name="minDiscount"
-          value={minDiscount}
-          onChangeFilter={onChangeFilter}
-        />
-        %
-      </FormBlock>
+        <FormBlock
+          title='Категории'
+          additionalClass='categoryBlock'
+        >
+          {this.renderButtons(categoriesList)}
+        </FormBlock>
 
-      <FormBlock
-        title='Категории'
-        additionalClass='categoryBlock'
-      >
-        {renderButtons()}
-      </FormBlock>
-
-      <Button
-        type="reset"
-        onClick={onResetFilter}
-      >
-        Сбросить фильтры
-      </Button>
-    </form>
-  );
-};
+        <Button
+          type="reset"
+          onClick={this.resetFilter}
+        >
+          Сбросить фильтры
+        </Button>
+      </form>
+    );
+  }
+}
 
 ProductFilter.propTypes = {
-  filter: pt.object.isRequired,
-  isInvalid: pt.bool.isRequired,
-  errorMsg: pt.string.isRequired,
-  totalProducts: pt.number.isRequired,
+  productsList: pt.arrayOf(PropValidator.PRODUCT_INFO).isRequired,
+  totalFilteredProducts: pt.number.isRequired,
   categoriesList: pt.arrayOf(pt.string).isRequired,
   searchCategories: pt.arrayOf(pt.string).isRequired,
-  onChangeFilter: pt.func.isRequired,
-  onResetFilter: pt.func.isRequired,
-  onChangeFilterCategories: pt.func.isRequired
+  filter: pt.object.isRequired,
+  history: pt.object.isRequired,
+  search: pt.string.isRequired,
+  setFilter: pt.func.isRequired,
+  changeFilter: pt.func.isRequired
 };
 
-export default memo(ProductFilter);
+export default withRouter(ProductFilter);

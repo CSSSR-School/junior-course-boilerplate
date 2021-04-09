@@ -13,7 +13,7 @@ const ProductItem = ({
   isInCart,
   isDetailMode,
   cartStatus,
-  onChangeCart
+  changeCart
 }) => {
 
   const {
@@ -30,7 +30,7 @@ const ProductItem = ({
 
   const isInStock = status === 'IN_STOCK';
 
-  const changeCartHandler = () => onChangeCart(id);
+  const changeCartHandler = () => changeCart(id);
 
   return (
     <div className={cx(s.goods, { [s.goodsNone]: !isInStock, [s.detailMode]: isDetailMode })}>
@@ -95,9 +95,9 @@ const ProductItem = ({
 ProductItem.propTypes = {
   product: PropValidator.PRODUCT_INFO.isRequired,
   isInCart: pt.bool.isRequired,
-  isDetailMode: pt.bool,
   cartStatus: pt.object.isRequired,
-  onChangeCart: pt.func.isRequired
+  isDetailMode: pt.bool,
+  changeCart: pt.func.isRequired
 };
 
 export default memo(ProductItem);

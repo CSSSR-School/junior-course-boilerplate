@@ -12,6 +12,7 @@ import {
 import Layout from './components/Layout/Layout.jsx';
 import Home from './pages/Home.jsx';
 import Product from './pages/Product.jsx';
+import Cart from './pages/Cart.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Loader from './components/Loader/Loader.jsx';
 import Error from './components/Error/Error.jsx';
@@ -39,6 +40,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route exact path='/products/:prodID' component={Product}/>
+            <Route exact path='/cart' component={Cart}/>
             <Route component={NotFound}/>
           </Switch>
         </Layout>

@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import pt from 'prop-types';
 
-const ArrowIcon = ({width = 40, height = 15}) => {
+const ArrowIcon = ({width = 18, height = 12}) => {
   return (
     <svg width={width} height={height}>
       <title>Arrow</title>

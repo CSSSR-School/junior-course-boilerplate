@@ -2,9 +2,8 @@ import React, {memo} from 'react';
 import pt from 'prop-types';
 import s from './ProductsList.module.css';
 import {PropValidator} from '../../prop-validator';
-import Title from '../Title/Title.jsx';
-import NoProduct from '../NoProduct/NoProduct.jsx';
 import ProductItemContainer from '../../containers/ProductItemContainer.jsx';
+import {PlanetIcon} from '../Icons';
 
 const ProductsList = ({products}) => {
 
@@ -17,29 +16,25 @@ const ProductsList = ({products}) => {
   );
 
   return (
-    <div>
-      <Title>Список товаров</Title>
+    <>
       {
         !products.length ?
-          <NoProduct
-            title='По вашему запросу товары не найдены'
-            isLinkable={false}
-          />
+          <div className={s.productsListEmpty}>
+            <h2>Ничего не найдено</h2>
+            <PlanetIcon/>
+          </div>
           :
           <ul className={s.productsList}>
             {renderProducts()}
           </ul>
+
       }
-    </div>
+    </>
   );
 };
 
 ProductsList.propTypes = {
   products: pt.arrayOf(PropValidator.PRODUCT_INFO).isRequired
-};
-
-ProductsList.defaultProps = {
-  products: []
 };
 
 export default memo(ProductsList);

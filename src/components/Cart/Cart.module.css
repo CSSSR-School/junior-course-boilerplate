@@ -1,17 +1,26 @@
-.cart {
-  margin-top: 100px;
-}
-
 .cartHeader {
   display: flex;
   align-items: baseline;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .cartTitle {
   margin-left: 5px;
   margin-right: 10px;
   font-weight: 500;
+}
+
+.cartAmount {
+  margin-bottom: 15px;
+}
+
+.cartSum {
+  margin-bottom: 20px;
+}
+
+.cartSum span {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .cart button {
