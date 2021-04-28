@@ -1,0 +1,16 @@
+div {
+  display: flex;
+  max-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h2 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+li {
+  padding: 5px;
+}
