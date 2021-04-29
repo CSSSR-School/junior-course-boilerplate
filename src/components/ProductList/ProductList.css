@@ -1,0 +1,9 @@
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 48px 32px;
+  padding-inline-start: 1.5em;
+  font-family: inherit;
+  font-size: 1.6rem;
+  line-height: 200%;
+}

@@ -3,17 +3,3 @@
   place-items: center;
   padding: 80px;
 }
-
-.page-title {
-  margin-bottom: 56px;
-  font-family: inherit;
-  font-size: 3.6rem;
-  font-weight: 300;
-}
-
-.product-list {
-  padding-inline-start: 1.5em;
-  font-family: inherit;
-  font-size: 1.6rem;
-  line-height: 200%;
-}
