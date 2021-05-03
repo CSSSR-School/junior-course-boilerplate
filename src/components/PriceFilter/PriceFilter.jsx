@@ -16,8 +16,8 @@ const PriceFilter = ({
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSubmit({
-      minPrice: minPriceRef.current.value,
-      maxPrice: maxPriceRef.current.value,
+      minPrice: parseInt(minPriceRef.current.value),
+      maxPrice: parseInt(maxPriceRef.current.value),
     })
   };
 
@@ -37,6 +37,7 @@ const PriceFilter = ({
             type="number"
             placeholder={defaultMinPrice}
             defaultValue={defaultMinPrice}
+            ref={minPriceRef}
           />
         </div>
 
