@@ -41,6 +41,7 @@
   line-height: 100%;
   border: 1px solid var(--border-color);
 }
+
 .price-filter__input::placeholder {
   color: var(--placeholder-color);
 }

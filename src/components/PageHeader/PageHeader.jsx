@@ -7,7 +7,7 @@ const PageHeader = () => {
     <header>
       <h1 className="page-title">
         Список товаров
-    </h1>
+      </h1>
     </header>
   );
 };
