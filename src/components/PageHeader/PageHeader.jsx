@@ -1,15 +1,19 @@
 import React from 'react';
 
+import LogRender from '../LogRender/LogRender';
+
 import './PageHeader.css'
 
-const PageHeader = () => {
-  return (
-    <header>
-      <h1 className="page-title">
-        Список товаров
-      </h1>
-    </header>
-  );
+class PageHeader extends LogRender {
+  render() {
+    return (
+      <header>
+        <h1 className="page-title">
+          Список товаров
+        </h1>
+      </header>
+    );
+  }
 };
 
 export default PageHeader;

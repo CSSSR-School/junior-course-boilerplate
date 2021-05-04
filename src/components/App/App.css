@@ -6,6 +6,6 @@
 .page-main {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: max-content 1fr max-content;
   width: 100%;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { minBy, maxBy} from 'csssr-school-utils';
 
 import PriceFilter from '../PriceFilter/PriceFilter';
@@ -14,44 +14,48 @@ const DefaultPrice = {
   MAX: Infinity,
 }
 
-const App = () => {
-  const [minPrice, setMinPrice] = useState(
-    () => minBy(product => product.price, products).price
-  );
-  const [maxPrice, setMaxPrice] = useState(
-    () => maxBy(product => product.price, products).price
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      minPrice: minBy(product => product.price, products).price,
+      maxPrice: maxBy(product => product.price, products).price,
+    }
+  }
 
-  const handleFilterSubmit = ({ maxPrice: newMaxPrice, minPrice: newMinPrice }) => {
+  handleFilterSubmit = ({ maxPrice: newMaxPrice, minPrice: newMinPrice }) => {
+    const { minPrice, maxPrice } = this.state;
     if (minPrice === newMinPrice && maxPrice === newMaxPrice) {
       return;
     } else if (newMaxPrice < 0 || newMinPrice < 0) {
       newMinPrice = DefaultPrice.MIN
       newMaxPrice = DefaultPrice.MAX
     }
-    setMinPrice(newMinPrice);
-    setMaxPrice(newMaxPrice);
+    this.setState({ minPrice: newMinPrice, maxPrice: newMaxPrice })
   }
 
-  return (
-    <div className="app">
-    <PageHeader />
-    <main className="page-main">
-      <div className="sidebar">
-          <PriceFilter
-            onSubmit={handleFilterSubmit}
-            defaultMinPrice={minPrice}
-            defaultMaxPrice={maxPrice}
+  render() {
+    const { minPrice, maxPrice } = this.state;
+    return (
+      <div className="app">
+      <PageHeader />
+      <main className="page-main">
+        <div className="sidebar">
+            <PriceFilter
+              onSubmit={ this.handleFilterSubmit }
+              defaultMinPrice={ minPrice }
+              defaultMaxPrice={ maxPrice }
+            />
+        </div>
+          <ProductList
+            products={ products }
+            minPrice={ minPrice }
+            maxPrice={ maxPrice }
           />
+      </main>
       </div>
-        <ProductList
-          products={products}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-        />
-    </main>
-    </div>
-  );
+    );
+  }
 };
 
 export default App;

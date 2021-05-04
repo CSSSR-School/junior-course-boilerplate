@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { logRender } from '../../hocs/logRender';
+import LogRender from '../LogRender/LogRender';
 
-const Rating = (props) => {
-  const { isFilled } = props;
-
-  return (
-    <span>{ isFilled ? '★' : '☆' }</span>
-  );
+class Rating extends LogRender {
+  render() {
+    const { isFilled } = this.props;
+    return (
+      <span>{ isFilled ? '★' : '☆' }</span>
+    );
+  }
 };
 
-const RatingWithLog = logRender(Rating);
-
-export default RatingWithLog;
+export default Rating;

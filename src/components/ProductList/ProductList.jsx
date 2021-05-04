@@ -2,48 +2,89 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductItem from 'csssr-school-product-card';
 
-import { logRender } from '../../hocs/logRender';
-
+import LogRender from '../LogRender/LogRender';
 import Rating from '../Rating/Rating';
+
+import { formatPrice, getFilteredProducts } from './utils';
 
 import './ProductList.css';
 
-const formatPrice = (price) => {
-  return price.toLocaleString() + ' ₽';
+class ProductList extends LogRender {
+  constructor(props) {
+    super(props);
+    const { products, minPrice, maxPrice } = props;
+    this.state = {
+      filteredProducts: getFilteredProducts(products, minPrice, maxPrice)
+    };
+  }
+
+  static getDerivedStateFromProps({ minPrice, maxPrice, products }) {
+    return { filteredProducts: getFilteredProducts(products, minPrice, maxPrice) };
+  }
+
+  render() {
+    const { filteredProducts } = this.state;
+    return (
+      <ul className="product-list">
+        {filteredProducts.map(({
+          id,
+          img,
+          isInStock,
+          maxRating,
+          price,
+          rating,
+          subPriceContent,
+          title,
+        }) =>
+          <ProductItem
+            key={id}
+            img={img}
+            isInStock={isInStock}
+            maxRating={maxRating}
+            price={formatPrice(price)}
+            rating={rating}
+            subPriceContent={subPriceContent}
+            title={title}
+            ratingComponent={Rating}
+          />
+        )}
+      </ul>
+    );
+  }
 }
 
-const ProductList = ({ products, minPrice, maxPrice }) => {
-  const filteredProducts = products.filter(
-    (product) => product.price >= minPrice && product.price <= maxPrice
-  );
+// ({ products, minPrice, maxPrice }) => {
+//   const filteredProducts = products.filter(
+//     (product) => product.price >= minPrice && product.price <= maxPrice
+//   );
 
-  return (
-    <ul className="product-list">
-      {filteredProducts.map(({
-        id,
-        img,
-        isInStock,
-        maxRating,
-        price,
-        rating,
-        subPriceContent,
-        title,
-      }) =>
-        <ProductItem
-          key={id}
-          img={img}
-          isInStock={isInStock}
-          maxRating={maxRating}
-          price={formatPrice(price)}
-          rating={rating}
-          subPriceContent={subPriceContent}
-          title={title}
-          ratingComponent={Rating}
-        />
-      )}
-    </ul>
-  );
-};
+//   return (
+//     <ul className="product-list">
+//       {filteredProducts.map(({
+//         id,
+//         img,
+//         isInStock,
+//         maxRating,
+//         price,
+//         rating,
+//         subPriceContent,
+//         title,
+//       }) =>
+//         <ProductItem
+//           key={id}
+//           img={img}
+//           isInStock={isInStock}
+//           maxRating={maxRating}
+//           price={formatPrice(price)}
+//           rating={rating}
+//           subPriceContent={subPriceContent}
+//           title={title}
+//           ratingComponent={Rating}
+//         />
+//       )}
+//     </ul>
+//   );
+// };
 
 ProductList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
@@ -60,6 +101,4 @@ ProductList.propTypes = {
   maxPrice: PropTypes.number.isRequired,
 };
 
-const ProductListWithLog = logRender(ProductList);
-
-export default ProductListWithLog;
+export default ProductList;

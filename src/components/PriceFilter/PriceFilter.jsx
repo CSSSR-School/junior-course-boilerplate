@@ -1,27 +1,30 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { logRender } from '../../hocs/logRender';
+import LogRender from '../LogRender/LogRender';
 
 import './PriceFilter.css';
 
-const PriceFilter = ({
-  onSubmit,
-  defaultMinPrice,
-  defaultMaxPrice
-}) => {
-  const minPriceRef = useRef();
-  const maxPriceRef = useRef();
+class PriceFilter extends LogRender {
+  constructor(props) {
+    super(props);
+    this.minPriceRef = React.createRef();
+    this.maxPriceRef = React.createRef();
+  }
 
-  const handleSubmit = (evt) => {
+  handleSubmit = (evt) => {
     evt.preventDefault();
-    onSubmit({
-      minPrice: parseInt(minPriceRef.current.value),
-      maxPrice: parseInt(maxPriceRef.current.value),
+    this.props.onSubmit({
+      minPrice: parseInt(this.minPriceRef.current.value),
+      maxPrice: parseInt(this.maxPriceRef.current.value),
     })
   };
 
-  return (
+  render() {
+    const { handleSubmit, minPriceRef, maxPriceRef } = this;
+    const { defaultMaxPrice, defaultMinPrice } = this.props;
+
+    return (
     <form className="price-filter" onSubmit={handleSubmit}>
 
       <h2 className="price-filter__title">Цена</h2>
@@ -35,9 +38,9 @@ const PriceFilter = ({
             className="price-filter__input"
             id="price-filter__input--min"
             type="number"
-            placeholder={defaultMinPrice}
-            defaultValue={defaultMinPrice}
-            ref={minPriceRef}
+            placeholder={ defaultMinPrice }
+            defaultValue={ defaultMinPrice }
+            ref={ minPriceRef }
           />
         </div>
 
@@ -49,9 +52,9 @@ const PriceFilter = ({
             className="price-filter__input"
             id="price-filter__input--max"
             type="number"
-            placeholder={defaultMaxPrice}
-            defaultValue={defaultMaxPrice}
-            ref={maxPriceRef}
+            placeholder={ defaultMaxPrice }
+            defaultValue={ defaultMaxPrice }
+            ref={ maxPriceRef }
           />
         </div>
       </fieldset>
@@ -62,15 +65,14 @@ const PriceFilter = ({
 
     </form>
   );
-};
+  }
+}
 
-
-const PriceFilterWithLog = logRender(PriceFilter);
-
-PriceFilterWithLog.propTypes = {
+PriceFilter.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   defaultMaxPrice: PropTypes.number.isRequired,
   defaultMinPrice: PropTypes.number.isRequired,
 };
 
-export default PriceFilterWithLog;
+
+export default PriceFilter;
