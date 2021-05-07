@@ -9,7 +9,7 @@ import products from '../../products.json';
 
 import './App.css';
 
-const DefaultPrice = {
+const DEFAULT_PRICE = {
   MIN: 0,
   MAX: Infinity,
 }
@@ -28,8 +28,8 @@ class App extends React.Component {
     if (minPrice === newMinPrice && maxPrice === newMaxPrice) {
       return;
     } else if (newMaxPrice < 0 || newMinPrice < 0) {
-      newMinPrice = DefaultPrice.MIN
-      newMaxPrice = DefaultPrice.MAX
+      newMinPrice = DEFAULT_PRICE.MIN
+      newMaxPrice = DEFAULT_PRICE.MAX
     }
     this.setState({ minPrice: newMinPrice, maxPrice: newMaxPrice })
   }

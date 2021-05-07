@@ -53,39 +53,6 @@ class ProductList extends LogRender {
   }
 }
 
-// ({ products, minPrice, maxPrice }) => {
-//   const filteredProducts = products.filter(
-//     (product) => product.price >= minPrice && product.price <= maxPrice
-//   );
-
-//   return (
-//     <ul className="product-list">
-//       {filteredProducts.map(({
-//         id,
-//         img,
-//         isInStock,
-//         maxRating,
-//         price,
-//         rating,
-//         subPriceContent,
-//         title,
-//       }) =>
-//         <ProductItem
-//           key={id}
-//           img={img}
-//           isInStock={isInStock}
-//           maxRating={maxRating}
-//           price={formatPrice(price)}
-//           rating={rating}
-//           subPriceContent={subPriceContent}
-//           title={title}
-//           ratingComponent={Rating}
-//         />
-//       )}
-//     </ul>
-//   );
-// };
-
 ProductList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
