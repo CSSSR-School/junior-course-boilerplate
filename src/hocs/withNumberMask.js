@@ -28,9 +28,9 @@ export const withNumberMask = (InputComponent) => {
       const { value } = this.state;
       return (
         <InputComponent
-          {...restProps}
-          onChange={this.handleValueChange}
-          value={value}
+          { ...restProps }
+          onChange={ this.handleValueChange }
+          value={ value }
         />
       );
     }
