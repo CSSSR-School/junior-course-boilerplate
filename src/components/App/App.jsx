@@ -1,58 +1,55 @@
 import React from 'react';
-import { minBy, maxBy} from 'csssr-school-utils';
+import { minBy, maxBy } from 'csssr-school-utils';
 
-import PriceFilter from '../PriceFilter/PriceFilter';
+import PriceFieldset from '../FilterForm/PriceFieldset/PriceFieldset';
+import DiscountFieldset from '../FilterForm/DiscountFieldset/DiscountFieldset';
 import ProductList from '../ProductList/ProductList';
+import FilterForm from '../FilterForm/FilterForm';
 import PageHeader from '../PageHeader/PageHeader';
 
 import products from '../../products.json';
 
 import './App.css';
 
-const DEFAULT_PRICE = {
-  MIN: 0,
-  MAX: Infinity,
-}
-
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      minPrice: minBy(product => product.price, products).price,
-      maxPrice: maxBy(product => product.price, products).price,
-    }
+  state = {
+    minPrice: minBy(product => product.price, products).price,
+    maxPrice: maxBy(product => product.price, products).price,
   }
-
-  handleFilterSubmit = ({ maxPrice: newMaxPrice, minPrice: newMinPrice }) => {
-    const { minPrice, maxPrice } = this.state;
-    if (minPrice === newMinPrice && maxPrice === newMaxPrice) {
-      return;
-    } else if (newMaxPrice < 0 || newMinPrice < 0) {
-      newMinPrice = DEFAULT_PRICE.MIN
-      newMaxPrice = DEFAULT_PRICE.MAX
-    }
-    this.setState({ minPrice: newMinPrice, maxPrice: newMaxPrice })
-  }
+  handleMinPriceChange = (newMinPrice) => { this.setState({ minPrice: newMinPrice }); }
+  handleMaxPriceChange = (newMaxPrice) => { this.setState({ maxPrice: newMaxPrice }); }
 
   render() {
     const { minPrice, maxPrice } = this.state;
     return (
       <div className="app">
-      <PageHeader />
-      <main className="page-main">
-        <div className="sidebar">
-            <PriceFilter
-              onSubmit={ this.handleFilterSubmit }
+
+        <PageHeader />
+
+        <div className="sidebar sidebar--left">
+          <FilterForm>
+            <PriceFieldset
+              onMinPriceChange={ this.handleMinPriceChange }
+              onMaxPriceChange={ this.handleMaxPriceChange }
               defaultMinPrice={ minPrice }
               defaultMaxPrice={ maxPrice }
             />
+            <DiscountFieldset
+
+            />
+          </FilterForm>
         </div>
+
+        <main className="page-main">
           <ProductList
             products={ products }
             minPrice={ minPrice }
             maxPrice={ maxPrice }
           />
-      </main>
+        </main>
+
+        <div className="sidebar" />
+
       </div>
     );
   }
