@@ -6,11 +6,9 @@ import { withNumberMask } from '../../hocs/withNumberMask';
 
 class InputNumber extends LogRender {
   render() {
-    const { inputRef, ...restProps } = this.props;
     return (
       <input
-        ref={ inputRef }
-        {...restProps}
+        {...this.props}
         type="number"
       />
     )

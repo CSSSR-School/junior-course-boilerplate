@@ -1,40 +1,36 @@
 import React from 'react';
 
+import LogRender from '../components/LogRender/LogRender';
+
 const NUMBER_MASK = /^[0-9]*$/;
 
 export const withNumberMask = (InputComponent) => {
-  return class WithNumberMask extends React.Component {
+  return class WithNumberMask extends LogRender {
     constructor(props) {
       super(props);
       const { defaultValue } = props;
-      this.inputRef =  React.createRef();
       this.state = {
         value: defaultValue,
       };
     }
 
-    handleValueChange = () => {
-      const { value } = this.inputRef.current;
+    handleValueChange = (evt) => {
+      const { value } = evt.target;
       if (NUMBER_MASK.test(value)) {
         const numValue = Number(value);
-        if (this.state.value !== numValue) {
-          this.setState({ value: numValue });
-          this.props.onChange(numValue);
-        }
+        this.setState({ value: numValue });
+        this.props.onChange(numValue);
       }
     };
 
     render() {
       const { defaultValue, onChange, ...restProps} = this.props;
       const { value } = this.state;
-      const { inputRef } = this;
-
       return (
         <InputComponent
-          onChange={ this.handleValueChange }
-          value={ value }
-          inputRef={ inputRef }
-          { ...restProps }
+          {...restProps}
+          onChange={this.handleValueChange}
+          value={value}
         />
       );
     }

@@ -7,15 +7,11 @@ import InputNumber from '../../InputNumber/InputNumber';
 import './PriceFieldset.css';
 
 class PriceFieldset extends LogRender {
-  minPriceRef = React.createRef();
-  maxPriceRef = React.createRef();
   handleMinPriceChange = (minPrice) => { this.props.onMinPriceChange(minPrice); };
   handleMaxPriceChange = (maxPrice) => { this.props.onMaxPriceChange(maxPrice); };
 
   render() {
     const {
-      minPriceRef,
-      maxPriceRef,
       handleMinPriceChange,
       handleMaxPriceChange,
     } = this;
@@ -53,7 +49,6 @@ class PriceFieldset extends LogRender {
                 placeholder={ defaultMinPrice }
                 defaultValue={ defaultMinPrice }
                 onChange={ handleMinPriceChange }
-                ref={ minPriceRef }
               />
             </div>
 
@@ -73,7 +68,6 @@ class PriceFieldset extends LogRender {
                 placeholder={ defaultMaxPrice }
                 defaultValue={ defaultMaxPrice }
                 onChange={ handleMaxPriceChange }
-                ref={ maxPriceRef }
               />
             </div>
 
