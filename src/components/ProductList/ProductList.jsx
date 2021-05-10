@@ -35,19 +35,21 @@ class ProductList extends LogRender {
           rating,
           subPriceContent,
           title,
-        }) =>
-          <ProductItem
-            key={id}
-            img={img}
-            isInStock={isInStock}
-            maxRating={maxRating}
-            price={formatPrice(price)}
-            rating={rating}
-            subPriceContent={subPriceContent}
-            title={title}
-            ratingComponent={Rating}
-          />
-        )}
+        }) => (
+          <LogRender>
+            <ProductItem
+              key={id}
+              img={img}
+              isInStock={isInStock}
+              maxRating={maxRating}
+              price={formatPrice(price)}
+              rating={rating}
+              subPriceContent={subPriceContent}
+              title={title}
+              ratingComponent={Rating}
+            />
+          </LogRender>
+        ))}
       </ul>
     );
   }

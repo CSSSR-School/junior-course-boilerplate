@@ -1,4 +1,5 @@
 import React from 'react';
+import shallowCompare from 'react-addons-shallow-compare'
 import { logger } from 'csssr-school-utils';
 
 class LogRender extends React.Component {
@@ -7,7 +8,12 @@ class LogRender extends React.Component {
   }
   shouldComponentUpdate(nextProps, nextState) {
     this.logRender(nextProps, nextState);
-    return true
+    console.log(this, shallowCompare(this, this.state, nextState), shallowCompare(this, this.props, nextProps))
+    return !shallowCompare(this, this.state, nextState) || !shallowCompare(this, this.props, nextProps);
+  }
+
+  render() {
+    return this.props.children;
   }
 }
 
