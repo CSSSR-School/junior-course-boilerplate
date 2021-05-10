@@ -6,9 +6,9 @@ class LogRender extends React.Component {
   logRender(nextProps, nextState) {
     logger.call(this, this.constructor.name, nextProps, nextState);
   }
+
   shouldComponentUpdate(nextProps, nextState) {
     this.logRender(nextProps, nextState);
-    console.log(this, shallowCompare(this, this.state, nextState), shallowCompare(this, this.props, nextProps))
     return !shallowCompare(this, this.state, nextState) || !shallowCompare(this, this.props, nextProps);
   }
 

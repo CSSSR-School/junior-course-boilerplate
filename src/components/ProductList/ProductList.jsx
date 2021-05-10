@@ -12,14 +12,14 @@ import './ProductList.css';
 class ProductList extends LogRender {
   constructor(props) {
     super(props);
-    const { products, minPrice, maxPrice } = props;
+    const { products, minPrice, maxPrice, discount, category } = props;
     this.state = {
-      filteredProducts: getFilteredProducts(products, minPrice, maxPrice)
+      filteredProducts: getFilteredProducts(products, { minPrice, maxPrice, discount, category })
     };
   }
 
-  static getDerivedStateFromProps({ minPrice, maxPrice, products }) {
-    return { filteredProducts: getFilteredProducts(products, minPrice, maxPrice) };
+  static getDerivedStateFromProps({ minPrice, maxPrice, products, discount, category }) {
+    return { filteredProducts: getFilteredProducts(products, { minPrice, maxPrice, discount, category }) };
   }
 
   render() {
@@ -64,6 +64,7 @@ ProductList.propTypes = {
     subPriceContent: PropTypes.string.isRequired,
     maxRating: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
   })),
   minPrice: PropTypes.number.isRequired,
   maxPrice: PropTypes.number.isRequired,

@@ -1,12 +1,15 @@
 .filter-form {
   --border-color: #7e8fa4;
   --placeholder-color: #7e8fa4;
+  --background-color: #ffffff;
   display: grid;
   grid-gap: 24px;
   padding: 0 48px;
+  font-size: 1.4rem;
 }
 
 .filter-fieldset {
+  width: 100%;
   padding: 0;
   margin: 0;
   border: none;
@@ -23,14 +26,12 @@
   display: grid;
   align-items: center;
   margin-right: 12px;
-  font-size: 1.4rem;
   font-weight: 600;
 }
 
 .filter-fieldset__input {
   width: 91px;
   padding: 8px 16px;
-  font-size: 1.4rem;
   font-weight: 400;
   line-height: 100%;
   border: 1px solid var(--border-color);
@@ -38,4 +39,12 @@
 
 .filter-fieldset__input::placeholder {
   color: var(--placeholder-color);
+}
+
+.filter-form__reset {
+  line-height: 100%;
+  padding: 9px;
+  background-color: var(--background-color);
+  border: 1px solid currentColor;
+  cursor: pointer;
 }
