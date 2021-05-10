@@ -15,9 +15,11 @@ class App extends React.Component {
   state = {
     minPrice: minBy(product => product.price, products).price,
     maxPrice: maxBy(product => product.price, products).price,
+    discount: 0,
   }
-  handleMinPriceChange = (newMinPrice) => { this.setState({ minPrice: newMinPrice }); }
-  handleMaxPriceChange = (newMaxPrice) => { this.setState({ maxPrice: newMaxPrice }); }
+  handleMinPriceChange = (minPrice) => { this.setState({ minPrice }); }
+  handleMaxPriceChange = (maxPrice) => { this.setState({ maxPrice }); }
+  handleDiscountChange = (discount) => { this.setState({ discount }); }
 
   render() {
     const { minPrice, maxPrice } = this.state;
@@ -29,13 +31,14 @@ class App extends React.Component {
         <div className="sidebar sidebar--left">
           <FilterForm>
             <PriceFieldset
-              onMinPriceChange={ this.handleMinPriceChange }
-              onMaxPriceChange={ this.handleMaxPriceChange }
               defaultMinPrice={ minPrice }
               defaultMaxPrice={ maxPrice }
+              onMinPriceChange={ this.handleMinPriceChange }
+              onMaxPriceChange={ this.handleMaxPriceChange }
             />
             <DiscountFieldset
-
+              defaultValue={ this.state.discount }
+              onChange={ this.handleDiscountChange }
             />
           </FilterForm>
         </div>

@@ -36,9 +36,8 @@ class ProductList extends LogRender {
           subPriceContent,
           title,
         }) => (
-          <LogRender>
+          <LogRender key={id}>
             <ProductItem
-              key={id}
               img={img}
               isInStock={isInStock}
               maxRating={maxRating}

@@ -1,27 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InputDiscount from 'csssr-school-input-discount';
 
 import LogRender from '../../LogRender/LogRender';
 
-class DiscountFieldset extends LogRender {
-  state = { value: 0 };
+import { withNumberMask } from '../../../hocs/withNumberMask';
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value });
+const InputDiscountWithMask = withNumberMask(InputDiscount);
+
+class DiscountFieldset extends LogRender {
+
+  handleDiscountChange = (discount) => {
+    this.props.onChange(discount);
   }
 
   render() {
     return (
       <fieldset className="filter-fieldset">
-        <InputDiscount
+        <InputDiscountWithMask
           title="Скидка"
           name="sale"
-          value={this.state.value}
-          onChange={ this.handleChange }
+          onChange={ this.handleDiscountChange }
+          defaultValue={ this.props.defaultValue }
         />
       </fieldset>
     );
   }
+}
+
+DiscountFieldset.propTypes = {
+  defaultValue: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 }
 
 export default DiscountFieldset;

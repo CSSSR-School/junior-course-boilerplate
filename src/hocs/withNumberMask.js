@@ -8,7 +8,7 @@ export const withNumberMask = (InputComponent) => {
   return class WithNumberMask extends LogRender {
     constructor(props) {
       super(props);
-      const { defaultValue } = props;
+      const { defaultValue = 0 } = props;
       this.state = {
         value: defaultValue,
       };
@@ -19,7 +19,7 @@ export const withNumberMask = (InputComponent) => {
       if (NUMBER_MASK.test(value)) {
         const numValue = Number(value);
         this.setState({ value: numValue });
-        this.props.onChange(numValue);
+        this.props.onChange && this.props.onChange(numValue);
       }
     };
 
