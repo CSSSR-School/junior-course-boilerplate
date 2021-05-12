@@ -22,14 +22,15 @@ class CategoryFieldset extends LogRender {
 
         <div className="filter-fieldset--category__container">
           { this.props.categories.map((category) => (
-              <button
-                className="category-checkbox"
-                htmlFor={ `filter-category--${category}` }
-                key={ category }
-                active={ category === this.props.category || null }
-                onClick={ () => this.props.onChange(category) }
-              >
-                { category }
+            <button
+              type="button"
+              className="category-checkbox"
+              htmlFor={ `filter-category--${category}` }
+              key={ category }
+              active={ (category === this.props.category).toString() }
+              onClick={ () => this.props.onChange(category) }
+            >
+              { category }
             </button>
           )) }
         </div>
@@ -41,8 +42,8 @@ class CategoryFieldset extends LogRender {
 
 CategoryFieldset.propTypes = {
   onChange: PropTypes.func.isRequired,
-  category: PropTypes.oneOf([PropTypes.string.isRequired, null]),
+  category: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
-}
+};
 
 export default CategoryFieldset;

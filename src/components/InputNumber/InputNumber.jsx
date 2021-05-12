@@ -9,7 +9,7 @@ class InputNumber extends LogRender {
     return (
       <input
         {...this.props}
-        type="number"
+        type="text"
       />
     )
   }

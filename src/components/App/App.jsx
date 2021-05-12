@@ -5,6 +5,10 @@ import ProductList from '../ProductList/ProductList';
 import FilterForm from '../FilterForm/FilterForm';
 import PageHeader from '../PageHeader/PageHeader';
 
+import DiscountFieldset from '../FilterForm/DiscountFieldset/DiscountFieldset';
+import CategoryFieldset from '../FilterForm/CategoryFieldset/CategoryFieldset';
+import PriceFieldset from '../FilterForm/PriceFieldset/PriceFieldset';
+
 import products from '../../products.json';
 
 import './App.css';
@@ -53,23 +57,53 @@ class App extends React.Component {
     }
   }
 
+  handleMinPriceChange = (value) => this.handleFilterChange('minPrice', value);
+  handleMaxPriceChange = (value) => this.handleFilterChange('maxPrice', value);
+  handleDiscountChange = (value) => this.handleFilterChange('discount', value);
+  handleCategoryChange = (value) => this.handleFilterChange('category', value);
+  handleResetFilterButtonClick = () => this.handleFilterChange('reset');
+
   componentDidUpdate() {
     const { category } = this.state;
     if (category) {
       window.history.pushState(null, category, `/?category=${category}`);
+    } else {
+      window.history.pushState(null, null, '/');
     }
   }
 
   render() {
-    const { handleFilterChange } = this;
     return (
-      <AppContext.Provider value={{ ...this.state, categories } }>
+      <AppContext.Provider value={{ ...this.state } }>
         <div className="app">
 
           <PageHeader />
 
           <div className="sidebar sidebar--left">
-            <FilterForm onFilterChange={ handleFilterChange } />
+            <FilterForm >
+              <PriceFieldset
+                minPrice={ this.state.minPrice }
+                maxPrice={ this.state.maxPrice }
+                onMinPriceChange={ this.handleMinPriceChange }
+                onMaxPriceChange={ this.handleMaxPriceChange }
+              />
+              <DiscountFieldset
+                discount={ this.state.discount }
+                onChange={ this.handleDiscountChange }
+              />
+              <CategoryFieldset
+                categories={ categories }
+                category={ this.state.category }
+                onChange={ this.handleCategoryChange }
+              />
+              <button
+                type="button"
+                className="filter-form__reset"
+                onClick={ this.handleResetFilterButtonClick }
+              >
+                Сбросить фильтры
+              </button>
+            </FilterForm>
           </div>
 
           <main className="page-main">
