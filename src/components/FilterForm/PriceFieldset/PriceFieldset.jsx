@@ -9,19 +9,23 @@ import { AppContext } from '../../App/App';
 import './PriceFieldset.css';
 
 class PriceFieldset extends LogRender {
-  handleMinPriceChange = (minPrice) => { this.props.onMinPriceChange(minPrice); };
-  handleMaxPriceChange = (maxPrice) => { this.props.onMaxPriceChange(maxPrice); };
+  constructor(props) {
+    super(props);
+    this.defaultMaxPrice = props.maxPrice;
+    this.defaultMinPrice = props.minPrice;
+    this.handleMinPriceChange = (minPrice) => { this.props.onMinPriceChange(minPrice); };
+    this.handleMaxPriceChange = (maxPrice) => { this.props.onMaxPriceChange(maxPrice); };
+  }
 
   render() {
     const {
       handleMinPriceChange,
       handleMaxPriceChange,
     } = this;
-    const { defaultMinPrice, defaultMaxPrice } = this.props;
 
     return (
       <AppContext.Consumer>
-        {({minPrice, maxPrice}) => (
+        {({ minPrice, maxPrice }) => (
           <fieldset className="
             filter-fieldset
             filter-fieldset--price
@@ -49,7 +53,7 @@ class PriceFieldset extends LogRender {
                 <InputNumber
                   className="filter-fieldset__input"
                   id="filter-fieldset__input--min"
-                  placeholder={ defaultMinPrice }
+                  placeholder={ this.defaultMinPrice }
                   onChange={ handleMinPriceChange }
                   value={ minPrice }
                 />
@@ -68,7 +72,7 @@ class PriceFieldset extends LogRender {
                 <InputNumber
                   className="filter-fieldset__input"
                   id="filter-fieldset__input--max"
-                  placeholder={ defaultMaxPrice }
+                  placeholder={ this.defaultMaxPrice }
                   onChange={ handleMaxPriceChange }
                   value={ maxPrice }
                 />
@@ -86,8 +90,8 @@ class PriceFieldset extends LogRender {
 PriceFieldset.propTypes = {
   onMinPriceChange: PropTypes.func.isRequired,
   onMaxPriceChange: PropTypes.func.isRequired,
-  defaultMaxPrice: PropTypes.number.isRequired,
-  defaultMinPrice: PropTypes.number.isRequired,
+  maxPrice: PropTypes.number.isRequired,
+  minPrice: PropTypes.number.isRequired,
 };
 
 export default PriceFieldset;

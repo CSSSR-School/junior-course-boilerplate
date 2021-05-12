@@ -1,9 +1,6 @@
 import React from 'react';
 import { minBy, maxBy } from 'csssr-school-utils';
 
-import DiscountFieldset from '../FilterForm/DiscountFieldset/DiscountFieldset';
-import CategoryFieldset from '../FilterForm/CategoryFieldset/CategoryFieldset';
-import PriceFieldset from '../FilterForm/PriceFieldset/PriceFieldset';
 import ProductList from '../ProductList/ProductList';
 import FilterForm from '../FilterForm/FilterForm';
 import PageHeader from '../PageHeader/PageHeader';
@@ -31,16 +28,29 @@ class App extends React.Component {
     this.state = this.defaultState;
   }
 
-  handleResetFilterButtonClick = () => { this.setState(this.defaultState); }
-  handleMinPriceChange = (minPrice) => { this.setState({ minPrice }); }
-  handleMaxPriceChange = (maxPrice) => { this.setState({ maxPrice }); }
-  handleDiscountChange = (discount) => { this.setState({ discount }); }
-  handleCategoryChange = (newCategory) => {
-    this.setState(
-      ({ category }) => ({
-        category: category !== newCategory ? newCategory : null
-      })
-    );
+  handleFilterChange = (filter, value) => {
+    switch (filter) {
+      case 'minPrice':
+      case 'maxPrice':
+      case 'discount':
+        this.setState({ [ filter ]: value });
+        break;
+
+      case 'category':
+        this.setState(
+          ({ category }) => ({
+            category: category !== value ? value : null
+          })
+        );
+        break;
+
+      case 'reset':
+        this.setState(this.defaultState);
+        break;
+
+      default:
+        throw new Error('Unknown filter name provided to handleFilterChange()');
+    }
   }
 
   componentDidUpdate() {
@@ -51,6 +61,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { handleFilterChange } = this;
     return (
       <AppContext.Provider value={{ ...this.state, categories } }>
         <div className="app">
@@ -58,28 +69,7 @@ class App extends React.Component {
           <PageHeader />
 
           <div className="sidebar sidebar--left">
-            <FilterForm>
-              <PriceFieldset
-                defaultMinPrice={ this.state.minPrice }
-                defaultMaxPrice={ this.state.maxPrice }
-                onMinPriceChange={ this.handleMinPriceChange }
-                onMaxPriceChange={ this.handleMaxPriceChange }
-              />
-              <DiscountFieldset
-                defaultValue={ this.state.discount }
-                onChange={ this.handleDiscountChange }
-              />
-              <CategoryFieldset
-                onChange={ this.handleCategoryChange }
-              />
-              <button
-                type="button"
-                className="filter-form__reset"
-                onClick={ this.handleResetFilterButtonClick }
-              >
-                Сбросить фильтры
-              </button>
-            </FilterForm>
+            <FilterForm onFilterChange={ handleFilterChange } />
           </div>
 
           <main className="page-main">
