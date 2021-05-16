@@ -13,9 +13,6 @@ class DiscountFieldset extends LogRender {
     super(props);
     this.defaultValue = props.discount;
   }
-  handleDiscountChange = (discount) => {
-    this.props.onChange(discount);
-  }
 
   render() {
     return (
@@ -23,7 +20,7 @@ class DiscountFieldset extends LogRender {
         <InputDiscountWithMask
           title="Скидка"
           name="sale"
-          onChange={ this.handleDiscountChange }
+          onChange={ this.props.handleDiscountChange }
           defaultValue={ this.defaultValue }
           value={ this.props.discount }
         />
@@ -34,7 +31,7 @@ class DiscountFieldset extends LogRender {
 
 DiscountFieldset.propTypes = {
   discount: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
+  handleDiscountChange: PropTypes.func.isRequired,
 }
 
 export default DiscountFieldset;

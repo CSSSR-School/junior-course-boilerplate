@@ -28,7 +28,7 @@ class CategoryFieldset extends LogRender {
               htmlFor={ `filter-category--${category}` }
               key={ category }
               active={ (category === this.props.category).toString() }
-              onClick={ () => this.props.onChange(category) }
+              onClick={ () => this.props.handleCategoryChange(category) }
             >
               { category }
             </button>
@@ -41,7 +41,7 @@ class CategoryFieldset extends LogRender {
 }
 
 CategoryFieldset.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  handleCategoryChange: PropTypes.func.isRequired,
   category: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

@@ -23,10 +23,11 @@ class ProductList extends LogRender {
   }
 
   render() {
-    const { filteredProducts } = this.state;
+    const { products, minPrice, maxPrice, discount, category } = this.props;
+    const filteredProducts = getFilteredProducts(products, { minPrice, maxPrice, discount, category });
     return (
       <ul className="product-list">
-        {filteredProducts.map(({
+        { filteredProducts.map(({
           id,
           img,
           isInStock,
@@ -36,16 +37,16 @@ class ProductList extends LogRender {
           subPriceContent,
           title,
         }) => (
-          <LogRender key={id}>
+          <LogRender key={ id }>
             <ProductItem
-              img={img}
-              isInStock={isInStock}
-              maxRating={maxRating}
-              price={formatPrice(price)}
-              rating={rating}
-              subPriceContent={subPriceContent}
-              title={title}
-              ratingComponent={Rating}
+              img={ img }
+              isInStock={ isInStock }
+              maxRating={ maxRating }
+              price={ formatPrice(price) }
+              rating={ rating }
+              subPriceContent={ subPriceContent }
+              title={ title }
+              ratingComponent={ Rating }
             />
           </LogRender>
         ))}
