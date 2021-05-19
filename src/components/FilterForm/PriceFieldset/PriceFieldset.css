@@ -1,0 +1,16 @@
+.filter-fieldset--price__legend {
+  grid-area: 1 / 1 / 2 / 3;
+  margin-bottom: ;
+}
+
+.filter-fieldset__groups-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 16px;
+}
+
+.filter-fieldset--price__group {
+  display: grid;
+  grid-auto-flow: column;
+}

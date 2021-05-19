@@ -4,11 +4,15 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.3.1",
+    "csssr-school-input-discount": "git+https://github.com/CSSSR-School/junior-course-input-discount.git",
     "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git",
     "csssr-school-utils": "git+https://github.com/CSSSR-School/junior-course-utils.git",
     "react": "^16.12.0",
+    "react-addons-shallow-compare": "^15.6.3",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.2.0"
+    "react-redux": "^7.2.4",
+    "react-scripts": "3.2.0",
+    "redux": "^4.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -12,21 +12,22 @@ import './ProductList.css';
 class ProductList extends LogRender {
   constructor(props) {
     super(props);
-    const { products, minPrice, maxPrice } = props;
+    const { products, minPrice, maxPrice, discount, category } = props;
     this.state = {
-      filteredProducts: getFilteredProducts(products, minPrice, maxPrice)
+      filteredProducts: getFilteredProducts(products, { minPrice, maxPrice, discount, category })
     };
   }
 
-  static getDerivedStateFromProps({ minPrice, maxPrice, products }) {
-    return { filteredProducts: getFilteredProducts(products, minPrice, maxPrice) };
+  static getDerivedStateFromProps({ minPrice, maxPrice, products, discount, category }) {
+    return { filteredProducts: getFilteredProducts(products, { minPrice, maxPrice, discount, category }) };
   }
 
   render() {
-    const { filteredProducts } = this.state;
+    const { products, minPrice, maxPrice, discount, category } = this.props;
+    const filteredProducts = getFilteredProducts(products, { minPrice, maxPrice, discount, category });
     return (
       <ul className="product-list">
-        {filteredProducts.map(({
+        { filteredProducts.map(({
           id,
           img,
           isInStock,
@@ -35,19 +36,20 @@ class ProductList extends LogRender {
           rating,
           subPriceContent,
           title,
-        }) =>
-          <ProductItem
-            key={id}
-            img={img}
-            isInStock={isInStock}
-            maxRating={maxRating}
-            price={formatPrice(price)}
-            rating={rating}
-            subPriceContent={subPriceContent}
-            title={title}
-            ratingComponent={Rating}
-          />
-        )}
+        }) => (
+          <LogRender key={ id }>
+            <ProductItem
+              img={ img }
+              isInStock={ isInStock }
+              maxRating={ maxRating }
+              price={ formatPrice(price) }
+              rating={ rating }
+              subPriceContent={ subPriceContent }
+              title={ title }
+              ratingComponent={ Rating }
+            />
+          </LogRender>
+        ))}
       </ul>
     );
   }
@@ -63,6 +65,7 @@ ProductList.propTypes = {
     subPriceContent: PropTypes.string.isRequired,
     maxRating: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
   })),
   minPrice: PropTypes.number.isRequired,
   maxPrice: PropTypes.number.isRequired,

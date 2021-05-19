@@ -53,10 +53,8 @@
 }
 
 body {
-  display: grid;
-  place-items: center;
   margin: 0;
-  padding: 80px 0;
+  padding: 0;
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -64,7 +62,8 @@ body {
 }
 
 #root {
-  width: 100%;
+  width: max-content;
+  margin: 0 auto;
 }
 
 input::-webkit-outer-spin-button,
@@ -75,4 +74,14 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
