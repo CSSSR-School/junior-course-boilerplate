@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import LogRender from '../../components/LogRender/LogRender';
 import DiscountFieldset from '../../components/FilterForm/DiscountFieldset/DiscountFieldset';
 
-import { setDiscountFilterAction } from '../../store/store';
+import {
+  setDiscountFilterAction,
+  discountSelector,
+} from '../../store/filters';
 
 class DiscountFieldsetContainer extends LogRender {
   render() {
@@ -17,10 +20,8 @@ class DiscountFieldsetContainer extends LogRender {
   }
 }
 
-DiscountFieldsetContainer.propTypes = {};
-
 const mapStateToProps = (state) => ({
-  discount: state.discount
+  discount: discountSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,6 +3,7 @@
   grid-template-columns: repeat(3, max-content);
   grid-gap: 48px 32px;
   padding-inline-start: 1.5em;
+  margin-bottom: 38px;
   font-family: inherit;
   font-size: 1.6rem;
   line-height: 200%;

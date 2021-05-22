@@ -64,5 +64,115 @@
     "maxRating": 5,
     "rating": 3,
     "category": "clothes"
+  },
+  {
+    "id": 7,
+    "title": "Название второго товара",
+    "isInStock": false,
+    "img": "/images/product-image-2.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "clothes"
+  },
+  {
+    "id": 8,
+    "title": "Название третьего товара",
+    "isInStock": true,
+    "img": "/images/product-image-3.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "clothes"
+  },
+  {
+    "id": 9,
+    "title": "Название четвёртого товара",
+    "isInStock": true,
+    "img": "/images/product-image-4.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "books"
+  },
+  {
+    "id": 10,
+    "title": "Название пятого товара",
+    "isInStock": true,
+    "img": "/images/product-image-5.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "books"
+  },
+  {
+    "id": 11,
+    "title": "Название шестого товара",
+    "isInStock": false,
+    "img": "/images/product-image-6.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "clothes"
+  },
+  {
+    "id": 12,
+    "title": "Название второго товара",
+    "isInStock": false,
+    "img": "/images/product-image-2.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "clothes"
+  },
+  {
+    "id": 13,
+    "title": "Название третьего товара",
+    "isInStock": true,
+    "img": "/images/product-image-3.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "clothes"
+  },
+  {
+    "id": 14,
+    "title": "Название четвёртого товара",
+    "isInStock": true,
+    "img": "/images/product-image-4.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "books"
+  },
+  {
+    "id": 15,
+    "title": "Название пятого товара",
+    "isInStock": true,
+    "img": "/images/product-image-5.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "books"
+  },
+  {
+    "id": 16,
+    "title": "Название шестого товара",
+    "isInStock": false,
+    "img": "/images/product-image-6.png",
+    "price": 23000,
+    "subPriceContent": "",
+    "maxRating": 5,
+    "rating": 3,
+    "category": "clothes"
   }
 ]

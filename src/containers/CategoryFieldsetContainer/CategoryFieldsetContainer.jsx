@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import LogRender from '../../components/LogRender/LogRender';
 import CategoryFieldset from '../../components/FilterForm/CategoryFieldset/CategoryFieldset';
 
-import { setCategoryFilterAction } from '../../store/store';
+import { categoriesSelector } from '../../store/domain';
+import {
+  setCategoryFilterAction,
+  categorySelector,
+} from '../../store/filters';
+
 
 class CategoryFieldsetContainer extends LogRender {
   render() {
@@ -18,11 +23,9 @@ class CategoryFieldsetContainer extends LogRender {
   }
 }
 
-CategoryFieldset.propTypes = {};
-
 const mapStateToProps = (state) => ({
-  category: state.category,
-  categories: state.categories,
+  category: categorySelector(state),
+  categories: categoriesSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

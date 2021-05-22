@@ -6,8 +6,10 @@ import PriceFieldset from '../../components/FilterForm/PriceFieldset/PriceFields
 
 import {
   setMinPriceFilterAction,
-  setMaxPriceFilterAction
-} from '../../store/store';
+  setMaxPriceFilterAction,
+  maxPriceSelector,
+  minPriceSelector,
+} from '../../store/filters';
 
 class PriceFieldContainer extends LogRender {
   render() {
@@ -22,11 +24,9 @@ class PriceFieldContainer extends LogRender {
   }
 }
 
-PriceFieldContainer.propTypes = {};
-
 const mapStateToProps = (state) => ({
-  minPrice: state.minPrice,
-  maxPrice: state.maxPrice,
+  minPrice: minPriceSelector(state),
+  maxPrice: maxPriceSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

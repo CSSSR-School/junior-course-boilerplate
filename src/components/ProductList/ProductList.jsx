@@ -5,29 +5,15 @@ import ProductItem from 'csssr-school-product-card';
 import LogRender from '../LogRender/LogRender';
 import Rating from '../Rating/Rating';
 
-import { formatPrice, getFilteredProducts } from './utils';
-
 import './ProductList.css';
 
+const formatPrice = (price) => `${ price.toLocaleString() } ₽`;
+
 class ProductList extends LogRender {
-  constructor(props) {
-    super(props);
-    const { products, minPrice, maxPrice, discount, category } = props;
-    this.state = {
-      filteredProducts: getFilteredProducts(products, { minPrice, maxPrice, discount, category })
-    };
-  }
-
-  static getDerivedStateFromProps({ minPrice, maxPrice, products, discount, category }) {
-    return { filteredProducts: getFilteredProducts(products, { minPrice, maxPrice, discount, category }) };
-  }
-
   render() {
-    const { products, minPrice, maxPrice, discount, category } = this.props;
-    const filteredProducts = getFilteredProducts(products, { minPrice, maxPrice, discount, category });
     return (
       <ul className="product-list">
-        { filteredProducts.map(({
+        { this.props.products.map(({
           id,
           img,
           isInStock,
@@ -67,8 +53,6 @@ ProductList.propTypes = {
     rating: PropTypes.number.isRequired,
     category: PropTypes.string.isRequired,
   })),
-  minPrice: PropTypes.number.isRequired,
-  maxPrice: PropTypes.number.isRequired,
 };
 
 export default ProductList;

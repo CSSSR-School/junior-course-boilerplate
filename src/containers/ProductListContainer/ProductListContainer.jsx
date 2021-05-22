@@ -4,28 +4,21 @@ import { connect } from 'react-redux';
 import LogRender from '../../components/LogRender/LogRender';
 import ProductList from '../../components/ProductList/ProductList';
 
+import { productsAndPagesSelector } from '../../store/store';
+
+
 class ProductListContainer extends LogRender {
   render() {
     return (
       <ProductList
-        products={ this.props.products }
-        minPrice={ this.props.minPrice }
-        maxPrice={ this.props.maxPrice }
-        discount={ this.props.discount }
-        category={ this.props.category }
+        { ...this.props }
       />
     )
   }
 }
 
-ProductListContainer.propTypes = {};
-
 const mapStateToProps = (state) => ({
-  products: state.products,
-  minPrice: state.minPrice,
-  maxPrice: state.maxPrice,
-  discount: state.discount,
-  category: state.category,
+  products: productsAndPagesSelector(state).products,
 });
 
 export default connect(mapStateToProps)(ProductListContainer);

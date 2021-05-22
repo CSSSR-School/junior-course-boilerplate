@@ -1,76 +1,66 @@
-import { minBy, maxBy } from 'csssr-school-utils';
+import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
 
-import products from '../products.json';
+import domain from './domain';
+import filters from './filters';
+import app from './app';
 
-const defaultState = {
-  minPrice: minBy(product => product.price, products).price,
-  maxPrice: maxBy(product => product.price, products).price,
-  category: null,
-  discount: 0,
-  products,
-  categories: products.reduce(
-    (acc, product) => acc.includes(product.category) ? acc : [...acc, product.category],
-    [],
-  ),
+import { productsSelector } from './domain';
+import {
+  currentPageSelector,
+  productsPerPageSelector,
+} from './app';
+import {
+  categorySelector,
+  discountSelector,
+  minPriceSelector,
+  maxPriceSelector,
+} from './filters';
+
+const getCurrentPageProductsSlice = (products, page, productsPerPage) => {
+  const start = productsPerPage * (page - 1);
+  const end = start + productsPerPage;
+  return products.slice(start, end);
 };
 
-const SET_MIN_PRICE_FILTER = 'SET_MIN_PRICE_FILTER';
-const SET_MAX_PRICE_FILTER = 'SET_MAX_PRICE_FILTER';
-const SET_DISCOUNT_FILTER = 'SET_DISCOUNT_FILTER';
-const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
-const RESET_FILTERS = 'RESET_FILTERS';
-
-export const setMinPriceFilterAction = (payload) => ({
-  type: SET_MIN_PRICE_FILTER,
-  payload,
-});
-
-export const setMaxPriceFilterAction = (payload) => ({
-  type: SET_MAX_PRICE_FILTER,
-  payload,
-});
-
-export const setDiscountFilterAction = (payload) => ({
-  type: SET_DISCOUNT_FILTER,
-  payload,
-});
-
-export const setCategoryFilterAction = (payload) => ({
-  type: SET_CATEGORY_FILTER,
-  payload,
-});
-
-export const resetFiltersAction = () => ({
-  type: RESET_FILTERS,
-});
-
-export const reducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case SET_MIN_PRICE_FILTER:
-      return {
-        ...state,
-        minPrice: action.payload,
+export const productsAndPagesSelector = createSelector(
+  productsSelector,
+  categorySelector,
+  discountSelector,
+  minPriceSelector,
+  maxPriceSelector,
+  currentPageSelector,
+  productsPerPageSelector,
+  (products, category, discount, minPrice, maxPrice, currentPage, productsPerPage) => {
+    const filteredProducts = products.filter(
+      (product) => {
+        const fitsCategory = category === 'all' ? true : product.category === category;
+        const fitsPrice = product.price >= minPrice && product.price <= maxPrice;
+        const fitsDiscount = discount ? product.discount > discount : true;
+        return fitsPrice && fitsCategory && fitsDiscount;
       }
-    case SET_MAX_PRICE_FILTER:
-      return {
-        ...state,
-        maxPrice: action.payload,
-      }
-    case SET_DISCOUNT_FILTER:
-      return {
-        ...state,
-        discount: action.payload,
-      }
-    case SET_CATEGORY_FILTER:
-      return {
-        ...state,
-        category: state.category !== action.payload
-          ? action.payload
-          : null,
-      }
-    case RESET_FILTERS:
-      return defaultState;
-    default:
-      return state;
+    );
+
+    const pagesCount = Math.ceil(filteredProducts.length / productsPerPage);
+    // since currentPage for a new filter can be bigger than the new overall page count
+    const currentPageForThisFilter = Math.min(currentPage, pagesCount);
+
+    const productsToRender = getCurrentPageProductsSlice(
+      filteredProducts,
+      currentPageForThisFilter,
+      productsPerPage,
+    );
+
+    return {
+      products: productsToRender,
+      currentPage: currentPageForThisFilter,
+      pagesCount,
+    }
   }
-};
+);
+
+export default combineReducers({
+  domain,
+  filters,
+  app,
+});

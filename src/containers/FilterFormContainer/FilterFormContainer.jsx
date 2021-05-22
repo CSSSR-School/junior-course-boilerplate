@@ -6,7 +6,7 @@ import FilterForm from '../../components/FilterForm/FilterForm';
 
 import {
   resetFiltersAction,
-} from '../../store/store';
+} from '../../store/filters';
 
 class FilterFormContainer extends LogRender {
   render() {
@@ -19,8 +19,6 @@ class FilterFormContainer extends LogRender {
     )
   }
 }
-
-FilterFormContainer.propTypes = {};
 
 const mapDispatchToProps = (dispatch) => ({
   handleResetFilterButtonClick: () => dispatch(resetFiltersAction())

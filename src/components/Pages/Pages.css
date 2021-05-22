@@ -1,0 +1,41 @@
+.catalog-pagination {
+  --border-color: #c5cfde;
+  --font-color: #7e8fa4;
+  --active-background-color: #5695ed;
+
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  grid-gap: 16px;
+  margin: 0 auto;
+  width: max-content;
+  font-size: 1.4rem;
+}
+
+.catalog-pagination__list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 2px;
+}
+
+.catalog-pagination__button {
+  display: grid;
+  place-items: center;
+  padding: 0.5em 1em;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--font-color);
+  cursor: pointer;
+}
+
+.catalog-pagination__button[disabled] {
+  cursor: default;
+}
+
+.catalog-pagination__button--navigators {
+  padding: 0.5em 1.8em;
+}
+
+.catalog-pagination__button[active] {
+  background-color: var(--active-background-color);
+  color: var(--background-color);
+}

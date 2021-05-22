@@ -7,16 +7,18 @@ import CategoryFieldset from '../../containers/CategoryFieldsetContainer/Categor
 import PriceFieldset from '../../containers/PriceFieldsetContainer/PriceFieldContainer';
 import ProductList from '../../containers/ProductListContainer/ProductListContainer';
 import FilterForm from '../../containers/FilterFormContainer/FilterFormContainer';
+import Pages from '../../containers/Pages/Pages';
 
 import './App.css';
 
 class App extends React.Component {
   componentDidUpdate() {
-    const { category } = this.state;
-    if (category) {
-      window.history.pushState(null, category, `/?category=${category}`);
-    } else {
-      window.history.pushState(null, null, '/');
+    const params = new URLSearchParams({
+      category: this.props.category,
+      page: this.props.currentPage
+    });
+    if (window.location.search !== params) {
+      window.history.pushState(null, null, '?' + params);
     }
   }
 
@@ -36,6 +38,7 @@ class App extends React.Component {
 
         <main className="page-main">
           <ProductList />
+          <Pages />
         </main>
 
         <div className="sidebar" />
@@ -44,5 +47,7 @@ class App extends React.Component {
     );
   }
 };
+
+
 
 export default App;
