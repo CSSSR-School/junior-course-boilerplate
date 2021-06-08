@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import data from './products.json';
+
 import './index.css';
 
 class Title extends React.Component {
@@ -10,14 +12,19 @@ class Title extends React.Component {
 
 class List extends React.Component {
     render() {
+        const products = data.map(function(product) {
+            if (product.id < 4) {
+                return (
+                    <li key={product.id}>
+                        {product.name}
+                    </li>
+                );
+            }
+        });
         return (
-            <div className="listOfProducts">
+            <div className="productsList">
                 <Title />
-                <ul>
-                    <li id="1">Имя товара1</li>
-                    <li id="2">Имя товара2</li>
-                    <li id="3">Имя товара3</li>
-                </ul>
+                <ul>{products}</ul>
             </div>
         );
     }
