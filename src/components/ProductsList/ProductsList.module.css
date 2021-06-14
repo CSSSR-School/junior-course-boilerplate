@@ -1,0 +1,9 @@
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline-start: 0; // не помогает
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+  list-style: none;
+}

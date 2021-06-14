@@ -10,19 +10,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-h1 {
-  font-size: 36px;
-  font-weight: 300;
-  line-height: 48px;
-  color: #323c48;
-  margin-bottom: 55px;
-}
-
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
