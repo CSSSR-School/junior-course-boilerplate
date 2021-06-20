@@ -8,3 +8,7 @@
   width: 736px;
   list-style: none;
 }
+
+.productsList > li {
+  margin-bottom: 55px;
+}
