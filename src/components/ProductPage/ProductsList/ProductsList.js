@@ -3,6 +3,7 @@ import pt from 'prop-types';
 import s from './ProductsList.module.css';
 import ProductItem from 'csssr-school-product-card';
 import ratingComponent from '../ratingComponent/ratingComponent.js';
+import ProductsFilter from '../ProductsFilter/ProductsFilter';
 
 function ProductsList(props) {
     const products = props.data.map((product) =>
@@ -22,6 +23,7 @@ function ProductsList(props) {
     return (
         <ul className={s.productsList}>
             {products}
+            <ProductsFilter />
         </ul>
     );
 }
