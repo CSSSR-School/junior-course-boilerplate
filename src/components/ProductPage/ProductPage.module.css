@@ -1,3 +1,8 @@
-.productPage {
-  position: relative;
+.productPageContent {
+  display: flex;
+  justify-content: center;
+}
+
+.productPageFilterWrapper {
+  margin-right: 48px;
 }

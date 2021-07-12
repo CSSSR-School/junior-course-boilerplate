@@ -1,6 +1,4 @@
 .form {
-  position: absolute;
-  left: -304px;
   display: flex;
   flex-direction: column;
   width: 256px;
@@ -16,14 +14,14 @@ input {
   border: none;
 }
 
-.formTitle {
+.form__title {
   font-size: 20px;
   font-weight: 600;
   line-height: 28px;
   margin-bottom: 16px;
 }
 
-.formLabels {
+.range__wrapper {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
@@ -31,8 +29,7 @@ input {
   line-height: 14px;
 }
 
-.startValue,
-.endValue {
+.range__input {
   margin-left: 12px;
   padding-left: 16px;
   /* padding-left: 16px; */
@@ -42,7 +39,7 @@ input {
   border: 1px solid #7e8fa4;
 }
 
-.form .submit {
+.filter__submit {
   margin-top: 24px;
   width: 256px;
   padding-top: 9px;
@@ -57,4 +54,13 @@ input {
   color: #fff;
 
   cursor: pointer;
+}
+
+.filter__submit:hover,
+.filter__submit:focus {
+  background-color: #282828;
+}
+
+.filter__submit:active {
+  background-color: #000;
 }
