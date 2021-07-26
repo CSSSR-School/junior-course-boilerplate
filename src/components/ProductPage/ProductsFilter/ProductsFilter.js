@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProductsFilter.module.css';
-import {toInt} from 'csssr-school-utils';
+import {toInt, maxBy, minBy} from 'csssr-school-utils';
 
 class ProductsFilter extends React.Component {
     constructor(props) {
@@ -17,15 +17,21 @@ class ProductsFilter extends React.Component {
     }
 
     getMinValue(arr) {
-        // делаем глубокую копию
-        const temp = JSON.parse(JSON.stringify(arr));
         // убираем нечисловые символы
-        temp.forEach(toInt(temp.price));
-        // сортируем по возрастанию
-        temp.sort((a, b) => {
-            return a.price > b.price ? 1 : -1;
+        arr.forEach(item => {
+            return item.price = toInt(item.price);
         });
-        return temp[0].price;
+        // ищем минимальную цену price
+        return minBy(obj => obj.price, arr).price;
+    }
+
+    getMaxValue(arr) {
+        // убираем нечисловые символы
+        arr.forEach(item => {
+            return item.price = toInt(item.price);
+        });
+        // ищем максимальную цену price
+        return maxBy(obj => obj.price, arr).price;
     }
 
     handleChangeMin(event) {
@@ -41,7 +47,6 @@ class ProductsFilter extends React.Component {
     }
 
     handleSubmit(event) {
-        alert(`min value: ${this.state.minValue}, max value: ${this.state.maxValue}`);
         event.preventDefault();
     }
 
