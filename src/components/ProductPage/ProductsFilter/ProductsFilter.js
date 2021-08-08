@@ -1,62 +1,62 @@
 import React from 'react';
 import s from './ProductsFilter.module.css';
+import FilterInput from '../FilterInput/FilterInput.js';
 
 class ProductsFilter extends React.Component {
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeMin = this.handleChangeMin.bind(this);
         this.handleChangeMax = this.handleChangeMax.bind(this);
+        this.formSubmit = this.formSubmit.bind(this);
     }
 
-    handleChangeMin(event) {
-        if (Math.sign(event.target.value) === 0 || Math.sign(event.target.value) === 1) {
-            this.props.onMinValueChange(event.target.value);
+    handleChangeMin(minValue) {
+        if (Math.sign(minValue) === 0 || Math.sign(minValue) === 1) {
+          this.props.changeMin(minValue);
+        }
+    }
+    
+    handleChangeMax(maxValue) {
+        if (Math.sign(maxValue) === 0 || Math.sign(maxValue) === 1) {
+            this.props.changeMax(maxValue);
         }
     }
 
-    handleChangeMax(event) {
-        if (Math.sign(event.target.value) === 0 || Math.sign(event.target.value) === 1) {
-          this.props.onMaxValueChange(event.target.value);
+    formSubmit(e) {
+        if (this.props.minValue > this.props.maxValue) {
+          alert('Минимальная цена должна быть меньше или равна максимальной');
         }
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
+        e.preventDefault();
     }
 
     render() {
-        const minValue = this.props.minValue;
-        const maxValue = this.props.maxValue;
-
         return (
             <div className={s.form}>
                 <div className={s.form__title}>Цена</div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.formSubmit}>
                     <div className={s.range__wrapper}>
                         <label className={s.range}>
                             от
-                            <input
-                                type="text"
+                            <FilterInput
                                 className={s.range__input}
-                                value={minValue}
-                                onChange={this.handleChangeMin}
-                                />
+                                inputValue={this.props.minValue}
+                                onValueChange={this.handleChangeMin}
+                            />
                         </label>
                         <label className={s.range}>
                             до
-                            <input
-                                type="text"
+                            <FilterInput
                                 className={s.range__input}
-                                value={maxValue}
-                                onChange={this.handleChangeMax}
-                                />
+                                inputValue={this.props.maxValue}
+                                onValueChange={this.handleChangeMax}
+                            />
                         </label>
                     </div>
-                    <input
+                    <button
                         className={s.filter__submit}
-                        type="submit"
-                        value="Применить" />
+                        type="submit">
+                            Применить
+                    </button>
                 </form>
             </div>
         );

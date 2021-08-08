@@ -1,50 +1,27 @@
 import React from 'react';
-import { maxBy, minBy, toInt } from 'csssr-school-utils';
 
 import ProductPageTitle from './ProductPageTitle/ProductPageTitle.js';
 import ProductsList from './ProductsList/ProductsList.js';
-import ProductsFilter from './ProductsFilter/ProductsFilter';
+import ProductsFilter from './ProductsFilter/ProductsFilter.js';
 
-import data from '../../products.json';
 import s from './ProductPage.module.css';
-
-function getMinValue(arr) {
-    // убираем нечисловые символы
-    arr.forEach(item => {
-        return item.price = toInt(item.price);
-    });
-    // ищем минимальную цену price
-    return minBy(obj => obj.price, arr).price;
-  }
-  
-function getMaxValue(arr) {
-// ищем максимальную цену price
-return maxBy(obj => obj.price, arr).price;
-}
 
 class ProductPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            minValue: getMinValue(data),
-            maxValue: getMaxValue(data)
-        };
-        this.handleMinChange = this.handleMinChange.bind(this);
-        this.handleMaxChange = this.handleMaxChange.bind(this);
+        this.handleChangeMin = this.handleChangeMin.bind(this);
+        this.handleChangeMax = this.handleChangeMax.bind(this);
     }
 
-    handleMinChange(minValue) {
-        this.setState({minValue});
+    handleChangeMin(minValue) {
+        this.props.changeMin(minValue);
     }
     
-    handleMaxChange(maxValue) {
-        this.setState({maxValue});
+    handleChangeMax(maxValue) {
+        this.props.changeMax(maxValue);
     }
 
     render() {
-        const minValue = this.state.minValue;
-        const maxValue = this.state.maxValue;
-
         return (
             <main>
                 <div className={s.productPage}>   
@@ -52,13 +29,13 @@ class ProductPage extends React.Component {
                     <div className={s.productPageContent}>
                         <div className={s.productPageFilterWrapper}>
                             <ProductsFilter
-                                onMinValueChange={this.handleMinChange}
-                                onMaxValueChange={this.handleMaxChange}
-                                minValue={minValue}
-                                maxValue={maxValue}
+                                minValue={this.props.minValue}
+                                maxValue={this.props.maxValue}
+                                changeMin={this.handleChangeMin}
+                                changeMax={this.handleChangeMax}
                             />
                         </div>
-                        <ProductsList data={data}/>
+                        <ProductsList data={this.props.data} />
                     </div>
                 </div>
             </main>
