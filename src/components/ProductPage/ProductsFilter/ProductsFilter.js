@@ -23,9 +23,6 @@ class ProductsFilter extends React.Component {
     }
 
     formSubmit(e) {
-        if (this.props.minValue > this.props.maxValue) {
-          alert('Минимальная цена должна быть меньше или равна максимальной');
-        }
         e.preventDefault();
     }
 

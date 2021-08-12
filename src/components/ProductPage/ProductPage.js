@@ -33,6 +33,7 @@ class ProductPage extends React.Component {
                                 maxValue={this.props.maxValue}
                                 changeMin={this.handleChangeMin}
                                 changeMax={this.handleChangeMax}
+                                filteredProducts={this.props.filteredProducts}
                             />
                         </div>
                         <ProductsList data={this.props.data} />

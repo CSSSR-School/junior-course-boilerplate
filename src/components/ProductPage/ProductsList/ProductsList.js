@@ -8,6 +8,7 @@ class ProductsList extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         const products = this.props.data.map((product) =>
             <li key={product.id}>
