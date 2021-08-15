@@ -17,9 +17,9 @@ function getMaxValue(arr) {
     return maxBy((obj) => obj.price, arr).price;
 }
 
-function getFilteredProducts(arr, getMinValue, getMaxValue) {
+function getFilteredProducts(arr, minValue, maxValue) {
     const filtered = arr.filter((item) => {
-        return (item.price >= getMinValue(arr)) && (item.price <= getMaxValue(arr));
+        return (item.price >= minValue) && (item.price <= maxValue);
     });
     console.log(filtered);
     return filtered;
@@ -31,18 +31,25 @@ class App extends React.Component {
         this.state = {
             minValue: '',
             maxValue: '',
-            filteredProducts: ''
+            filteredProducts: []
         };
         this.handleChangeMin = this.handleChangeMin.bind(this);
         this.handleChangeMax = this.handleChangeMax.bind(this);
+        this.formSubmit = this.formSubmit.bind(this);
     }
 
     handleChangeMin(minValue) {
-        this.setState({minValue});
+        this.setState({minValue: parseInt(minValue)});
     }
 
     handleChangeMax(maxValue) {
-        this.setState({maxValue});
+        this.setState({maxValue: parseInt(maxValue)});
+    }
+
+    formSubmit(data, minValue, maxValue) {
+        this.setState({
+            filteredProducts: getFilteredProducts(data, minValue, maxValue)
+        });
     }
 
     componentDidMount() {
@@ -50,7 +57,7 @@ class App extends React.Component {
         this.setState({
             minValue: getMinValue(data),
             maxValue: getMaxValue(data),
-            filteredProducts: getFilteredProducts(data, getMinValue, getMaxValue)
+            filteredProducts: getFilteredProducts(data, getMinValue(data), getMaxValue(data))
         });
     }
 
@@ -62,6 +69,7 @@ class App extends React.Component {
             maxValue={this.state.maxValue}
             changeMin={this.handleChangeMin}
             changeMax={this.handleChangeMax}
+            formSubmit={this.formSubmit}
         />;
     }
 }
