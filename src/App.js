@@ -17,11 +17,12 @@ function getMaxValue(arr) {
     return maxBy((obj) => obj.price, arr).price;
 }
 
+// фильтрую массив по мин и макс значениям цены товара
 function getFilteredProducts(arr, minValue, maxValue) {
     const filtered = arr.filter((item) => {
         return (item.price >= minValue) && (item.price <= maxValue);
     });
-    console.log(filtered);
+    // console.log(filtered);
     return filtered;
 }
 
@@ -46,6 +47,7 @@ class App extends React.Component {
         this.setState({maxValue: parseInt(maxValue)});
     }
 
+    // здесь я хочу записать в стэйт фильтрованный по введенным пользователем минимальному и максимальному значениям список, но пока что при отправке формы список не перерендеривается
     formSubmit(data, minValue, maxValue) {
         this.setState({
             filteredProducts: getFilteredProducts(data, minValue, maxValue)

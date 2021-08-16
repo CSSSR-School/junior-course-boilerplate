@@ -42,7 +42,8 @@ class ProductPage extends React.Component {
                             />
                         </div>
                         <ProductsList
-                            // data={this.props.data}
+                            // здесь раньше стояла data={this.props.data}
+                            // но решил попробовать рендерить список товаров из уже фильтрованного списка filteredProducts
                             data={this.props.filteredProducts}
                         />
                     </div>
