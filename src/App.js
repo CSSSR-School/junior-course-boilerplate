@@ -47,7 +47,7 @@ class App extends React.Component {
         this.setState({maxValue: parseInt(maxValue)});
     }
 
-    // здесь я хочу записать в стэйт фильтрованный по введенным пользователем минимальному и максимальному значениям список, но пока что при отправке формы список не перерендеривается
+    // тут я хочу записать в стэйт фильтрованный по введенным пользователем минимальному и максимальному значениям список, но пока что при отправке формы список не перерендеривается
     formSubmit(data, minValue, maxValue) {
         this.setState({
             filteredProducts: getFilteredProducts(data, minValue, maxValue)
