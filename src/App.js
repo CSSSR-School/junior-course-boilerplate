@@ -17,7 +17,7 @@ function getMaxValue(arr) {
     return maxBy((obj) => obj.price, arr).price;
 }
 
-// фильтрую массив по мин и макс значениям цены товара
+// фильтрую массив по min и max значениям цены товара
 function getFilteredProducts(arr, minValue, maxValue) {
     const filtered = arr.filter((item) => {
         return (item.price >= minValue) && (item.price <= maxValue);
