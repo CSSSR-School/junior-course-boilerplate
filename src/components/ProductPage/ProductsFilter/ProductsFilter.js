@@ -22,9 +22,9 @@ class ProductsFilter extends React.Component {
         }
     }
 
-    formSubmit(e, arr, minValue, maxValue) {
-        this.props.formSubmit(arr, minValue, maxValue);
+    formSubmit(e) {
         e.preventDefault();
+        this.props.formSubmit();
     }
 
     render() {

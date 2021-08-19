@@ -22,8 +22,8 @@ class ProductPage extends React.Component {
         this.props.changeMax(maxValue);
     }
 
-    formSubmit(arr, minValue, maxValue) {
-        this.props.formSubmit(arr, minValue, maxValue);
+    formSubmit() {
+        this.props.formSubmit();
     }
 
     render() {
@@ -42,8 +42,6 @@ class ProductPage extends React.Component {
                             />
                         </div>
                         <ProductsList
-                            // здесь раньше стояла data={this.props.data}
-                            // но решил попробовать рендерить список товаров из уже фильтрованного списка filteredProducts
                             data={this.props.filteredProducts}
                         />
                     </div>
