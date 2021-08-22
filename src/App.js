@@ -2,7 +2,7 @@ import React from 'react';
 import ProductPage from './components/ProductPage/ProductPage.js';
 import data from './products.json';
 import { maxBy, minBy, toInt } from 'csssr-school-utils';
-import logger from 'csssr-school-utils';
+import LogRender from './LogRender.js';
 
 function getInt(arr) {
     arr.forEach((item) => {
@@ -62,11 +62,6 @@ class App extends React.Component {
             filteredProducts: getFilteredProducts(data, getMinValue(data), getMaxValue(data))
         });
     }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     logger.call(this, this.constructor.name, nextProps, nextState);
-    //     return true
-    //   }
 
     render() {
         return <ProductPage
