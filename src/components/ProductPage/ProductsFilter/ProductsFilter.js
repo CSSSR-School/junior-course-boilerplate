@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProductsFilter.module.css';
 import FilterInput from '../FilterInput/FilterInput.js';
+import LogRender from '../../../LogRender';
 
 class ProductsFilter extends React.Component {
     constructor(props) {
@@ -61,4 +62,6 @@ class ProductsFilter extends React.Component {
     }
 }
 
-export default ProductsFilter;
+const WrappedFilter = LogRender(ProductsFilter);
+
+export default WrappedFilter;
