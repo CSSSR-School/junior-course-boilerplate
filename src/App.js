@@ -2,7 +2,6 @@ import React from 'react';
 import ProductPage from './components/ProductPage/ProductPage.js';
 import data from './products.json';
 import { maxBy, minBy, toInt } from 'csssr-school-utils';
-import LogRender from './LogRender.js';
 
 function getInt(arr) {
     arr.forEach((item) => {
@@ -23,7 +22,6 @@ function getFilteredProducts(arr, minValue, maxValue) {
     const filtered = arr.filter((item) => {
         return (item.price >= minValue) && (item.price <= maxValue);
     });
-    // console.log(filtered);
     return filtered;
 }
 

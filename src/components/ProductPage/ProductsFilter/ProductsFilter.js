@@ -3,7 +3,7 @@ import s from './ProductsFilter.module.css';
 import FilterInput from '../FilterInput/FilterInput.js';
 import LogRender from '../../../LogRender';
 
-class ProductsFilter extends React.Component {
+class ProductsFilter extends LogRender {
     constructor(props) {
         super(props);
         this.handleChangeMin = this.handleChangeMin.bind(this);
@@ -62,6 +62,4 @@ class ProductsFilter extends React.Component {
     }
 }
 
-const WrappedFilter = LogRender(ProductsFilter);
-
-export default WrappedFilter;
+export default ProductsFilter;

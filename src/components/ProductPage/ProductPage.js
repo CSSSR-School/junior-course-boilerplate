@@ -2,7 +2,7 @@ import React from 'react';
 
 import ProductPageTitle from './ProductPageTitle/ProductPageTitle.js';
 import ProductsList from './ProductsList/ProductsList.js';
-import WrappedFilter from './ProductsFilter/ProductsFilter.js';
+import ProductsFilter from './ProductsFilter/ProductsFilter.js';
 
 import s from './ProductPage.module.css';
 
@@ -33,7 +33,7 @@ class ProductPage extends React.Component {
                     <ProductPageTitle />
                     <div className={s.productPageContent}>
                         <div className={s.productPageFilterWrapper}>
-                            <WrappedFilter
+                            <ProductsFilter
                                 minValue={this.props.minValue}
                                 maxValue={this.props.maxValue}
                                 changeMin={this.handleChangeMin}

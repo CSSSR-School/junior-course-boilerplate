@@ -3,12 +3,13 @@ import pt from 'prop-types';
 import s from './ProductsList.module.css';
 import ProductItem from 'csssr-school-product-card';
 import ratingComponent from '../ratingComponent/ratingComponent.js';
+import LogRender from '../../../LogRender';
 
-class ProductsList extends React.Component {
+class ProductsList extends LogRender {
     constructor(props) {
         super(props);
     }
-    
+
     render() {
         const products = this.props.data.map((product) =>
             <li key={product.id}>

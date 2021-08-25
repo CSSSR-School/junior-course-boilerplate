@@ -1,21 +1,11 @@
 import React from 'react';
-import logger from 'csssr-school-utils';
+import {logger} from 'csssr-school-utils';
 
-function LogRender(WrappedComponent) {
-    return class extends React.Component {
-        constructor(props) {
-            super(props);
-        }
-    
-        shouldComponentUpdate(nextProps, nextState) {
-            logger.call(this, this.constructor.name, nextProps, nextState);
-            return true;
-        }
-    
-        render() {
-            return <WrappedComponent />;
-        }
-    };
-}
+class LogRender extends React.Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        logger.call(this, this.constructor.name, nextProps, nextState);
+        return true;
+    }
+};
 
 export default LogRender;
