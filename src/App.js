@@ -35,21 +35,36 @@ class App extends React.Component {
         };
         this.handleChangeMin = this.handleChangeMin.bind(this);
         this.handleChangeMax = this.handleChangeMax.bind(this);
-        this.formSubmit = this.formSubmit.bind(this);
     }
 
     handleChangeMin(minValue) {
-        this.setState({minValue: parseInt(minValue)});
+        if (Math.sign(minValue) === 0 || Math.sign(minValue) === 1) {
+            this.setState({
+                minValue: parseInt(minValue),
+                filteredProducts: getFilteredProducts(this.state.filteredProducts, minValue, this.state.maxValue)
+            });
+            // временные логи для проверки:
+            console.log(this.state.minValue);
+            console.log(this.state.maxValue);
+        }
+        if (minValue === '') {
+            this.setState({minValue: minValue});
+        }
     }
 
     handleChangeMax(maxValue) {
-        this.setState({maxValue: parseInt(maxValue)});
-    }
-
-    formSubmit() {
-        this.setState({
-            filteredProducts: getFilteredProducts(this.state.filteredProducts, this.state.minValue, this.state.maxValue)
-        });
+        if (Math.sign(maxValue) === 0 || Math.sign(maxValue) === 1) {
+            this.setState({
+                maxValue: parseInt(maxValue),
+                filteredProducts: getFilteredProducts(this.state.filteredProducts, this.state.minValue, maxValue)
+            });
+            // временные логи для проверки:
+            console.log(this.state.minValue);
+            console.log(this.state.maxValue);
+        }
+        if (maxValue === '') {
+            this.setState({maxValue: maxValue});
+        }
     }
 
     componentDidMount() {
@@ -69,7 +84,6 @@ class App extends React.Component {
             maxValue={this.state.maxValue}
             changeMin={this.handleChangeMin}
             changeMax={this.handleChangeMax}
-            formSubmit={this.formSubmit}
         />;
     }
 }

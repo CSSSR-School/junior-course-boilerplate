@@ -11,7 +11,6 @@ class ProductPage extends React.Component {
         super(props);
         this.handleChangeMin = this.handleChangeMin.bind(this);
         this.handleChangeMax = this.handleChangeMax.bind(this);
-        this.formSubmit = this.formSubmit.bind(this);
     }
 
     handleChangeMin(minValue) {
@@ -20,10 +19,6 @@ class ProductPage extends React.Component {
     
     handleChangeMax(maxValue) {
         this.props.changeMax(maxValue);
-    }
-
-    formSubmit() {
-        this.props.formSubmit();
     }
 
     render() {
@@ -38,7 +33,6 @@ class ProductPage extends React.Component {
                                 maxValue={this.props.maxValue}
                                 changeMin={this.handleChangeMin}
                                 changeMax={this.handleChangeMax}
-                                formSubmit={this.formSubmit}
                             />
                         </div>
                         <ProductsList

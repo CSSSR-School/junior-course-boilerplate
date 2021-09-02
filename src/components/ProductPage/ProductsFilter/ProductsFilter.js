@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProductsFilter.module.css';
-import FilterInput from '../FilterInput/FilterInput.js';
+import InputNumber from '../InputNumber/InputNumber.js';
 import LogRender from '../../../LogRender';
 
 class ProductsFilter extends LogRender {
@@ -8,24 +8,14 @@ class ProductsFilter extends LogRender {
         super(props);
         this.handleChangeMin = this.handleChangeMin.bind(this);
         this.handleChangeMax = this.handleChangeMax.bind(this);
-        this.formSubmit = this.formSubmit.bind(this);
     }
 
     handleChangeMin(minValue) {
-        if (Math.sign(minValue) === 0 || Math.sign(minValue) === 1) {
-          this.props.changeMin(minValue);
-        }
+        this.props.changeMin(minValue);
     }
     
     handleChangeMax(maxValue) {
-        if (Math.sign(maxValue) === 0 || Math.sign(maxValue) === 1) {
-            this.props.changeMax(maxValue);
-        }
-    }
-
-    formSubmit(e) {
-        e.preventDefault();
-        this.props.formSubmit();
+        this.props.changeMax(maxValue);
     }
 
     render() {
@@ -36,7 +26,7 @@ class ProductsFilter extends LogRender {
                     <div className={s.range__wrapper}>
                         <label className={s.range}>
                             от
-                            <FilterInput
+                            <InputNumber
                                 className={s.range__input}
                                 inputValue={this.props.minValue}
                                 onValueChange={this.handleChangeMin}
@@ -44,18 +34,18 @@ class ProductsFilter extends LogRender {
                         </label>
                         <label className={s.range}>
                             до
-                            <FilterInput
+                            <InputNumber
                                 className={s.range__input}
                                 inputValue={this.props.maxValue}
                                 onValueChange={this.handleChangeMax}
                             />
                         </label>
                     </div>
-                    <button
+                    {/* <button
                         className={s.filter__submit}
                         type="submit">
                             Применить
-                    </button>
+                    </button> */}
                 </form>
             </div>
         );
