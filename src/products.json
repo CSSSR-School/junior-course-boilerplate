@@ -5,6 +5,7 @@
     "img": "./images/img1.jpg",
     "title": "Название первого товара",
     "price": "1000 ₽",
+    "discount": 10,
     "subPriceContent": "",
     "maxRating": 5,
     "rating": 4
@@ -15,6 +16,7 @@
     "img": "./images/img2.jpg",
     "title": "Название второго товара",
     "price": "5000 ₽",
+    "discount": 10,
     "subPriceContent": "",
     "maxRating": 5,
     "rating": 4
@@ -25,6 +27,7 @@
     "img": "./images/img3.jpg",
     "title": "Название третьего товара",
     "price": "20000 ₽",
+    "discount": 25,
     "subPriceContent": "",
     "maxRating": 5,
     "rating": 4
@@ -35,6 +38,7 @@
     "img": "./images/img4.jpg",
     "title": "Название четвертого товара",
     "price": "23000 ₽",
+    "discount": 50,
     "subPriceContent": "",
     "maxRating": 5,
     "rating": 4
@@ -45,6 +49,7 @@
     "img": "./images/img5.jpg",
     "title": "Название пятого товара",
     "price": "15000 ₽",
+    "discount": 15,
     "subPriceContent": "",
     "maxRating": 5,
     "rating": 4
@@ -55,6 +60,7 @@
     "img": "./images/img6.jpg",
     "title": "Название шестого товара",
     "price": "5000 ₽",
+    "discount": 15,
     "subPriceContent": "",
     "maxRating": 5,
     "rating": 4

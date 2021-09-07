@@ -14,7 +14,7 @@ class FilterInput extends React.Component {
         return (
             <input
                 className={this.props.className}
-                type="text"
+                type="number"
                 value={this.props.inputValue}
                 onChange={this.handleChange}
             />

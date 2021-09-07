@@ -18,11 +18,24 @@ function getMaxValue(arr) {
 }
 
 // фильтрую массив по min и max значениям цены
-function getFilteredProducts(arr, minValue, maxValue) {
+function getFilteredProducts(arr, minValue, maxValue, discountValue) {
     const filtered = arr.filter((item) => {
-        return (item.price >= minValue) && (item.price <= maxValue);
+        return (item.price >= minValue) && (item.price <= maxValue) && (item.discount >= discountValue);
     });
     return filtered;
+}
+
+class Product {
+    constructor(data) {
+        this.id = data.id;
+        this.isInStock = data.isInStock;
+        this.img = data.img;
+        this.title = data.title;
+        this.priceInt = data.price;
+        this.price = toInt(data.price);
+        this.discount = data.discount;
+        this.subPriceContent = data.subPriceContent;
+    }
 }
 
 class App extends React.Component {
@@ -31,48 +44,73 @@ class App extends React.Component {
         this.state = {
             minValue: '',
             maxValue: '',
-            filteredProducts: []
+            discountValue: 0,
+            filteredProducts: [],
+            products: []
         };
         this.handleChangeMin = this.handleChangeMin.bind(this);
         this.handleChangeMax = this.handleChangeMax.bind(this);
+        this.products = this.getProducts(data);
+        this.discountChange = this.discountChange.bind(this);
     }
 
+
     handleChangeMin(minValue) {
-        if (Math.sign(minValue) === 0 || Math.sign(minValue) === 1) {
+        this.setState({
+            minValue: parseInt(minValue),   
+        },()=>{
             this.setState({
-                minValue: parseInt(minValue),
-                filteredProducts: getFilteredProducts(this.state.filteredProducts, minValue, this.state.maxValue)
+                filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
             });
             // временные логи для проверки:
-            console.log(this.state.minValue);
-            console.log(this.state.maxValue);
-        }
-        if (minValue === '') {
-            this.setState({minValue: minValue});
-        }
+            console.log('minValue:', this.state.minValue);
+            console.log('maxValue:', this.state.maxValue);
+        });
     }
 
     handleChangeMax(maxValue) {
-        if (Math.sign(maxValue) === 0 || Math.sign(maxValue) === 1) {
+        this.setState({
+            maxValue: parseInt(maxValue), 
+        },()=>{
             this.setState({
-                maxValue: parseInt(maxValue),
-                filteredProducts: getFilteredProducts(this.state.filteredProducts, this.state.minValue, maxValue)
+                filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
             });
             // временные логи для проверки:
-            console.log(this.state.minValue);
-            console.log(this.state.maxValue);
-        }
-        if (maxValue === '') {
-            this.setState({maxValue: maxValue});
-        }
+            console.log('minValue:', this.state.minValue);
+            console.log('maxValue:', this.state.maxValue);
+        });
+    }
+
+    getProducts(arr) {
+        let test = arr.map((item) => {
+            return new Product(item);
+        });
+        // debugger;
+        return test;
+    }
+
+    getDiscountedPrice() {
+
+    }
+
+    discountChange(discountValue) {
+        this.setState({ discountValue: discountValue }, () => {
+            this.setState({
+                filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
+            });
+            console.log(this.state.discountValue); // лог для теста
+            console.log(this.state.filteredProducts); // лог для теста
+        });
     }
 
     componentDidMount() {
-        getInt(data);
+        // getInt(data);
+        const min = getMinValue(this.products);
+        const max = getMaxValue(this.products);
         this.setState({
-            minValue: getMinValue(data),
-            maxValue: getMaxValue(data),
-            filteredProducts: getFilteredProducts(data, getMinValue(data), getMaxValue(data))
+            minValue: min,
+            maxValue: max,
+            filteredProducts: getFilteredProducts(this.products, min, max, this.state.discountValue),
         });
     }
 
@@ -84,6 +122,8 @@ class App extends React.Component {
             maxValue={this.state.maxValue}
             changeMin={this.handleChangeMin}
             changeMax={this.handleChangeMax}
+            discountValue={this.state.discountValue}
+            discountChange={this.discountChange}
         />;
     }
 }

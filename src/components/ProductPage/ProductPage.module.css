@@ -8,3 +8,7 @@
 .productPageFilterWrapper {
   margin-right: 48px;
 }
+
+.productPageFilterWrapper > * {
+  margin-bottom: 25px;
+}

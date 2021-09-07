@@ -3,6 +3,7 @@ import React from 'react';
 import ProductPageTitle from './ProductPageTitle/ProductPageTitle.js';
 import ProductsList from './ProductsList/ProductsList.js';
 import ProductsFilter from './ProductsFilter/ProductsFilter.js';
+import Discount from 'csssr-school-input-discount';
 
 import s from './ProductPage.module.css';
 
@@ -11,6 +12,7 @@ class ProductPage extends React.Component {
         super(props);
         this.handleChangeMin = this.handleChangeMin.bind(this);
         this.handleChangeMax = this.handleChangeMax.bind(this);
+        this.discountChange = this.discountChange.bind(this);
     }
 
     handleChangeMin(minValue) {
@@ -21,7 +23,12 @@ class ProductPage extends React.Component {
         this.props.changeMax(maxValue);
     }
 
+    discountChange(event) {
+        this.props.discountChange(event.target.value);
+    }
+
     render() {
+        let title = 'Скидка';
         return (
             <main>
                 <div className={s.productPage}>   
@@ -34,6 +41,13 @@ class ProductPage extends React.Component {
                                 changeMin={this.handleChangeMin}
                                 changeMax={this.handleChangeMax}
                             />
+                            <div>
+                                <Discount
+                                    title={title}
+                                    value={this.props.discountValue}
+                                    onChange={this.discountChange}
+                                />
+                            </div>
                         </div>
                         <ProductsList
                             data={this.props.filteredProducts}
