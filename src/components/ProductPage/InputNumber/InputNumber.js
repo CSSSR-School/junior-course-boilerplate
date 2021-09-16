@@ -1,25 +1,14 @@
 import React from 'react';
+import HocInput from '../HocInput';
 
-class FilterInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
+const FilterInput = (props) => (
+    <input
+        className={props.className}
+        value={props.inputValue}
+        onChange={props.handleChange}
+    />
+);
 
-    handleChange(event) {
-        this.props.onValueChange(event.target.value);
-    }
+const HoccedFilterInput = HocInput(FilterInput);
 
-    render() {
-        return (
-            <input
-                className={this.props.className}
-                type="number"
-                value={this.props.inputValue}
-                onChange={this.handleChange}
-            />
-        );
-    }
-}
-
-export default FilterInput;
+export default HoccedFilterInput;

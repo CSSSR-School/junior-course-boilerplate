@@ -2,6 +2,7 @@ import React from 'react';
 import ProductPage from './components/ProductPage/ProductPage.js';
 import data from './products.json';
 import { maxBy, minBy, toInt } from 'csssr-school-utils';
+import Product from './components/ProductPage/Product/Product';
 
 function getInt(arr) {
     arr.forEach((item) => {
@@ -10,32 +11,24 @@ function getInt(arr) {
 }
   
 function getMinValue(arr) {
-    return minBy((obj) => obj.price, arr).price;
+    return minBy((obj) => obj.priceInt, arr).priceInt;
 }
   
 function getMaxValue(arr) {
-    return maxBy((obj) => obj.price, arr).price;
+    return maxBy((obj) => obj.priceInt, arr).priceInt;
 }
 
-// фильтрую массив по min и max значениям цены
 function getFilteredProducts(arr, minValue, maxValue, discountValue) {
-    const filtered = arr.filter((item) => {
-        return (item.price >= minValue) && (item.price <= maxValue) && (item.discount >= discountValue);
-    });
-    return filtered;
-}
 
-class Product {
-    constructor(data) {
-        this.id = data.id;
-        this.isInStock = data.isInStock;
-        this.img = data.img;
-        this.title = data.title;
-        this.priceInt = data.price;
-        this.price = toInt(data.price);
-        this.discount = data.discount;
-        this.subPriceContent = data.subPriceContent;
-    }
+    const filtered = arr.filter((item) => {
+        return (item.priceInt >= minValue) && (item.priceInt <= maxValue) && (item.discount >= discountValue);
+    });
+
+    filtered.map((item) => {
+        item.subPriceContent = item.discount + '%';
+    });
+
+    return filtered;
 }
 
 class App extends React.Component {
@@ -44,7 +37,7 @@ class App extends React.Component {
         this.state = {
             minValue: '',
             maxValue: '',
-            discountValue: 0,
+            discountValue: '',
             filteredProducts: [],
             products: []
         };
@@ -54,10 +47,9 @@ class App extends React.Component {
         this.discountChange = this.discountChange.bind(this);
     }
 
-
     handleChangeMin(minValue) {
         this.setState({
-            minValue: parseInt(minValue),   
+            minValue: minValue,
         },()=>{
             this.setState({
                 filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
@@ -70,7 +62,7 @@ class App extends React.Component {
 
     handleChangeMax(maxValue) {
         this.setState({
-            maxValue: parseInt(maxValue), 
+            maxValue: maxValue, 
         },()=>{
             this.setState({
                 filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
@@ -87,10 +79,6 @@ class App extends React.Component {
         });
         // debugger;
         return test;
-    }
-
-    getDiscountedPrice() {
-
     }
 
     discountChange(discountValue) {

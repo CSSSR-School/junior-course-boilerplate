@@ -3,7 +3,7 @@ import React from 'react';
 import ProductPageTitle from './ProductPageTitle/ProductPageTitle.js';
 import ProductsList from './ProductsList/ProductsList.js';
 import ProductsFilter from './ProductsFilter/ProductsFilter.js';
-import Discount from 'csssr-school-input-discount';
+import DiscountForm from './DiscountForm/DiscountForm.js';
 
 import s from './ProductPage.module.css';
 
@@ -23,12 +23,11 @@ class ProductPage extends React.Component {
         this.props.changeMax(maxValue);
     }
 
-    discountChange(event) {
-        this.props.discountChange(event.target.value);
+    discountChange(value) {
+        this.props.discountChange(value);
     }
 
     render() {
-        let title = 'Скидка';
         return (
             <main>
                 <div className={s.productPage}>   
@@ -42,11 +41,9 @@ class ProductPage extends React.Component {
                                 changeMax={this.handleChangeMax}
                             />
                             <div>
-                                <Discount
-                                    title={title}
-                                    value={this.props.discountValue}
-                                    onChange={this.discountChange}
-                                />
+                                <DiscountForm 
+                                    handleChange={this.discountChange}
+                                    value={this.props.discountValue} />
                             </div>
                         </div>
                         <ProductsList

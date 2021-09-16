@@ -29,7 +29,7 @@ class ProductsFilter extends LogRender {
                             <InputNumber
                                 className={s.range__input}
                                 inputValue={this.props.minValue}
-                                onValueChange={this.handleChangeMin}
+                                handleChange={this.handleChangeMin}
                             />
                         </label>
                         <label className={s.range}>
@@ -37,7 +37,7 @@ class ProductsFilter extends LogRender {
                             <InputNumber
                                 className={s.range__input}
                                 inputValue={this.props.maxValue}
-                                onValueChange={this.handleChangeMax}
+                                handleChange={this.handleChangeMax}
                             />
                         </label>
                     </div>
