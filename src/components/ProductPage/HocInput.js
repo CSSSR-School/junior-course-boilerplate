@@ -16,6 +16,7 @@ const HocInput = (WrappedComponent) => {
             return (
                 <WrappedComponent
                     {...this.props}
+                    handleChange={this.handleChange}
                 />
             );
         }
