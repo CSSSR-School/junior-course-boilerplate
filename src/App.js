@@ -70,8 +70,6 @@ class App extends React.Component {
             maxValue={this.state.maxValue}
             handleChange={this.handleChange}
             formSubmit={this.formSubmit}
-            // discountValue={this.state.discountValue}
-            // discountChange={this.discountChange}
         />;
     }
 }
