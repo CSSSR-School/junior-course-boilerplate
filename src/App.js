@@ -21,8 +21,6 @@ function getFilteredProducts(arr, min, max) {
     const filtered = arr.filter((item) => {
         return (item.price >= min) && (item.price <= max);
     });
-    // временный лог для проверки
-    console.log(filtered);
 
     return filtered;
 }
