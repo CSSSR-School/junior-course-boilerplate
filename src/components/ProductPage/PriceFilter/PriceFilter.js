@@ -1,55 +1,58 @@
 import React from 'react';
-import s from './ProductsFilter.module.css';
+import s from './PriceFilter.module.css';
 import InputNumber from '../InputNumber/InputNumber.js';
 import LogRender from '../../../LogRender';
 
-class ProductsFilter extends LogRender {
+class PriceFilter extends LogRender {
     constructor(props) {
         super(props);
-        this.handleChangeMin = this.handleChangeMin.bind(this);
-        this.handleChangeMax = this.handleChangeMax.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChangeMin(minValue) {
-        this.props.changeMin(minValue);
+    handleChange(event) {
+        this.props.handleChange(event);
     }
-    
-    handleChangeMax(maxValue) {
-        this.props.changeMax(maxValue);
+
+    handleSubmit(event) {
+        event.preventDefault();
+        this.props.formSubmit();
     }
 
     render() {
         return (
             <div className={s.form}>
                 <div className={s.form__title}>Цена</div>
-                <form onSubmit={this.formSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <div className={s.range__wrapper}>
                         <label className={s.range}>
                             от
                             <InputNumber
                                 className={s.range__input}
-                                inputValue={this.props.minValue}
-                                handleChange={this.handleChangeMin}
+                                name="minValue"
+                                value={this.props.minValue}
+                                handleChange={this.handleChange}
                             />
                         </label>
                         <label className={s.range}>
                             до
                             <InputNumber
                                 className={s.range__input}
-                                inputValue={this.props.maxValue}
-                                handleChange={this.handleChangeMax}
+                                name="maxValue"
+                                value={this.props.maxValue}
+                                handleChange={this.handleChange}
                             />
                         </label>
                     </div>
-                    {/* <button
+                    <button 
                         className={s.filter__submit}
                         type="submit">
                             Применить
-                    </button> */}
+                    </button>
                 </form>
             </div>
         );
     }
 }
 
-export default ProductsFilter;
+export default PriceFilter;

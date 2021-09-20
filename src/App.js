@@ -2,7 +2,6 @@ import React from 'react';
 import ProductPage from './components/ProductPage/ProductPage.js';
 import data from './products.json';
 import { maxBy, minBy, toInt } from 'csssr-school-utils';
-import Product from './components/ProductPage/Product/Product';
 
 function getInt(arr) {
     arr.forEach((item) => {
@@ -11,22 +10,19 @@ function getInt(arr) {
 }
   
 function getMinValue(arr) {
-    return minBy((obj) => obj.priceInt, arr).priceInt;
+    return minBy((obj) => obj.price, arr).price;
 }
   
 function getMaxValue(arr) {
-    return maxBy((obj) => obj.priceInt, arr).priceInt;
+    return maxBy((obj) => obj.price, arr).price;
 }
 
-function getFilteredProducts(arr, minValue, maxValue, discountValue) {
-
+function getFilteredProducts(arr, min, max) {
     const filtered = arr.filter((item) => {
-        return (item.priceInt >= minValue) && (item.priceInt <= maxValue) && (item.discount >= discountValue);
+        return (item.price >= min) && (item.price <= max);
     });
-
-    filtered.map((item) => {
-        item.subPriceContent = item.discount + '%';
-    });
+    // временный лог для проверки
+    console.log(filtered);
 
     return filtered;
 }
@@ -37,81 +33,47 @@ class App extends React.Component {
         this.state = {
             minValue: '',
             maxValue: '',
-            discountValue: '',
             filteredProducts: [],
-            products: []
         };
-        this.handleChangeMin = this.handleChangeMin.bind(this);
-        this.handleChangeMax = this.handleChangeMax.bind(this);
-        this.products = this.getProducts(data);
-        this.discountChange = this.discountChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.formSubmit = this.formSubmit.bind(this);
     }
 
-    handleChangeMin(minValue) {
+    handleChange(event) {
         this.setState({
-            minValue: minValue,
-        },()=>{
-            this.setState({
-                filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
-            });
-            // временные логи для проверки:
-            console.log('minValue:', this.state.minValue);
-            console.log('maxValue:', this.state.maxValue);
+            [event.target.name]: parseInt(event.target.value)
         });
     }
 
-    handleChangeMax(maxValue) {
+    formSubmit() {
         this.setState({
-            maxValue: maxValue, 
-        },()=>{
-            this.setState({
-                filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
-            });
-            // временные логи для проверки:
-            console.log('minValue:', this.state.minValue);
-            console.log('maxValue:', this.state.maxValue);
-        });
-    }
-
-    getProducts(arr) {
-        let test = arr.map((item) => {
-            return new Product(item);
-        });
-        // debugger;
-        return test;
-    }
-
-    discountChange(discountValue) {
-        this.setState({ discountValue: discountValue }, () => {
-            this.setState({
-                filteredProducts: getFilteredProducts(this.products, this.state.minValue, this.state.maxValue, this.state.discountValue)
-            });
-            console.log(this.state.discountValue); // лог для теста
-            console.log(this.state.filteredProducts); // лог для теста
+            filteredProducts: getFilteredProducts(data, this.state.minValue, this.state.maxValue)
         });
     }
 
     componentDidMount() {
-        // getInt(data);
-        const min = getMinValue(this.products);
-        const max = getMaxValue(this.products);
+        getInt(data);
         this.setState({
-            minValue: min,
-            maxValue: max,
-            filteredProducts: getFilteredProducts(this.products, min, max, this.state.discountValue),
+            minValue: getMinValue(data),
+            maxValue: getMaxValue(data),
+            filteredProducts: getFilteredProducts(data, getMinValue(data), getMaxValue(data))
         });
     }
 
     render() {
+        
+        // логи для проверки
+        console.log('minValue:', this.state.minValue);
+        console.log('maxValue:', this.state.maxValue);
+
         return <ProductPage
-            data={data}
             filteredProducts={this.state.filteredProducts}
             minValue={this.state.minValue}
             maxValue={this.state.maxValue}
-            changeMin={this.handleChangeMin}
-            changeMax={this.handleChangeMax}
-            discountValue={this.state.discountValue}
-            discountChange={this.discountChange}
+            handleChange={this.handleChange}
+            formSubmit={this.formSubmit}
+            // discountValue={this.state.discountValue}
+            // discountChange={this.discountChange}
         />;
     }
 }

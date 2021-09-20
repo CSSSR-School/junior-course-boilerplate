@@ -2,30 +2,29 @@ import React from 'react';
 
 import ProductPageTitle from './ProductPageTitle/ProductPageTitle.js';
 import ProductsList from './ProductsList/ProductsList.js';
-import ProductsFilter from './ProductsFilter/ProductsFilter.js';
-import DiscountForm from './DiscountForm/DiscountForm.js';
+import PriceFilter from './PriceFilter/PriceFilter.js';
+// import DiscountForm from './DiscountForm/DiscountForm.js';
 
 import s from './ProductPage.module.css';
 
 class ProductPage extends React.Component {
     constructor(props) {
         super(props);
-        this.handleChangeMin = this.handleChangeMin.bind(this);
-        this.handleChangeMax = this.handleChangeMax.bind(this);
-        this.discountChange = this.discountChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.formSubmit = this.formSubmit.bind(this);
     }
 
-    handleChangeMin(minValue) {
-        this.props.changeMin(minValue);
-    }
-    
-    handleChangeMax(maxValue) {
-        this.props.changeMax(maxValue);
+    handleChange(event) {
+        this.props.handleChange(event);
     }
 
-    discountChange(value) {
-        this.props.discountChange(value);
+    formSubmit() {
+        this.props.formSubmit();
     }
+
+    // discountChange(value) {
+    //     this.props.discountChange(value);
+    // }
 
     render() {
         return (
@@ -34,17 +33,17 @@ class ProductPage extends React.Component {
                     <ProductPageTitle />
                     <div className={s.productPageContent}>
                         <div className={s.productPageFilterWrapper}>
-                            <ProductsFilter
+                            <PriceFilter
                                 minValue={this.props.minValue}
                                 maxValue={this.props.maxValue}
-                                changeMin={this.handleChangeMin}
-                                changeMax={this.handleChangeMax}
+                                handleChange={this.handleChange}
+                                formSubmit={this.formSubmit}
                             />
-                            <div>
+                            {/* <div>
                                 <DiscountForm 
                                     handleChange={this.discountChange}
                                     value={this.props.discountValue} />
-                            </div>
+                            </div> */}
                         </div>
                         <ProductsList
                             data={this.props.filteredProducts}
