@@ -7,16 +7,10 @@ class PriceFilter extends LogRender {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         this.props.handleChange(event);
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        this.props.formSubmit();
     }
 
     render() {
@@ -44,11 +38,11 @@ class PriceFilter extends LogRender {
                             />
                         </label>
                     </div>
-                    <button 
+                    {/* <button 
                         className={s.filter__submit}
                         type="submit">
                             Применить
-                    </button>
+                    </button> */}
                 </form>
             </div>
         );

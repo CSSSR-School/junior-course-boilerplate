@@ -34,18 +34,16 @@ class App extends React.Component {
             filteredProducts: [],
         };
         this.handleChange = this.handleChange.bind(this);
-        this.formSubmit = this.formSubmit.bind(this);
     }
 
+    // другого решения, кроме как вложенный setState, не нашел
     handleChange(event) {
         this.setState({
             [event.target.name]: parseInt(event.target.value)
-        });
-    }
-
-    formSubmit() {
-        this.setState({
-            filteredProducts: getFilteredProducts(data, this.state.minValue, this.state.maxValue)
+        }, () => {
+            this.setState({
+                filteredProducts: getFilteredProducts(data, this.state.minValue, this.state.maxValue)
+            })
         });
     }
 
@@ -63,13 +61,13 @@ class App extends React.Component {
         // логи для проверки
         console.log('minValue:', this.state.minValue);
         console.log('maxValue:', this.state.maxValue);
+        console.log('filteredProducts', this.state.filteredProducts);
 
         return <ProductPage
             filteredProducts={this.state.filteredProducts}
             minValue={this.state.minValue}
             maxValue={this.state.maxValue}
             handleChange={this.handleChange}
-            formSubmit={this.formSubmit}
         />;
     }
 }
