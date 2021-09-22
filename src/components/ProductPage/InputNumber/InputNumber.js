@@ -7,7 +7,9 @@ class InputNumber extends React.Component {
     }
 
     handleChange(event) {
-        this.props.handleChange(event);
+        if (!isNaN(parseInt(event.target.value)) || event.target.value === '') {
+            this.props.handleChange(event);
+        }
     }
 
     render() {

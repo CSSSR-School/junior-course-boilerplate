@@ -36,14 +36,9 @@ class App extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    // другого решения, кроме как вложенный setState, не нашел
     handleChange(event) {
         this.setState({
-            [event.target.name]: parseInt(event.target.value)
-        }, () => {
-            this.setState({
-                filteredProducts: getFilteredProducts(data, this.state.minValue, this.state.maxValue)
-            })
+            [event.target.name]: event.target.value
         });
     }
 
@@ -57,14 +52,14 @@ class App extends React.Component {
     }
 
     render() {
-        
+        const filteredProducts = getFilteredProducts(data, this.state.minValue, this.state.maxValue);
         // логи для проверки
         console.log('minValue:', this.state.minValue);
         console.log('maxValue:', this.state.maxValue);
         console.log('filteredProducts', this.state.filteredProducts);
 
         return <ProductPage
-            filteredProducts={this.state.filteredProducts}
+            filteredProducts={filteredProducts}
             minValue={this.state.minValue}
             maxValue={this.state.maxValue}
             handleChange={this.handleChange}
