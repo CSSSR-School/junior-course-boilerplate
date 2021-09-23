@@ -11,14 +11,15 @@ class ProductPage extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        // this.discountChange = this.discountChange.bind(this);
     }
 
     handleChange(event) {
         this.props.handleChange(event);
     }
 
-    // discountChange(value) {
-    //     this.props.discountChange(value);
+    // discountChange(event) {
+    //     this.props.discountChange(event);
     // }
 
     render() {

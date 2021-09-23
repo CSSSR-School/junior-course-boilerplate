@@ -8,8 +8,9 @@ class DiscountForm extends React.Component {
     }
 
     handleChange(event) {
-        let num = isNaN(parseInt(event.target.value)) ? '' : parseInt(event.target.value);
-        this.props.handleChange(num);
+        if (!isNaN(parseInt(event.target.value)) || event.target.value === '') {
+            this.props.handleChange(event);
+        }
     }
 
     render() {

@@ -38,11 +38,6 @@ class PriceFilter extends LogRender {
                             />
                         </label>
                     </div>
-                    {/* <button 
-                        className={s.filter__submit}
-                        type="submit">
-                            Применить
-                    </button> */}
                 </form>
             </div>
         );
