@@ -11,16 +11,11 @@ class ProductPage extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        // this.discountChange = this.discountChange.bind(this);
     }
 
     handleChange(event) {
         this.props.handleChange(event);
     }
-
-    // discountChange(event) {
-    //     this.props.discountChange(event);
-    // }
 
     render() {
         return (
@@ -36,7 +31,7 @@ class ProductPage extends React.Component {
                             />
                             {/* <div>
                                 <DiscountForm 
-                                    handleChange={this.discountChange}
+                                    handleChange={this.handleChange}
                                     value={this.props.discountValue} />
                             </div> */}
                         </div>

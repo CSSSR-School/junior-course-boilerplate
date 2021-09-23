@@ -31,11 +31,10 @@ class App extends React.Component {
         this.state = {
             minValue: '',
             maxValue: '',
-            sale: '',
+            sale: 0,
             filteredProducts: [],
         };
         this.handleChange = this.handleChange.bind(this);
-        // this.discountChange = this.discountChange.bind(this);
     }
 
     handleChange(event) {
@@ -49,12 +48,6 @@ class App extends React.Component {
             }); 
         }
     }
-
-    // discountChange(event) {
-    //     this.setState({
-    //         sale: event.target.value
-    //     });
-    // }
 
     componentDidMount() {
         getInt(data);
@@ -77,9 +70,8 @@ class App extends React.Component {
             filteredProducts={filteredProducts}
             minValue={this.state.minValue}
             maxValue={this.state.maxValue}
-            discountValue={this.state.discountValue}
+            discountValue={this.state.sale}
             handleChange={this.handleChange}
-            // discountChange={this.discountChange}
         />;
     }
 }
