@@ -17,9 +17,11 @@ function getMaxValue(arr) {
     return maxBy((obj) => obj.price, arr).price;
 }
 
-function getFilteredProducts(arr, min, max) {
+function getFilteredProducts(arr, min, max, sale) {
     const filtered = arr.filter((item) => {
-        return (item.price >= min) && (item.price <= max);
+        if (item.discount >= sale) {
+            return (item.price >= min) && (item.price <= max);
+        }
     });
 
     return filtered;
@@ -54,12 +56,12 @@ class App extends React.Component {
         this.setState({
             minValue: getMinValue(data),
             maxValue: getMaxValue(data),
-            filteredProducts: getFilteredProducts(data, getMinValue(data), getMaxValue(data))
+            filteredProducts: getFilteredProducts(data, getMinValue(data), getMaxValue(data), this.state.sale)
         });
     }
 
     render() {
-        const filteredProducts = getFilteredProducts(data, this.state.minValue, this.state.maxValue);
+        const filteredProducts = getFilteredProducts(data, this.state.minValue, this.state.maxValue, this.state.sale);
         // логи для проверки
         console.log('minValue:', this.state.minValue);
         console.log('maxValue:', this.state.maxValue);
