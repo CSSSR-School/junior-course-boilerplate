@@ -32,7 +32,7 @@ class ProductPage extends React.Component {
                             <div>
                                 <DiscountForm 
                                     handleChange={this.handleChange}
-                                    value={this.props.discountValue} />
+                                    value={this.props.sale} />
                             </div>
                         </div>
                         <ProductsList
