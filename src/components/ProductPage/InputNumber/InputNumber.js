@@ -1,35 +1,17 @@
 import React from 'react';
+import HoccedInput from '../HoccedInput';
 
-function isNumericOrEmpty(str) {
-    if (!isNaN(str) && !isNaN(parseFloat(str))) {
-        return true;
-    } else if(str === '') {
-        return true;
-    }
+const InputNumber = (props) => {
+    return (
+        <input
+            className={props.className}
+            name={props.name}
+            value={props.value}
+            onChange={props.handleChange}
+        />
+    );
 }
 
+const HoccedInputNumber = HoccedInput(InputNumber);
 
-class InputNumber extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event) {
-        if (isNumericOrEmpty(event.target.value)) {
-            this.props.handleChange(event);
-        }
-    }
-
-    render() {
-        return (
-            <input
-                className={this.props.className}
-                name={this.props.name}
-                value={this.props.value}
-                onChange={this.handleChange} />
-        );
-    }
-}
-
-export default InputNumber;
+export default HoccedInputNumber;
