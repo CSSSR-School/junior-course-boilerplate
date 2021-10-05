@@ -1,14 +1,16 @@
 import React from 'react';
 import s from './ProductsList.module.css';
-import ProductItem from 'csssr-school-product-card';
-import ratingComponent from '../ratingComponent/ratingComponent.js';
+// import ProductItem from 'csssr-school-product-card';
+import Product from '../Product';
+// import ratingComponent from '../ratingComponent/ratingComponent.js';
 import LogRender from '../../../LogRender';
 
 class ProductsList extends LogRender {
     render() {
+        console.log('ProductsList#render');
         const products = this.props.data.map((product) =>
             <li key={product.id}>
-                <ProductItem
+                <Product
                     isInStock={product.isInStock}
                     img={product.img}
                     title={product.title}
@@ -16,7 +18,7 @@ class ProductsList extends LogRender {
                     subPriceContent={product.subPriceContent}
                     maxRating={product.maxRating}
                     rating={product.rating}
-                    ratingComponent={ratingComponent}
+                    // ratingComponent={ratingComponent}
                 />
             </li>
         );

@@ -28,7 +28,7 @@ function getFilteredProducts(arr, min, max, sale) {
     return filtered;
 }
 
-class App extends React.Component {
+class App extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,6 +52,7 @@ class App extends React.Component {
     }
 
     render() {
+        console.log('App#render');
         const {minValue, maxValue, sale} = this.state;
         const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale);
         // логи для проверки

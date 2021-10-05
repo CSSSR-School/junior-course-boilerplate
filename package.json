@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.2.0",
+    "csssr-school-input-discount": "git+https://github.com/CSSSR-School/junior-course-input-discount.git",
     "csssr-school-product-card": "git+https://github.com/CSSSR-School/junior-course-product-card.git",
     "csssr-school-utils": "git+https://github.com/CSSSR-School/junior-course-utils.git",
-    "csssr-school-input-discount": "git+https://github.com/CSSSR-School/junior-course-input-discount.git"
+    "react": "^16.12.0",
+    "react-addons-shallow-compare": "^15.6.3",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
