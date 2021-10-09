@@ -27,15 +27,16 @@ function getFilteredProducts(arr, min, max, sale) {
     });
 }
 
-// думаю над этим...
 function memoizeByResult(fn) {
     let memoizedResult = null;
-    fn((result) => {
+    return (callback, ...args) => {
+      fn.apply((result, args) => {
         if (!R.equals(memoizedResult, result)) {
-            memoizedResult = result;
+          memoizedResult = result;
         }
-        return memoizedResult;
-    });
+        callback(memoizedResult);
+      });
+    };
 }
 
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
