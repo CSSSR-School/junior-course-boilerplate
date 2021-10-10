@@ -29,13 +29,12 @@ function getFilteredProducts(arr, min, max, sale) {
 
 function memoizeByResult(fn) {
     let memoizedResult = null;
-    return (callback, ...args) => {
-      fn.apply((result, args) => {
+    return (...args) => {
+      fn.apply(null, [(result) => {
         if (!R.equals(memoizedResult, result)) {
           memoizedResult = result;
         }
-        callback(memoizedResult);
-      });
+      }, ...args]);
     };
 }
 
