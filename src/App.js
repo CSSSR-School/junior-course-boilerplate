@@ -29,13 +29,14 @@ function getFilteredProducts(arr, min, max, sale) {
 
 function memoizeByResult(fn) {
     let memoizedResult = null;
-    return (...args) => {
+    return (callback, ...args) => {
       fn.apply(null, [(result) => {
         if (!R.equals(memoizedResult, result)) {
           memoizedResult = result;
         }
+        callback(memoizedResult);
       }, ...args]);
-    };
+    }
 }
 
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
