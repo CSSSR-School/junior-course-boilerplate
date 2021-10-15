@@ -27,6 +27,7 @@ function getFilteredProducts(arr, min, max, sale) {
     });
 }
 
+/* на будущее
 function memoizeByResult(fn) {
     let memoizedResult = null;
     return (callback, ...args) => {
@@ -40,6 +41,7 @@ function memoizeByResult(fn) {
 }
 
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
+*/
 
 class App extends React.PureComponent {
     constructor(props) {
@@ -68,7 +70,7 @@ class App extends React.PureComponent {
     render() {
         console.log('App#render');
         const {minValue, maxValue, sale} = this.state;
-        const filteredProducts = memoizedGetFilteredProducts(data, minValue, maxValue, sale);
+        const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale);
         // логи для проверки
         console.log(filteredProducts);
         // console.log('minValue:', minValue);
