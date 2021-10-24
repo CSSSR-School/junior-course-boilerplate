@@ -38,29 +38,3 @@ input {
   color: #7e8fa4;
   border: 1px solid #7e8fa4;
 }
-
-.filter__submit {
-  margin-top: 24px;
-  width: 256px;
-  padding-top: 9px;
-  padding-bottom: 9px;
-
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 14px;
-
-  background-color: #323c48;
-  border: none;
-  color: #fff;
-
-  cursor: pointer;
-}
-
-.filter__submit:hover,
-.filter__submit:focus {
-  background-color: #282828;
-}
-
-.filter__submit:active {
-  background-color: #000;
-}

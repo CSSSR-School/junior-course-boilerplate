@@ -5,9 +5,9 @@ import ratingComponent from './ratingComponent/ratingComponent';
 
 class Product extends LogRender {
     render() {
-        console.log('Product#render');
         return (
-            <ProductItem 
+            <ProductItem
+                category={this.props.category}
                 isInStock={this.props.isInStock}
                 img={this.props.img}
                 title={this.props.title}

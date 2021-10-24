@@ -2,7 +2,7 @@ import React from 'react';
 import ProductPage from './components/ProductPage/ProductPage.js';
 import data from './products.json';
 import { maxBy, minBy, toInt } from 'csssr-school-utils';
-import * as R from 'ramda';
+// import * as R from 'ramda';
 
 function getInt(arr) {
     arr.forEach((item) => {
@@ -68,14 +68,8 @@ class App extends React.PureComponent {
     }
 
     render() {
-        console.log('App#render');
         const {minValue, maxValue, sale} = this.state;
         const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale);
-        // логи для проверки
-        console.log(filteredProducts);
-        // console.log('minValue:', minValue);
-        // console.log('maxValue:', maxValue);
-        // console.log('sale', sale);
 
         return <ProductPage
             filteredProducts={filteredProducts}
