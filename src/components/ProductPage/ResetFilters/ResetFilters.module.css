@@ -1,0 +1,21 @@
+.button_reset {
+  display: block;
+  width: 100%;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #323c48;
+  color: #323c48;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  transition: 0.1s ease-in;
+}
+
+.button_reset:hover {
+  background: #323c48;
+  color: #fff;
+}

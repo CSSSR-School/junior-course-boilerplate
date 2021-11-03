@@ -13,16 +13,16 @@ class Category extends React.Component {
 
     render() {
         return (
-            <div className={s.form}>
-                <div className={s.form__title}>Категории</div>
-                <div className={s.categories_wrapper}>
+            <div className={s.categories}>
+                <div className={s.categories__title}>Категории</div>
+                <div className={s.categories__wrapper}>
                     <button
-                        className={s.categories_item}
+                        className={s.categories__item}
                         name="clothes"
                         onClick={this.handleClick}
                     >Clothes</button>
                     <button
-                        className={s.categories_item}
+                        className={s.categories__item}
                         name="books"
                         onClick={this.handleClick}
                     >Books</button>

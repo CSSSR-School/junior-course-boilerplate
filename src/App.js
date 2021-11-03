@@ -22,7 +22,7 @@ function getMaxValue(arr) {
 function getFilteredProducts(arr, min, max, sale, category) {
     return arr.filter((item) => {
         if (item.discount >= sale) {
-            if (category === '') {
+            if (category == '') {
                 return (item.price >= min) && (item.price <= max);
             }
             else {
@@ -58,7 +58,8 @@ class App extends React.PureComponent {
             category: ''
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleCategoriesClick = this.handleCategoriesClick.bind(this);
+        this.handleResetClick = this.handleResetClick.bind(this);
     }
 
     handleChange(event) {
@@ -73,14 +74,20 @@ class App extends React.PureComponent {
         }
     }
 
-    handleClick(event) {
+    handleCategoriesClick(event) {
         this.setState({ category: event.target.name })
+    }
+
+    handleResetClick() {
+        this.setState({ minValue: getMinValue(data),
+                        maxValue: getMaxValue(data),
+                        sale: 0, 
+                        category: '' })
     }
 
     render() {
         const {minValue, maxValue, sale, category} = this.state;
         const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale, category);
-        console.log(this.state);
 
         return <ProductPage
             filteredProducts={filteredProducts}
@@ -88,7 +95,8 @@ class App extends React.PureComponent {
             maxValue={maxValue}
             sale={sale}
             handleChange={this.handleChange}
-            handleClick={this.handleClick}
+            handleResetClick={this.handleResetClick}
+            handleCategoriesClick={this.handleCategoriesClick}
         />;
     }
 }

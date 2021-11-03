@@ -5,6 +5,7 @@ import ProductsList from './ProductsList/ProductsList.js';
 import PriceFilter from './PriceFilter/PriceFilter.js';
 import HoccedDiscountForm from './DiscountForm/DiscountForm.js';
 import Category from './Category/Category.js';
+import ResetFilters from './ResetFilters/ResetFilters.js';
 
 import s from './ProductPage.module.css';
 
@@ -12,15 +13,20 @@ class ProductPage extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleCategoriesClick = this.handleCategoriesClick.bind(this);
+        this.handleResetClick = this.handleResetClick.bind(this);
     }
 
     handleChange(event) {
         this.props.handleChange(event);
     }
 
-    handleClick(event) {
-        this.props.handleClick(event);
+    handleCategoriesClick(event) {
+        this.props.handleCategoriesClick(event);
+    }
+
+    handleResetClick() {
+        this.props.handleResetClick();
     }
 
     render() {
@@ -29,6 +35,7 @@ class ProductPage extends React.Component {
                 <div className={s.productPage}>   
                     <ProductPageTitle />
                     <div className={s.productPageContent}>
+
                         <div className={s.productPageFilterWrapper}>
                             <PriceFilter
                                 minValue={this.props.minValue}
@@ -40,9 +47,10 @@ class ProductPage extends React.Component {
                                     handleChange={this.handleChange}
                                     value={this.props.sale} />
                             </div>
-                            <Category
-                                handleClick={this.handleClick} />
+                            <Category handleClick={this.handleCategoriesClick} />
+                            <ResetFilters handleClick={this.handleResetClick} />
                         </div>
+
                         <ProductsList
                             data={this.props.filteredProducts}
                         />
