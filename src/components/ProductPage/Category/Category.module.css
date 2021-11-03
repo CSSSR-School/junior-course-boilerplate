@@ -12,3 +12,35 @@
   line-height: 28px;
   margin-bottom: 16px;
 }
+
+.categories_wrapper {
+  display: flex;
+}
+
+.categories_item {
+  display: block;
+  margin-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #7e8fa4;
+  border-radius: 15px;
+  color: #7e8fa4;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+.categories_item:hover {
+  background: #323c48;
+  border: 1px solid #323c48;
+  color: #fff;
+}
+
+.categories_item:active {
+  background: #000;
+  border: 1px solid #000;
+}

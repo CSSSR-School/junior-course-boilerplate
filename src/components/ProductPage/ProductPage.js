@@ -12,10 +12,15 @@ class ProductPage extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(event) {
         this.props.handleChange(event);
+    }
+
+    handleClick(event) {
+        this.props.handleClick(event);
     }
 
     render() {
@@ -35,7 +40,8 @@ class ProductPage extends React.Component {
                                     handleChange={this.handleChange}
                                     value={this.props.sale} />
                             </div>
-                            <Category />
+                            <Category
+                                handleClick={this.handleClick} />
                         </div>
                         <ProductsList
                             data={this.props.filteredProducts}
