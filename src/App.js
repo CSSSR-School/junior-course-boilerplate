@@ -4,29 +4,30 @@ import data from './products.json';
 import { maxBy, minBy, toInt } from 'csssr-school-utils';
 // import * as R from 'ramda';
 
-function getInt(arr) {
-    arr.forEach((item) => {
-      return (item.price = toInt(item.price));
-    });
-}
+// пока оставлю данную функцию
+// function getInt(arr) {
+//     arr.forEach((item) => {
+//       return (item.price = toInt(item.price));
+//     });
+// }
   
 function getMinValue(arr) {
-    getInt(arr);
-    return minBy((obj) => obj.price, arr).price;
+    return toInt(minBy((obj) => toInt(obj.price), arr).price);
 }
   
 function getMaxValue(arr) {
-    return maxBy((obj) => obj.price, arr).price;
+    return toInt(maxBy((obj) => toInt(obj.price), arr).price);
 }
 
 function getFilteredProducts(arr, min, max, sale, category) {
     return arr.filter((item) => {
+        const priceItem = toInt(item.price);
         if (item.discount >= sale) {
             if (category == '') {
-                return (item.price >= min) && (item.price <= max);
+                return (priceItem >= min) && (priceItem <= max);
             }
             else {
-                return (item.price >= min) && (item.price <= max) && (item.category === category);
+                return (priceItem >= min) && (priceItem <= max) && (item.category === category);
             }
         }
     });
@@ -47,6 +48,15 @@ function memoizeByResult(fn) {
 
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
 */
+const categories = {
+    clothes: 'clothes',
+    books: 'books',
+}
+
+const CategoryContext = React.createContext({
+    toggleCategory: () => {},
+    category: categories.clothes,
+});
 
 class App extends React.PureComponent {
     constructor(props) {
@@ -55,11 +65,19 @@ class App extends React.PureComponent {
             minValue: getMinValue(data),
             maxValue: getMaxValue(data),
             sale: 0,
-            category: ''
+            category: '',
+            toggleCategory: this.toggleCategory,
+        
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleCategoriesClick = this.handleCategoriesClick.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
+        this.toggleCategory = this.toggleCategory.bind(this);
+    }
+
+    toggleCategory(e) {
+        this.setState({
+            category: e.target.name === categories.clothes ? categories.books : categories.clothes
+        });
     }
 
     handleChange(event) {
@@ -74,31 +92,31 @@ class App extends React.PureComponent {
         }
     }
 
-    handleCategoriesClick(event) {
-        this.setState({ category: event.target.name })
-    }
-
     handleResetClick() {
         this.setState({ minValue: getMinValue(data),
                         maxValue: getMaxValue(data),
-                        sale: 0, 
-                        category: '' })
+                        sale: 0,
+                        category: ''
+                    });
     }
 
     render() {
         const {minValue, maxValue, sale, category} = this.state;
         const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale, category);
-
-        return <ProductPage
-            filteredProducts={filteredProducts}
-            minValue={minValue}
-            maxValue={maxValue}
-            sale={sale}
-            handleChange={this.handleChange}
-            handleResetClick={this.handleResetClick}
-            handleCategoriesClick={this.handleCategoriesClick}
-        />;
+        console.log(this.state.category);
+        return (
+            <CategoryContext.Provider value={this.state}>
+                <ProductPage
+                    filteredProducts={filteredProducts}
+                    minValue={minValue}
+                    maxValue={maxValue}
+                    sale={sale}
+                    handleChange={this.handleChange}
+                    handleResetClick={this.handleResetClick}
+                />;
+            </CategoryContext.Provider>
+        );
     }
 }
 
-export default App;
+export { App, CategoryContext }; 

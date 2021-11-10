@@ -13,7 +13,7 @@ class ProductPage extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.handleCategoriesClick = this.handleCategoriesClick.bind(this);
+        // this.handleCategoriesClick = this.handleCategoriesClick.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
     }
 
@@ -21,9 +21,9 @@ class ProductPage extends React.Component {
         this.props.handleChange(event);
     }
 
-    handleCategoriesClick(event) {
-        this.props.handleCategoriesClick(event);
-    }
+    // handleCategoriesClick(event) {
+    //     this.props.handleCategoriesClick(event);
+    // }
 
     handleResetClick() {
         this.props.handleResetClick();
@@ -47,7 +47,7 @@ class ProductPage extends React.Component {
                                     handleChange={this.handleChange}
                                     value={this.props.sale} />
                             </div>
-                            <Category handleClick={this.handleCategoriesClick} />
+                            <Category />
                             <ResetFilters handleClick={this.handleResetClick} />
                         </div>
 
