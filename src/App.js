@@ -3,13 +3,6 @@ import ProductPage from './components/ProductPage/ProductPage.js';
 import data from './products.json';
 import { maxBy, minBy, toInt } from 'csssr-school-utils';
 // import * as R from 'ramda';
-
-// пока оставлю данную функцию
-// function getInt(arr) {
-//     arr.forEach((item) => {
-//       return (item.price = toInt(item.price));
-//     });
-// }
   
 function getMinValue(arr) {
     return toInt(minBy((obj) => toInt(obj.price), arr).price);
@@ -48,6 +41,7 @@ function memoizeByResult(fn) {
 
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
 */
+
 const categories = {
     clothes: 'clothes',
     books: 'books',
@@ -61,6 +55,8 @@ const CategoryContext = React.createContext({
 class App extends React.PureComponent {
     constructor(props) {
         super(props);
+        const url = window.location.pathname.substr(1);
+        window.history.replaceState({ url }, 'title', window.location.pathname);
         this.state = {
             minValue: getMinValue(data),
             maxValue: getMaxValue(data),
@@ -74,10 +70,24 @@ class App extends React.PureComponent {
         this.toggleCategory = this.toggleCategory.bind(this);
     }
 
+    componentDidMount() {
+        window.addEventListener('popstate', this.setFromHistory);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('popstate', this.setFromHistory);
+    }
+
+    setFromHistory = (event) => {
+        this.setState({ category: event.state['url'] });
+    }
+
     toggleCategory(e) {
         this.setState({
             category: e.target.name === categories.clothes ? categories.books : categories.clothes
         });
+        const url = e.target.name;
+        window.history.pushState({ url }, 'title', url);
     }
 
     handleChange(event) {
@@ -103,9 +113,10 @@ class App extends React.PureComponent {
     render() {
         const {minValue, maxValue, sale, category} = this.state;
         const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale, category);
-        console.log(this.state.category);
         return (
-            <CategoryContext.Provider value={this.state}>
+            <CategoryContext.Provider value={{
+                ...this.state,
+                toggleCategory: this.toggleCategory}}>
                 <ProductPage
                     filteredProducts={filteredProducts}
                     minValue={minValue}
