@@ -89,7 +89,7 @@ class App extends React.PureComponent {
 
     toggleCategory(e) {
         this.setState({
-            category: e.target.name === categories.clothes.name ? categories.clothes : categories.books,
+            category: e.target.name === categories.clothes.name ? categories.clothes.name : categories.books.name,
             isActive: !this.state.isActive
         });
 
