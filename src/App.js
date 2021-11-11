@@ -43,8 +43,14 @@ let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
 */
 
 const categories = {
-    clothes: 'clothes',
-    books: 'books',
+    clothes: {
+        isActive: false,
+        name: 'clothes',
+    },
+    books: {
+        isActive: false,
+        name: 'books',
+    }
 }
 
 const CategoryContext = React.createContext({
@@ -63,7 +69,6 @@ class App extends React.PureComponent {
             sale: 0,
             category: '',
             toggleCategory: this.toggleCategory,
-        
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
@@ -84,8 +89,12 @@ class App extends React.PureComponent {
 
     toggleCategory(e) {
         this.setState({
-            category: e.target.name === categories.clothes ? categories.clothes : categories.books
+            category: e.target.name === categories.clothes.name ? categories.clothes : categories.books,
+            isActive: !this.state.isActive
         });
+
+
+
         const url = e.target.name;
         window.history.pushState({ url }, 'title', url);
     }
@@ -111,8 +120,11 @@ class App extends React.PureComponent {
     }
 
     render() {
-        const {minValue, maxValue, sale, category} = this.state;
+        const {minValue, maxValue, sale} = this.state;
+        const category = this.state.category;
         const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale, category);
+        console.log(filteredProducts);
+
         return (
             <CategoryContext.Provider value={{
                 ...this.state,

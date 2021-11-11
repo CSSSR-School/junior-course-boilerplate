@@ -19,12 +19,12 @@
 
 .categories__item {
   display: block;
+  box-sizing: border-box;
   margin-right: 16px;
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 16px;
   padding-right: 16px;
-  box-sizing: border-box;
   background: #fff;
   border: 1px solid #7e8fa4;
   border-radius: 15px;
@@ -41,7 +41,7 @@
   color: #fff;
 }
 
-.categories__item:focus {
+.categories__itemActive {
   background: #323c48;
   border: 1px solid #323c48;
   color: #fff;
