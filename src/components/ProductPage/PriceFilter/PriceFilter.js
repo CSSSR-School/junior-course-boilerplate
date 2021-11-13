@@ -19,7 +19,7 @@ class PriceFilter extends LogRender {
                 <div className={s.form__title}>Цена</div>
                 <form onSubmit={this.handleSubmit}>
                     <div className={s.range__wrapper}>
-                        <label className={s.range}>
+                        <label>
                             от
                             <HoccedInputNumber
                                 className={s.range__input}
@@ -28,7 +28,7 @@ class PriceFilter extends LogRender {
                                 handleChange={this.handleChange}
                             />
                         </label>
-                        <label className={s.range}>
+                        <label>
                             до
                             <HoccedInputNumber
                                 className={s.range__input}

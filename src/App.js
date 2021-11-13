@@ -42,20 +42,10 @@ function memoizeByResult(fn) {
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
 */
 
-const categories = {
-    clothes: {
-        isActive: false,
-        name: 'clothes',
-    },
-    books: {
-        isActive: false,
-        name: 'books',
-    }
-}
+const selectedCategories = [];
 
 const CategoryContext = React.createContext({
-    toggleCategory: () => {},
-    category: categories.clothes,
+    handleSelectCategory: () => {},
 });
 
 class App extends React.PureComponent {
@@ -68,11 +58,11 @@ class App extends React.PureComponent {
             maxValue: getMaxValue(data),
             sale: 0,
             category: '',
-            toggleCategory: this.toggleCategory,
+            handleSelectCategory: this.handleSelectCategory,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
-        this.toggleCategory = this.toggleCategory.bind(this);
+        this.handleSelectCategory = this.handleSelectCategory.bind(this);
     }
 
     componentDidMount() {
@@ -87,13 +77,10 @@ class App extends React.PureComponent {
         this.setState({ category: event.state['url'] });
     }
 
-    toggleCategory(e) {
+    handleSelectCategory(e) {
         this.setState({
-            category: e.target.name === categories.clothes.name ? categories.clothes.name : categories.books.name,
-            isActive: !this.state.isActive
+            
         });
-
-
 
         const url = e.target.name;
         window.history.pushState({ url }, 'title', url);
@@ -128,7 +115,7 @@ class App extends React.PureComponent {
         return (
             <CategoryContext.Provider value={{
                 ...this.state,
-                toggleCategory: this.toggleCategory}}>
+                handleSelectCategory: this.handleSelectCategory}}>
                 <ProductPage
                     filteredProducts={filteredProducts}
                     minValue={minValue}
