@@ -12,18 +12,30 @@ function getMaxValue(arr) {
     return toInt(maxBy((obj) => toInt(obj.price), arr).price);
 }
 
-function getFilteredProducts(arr, min, max, sale, category) {
+function getFilteredProducts(arr, min, max, sale, selectedCategories) {
     return arr.filter((item) => {
         const priceItem = toInt(item.price);
         if (item.discount >= sale) {
-            if (category == '') {
+            if (selectedCategories = []) {
                 return (priceItem >= min) && (priceItem <= max);
             }
             else {
-                return (priceItem >= min) && (priceItem <= max) && (item.category === category);
+                for (let elem of selectedCategories) {
+                    return (priceItem >= min) && (priceItem <= max) && (item.category === elem);
+                }
             }
         }
     });
+}
+
+function getSelectedCategories(selectedCategories, name) {
+    let index = selectedCategories.indexOf(name);
+    if (index > -1) {
+        selectedCategories.splice(index, 1);
+    } else {
+        selectedCategories.push(name);
+    }
+    return selectedCategories;
 }
 
 /* на будущее
@@ -42,7 +54,7 @@ function memoizeByResult(fn) {
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
 */
 
-const selectedCategories = [];
+let selectedCategories = [];
 
 const CategoryContext = React.createContext({
     handleSelectCategory: () => {},
@@ -57,7 +69,7 @@ class App extends React.PureComponent {
             minValue: getMinValue(data),
             maxValue: getMaxValue(data),
             sale: 0,
-            category: '',
+            selectedCategories: [],
             handleSelectCategory: this.handleSelectCategory,
         };
         this.handleChange = this.handleChange.bind(this);
@@ -78,9 +90,10 @@ class App extends React.PureComponent {
     }
 
     handleSelectCategory(e) {
+        getSelectedCategories(selectedCategories, e.target.name);
         this.setState({
-            
-        });
+            selectedCategories: selectedCategories
+        })
 
         const url = e.target.name;
         window.history.pushState({ url }, 'title', url);
@@ -102,15 +115,14 @@ class App extends React.PureComponent {
         this.setState({ minValue: getMinValue(data),
                         maxValue: getMaxValue(data),
                         sale: 0,
-                        category: ''
                     });
     }
 
     render() {
-        const {minValue, maxValue, sale} = this.state;
-        const category = this.state.category;
-        const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale, category);
-        console.log(filteredProducts);
+        const {minValue, maxValue, sale, selectedCategories} = this.state;
+        const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale, selectedCategories);
+        console.log('filteredProducts', filteredProducts);
+        console.log('selectedCategories', selectedCategories);
 
         return (
             <CategoryContext.Provider value={{

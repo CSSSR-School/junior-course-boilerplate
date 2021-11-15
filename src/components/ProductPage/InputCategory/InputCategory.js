@@ -11,15 +11,15 @@ class InputCategory extends React.Component {
     render() {
         return (
             <CategoryContext.Consumer>
-                {({ handleSelectCategory, selectedCategories, item }) => (
+                {({ handleSelectCategory, selectedCategories }) => (
                     <label className={s.checkboxCategory}>
                         <input 
                             type="checkbox"
-                            checked={selectedCategories.includes(item)}
+                            checked={selectedCategories.includes(this.props.name)}
                             onChange={handleSelectCategory}
-                            name={item}
+                            name={this.props.name}
                         />
-                        <span>{item}</span>
+                        <span>{this.props.name}</span>
                     </label>
                 )}
             </CategoryContext.Consumer>
