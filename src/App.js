@@ -29,12 +29,20 @@ function getMaxValue(arr) {
 }
 
 function getFilteredProducts(arr, min, max, sale, selectedCategories) {
-    return arr.filter((item) => {
+    return arr.filter(item => {
         const priceItem = toInt(item.price);
-        if (item.discount >= sale) {
-            return (priceItem >= min) && (priceItem <= max) && selectedCategories.includes(item.category);
+        if (selectedCategories.length === 0) {
+            return (item.discount >= sale) && (priceItem >= min) && (priceItem <= max);
+        } else if (selectedCategories.includes(item.category)) {
+                return (item.discount >= sale) && (priceItem >= min) && (priceItem <= max);
         }
     });
+    // return arr.filter((item) => {
+    //     const priceItem = toInt(item.price);
+    //     if (item.discount >= sale) {
+    //         return (priceItem >= min) && (priceItem <= max) && selectedCategories.includes(item.category);
+    //     }
+    // });
 }
 
 // function getSelectedCategories(selected, name) {
