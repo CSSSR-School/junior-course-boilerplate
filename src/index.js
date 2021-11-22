@@ -16,12 +16,9 @@ function App() {
       <ul className="list">
         {
           data.map( ({id, name}) => {
-              for (let i = 0; id < 4;) {
-                i++
-                return (
-                  <li className="list__item" key={id}>{name}</li>
-                );
-              }
+            return (
+              <li className="list__item" key={id}>{name}</li>
+            );
             }
           )
         }
