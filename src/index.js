@@ -15,11 +15,11 @@ function App() {
     return (
       <ul className="list">
         {
-          Object.entries(data).map( ([key,value]) => {
-              for (let i = 0; key < 3;) {
+          data.map( ({id, name}) => {
+              for (let i = 0; id < 4;) {
                 i++
                 return (
-                  <li className="list__item" key={key}>{value.name}</li>
+                  <li className="list__item" key={id}>{name}</li>
                 );
               }
             }
@@ -28,8 +28,6 @@ function App() {
       </ul>
     );
   }
-
-  console.log(data)
 
   return (
     <div className="App">
