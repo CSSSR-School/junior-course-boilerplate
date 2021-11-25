@@ -3,33 +3,17 @@ import ReactDOM from 'react-dom';
 
 import data from './products.json';
 
+import MainTitle from './components/MainTitle/MainTitle';
+import CardsList from './components/CardsList/CardsList';
+
 import './index.css';
 
 function App() {
 
-  function Title(props) {
-    return <h1 className="title">{props.title}</h1>
-  }
-
-  function List() {
-    return (
-      <ul className="list">
-        {
-          data.map( ({id, name}) => {
-            return (
-              <li className="list__item" key={id}>{name}</li>
-            );
-            }
-          )
-        }
-      </ul>
-    );
-  }
-
   return (
     <div className="App">
-      <Title title="Список товаров" />
-      <List />
+      <MainTitle title="Список товаров" />
+      <CardsList listProducts={data} />
     </div>
   );
 }
