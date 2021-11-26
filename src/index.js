@@ -11,7 +11,7 @@ import './index.css';
 function App() {
 
   return (
-    <div className="App">
+    <div className="main">
       <MainTitle title="Список товаров" />
       <CardsList listProducts={data} />
     </div>
