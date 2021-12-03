@@ -4,15 +4,13 @@ import './CardsList.css';
 import RatingComponent from '../RatingComponent/RatingComponent';
 
 
-
 function CardsList(props) {
-
   return (
       <ul className="cards-list">
           {
-            props.listProducts.map( (listItem) => {
+            props.listProducts.map( (listItem, index) => {
                 return (
-                  <li className="cards-list__item">
+                  <li className="cards-list__item" key={index}>
                     <ProductItem key={listItem.id}
                                  isInStock={listItem.isInStock}
                                  img={listItem.img}

@@ -7,8 +7,5 @@
   margin: 3rem auto;
   padding: 2rem 3rem;
   font-family: "Open Sans", sans-serif;
-}
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  color: #323c48;
 }
