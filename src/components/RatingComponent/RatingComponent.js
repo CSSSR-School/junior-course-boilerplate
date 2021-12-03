@@ -1,9 +1,8 @@
 import React from 'react';
 import './RatingComponent.css';
-import reactMixin from 'react-mixin';
 import logRender from '../logRender/logRender';
 
-class RatingComponent extends React.Component {
+class RatingComponent extends logRender {
   constructor(props) {
     super(props);
     this.state = { isFilled: false };
@@ -14,7 +13,5 @@ class RatingComponent extends React.Component {
     )
   }
 }
-
-reactMixin(RatingComponent.prototype, logRender)
 
 export default RatingComponent
