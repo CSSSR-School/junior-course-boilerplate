@@ -4,8 +4,17 @@
   box-sizing: border-box;
 }
 .main {
+  display: flex;
+  width: 100%;
   margin: 3rem auto;
-  padding: 2rem 3rem;
+  padding: 2.1rem 3rem;
   font-family: "Open Sans", sans-serif;
   color: #323c48;
+}
+.main-section {
+  flex: 100% 0 1;
+  padding-right: 19.2%;
+}
+.aside-section {
+  flex: 0 0 19.2%;
 }

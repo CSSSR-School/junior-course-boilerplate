@@ -1,5 +1,7 @@
 import React from 'react';
 import './RatingComponent.css';
+import reactMixin from 'react-mixin';
+import logRender from '../logRender/logRender';
 
 class RatingComponent extends React.Component {
   constructor(props) {
@@ -12,5 +14,7 @@ class RatingComponent extends React.Component {
     )
   }
 }
+
+reactMixin(RatingComponent.prototype, logRender)
 
 export default RatingComponent
