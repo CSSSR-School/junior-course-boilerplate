@@ -1,7 +1,7 @@
 import React from 'react';
 import './PriceBlock.css';
-import logRender from '../logRender/logRender';
-import reactMixin from 'react-mixin';
+//import logRender from '../logRender/logRender';
+//import reactMixin from 'react-mixin';
 
 class PriceBlock extends React.Component {
     constructor(props) {
@@ -11,8 +11,8 @@ class PriceBlock extends React.Component {
   }
 
   handleSubmit = (event) => {
-    this.props.handleChangeState(this.inputMinRef.current.value,this.inputMaxRef.current.value);
     event.preventDefault();
+    this.props.handleChangeState(this.inputMinRef.current.value,this.inputMaxRef.current.value);
   }
 
   render() {
@@ -30,6 +30,6 @@ class PriceBlock extends React.Component {
     );
   }
 }
-reactMixin(PriceBlock.prototype, logRender);
+//reactMixin(PriceBlock.prototype, logRender);
 
 export default PriceBlock

@@ -24,14 +24,17 @@ class App extends React.Component {
   }
 
   handleChangeState = (valueMin, valueMax) => {
-    valueMin = valueMin >= 0 ? valueMin : this.state.valueMin;
-    valueMax = valueMax >= 0 ? valueMax : this.state.valueMax;
+    valueMin = valueMin >= 0 ? this.setState.valueMin : this.state.valueMin;
+    valueMax = valueMax >= 0 ? this.setState.valueMax : this.state.valueMax;
 
-    this.setState({
-      filteredProducts: data.filter((item) => {
-        return item.price >= valueMin && item.price <= valueMax
-      })
-    })
+    function productFilter(item) {
+      if(item.price >= valueMin && item.price <= valueMax) {
+        return item;
+      }
+    }
+
+    this.setState({filteredProducts: data.filter(item => productFilter(item))});
+    console.log(data.filter(item => productFilter(item)))
   }
 
   render() {
@@ -41,7 +44,7 @@ class App extends React.Component {
         <PriceBlock
           inputMinValue={this.state.minPrice}
           inputMaxValue={this.state.maxPrice}
-          onSubmit={this.handleChangeState}
+          handleChangeState={this.handleChangeState}
         />
         <MainTitle title="Список товаров" />
         <CardsList listProducts={this.state.filteredProducts} minPrice={this.state.minPrice} maxPrice={this.state.maxPrice} />
