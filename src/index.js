@@ -15,29 +15,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      valueMin: '',
-      valueMax: '',
-      filteredProducts: data,
       minPrice: minBy(obj => obj.price, data).price,
-      maxPrice: maxBy(obj => obj.price, data).price
+      maxPrice: maxBy(obj => obj.price, data).price,
+      discount: 30,
+      filteredProducts: data
     };
   }
 
-  handleChangeState = (valueMin, valueMax) => {
-    valueMin = valueMin >= 0 ? valueMin : this.state.valueMin;
-    valueMax = valueMax >= 0 ? valueMax : this.state.valueMax;
-
-    function productFilter(item) {
-      if(item.price >= valueMin && item.price <= valueMax) {
-        return item;
-      }
-    }
-
-    this.setState({filteredProducts: data.filter(item => productFilter(item))});
+  handleChangeState = (name,value) => {
+    this.setState({[name]: value});
   }
 
   render() {
-
+    console.log(this.state.minPrice, this.state.maxPrice)
     return (
       <div className="main">
         <section className="aside-section">
@@ -45,11 +35,12 @@ class App extends React.Component {
             inputMinValue={this.state.minPrice}
             inputMaxValue={this.state.maxPrice}
             handleChangeState={this.handleChangeState}
+            discountValue={this.state.discount}
           />
         </section>
         <section className="main-section">
           <MainTitle title="Список товаров" />
-          <CardsList listProducts={this.state.filteredProducts} minPrice={this.state.minPrice} maxPrice={this.state.maxPrice} />
+          <CardsList listProducts={this.state.filteredProducts} discount={this.state.discount} minPrice={this.state.minPrice} maxPrice={this.state.maxPrice} />
         </section>
       </div>
     );
