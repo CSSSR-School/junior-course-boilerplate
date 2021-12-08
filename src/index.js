@@ -17,17 +17,22 @@ class App extends React.Component {
     this.state = {
       minPrice: minBy(obj => obj.price, data).price,
       maxPrice: maxBy(obj => obj.price, data).price,
-      discount: 30,
+      discount: minBy(obj => obj.discount, data).discount,
       filteredProducts: data
     };
   }
 
-  handleChangeState = (name,value) => {
-    this.setState({[name]: value});
+  handleChangeState = (name,filteredValue) => {
+    this.setState({name: filteredValue});
+    this.setState({
+      filteredProducts: data.filter((item) => {
+        return item.price >= this.state.minPrice && item.price <= this.state.minPrice
+        && item.discount === this.state.discount
+      })
+    })
   }
 
   render() {
-    console.log(this.state.minPrice, this.state.maxPrice)
     return (
       <div className="main">
         <section className="aside-section">
@@ -40,7 +45,7 @@ class App extends React.Component {
         </section>
         <section className="main-section">
           <MainTitle title="Список товаров" />
-          <CardsList listProducts={this.state.filteredProducts} discount={this.state.discount} minPrice={this.state.minPrice} maxPrice={this.state.maxPrice} />
+          <CardsList listProducts={this.filteredProducts}  />
         </section>
       </div>
     );

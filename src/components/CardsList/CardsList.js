@@ -8,8 +8,7 @@ function CardsList(props) {
   return (
       <ul className="cards-list">
           {
-            props.listProducts.filter(listItem => listItem.price >= props.minPrice
-              && listItem.price <= props.maxPrice && listItem.discount === props.discount).map( (listItem, index) => {
+            props.listProducts.map( (listItem, index) => {
                 return (
                   <li className="cards-list__item" key={index}>
                     <ProductItem key={listItem.id}

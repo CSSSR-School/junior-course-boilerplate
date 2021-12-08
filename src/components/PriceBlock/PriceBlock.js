@@ -18,7 +18,7 @@ class PriceBlock extends logRender {
             <label className="price-block__label">до</label>
             <InputNumber defaultValue={inputMaxValue} name='maxPrice' handleChangeState={handleChangeState}/>
           </div>
-          <InputDiscount title='Скидка' name='discount' value={discountValue} handleChangeState={handleChangeState} />
+          <InputDiscount title='Скидка' name='discount' value={discountValue} />
         </form>
     );
   }
