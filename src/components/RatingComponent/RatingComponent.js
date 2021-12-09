@@ -3,13 +3,11 @@ import './RatingComponent.css';
 import logRender from '../logRender/logRender';
 
 class RatingComponent extends logRender {
-  constructor(props) {
-    super(props);
-    this.state = { isFilled: false };
-  }
+
   render() {
+    const {isFilled} = this.props
     return (
-      <div className={this.state.isFilled || ''} />
+      <div className={`star ${isFilled ? 'is-filled' : ''}`} />
     )
   }
 }

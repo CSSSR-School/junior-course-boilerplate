@@ -5,6 +5,7 @@ import logRender from '../logRender/logRender';
 import InputNumber from '../InputNumber/InputNumber';
 import InputDiscount from '../InputDiscount/InputDiscount';
 
+
 class PriceBlock extends logRender {
 
   render() {

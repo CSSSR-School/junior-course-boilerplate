@@ -4,29 +4,32 @@ import './CardsList.css';
 import RatingComponent from '../RatingComponent/RatingComponent';
 
 
-function CardsList(props) {
-  return (
+class CardsList extends React.PureComponent {
+
+  render() {
+    return (
       <ul className="cards-list">
-          {
-            props.listProducts.map( (listItem, index) => {
-                return (
-                  <li className="cards-list__item" key={index}>
-                    <ProductItem key={listItem.id}
-                                 isInStock={listItem.isInStock}
-                                 img={listItem.img}
-                                 title={listItem.title}
-                                 price={listItem.price}
-                                 subPriceContent={''}
-                                 maxRating={listItem.maxRating}
-                                 rating={listItem.rating}
-                                 ratingComponent={RatingComponent}
-                    />
-                  </li>
-                )
-              })
-          }
+        {
+          this.props.listProducts.map( (listItem, index) => {
+            return (
+              <li className="cards-list__item" key={index}>
+                <ProductItem key={listItem.id}
+                             isInStock={listItem.isInStock}
+                             img={listItem.img}
+                             title={listItem.title}
+                             price={listItem.price}
+                             subPriceContent={''}
+                             maxRating={listItem.maxRating}
+                             rating={listItem.rating}
+                             ratingComponent={RatingComponent}
+                />
+              </li>
+            )
+          })
+        }
       </ul>
     );
+  }
 }
 
 export default CardsList
