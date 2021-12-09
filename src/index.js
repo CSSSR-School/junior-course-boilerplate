@@ -18,15 +18,14 @@ class App extends React.Component {
       minPrice: minBy(obj => obj.price, data).price,
       maxPrice: maxBy(obj => obj.price, data).price,
       discount: minBy(obj => obj.discount, data).discount,
-      products: data,
-      filteredProducts: data
+      filteredProducts: data,
     };
   }
 
   handleChangeState = (name,filteredValue) => {
     this.setState({[name]: filteredValue});
     this.setState(state => {
-      let products = state.products;
+      let products = data;
       let filteredProducts = products.filter((listItem) => {
         return listItem.price >= state.minPrice
           && listItem.price <= state.maxPrice && listItem.discount === state.discount
