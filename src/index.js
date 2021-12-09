@@ -24,16 +24,13 @@ class App extends React.Component {
 
   handleChangeState = (name,filteredValue) => {
     this.setState({[name]: filteredValue});
-    this.setState(state => {
-      let products = state.filteredProducts;
-      let filteredProducts = products.filter((listItem) => {
-        return listItem.price >= state.minPrice
-          && listItem.price <= state.maxPrice && listItem.discount === state.discount
-      });
-      products = [...filteredProducts];
-      return {filteredProducts: products}
-    })
   }
+
+  filterProducts = (data, minPrice, maxPrice, discount) => {
+    return data.filter((item) => {
+      return item.price >= minPrice && item.price <= maxPrice && item.discount >= discount
+    })
+}
 
   render() {
     return (
@@ -48,7 +45,7 @@ class App extends React.Component {
         </section>
         <section className="main-section">
           <MainTitle title="Список товаров" />
-          <CardsList listProducts={this.state.filteredProducts} discount={this.state.discount} minPrice={this.state.minPrice} maxPrice={this.state.maxPrice} />
+          <CardsList listProducts={this.filterProducts(this.state.filteredProducts, this.state.minPrice, this.state.maxPrice, this.state.discount)}  />
         </section>
       </div>
     );
