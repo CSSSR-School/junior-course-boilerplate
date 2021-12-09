@@ -6,9 +6,7 @@ export default function InputHandler(HocedComponent) {
     constructor(props) {
       super(props);
         this.state = {
-          minPrice: '',
-          maxPrice: '',
-          discount: ''
+          value: ''
         }
     }
 
@@ -18,10 +16,10 @@ export default function InputHandler(HocedComponent) {
       const value = event.target.value;
       const filteredValue = toInt(value);
       if (filteredValue !== '') {
-        this.props.handleChangeState(name, filteredValue)
+        this.props.onChange(name, filteredValue)
       }
       return (
-        this.setState({[name]:filteredValue})
+        this.setState({value:filteredValue})
       )
     }
 

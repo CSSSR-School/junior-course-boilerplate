@@ -14,11 +14,11 @@ class PriceBlock extends logRender {
           <span className="price-block__title">Цена</span>
           <div className="price-block__row">
             <label className="price-block__label">от</label>
-            <InputNumber defaultValue={inputMinValue} name='minPrice' handleChangeState={handleChangeState}/>
+            <InputNumber defaultValue={inputMinValue} name='minPrice' onChange={handleChangeState} />
             <label className="price-block__label">до</label>
-            <InputNumber defaultValue={inputMaxValue} name='maxPrice' handleChangeState={handleChangeState}/>
+            <InputNumber defaultValue={inputMaxValue} name='maxPrice' onChange={handleChangeState} />
           </div>
-          <InputDiscount title='Скидка' name='discount' value={discountValue} />
+          <InputDiscount title='Скидка' name='discount' value={discountValue} onChange={handleChangeState}  />
         </form>
     );
   }

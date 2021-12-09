@@ -23,8 +23,7 @@ function CardsList(props) {
                     />
                   </li>
                 )
-              }
-            )
+              })
           }
       </ul>
     );
