@@ -11,9 +11,9 @@ export default function InputHandler(HocedComponent) {
     }
 
     handleChange = (event) => {
+      const { name, value} = event.target
       event.target.value =  event.target.value.replace(/[^\d]/g,'');
-      const name = event.target.name;
-      const value = event.target.value;
+
       const filteredValue = toInt(value);
       if (filteredValue !== '') {
         this.props.onChange(name, filteredValue)

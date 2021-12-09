@@ -25,12 +25,13 @@ class App extends React.Component {
   handleChangeState = (name,filteredValue) => {
     this.setState({[name]: filteredValue});
     this.setState(state => {
-      let products = data;
+      let products = state.filteredProducts;
       let filteredProducts = products.filter((listItem) => {
         return listItem.price >= state.minPrice
           && listItem.price <= state.maxPrice && listItem.discount === state.discount
       });
-      return {filteredProducts: filteredProducts}
+      products = [...filteredProducts];
+      return {filteredProducts: products}
     })
   }
 
