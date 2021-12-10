@@ -3,7 +3,7 @@ import InputHandler from '../InputHendler/InputHandler';
 
 const InputNumber = ({defaultValue, name, handleChange }) => {
   return (
-    <input type="text" className="price-block__input"
+    <input type="number" className="price-block__input"
            defaultValue={defaultValue}
            name={name}
            onChange={handleChange}

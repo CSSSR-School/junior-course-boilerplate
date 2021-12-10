@@ -1,10 +1,10 @@
 import React from 'react';
-import ProductItem from 'csssr-school-product-card';
 import './CardsList.css';
-import RatingComponent from '../RatingComponent/RatingComponent';
+import logRender from '../logRender/logRender';
+import ProductCard from '../ProductCard/ProductCard';
 
 
-class CardsList extends React.PureComponent {
+class CardsList extends logRender {
 
   render() {
     return (
@@ -13,7 +13,7 @@ class CardsList extends React.PureComponent {
           this.props.listProducts.map( (listItem, index) => {
             return (
               <li className="cards-list__item" key={index}>
-                <ProductItem key={listItem.id}
+                <ProductCard key={listItem.id}
                              isInStock={listItem.isInStock}
                              img={listItem.img}
                              title={listItem.title}
@@ -21,7 +21,6 @@ class CardsList extends React.PureComponent {
                              subPriceContent={''}
                              maxRating={listItem.maxRating}
                              rating={listItem.rating}
-                             ratingComponent={RatingComponent}
                 />
               </li>
             )

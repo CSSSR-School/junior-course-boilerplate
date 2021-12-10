@@ -35,6 +35,11 @@
   border: 1px solid #7e8fa4;
 }
 
+.price-block input::-webkit-outer-spin-button,
+.price-block input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
 .price-block__input:last-of-type {
   margin-right: 0;
 }

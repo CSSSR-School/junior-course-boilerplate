@@ -4,8 +4,10 @@ import shallowCompare from 'react-addons-shallow-compare';
 
 class logRender extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    logger.call(this, this.constructor.name, nextProps, nextState);
-    return shallowCompare(this, nextProps, nextState);
+    if (shallowCompare(this, nextProps, nextState)) {
+      logger.call(this, this.constructor.name, nextProps, nextState);
+      return true
+    } else { return false }
   }
 }
 
