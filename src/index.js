@@ -3,30 +3,17 @@ import ReactDOM from 'react-dom';
 
 import data from './products.json';
 
+import {minBy, maxBy} from 'csssr-school-utils';
+
 import MainTitle from './components/MainTitle/MainTitle';
 import CardsList from './components/CardsList/CardsList';
 import PriceBlock from './components/PriceBlock/PriceBlock';
 
-import {minBy, maxBy} from 'csssr-school-utils';
+import memoize from './utils/memoize';
 
 import './index.css';
 
-const memoize = (fn) => {
-  const prevCall = {
-    args: []
-  }
-  return function(...args) {
-    let equal = true;
-    args.forEach((el,index) => {
-      equal = equal && prevCall.args[index] === el
-    })
-    if (!equal) {
-      prevCall.args = args
-      prevCall.result = fn(...args)
-    }
-    return prevCall.result
-  }
-}
+
 
 class App extends React.Component {
   constructor(props) {
