@@ -11,6 +11,23 @@ import {minBy, maxBy} from 'csssr-school-utils';
 
 import './index.css';
 
+const memoize = (fn) => {
+  const prevCall = {
+    args: []
+  }
+  return function(...args) {
+    let equal = true;
+    args.forEach((el,index) => {
+      equal = equal && prevCall.args[index] === el
+    })
+    if (!equal) {
+      prevCall.args = args
+      prevCall.result = fn(...args)
+    }
+    return prevCall.result
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,11 +43,11 @@ class App extends React.Component {
     this.setState({[name]: filteredValue});
   }
 
-  filterProducts = (data, minPrice, maxPrice, discount) => {
+  filterProducts = memoize((data, minPrice, maxPrice, discount) => {
     return data.filter((item) => {
       return item.price >= minPrice && item.price <= maxPrice && item.discount >= discount
     })
-}
+  })
 
   render() {
     return (
