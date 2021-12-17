@@ -9,7 +9,8 @@
     "subPriceContent": 23000,
     "ratingComponent": "",
     "isInStock": true,
-    "discount": 30
+    "discount": 30,
+    "category": "books"
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "subPriceContent": 23000,
     "ratingComponent": "",
     "isInStock": true,
-    "discount": 30
+    "discount": 30,
+    "category": "clothes"
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "subPriceContent": 23000,
     "ratingComponent": "",
     "isInStock": true,
-    "discount": 30
+    "discount": 30,
+    "category": "books"
   },
   {
     "id": 4,
@@ -45,7 +48,8 @@
     "subPriceContent": 23000,
     "ratingComponent": "",
     "isInStock": false,
-    "discount": 30
+    "discount": 30,
+    "category": "clothes"
   },
   {
     "id": 5,
@@ -57,7 +61,8 @@
     "subPriceContent": 23000,
     "ratingComponent": "",
     "isInStock": true,
-    "discount": 30
+    "discount": 30,
+    "category": "books"
   },
   {
     "id": 6,
@@ -69,6 +74,7 @@
     "subPriceContent": 23000,
     "ratingComponent": "",
     "isInStock": false,
-    "discount": 100
+    "discount": 100,
+    "category": "clothes"
   }
 ]
