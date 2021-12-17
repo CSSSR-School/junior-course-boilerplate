@@ -2,29 +2,23 @@ import React from 'react';
 import './PriceBlock.css';
 import logRender from '../logRender/logRender';
 
-class PriceBlock extends logRender {
-    constructor(props) {
-      super(props);
-      this.inputMinRef = React.createRef();
-      this.inputMaxRef = React.createRef();
-  }
+import InputNumber from '../InputNumber/InputNumber';
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.handleChangeState(this.inputMinRef.current.value,this.inputMaxRef.current.value);
-  }
+
+
+class PriceBlock extends logRender {
 
   render() {
+    const { inputMinValue, inputMaxValue, handleChangeState } = this.props
     return (
-        <form className="price-block" onSubmit={this.handleSubmit}>
-          <span className="price-block__title">Цена</span>
-          <div className="price-block__row">
+        <form className="aside-block price-block">
+          <h3 className="aside-block__title">Цена</h3>
+          <div className="aside-block__row">
             <label className="price-block__label">от</label>
-            <input type="text" className="price-block__input" ref={this.inputMinRef} defaultValue={this.props.inputMinValue}/>
+            <InputNumber defaultValue={inputMinValue} name='minPrice' onChange={handleChangeState} />
             <label className="price-block__label">до</label>
-            <input type="text" className="price-block__input" ref={this.inputMaxRef} defaultValue={this.props.inputMaxValue} />
+            <InputNumber defaultValue={inputMaxValue} name='maxPrice' onChange={handleChangeState} />
           </div>
-          <button className="price-block__btn">Применить</button>
         </form>
     );
   }

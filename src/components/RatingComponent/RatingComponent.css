@@ -1,0 +1,12 @@
+.star {
+  display: inline-block;
+  margin-right: 5px;
+  width: 14px;
+  height: 14px;
+  background-image: url("../../images/star.svg");
+  background-size: 100%;
+}
+
+.star.is-filled {
+  background-image: url("../../images/star_isFilled.svg");
+}

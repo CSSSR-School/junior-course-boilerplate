@@ -4,11 +4,13 @@
     "title": "Имя товара1",
     "img": "./images/image1.jpg",
     "price": 23000,
-    "rating": 4,
+    "rating": 2,
     "maxRating": 5,
     "subPriceContent": 23000,
     "ratingComponent": "",
-    "isInStock": true
+    "isInStock": true,
+    "discount": 30,
+    "category": "books"
   },
   {
     "id": 2,
@@ -19,7 +21,9 @@
     "maxRating": 5,
     "subPriceContent": 23000,
     "ratingComponent": "",
-    "isInStock": true
+    "isInStock": true,
+    "discount": 30,
+    "category": "clothes"
   },
   {
     "id": 3,
@@ -30,7 +34,9 @@
     "maxRating": 5,
     "subPriceContent": 23000,
     "ratingComponent": "",
-    "isInStock": true
+    "isInStock": true,
+    "discount": 30,
+    "category": "books"
   },
   {
     "id": 4,
@@ -41,18 +47,22 @@
     "maxRating": 5,
     "subPriceContent": 23000,
     "ratingComponent": "",
-    "isInStock": true
+    "isInStock": false,
+    "discount": 30,
+    "category": "clothes"
   },
   {
     "id": 5,
     "title": "Имя товара5",
     "img": "./images/image1.jpg",
     "price": 23000,
-    "rating": 4,
+    "rating": 3,
     "maxRating": 5,
     "subPriceContent": 23000,
     "ratingComponent": "",
-    "isInStock": true
+    "isInStock": true,
+    "discount": 30,
+    "category": "books"
   },
   {
     "id": 6,
@@ -63,6 +73,8 @@
     "maxRating": 5,
     "subPriceContent": 23000,
     "ratingComponent": "",
-    "isInStock": true
+    "isInStock": false,
+    "discount": 100,
+    "category": "clothes"
   }
 ]
