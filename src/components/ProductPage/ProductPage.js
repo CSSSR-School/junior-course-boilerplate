@@ -13,17 +13,12 @@ class ProductPage extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        // this.handleCategoriesClick = this.handleCategoriesClick.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
     }
 
     handleChange(event) {
         this.props.handleChange(event);
     }
-
-    // handleCategoriesClick(event) {
-    //     this.props.handleCategoriesClick(event);
-    // }
 
     handleResetClick() {
         this.props.handleResetClick();

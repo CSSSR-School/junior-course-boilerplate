@@ -1,8 +1,11 @@
 import React from 'react';
 import ProductPage from './components/ProductPage/ProductPage.js';
 import data from './products.json';
-import { maxBy, minBy, toInt } from 'csssr-school-utils';
-// import * as R from 'ramda';
+import getMinValue from './utils/getMinValue';
+import getMaxValue from './utils/getMaxValue';
+import getFilteredProducts from './utils/getFilteredProducts';
+
+// import * as R from 'ramda'; для мемоизации (введу позже)
 
 /* на будущее
 function memoizeByResult(fn) {
@@ -19,41 +22,6 @@ function memoizeByResult(fn) {
 
 let memoizedGetFilteredProducts = memoizeByResult(getFilteredProducts);
 */
-
-function getMinValue(arr) {
-    return toInt(minBy((obj) => toInt(obj.price), arr).price);
-}
-  
-function getMaxValue(arr) {
-    return toInt(maxBy((obj) => toInt(obj.price), arr).price);
-}
-
-function getFilteredProducts(arr, min, max, sale, selectedCategories) {
-    return arr.filter(item => {
-        const priceItem = toInt(item.price);
-        if (selectedCategories.length === 0) {
-            return (item.discount >= sale) && (priceItem >= min) && (priceItem <= max);
-        } else if (selectedCategories.includes(item.category)) {
-                return (item.discount >= sale) && (priceItem >= min) && (priceItem <= max);
-        }
-    });
-    // return arr.filter((item) => {
-    //     const priceItem = toInt(item.price);
-    //     if (item.discount >= sale) {
-    //         return (priceItem >= min) && (priceItem <= max) && selectedCategories.includes(item.category);
-    //     }
-    // });
-}
-
-// function getSelectedCategories(selected, name) {
-//     let index = selected.indexOf(name);
-//     if (index > -1) {
-//         selected.splice(index, 1);
-//     } else {
-//         selected.push(name);
-//     }
-//     return selected;
-// }
 
 const CategoryContext = React.createContext({
     handleSelectCategory: () => {},
@@ -79,6 +47,11 @@ class App extends React.PureComponent {
     }
 
     componentDidMount() {
+        const [, categoriesFromUrl] = window.location.search.split('=');
+        const selectedCategories = categoriesFromUrl
+            ? categoriesFromUrl.split(',') 
+            : [];
+        this.setState({ ...this.state, selectedCategories });
         window.addEventListener('popstate', this.setFromHistory);
     }
 
@@ -94,18 +67,29 @@ class App extends React.PureComponent {
         const selectedItem = e.target.name;
         const { selectedCategories } = this.state;
         let selected = [];
+        let url = '';
 
-        if (selectedCategories.includes(selectedItem)) {
-             selected = selectedCategories.filter((item) => item !== selectedItem);
+        if (selectedCategories.includes(selectedItem) && selectedCategories.length === 1) {
+            selected = [];
+            window.history.pushState({}, 'title', '/');
+        } else if (selectedCategories.includes(selectedItem) && selectedCategories.length) {
+            selected = selectedCategories.filter((item) => item !== selectedItem);
         } else {
             selected = [...selectedCategories, selectedItem];
         }
-
+        
         this.setState({
             selectedCategories: selected
         });
-
-        const url = e.target.name;
+        
+        if (selected.length === 1) {
+            url += '/?categories=' + selected[0];
+        } else if (selected.length > 1) {
+            url += '/?categories=' + selected[0];
+            for (let i = 1; i < selected.length; i++) {
+                url += ',' + selected[i];
+            }
+        }
         window.history.pushState({ url }, 'title', url);
     }
 
@@ -127,13 +111,12 @@ class App extends React.PureComponent {
                         sale: 0,
                         selectedCategories: []
                     });
+        window.history.pushState({}, 'title', '/');
     }
 
     render() {
         const {minValue, maxValue, sale, selectedCategories} = this.state;
         const filteredProducts = getFilteredProducts(data, minValue, maxValue, sale, selectedCategories);
-        console.log('filteredProducts', filteredProducts);
-        console.log('selectedCategories', this.state.selectedCategories);
 
         return (
             <CategoryContext.Provider value={{
