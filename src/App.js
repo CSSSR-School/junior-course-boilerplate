@@ -32,26 +32,30 @@ class App extends React.PureComponent {
         super(props);
         //перезаписываем первоначальный URL, чтобы при возвращении к самому первому реальному URL в нашей истории не было ошибки (когда свойство state события popstate будет равно null)
         const url = window.location.pathname.substr(1);
-        window.history.replaceState({ url }, 'title', window.location.pathname);
+        // window.history.replaceState({ url }, 'title', window.location.pathname);
+        const urlFilterParams = decodeURIComponent(window.location.search);
 
         this.state = {
             minValue: getMinValue(data),
             maxValue: getMaxValue(data),
             sale: 0,
-            selectedCategories: [],
+            selectedCategories: this.getSelectedCategoryFromUrl(urlFilterParams),
             handleSelectCategory: this.handleSelectCategory,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
         this.handleSelectCategory = this.handleSelectCategory.bind(this);
+
+        window.history.replaceState({ url: this.state.selectedCategories }, 'category', '?category=' + this.state.selectedCategories);
     }
 
+    getSelectedCategoryFromUrl = (url) => {
+        let parseUrl = url.split('=')
+        parseUrl = parseUrl.pop()
+        return parseUrl ? parseUrl.split(',') : []
+      };
+
     componentDidMount() {
-        const [, categoriesFromUrl] = window.location.search.split('=');
-        const selectedCategories = categoriesFromUrl
-            ? categoriesFromUrl.split(',') 
-            : [];
-        this.setState({ ...this.state, selectedCategories });
         window.addEventListener('popstate', this.setFromHistory);
     }
 
