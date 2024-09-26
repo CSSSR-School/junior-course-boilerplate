@@ -1,0 +1,36 @@
+.filterForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formHeader {
+  margin-bottom: 40px;
+}
+
+.formTitle {
+  font-family: OpenSans, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #323c48;
+  margin-bottom: 15px;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 48%;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.price input {
+  width: 100%;
+  font-size: 14px;
+  margin-left: 8px;
+  height: 30px;
+  border: solid 1px #7e8fa4;
+  padding-left: 10px;
+  padding-right: 10px;
+}

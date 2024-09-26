@@ -1,0 +1,12 @@
+.errorBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0 80px;
+}
+
+.errorTitle {
+  margin-bottom: 50px;
+  font-size: 30px;
+  font-weight: bold;
+}

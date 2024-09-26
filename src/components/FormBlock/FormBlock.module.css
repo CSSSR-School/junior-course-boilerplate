@@ -1,0 +1,36 @@
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.inputBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-weight: 600;
+}
+
+.categoryBlock .inputBlock {
+  justify-content: start;
+}
+
+.title {
+  font-family: OpenSans, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #323c48;
+  padding-bottom: 16px;
+}
+
+.formBlock input {
+  font-size: 14px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.formBlock button {
+  margin-bottom: 10px;
+}
